@@ -1,6 +1,7 @@
 package com.wan.sys.controller.message;
 
 import com.wan.sys.entity.message.Message;
+
 import com.wan.sys.entity.message.MessageQuery;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.service.message.IMessageService;

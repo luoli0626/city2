@@ -93,9 +93,24 @@ public class cityManagerController {
 	 * @param bean
 	 * @return
 	 */
+	@RequestMapping(value="editInfo")
+	@ResponseBody
 	public ResponseHead editInfo(UserBean bean){
 		return cityServive.editInfo(bean);
 	}
+	
+	
+	/**
+	 * 重置密码
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="resetPwd")
+	@ResponseBody
+	public ResponseHead resetPwd(UserBean bean){
+		return cityServive.resetPwd(bean);
+	}
+	
 	
 	/**
 	 * 上传图片

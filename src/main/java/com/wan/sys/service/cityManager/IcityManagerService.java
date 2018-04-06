@@ -33,5 +33,17 @@ public interface IcityManagerService {
 	 */
 	public ResponseHead myDetails(UserBean bean);
 	
+	/**
+	 * 编辑个人资料
+	 * @param bean
+	 * @return
+	 */
 	public ResponseHead editInfo(UserBean bean);
+	
+	/**
+	 * 重置密码
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead resetPwd(UserBean bean);
 }

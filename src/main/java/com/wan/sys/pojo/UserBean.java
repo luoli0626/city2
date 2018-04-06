@@ -64,6 +64,15 @@ public class UserBean extends BaseEntity implements java.io.Serializable {
 	private String isAdmin;
 	private String code;//	验证码
 	private String token;
+	private String imgAdress;
+	public String getImgAdress() {
+		return imgAdress;
+	}
+
+	public void setImgAdress(String imgAdress) {
+		this.imgAdress = imgAdress;
+	}
+
 	public String getCode() {
 		return code;
 	}

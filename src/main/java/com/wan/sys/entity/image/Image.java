@@ -12,7 +12,6 @@ public class Image {
     private String address;
     private String type;
     private int order;
-    @Column(name = "BELONG_ID")
     private long belongId;
 
     @Id
@@ -25,7 +24,7 @@ public class Image {
     public void setId(Long id) {
         this.id = id;
     }
-
+    @Column(name="ADDRESS")
     public String getAddress() {
         return address;
     }
@@ -33,7 +32,7 @@ public class Image {
     public void setAddress(String address) {
         this.address = address;
     }
-
+    @Column(name="TYPE")
     public String getType() {
         return type;
     }
@@ -41,7 +40,7 @@ public class Image {
     public void setType(String type) {
         this.type = type;
     }
-
+    @Column(name="\"ORDER\"")
     public int getOrder() {
         return order;
     }
@@ -49,7 +48,7 @@ public class Image {
     public void setOrder(int order) {
         this.order = order;
     }
-
+    @Column(name = "BELONG_ID")
     public long getBelongId() {
         return belongId;
     }
