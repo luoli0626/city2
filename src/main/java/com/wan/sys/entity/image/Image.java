@@ -12,6 +12,7 @@ public class Image {
     private String address;
     private String type;
     private int order;
+
     @Column(name = "BELONG_ID")
     private long belongId;
 

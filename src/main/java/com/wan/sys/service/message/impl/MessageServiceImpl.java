@@ -16,16 +16,16 @@ public class MessageServiceImpl implements IMessageService{
     IMessageDao messageDao;
 
     @Override
-    public List<Message> getMessageList(MessageQuery message) {
+    public List<Message> getMessageList(MessageQuery query) {
+
         String hql=" from Message t where 1=1 " ;
-        if (message.isOnline()) {
+        if (query.isOnline()) {
             hql += " and t.isOnline=Y ";
         }
 
         List<Message> messages;
-
-        if (message.getPage() > 0 && message.getRows() > 0) {
-            messages = messageDao.find(hql, message.getPage(), message.getRows());
+        if (query.getPage() > 0 && query.getRows() > 0) {
+            messages = messageDao.find(hql, query.getPage(), query.getRows());
         } else {
             messages = messageDao.find(hql);
         }
@@ -35,6 +35,7 @@ public class MessageServiceImpl implements IMessageService{
 
     @Override
     public Message getMessageById(Long id) {
+
         if (id != null && id > 0) {
             return messageDao.get(Message.class, id);
         }

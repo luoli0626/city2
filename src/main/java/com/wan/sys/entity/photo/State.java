@@ -1,6 +1,6 @@
 package com.wan.sys.entity.photo;
 
-public enum State implements Comparable<State>{
+public enum State {
 
     WAITING(0), PROCESSING(1), END(2);
 
