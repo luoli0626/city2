@@ -1,7 +1,7 @@
 package com.wan.sys.controller.message;
 
+import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.message.Message;
-import com.wan.sys.entity.message.MessageQuery;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.service.message.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class MessageController {
 
     @ResponseBody
     @RequestMapping("getMessageList")
-    public ResponseHead getMessageList(MessageQuery message) {
+    public ResponseHead getMessageList(Query message) {
         List<Message> messages = messageService.getMessageList(message);
         ResponseHead r = new ResponseHead();
         r.setData(messages);

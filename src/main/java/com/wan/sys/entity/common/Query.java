@@ -1,6 +1,7 @@
-package com.wan.sys.entity.dynamic;
+package com.wan.sys.entity.common;
 
-public class DynamicQuery {
+public class Query {
+
     private int page;
     private int rows;
     private boolean online;

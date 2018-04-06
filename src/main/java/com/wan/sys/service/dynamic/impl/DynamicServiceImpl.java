@@ -1,8 +1,8 @@
 package com.wan.sys.service.dynamic.impl;
 
 import com.wan.sys.dao.dynamic.IDynamicDao;
+import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.dynamic.Dynamic;
-import com.wan.sys.entity.dynamic.DynamicQuery;
 import com.wan.sys.service.dynamic.IDynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class DynamicServiceImpl implements IDynamicService {
     IDynamicDao dynamicDao;
 
     @Override
-    public List<Dynamic> getDynamicList(DynamicQuery query) {
+    public List<Dynamic> getDynamicList(Query query) {
 
         String hql=" from Dynamic t where 1=1 " ;
         if (query.isOnline()) {

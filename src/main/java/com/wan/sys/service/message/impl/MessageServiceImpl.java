@@ -1,8 +1,8 @@
 package com.wan.sys.service.message.impl;
 
 import com.wan.sys.dao.message.IMessageDao;
+import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.message.Message;
-import com.wan.sys.entity.message.MessageQuery;
 import com.wan.sys.service.message.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class MessageServiceImpl implements IMessageService{
     IMessageDao messageDao;
 
     @Override
-    public List<Message> getMessageList(MessageQuery query) {
+    public List<Message> getMessageList(Query query) {
 
         String hql=" from Message t where 1=1 " ;
         if (query.isOnline()) {
