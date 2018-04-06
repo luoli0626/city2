@@ -1,0 +1,98 @@
+.chart-content{
+	/* margin: 1% 0% 1% 0%;	 */
+}
+.chart-content .auto{
+	 background: #ff9603;    padding: 5% 5% 5% 5%;
+}
+.chart-content .right{
+	    background: #1b93e1;    padding: 5% 5% 5% 5%;
+}
+.chart-content .left{
+	background: #a2d200;    padding: 5% 5% 5% 5%;
+}
+.chart-content img{
+	    width: 28%;
+        float: right;
+}
+.chart-content .col-md-12{
+	text-align: center;
+    color: #FFFFFF;
+}
+.ukjh{
+	text-align: center;
+	    font-size:0.8vw;
+}
+.left1{
+	    background: #6fbcff;
+    padding: 5% 0%;
+        border-radius: 5px;
+}
+.left2{
+	    background: #ff6ade;
+    padding: 5% 0%;
+        border-radius: 5px;
+}
+.left3{
+	    background: #66a9ff;
+    padding: 5% 0%;
+        border-radius: 5px;
+}
+.auto4{
+	    background: #fddc33;
+    padding: 5% 0%;
+        border-radius: 5px;
+}
+.right5{
+	    background: #49ec5e;
+    padding: 5% 0%;
+        border-radius: 5px;
+}
+.ovjg{
+	font-weight: bold;
+	   font-size: 1.5vw;
+}
+/*问题总数*/
+.probmie{
+        line-height: 2vw;
+    color: #FFFFFF;
+    font-size: 2rem;
+}
+.probmie .col-md-12{
+	    text-align: center;
+	    padding: 8% 0% 8% 0%;
+}
+.probmie .col-md-3{
+	text-align: center;
+}
+.probmie .ukov-one{
+	background: #ff4a43;    border-radius: 5px;
+}
+.probmie .ukov-two{
+	background: #22beef;    border-radius: 5px;
+}
+.probmie .ukov-rhree{    border-radius: 5px;
+	background: #a2d200;
+}
+.probmie .ukov-for{    border-radius: 5px;
+	background: #8e44ad;
+}
+.probmie p{
+	margin: 0px;
+    font-weight: bold;
+        font-size: 0.8vw;
+}
+.probmie h5{
+    margin: 0px;
+    margin-top: 6%;
+    font-weight: bold;
+        font-size: 1.5vw;
+}
+.pr-tit{
+	    color: #999999;
+	    font-size: 1.6vw;
+	    float: left;
+}
+.pr-tit span{
+	    color: #1b93e1;
+    font-weight: bold;
+}

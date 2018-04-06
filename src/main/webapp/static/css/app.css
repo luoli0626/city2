@@ -1,0 +1,108 @@
+.lw-home-title {
+    padding-left: 20px;
+    height: 30px;
+    width: 200px;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.lw-home-data-show {
+    display: flex;
+    flex-flow: wrap;
+    width: 80%;
+    margin: 20px 10%;
+    color: #333;
+    align-items: center;
+    flex-direction: row;
+    border: 1px solid #e0e0e0;
+}
+
+.home-data-item {
+    text-align: center;
+    background-color:#fff;
+    width: 33.333%;
+    height: auto;
+}
+
+.home-data-item > div:nth-of-type(1) {
+    height: 60px;
+    line-height: 60px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.home-data-item > div:nth-of-type(1) > span,
+.home-data-item > div:nth-of-type(2) > span {
+    display: inline-block;
+}
+
+.home-data-item > div:nth-of-type(2) {
+    height: 100px;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 100px;
+}
+
+.home-entrance {
+    margin-left: 8%;
+    width: 60%;
+    display: flex;
+    margin-top: 30px;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.home-entrance > a {
+    display: block;
+    width: 25%;
+    min-width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    padding: 5px;
+}
+
+.home-entrance > a > span {
+    display: inline-block;
+}
+
+.home-icon {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    vertical-align: middle;
+}
+
+.icon-lw-count {
+    background: url("../images/img/lw_count.png") no-repeat 50% 30%;
+    background-size: 40px;
+}
+
+.icon-lw-crowd {
+    background: url("../images/img/lw_crowd.png") no-repeat 50% 30%;
+    background-size: 40px;
+}
+
+.icon-lw-device {
+    background: url("../images/img/lw_device.png") no-repeat 50% 30%;
+    background-size: 35px;
+}
+
+.icon-lw-firmware {
+    background: url("../images/img/lw_firmware.png") no-repeat 50% 30%;
+    background-size: 40px;
+}
+
+.icon-lw-floor {
+    background: url("../images/img/lw_floor.png") no-repeat 50% 30%;
+    background-size: 40px;
+}
+
+.icon-lw-new-district {
+    background: url("../images/img/lw_new_district.png") no-repeat 50% 30%;
+    background-size: 40px;
+}

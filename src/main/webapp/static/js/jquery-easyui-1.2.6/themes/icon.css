@@ -1,0 +1,284 @@
+.icon-blank {
+    background: url('icons/blank.gif') no-repeat 0 50%;
+}
+
+.icon-add {
+    background: url(icons/add.png) no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-edit {
+
+    background: url(icons/update.png) no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-lock-add {
+    /*
+    background:url('icons/pencil.png') no-repeat 0 50%;
+    */
+    background: url('icons/lock_add.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-lock-delete {
+    /*
+    background:url('icons/pencil.png') no-repeat 0 50%;
+    */
+    background: url('icons/lock_delete.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-remove {
+    /*
+    background:url('icons/edit_remove.png') no-repeat 0 50%;
+    */
+
+    background: url('icons/btn-cancel.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-save {
+    background: url('icons/filesave.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-cut {
+    background: url('icons/cut.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-ok {
+    background: url('icons/ok.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-no {
+    background: url('icons/no.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-cancel {
+    background: url('icons/cancel.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-reload {
+    background: url('icons/reload1.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-search {
+    background: url('icons/search.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-print {
+    background: url('icons/print.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-help {
+    background: url('icons/help.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-undo {
+
+    background: url('icons/collapse.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-cancle {
+
+    background: url('icons/reset.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-compile {
+
+
+    background: url('icons/suggest_reply.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-batch {
+
+    background: url('icons/flow_design.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-empty {
+
+    background: url('icons/profile-recovery.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-redistribute {
+
+    background: url('icons/cancel_trace.png') no-repeat 0 50%;
+    background-size: 14px;
+
+}
+
+.icon-deploy {
+
+    background: url('icons/operation.png') no-repeat 0 50%;
+    background-size: 14px;
+
+}
+
+.icon-redo {
+    background: url('icons/expand.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-back {
+    background: url('icons/back.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-sum {
+    background: url('icons/sum.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-tip {
+    background: url('icons/home.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-mini-add {
+    background: url('icons/mini_add.png') no-repeat 0 50%;
+}
+
+.icon-mini-edit {
+    background: url('icons/mini_edit.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-mini-refresh {
+    background: url('icons/mini_refresh.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**娑撳﹦些*/
+.icon-up {
+    background: url('icons/up.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**娑撳﹦些*/
+.icon-down {
+    background: url('icons/down.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**閸氬酣锟�/
+.icon-back{
+	background:url('icons/down.png') no-repeat 0 50%;
+}
+
+/**閮ㄧ讲*/
+.icon-deployment {
+    background: url('icons/deployment.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**鍔炵悊*/
+.icon-handle {
+    background: url('icons/handle.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**瀵煎嚭*/
+.icon-export {
+    background: url('icons/export.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**瀵煎叆*/
+.icon-import {
+    background: url('icons/import.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**杩斿洖*/
+.icon-return {
+    background: url('icons/return.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**鏇存敼鐘舵�*/
+.icon-changeState {
+    background: url('icons/changeState.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**鍊熷嚭*/
+.icon-lend {
+    background: url('icons/lend.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**绛炬敹*/
+.icon-sign {
+    background: url('icons/sign.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**鐢宠*/
+.icon-apply {
+    background: url('icons/apply.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**杞崲*/
+.icon-transformation {
+    background: url('icons/transformation.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**拥有持证*/
+.icon-haveholder {
+    background: url('icons/haveholder.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**销毁*/
+.icon-destroy {
+    background: url('icons/destroy.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**离职*/
+.icon-quit {
+    background: url('icons/quit.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+/**调动*/
+.icon-transfer {
+    background: url('icons/transfer.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-lw-home {
+    background: url('icons/lw_home.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+
+.icon-lw-mine {
+    background: url('icons/lw_mine.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+.icon-lw-chang-password {
+    background: url('icons/lw_chang_password.png') no-repeat 0 50%;
+    background-size: 14px;
+}
+
+
+
+ 

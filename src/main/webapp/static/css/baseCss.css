@@ -1,0 +1,110 @@
+html,body{ 
+	height:100%;
+}
+html, body, div, iframe, h1, h2, h3, h4, h5, h6, p, a, del, em, b, i, s, img, strong, dd, dl, dt,  ol, ul, li, label, form, table, tbody, thead, tr, th, td, address, span, cite { margin:0; padding:0; border:medium none; }
+h1, h2, h3, h4, h5, h6 {font-size:100%;}
+table { border-spacing:0 0;border-collapse:collapse;}
+a {text-decoration: none; outline:0;color:#000;}
+a:hover { text-decoration:underline; color:#f60;}
+ul,ol { list-style:none; text-align: left;}
+.tableForm {
+	
+}
+
+.tableForm td{
+    font-size: 12px;
+    padding-left: 6px;
+    text-align: left;
+}
+
+.tableForm th {
+	/*
+	text-align: right;
+	
+	/*background-color: #EDF6FC;*/
+	font-family:Microsoft Yahei;
+    color: #2e3d40;
+    font-size: 13px;
+    height: 25px;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.tableForm td input {
+	width: 150px;
+	color: #2e3d40;
+}
+
+.table_wd{
+	text-align:right;
+}
+
+.table_wd th {
+    color: #2e3d40;
+    font-size: 12px;
+    font-weight: bold;
+    height: 25px;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.table_wd td select{
+   color:#2e3d40;
+}
+
+.table_zh
+{
+	text-align:right;
+}
+
+.table_zh th {
+    color: #2e3d40;
+    font-size: 12px;
+    font-weight: bold;
+    height: 25px;
+    padding-right: 5px;
+	padding-left: 5px;
+    text-align: right;
+}
+
+/*列表*/
+.xllist { border:1px solid #e3e3e3; width:100%;}
+.xllist tr:nth-child(2n) {
+    background-color: #fcfcfc;
+    transition: all .125s ease-in-out;
+}
+.xllist tr:hover { background:#fbf8e9;}
+.xllist th,.xllist td { border-right:1px solid #e3e3e3; border-bottom:1px solid #e3e3e3;text-align:center;}
+.xllist th { background:url(images/table.png) repeat-x; color:#585858; height:30px;}
+.xllist td { text-align:center; line-height:25px; height:30px;}
+.xllist1 td { text-align:left; padding:6px 10px;}
+.xllist .xlming { text-align:center; padding-left:10px;}
+
+
+.my_fieldset {
+	border:1px solid #ccc;
+	margin:10px 10px 5px;
+	background-color: #F8F8F8;
+}
+.my_fieldset tr{
+	height:30px;
+}
+.my_legend{
+	font-family:Microsoft Yahei;
+	font-size:13px;
+	font-weight:bold;
+	color: #535353;
+}
+.buttonList{
+	margin: 0 10px 5px;
+}
+.buttonList_no_search{
+	margin: 10px 10px 5px;
+}
+
+.basic_input{width:160px;height: 15px;line-height: 15px;vertical-align: middle;}
+.basic_select{height: 21px;line-height: 21px;vertical-align: middle;}
+.tip
+{
+	color: red;
+}

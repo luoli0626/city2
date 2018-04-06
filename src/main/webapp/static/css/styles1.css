@@ -1,0 +1,292 @@
+@charset "utf-8";
+/* CSS Document */
+
+body
+{
+text-align:center;
+font-size:12px;
+font-family:Arial, Helvetica, sans-serif;
+color:#333333;
+}
+ul,ol{
+list-style:none;
+}
+img
+{
+	border:0;
+}
+li{
+vertical-align: bottom; /*消除ie6多余行高*/
+list-style:none;
+list-style-type:none;
+}
+* {
+margin:0;
+padding:0;
+}
+a
+{
+	text-decoration:none;
+}
+a:hover
+{
+	
+	text-decoration:none;
+}
+/*---------内容--------------*/
+.lr_content
+{
+	margin:0 auto;
+	width:780px;
+	padding:40px 20px 30px 20px;
+	border:1px solid #959595;
+	margin-top:10px;
+	margin-bottom:10px;
+	background:#fff;
+}
+.lr_title
+{
+	width:780px;
+	height:50px;
+	font-size:14px;
+	font-weight:bold;
+	text-align:left;
+	color:#2F3E45;
+	
+	
+}
+
+.fieldset1
+{
+	width:96%;
+	text-align:left;
+	border:1px solid #CCCCCC;
+	padding:0px 2% 10px 2%;
+	font-size:12px;
+	margin-bottom:15px;
+}
+
+.fieldset1 legend
+{
+	font-size:12px;
+	padding:0 5px 0 5px;
+	color:#2F3E45;
+	margin-bottom:15px;
+	
+	
+}
+
+.table1
+{
+	width:100%;
+	border:1px dotted #cccccc;
+	border-collapse:collapse;
+	line-height:30px;
+	table-layout: fixed;
+	text-align:left;
+	table th,td{word-wrap:break-word;overflow:hidden/* for ff2 */}
+}
+
+.table1 tr
+{
+	height:30px;
+
+}
+
+.table1 tr td
+{
+	height:30px;
+	padding:0 5px 0 5px;
+	border:1px dotted #cccccc;
+	vertical-align:top;
+	
+}
+
+.table1 tr td.t1
+{
+	color:#2F3E45;
+	text-align:right;
+	padding-right:10px;
+	font-weight:bold;
+	background:#EBF3FD;
+	vertical-align:middle;
+
+}
+
+.txtbox1
+{
+	float:left;
+	width:200px;
+	height:20px;
+	border:1px solid #7F9DB9;
+	margin-top:4px;
+	margin-right:5px;
+}
+
+.select1
+{
+	float:left;
+	width:202px;
+	height:22px;
+	border:1px solid #7F9DB9;
+	margin-top:4px;
+	margin-right:5px;
+}
+
+.radio1
+{
+	float:left;
+	margin-top:8px;
+	margin-right:5px;
+	margin-left:5px;
+	display:inline;
+}
+
+.textarea1
+{
+	width:200px;
+	height:70px;
+	border:1px solid #7F9DB9;
+	margin-top:4px;
+	margin-right:5px;
+	margin-bottom:4px;
+	
+}
+
+.txt1
+{
+	float:left;
+}
+
+.txt2
+{
+	float:left;
+	padding:0 5px 0 5px;
+}
+
+.box1
+{
+	float:left;
+	margin:5px;
+	display:inline;
+}
+
+.btn1
+{
+	float:left;
+	height:22px;
+	margin-right:5px;
+	padding:0 3px 0 3px;
+	_padding:0 0px 0 0px;
+	border:1px solid #7EABCD;
+	background:url(images/btn1.jpg) repeat-x;
+	color:#444444;
+	border-radius:3px;
+	display:inline;
+	margin-bottom:4px;
+}
+
+.table2
+{
+	width:420px;
+	float:left;
+	margin:5px 0 5px 0;
+	border:1px dotted #cccccc;
+	border-collapse:collapse;
+	line-height:26px;
+	table-layout: fixed;
+	text-align:left;
+	table th,td{word-wrap:break-word;overflow:hidden/* for ff2 */}
+}
+
+.table2 tr
+{
+	height:26px;
+
+}
+
+.table2 tr td
+{
+	height:26px;
+	padding:0 5px 0 5px;
+	border:1px dotted #cccccc;
+	vertical-align:top;
+	text-align:left;
+	
+}
+
+.table2 tr td.td1
+{
+	text-align:center;
+	color:#2F3E45;
+}
+.table2 .h1
+{
+	margin-top:2px;
+}
+
+
+
+
+.lr_btn1
+{
+	
+	width:180px;
+	*width:180px;
+	height:25px;
+	text-align:center;
+	padding:10px 0 10px 0;
+	margin:0 auto;
+	
+}
+
+/*---------按钮-----------*/
+
+
+.buttons a, .buttons button{
+    display:block;
+    float:left;
+    margin:0 10px 0 0;
+    background-color:#f5f5f5;
+    border:1px solid #aeaeae;
+    font-size:12px;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#959595;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+	border-radius:3px;
+}
+.buttons button{
+    width:auto;
+    overflow:visible;
+    padding:4px 10px 3px 10px; /* IE6 */
+}
+.buttons button[type]{
+    padding:5px 10px 5px 10px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html button[type]{
+    padding:4px 10px 3px 10px; /* IE7 */
+}
+.buttons button img, .buttons a img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+
+
+
+/* POSITIVE */
+
+button.positive, .buttons a.positive{
+    color:#727272;
+}
+.buttons a.positive:hover, button.positive:hover{
+    background-color:#deeaff;
+    border:1px solid #5caaff;
+    color:#5caaff;
+}

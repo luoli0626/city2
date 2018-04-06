@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:task="http://www.springframework.org/schema/task"
+	
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.2.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+	http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	http://www.springframework.org/schema/task  
+	http://www.springframework.org/schema/task/spring-task-3.2.xsd 
+	">
+	
+
+    <util:properties id="APP_PROPERTIES" location="classpath:application.properties" local-override="true"/>
+	
+	<!-- 自动扫描所有controller和aop切面 -->
+	<context:component-scan base-package="com.wan.sys.controller,
+	com.wan.sys.aop">
+
+
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan>
+	<!-- 激活自动代理功能 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<!-- freemarker 静态类的配置位置 -->
+    <bean id="freemarkerStatic"
+        class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:freeMarkerStaticClass.properties" />
+    </bean>
+    <!-- freemarker 静态类的解析配置-->
+    <bean id="freemarkerStaticModels" 
+        class="com.wan.sys.freemarker.template.FreemarkerStaticModels" factory-method="getInstance">
+        <property name="staticModels" ref="freemarkerStatic"/>
+    </bean>
+	
+    <!-- 配置freeMarker视图解析器(默认使用该解析器) -->
+    <bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="com.wan.sys.freemarker.view.ExFreeMarkerView"/>
+        <property name="contentType" value="text/html; charset=utf-8"/>
+        <property name="cache" value="true" />
+        <property name="suffix" value=".ftl" />
+        <property name="order" value="0"/>
+        <property name="exposeSpringMacroHelpers" value="true"/>
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="requestContextAttribute" value="request"/>
+        <!-- freemarker 静态类配置 -->
+        <property name="attributesMap" ref="freemarkerStaticModels"/>
+        
+    </bean>
+     
+    <!-- 配置freeMarker的模板路径 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer" >
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/ftl/</value>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="xml_escape" value-ref="fmXmlEscape" />
+                <entry key="webSiteName" value="城管后台管理系统" />
+            </map>
+        </property>
+        <property name="defaultEncoding">
+            <value>utf-8</value>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="locale">zh_CN</prop>
+			    <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+			    <prop key="date_format">yyyy-MM-dd</prop>
+			    <prop key="number_format">#.##</prop>
+            </props>
+        </property>
+    </bean>
+      
+    <bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape"/>
+    
+    
+    <!--通用视图解析器-->
+    <bean id="viewResolverCommon" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>  
+        <property name="suffix" value=".jsp"/>
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.InternalResourceView</value>
+        </property>
+        <property name="order" value="1"/>
+    </bean>
+  
+  <!-- 默认首页 -->
+	<mvc:view-controller path="/" view-name="forward:/toLogin" />
+	
+  <!-- 将无法mapping到Controller的path交给default servlet handler处理 -->
+    <mvc:default-servlet-handler />
+	<mvc:resources location="/static/" mapping="/static/**"  cache-period="31556926"/>
+
+    <!-- 拦截器 -->  
+   	<mvc:interceptors>
+   		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.wan.sys.interceptors.HttpContextInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/" />
+			<mvc:exclude-mapping path="/toLogin" />
+			<mvc:exclude-mapping path="/static/**" />
+			<mvc:exclude-mapping path="/images/**" />
+			<mvc:exclude-mapping path="/error/**" />
+			<mvc:exclude-mapping path="/main/login" />
+			<mvc:exclude-mapping path="/main/showHistory" />
+			<bean class="com.wan.sys.interceptors.AuthInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+ 	<mvc:annotation-driven>
+    	<mvc:message-converters>
+		    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+		        <property name ="supportedMediaTypes">
+		              <list>   
+		                  <value>text/plain;charset=UTF-8</value> 
+		                   <value>text/html;charset=UTF-8</value>   
+		              </list>   
+		        </property> 
+		    </bean>	
+		    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
+		        <property name="supportedMediaTypes"> 
+		            <list> 
+		                <value>application/json;charset=UTF-8</value> 
+						<value>text/html;charset=UTF-8</value>
+		            </list> 
+		        </property>
+		        <property name="objectMapper">  
+				    <bean class="org.codehaus.jackson.map.ObjectMapper">  
+				      <property name="dateFormat">  
+				        <!-- 日期转换 -->  
+				        <bean class="com.wan.sys.convertor.SmartDateFormat"/>  
+				      </property>  
+				    </bean>  
+				 </property>   
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven> 
+	
+		<!-- task任务扫描注解 -->
+    <task:annotation-driven/> 
+	
+</beans>

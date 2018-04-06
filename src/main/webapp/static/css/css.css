@@ -1,0 +1,321 @@
+HTML {
+	TEXT-ALIGN: center; MARGIN: 0px; HEIGHT: 100%
+}
+BODY {
+	TEXT-ALIGN: center; MARGIN: 0px; HEIGHT: 100%
+}
+BODY {
+	TEXT-ALIGN: center; FONT-FAMILY: Arial, Helvetica, sans-serif; COLOR: #313131; FONT-SIZE: 12px
+}
+UL {
+	LIST-STYLE-TYPE: none
+}
+OL {
+	LIST-STYLE-TYPE: none
+}
+IMG {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+LI {
+	LIST-STYLE-TYPE: none; VERTICAL-ALIGN: bottom
+}
+* {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+A {
+	TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: underline
+}
+.top {
+	WIDTH: 100%; HEIGHT: 130px
+}
+.header {
+	MIN-WIDTH: 900px; WIDTH: 100%; BACKGROUND: url(../img/header_bk2.jpg) repeat-x; HEIGHT: 102px; OVERFLOW: hidden
+}
+.header .header_left {
+	WIDTH: 587px; BACKGROUND: url(../img/header_bk1.jpg) no-repeat; FLOAT: left; HEIGHT: 102px
+}
+.header .header_left .logo {
+	MARGIN: 20px 0px 0px; WIDTH: 582px; DISPLAY: inline; FLOAT: left; HEIGHT: 63px
+}
+.header .header_right {
+	WIDTH: 285px; BACKGROUND: url(../img/header_bk3.jpg) no-repeat right top; FLOAT: right; HEIGHT: 102px
+}
+.header .header_right .txt001 {
+	TEXT-ALIGN: right; MARGIN: 15px 5px 0px 0px; WIDTH: 200px; FLOAT: left; HEIGHT: 20px; COLOR: #fff; FONT-SIZE: 12px
+}
+.header .header_right .icon001 {
+	MARGIN: 12px 8px 0px 0px; WIDTH: 16px; BACKGROUND: url(../img/out_icon.gif) no-repeat; FLOAT: left; HEIGHT: 16px
+}
+.header .header_right .txt002 {
+	MARGIN: 15px 0px 0px; WIDTH: 25px; FLOAT: left; HEIGHT: 20px; COLOR: #fff; FONT-SIZE: 12px
+}
+.header .header_right .txt002 A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+.header .header_right .txt002 A:hover {
+	COLOR: #03f; TEXT-DECORATION: underline
+}
+.nav {
+	WIDTH: 100%; BACKGROUND: url(../img/nav_bk.jpg) repeat-x; HEIGHT: 28px; COLOR: #fff; FONT-SIZE: 14px
+}
+.nav .title001 {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; DISPLAY: inline; FLOAT: left; HEIGHT: 20px; COLOR: #fff; MARGIN-LEFT: 20px; FONT-SIZE: 14px; PADDING-TOP: 8px
+}
+.nav .title002 {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 15px; PADDING-RIGHT: 15px; DISPLAY: inline; BACKGROUND: url(../img/nav_bk2.jpg) repeat-x; FLOAT: left; HEIGHT: 20px; COLOR: #fff; MARGIN-LEFT: 20px; FONT-SIZE: 14px; PADDING-TOP: 8px
+}
+.nav .title001 A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+.nav .title002 A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+.nav .title001 A:hover {
+	COLOR: #ff0; TEXT-DECORATION: none
+}
+.nav .title002 A:hover {
+	COLOR: #ff0; TEXT-DECORATION: none
+}
+.nav .txt001 {
+	MARGIN: 8px 0px 0px 30px; WIDTH: 280px; DISPLAY: inline; FLOAT: left
+}
+.nav .txt001 SPAN {
+	COLOR: #03c; FONT-WEIGHT: bold
+}
+.nav .txt002 {
+	MARGIN: 8px 20px 0px 0px; WIDTH: 60px; FLOAT: right; FONT-SIZE: 12px
+}
+.nav .txt002 A {
+	COLOR: #fff; TEXT-DECORATION: underline
+}
+.nav .txt002 A:hover {
+	COLOR: #03f; TEXT-DECORATION: underline
+}
+.nav .icon001 {
+	MARGIN: 8px 5px 0px 0px; WIDTH: 16px; BACKGROUND: url(../img/home_icon.gif) no-repeat; FLOAT: right; HEIGHT: 16px
+}
+.left_side {
+	WIDTH: 223px; BACKGROUND: url(../img/sidebar_bk.jpg) repeat-y; FLOAT: left; HEIGHT: 100%; FONT-SIZE: 14px; OVERFLOW: hidden
+}
+.left_side .check {
+	Z-INDEX: 1; POSITION: absolute; WIDTH: 11px; DISPLAY: block; HEIGHT: 33px; TOP: 240px; LEFT: 209px
+}
+.left_side .left_side_title {
+	WIDTH: 223px; BACKGROUND: url(../img/sidebar_titlebk.jpg) no-repeat; FLOAT: left; HEIGHT: 29px
+}
+.left_side .left_side_title .txt001 {
+	TEXT-ALIGN: center; MARGIN: 8px 0px 0px 50px; WIDTH: 110px; DISPLAY: inline; FLOAT: left; HEIGHT: 16px; COLOR: #003366; FONT-SIZE: 13px
+}
+.left_side .left_side_title .icon001 {
+	WIDTH: 20px; FLOAT: right; HEIGHT: 29px
+}
+.left_side .left_side_content {
+	MARGIN: 5px 4px 5px 1px; DISPLAY: inline; FLOAT: left; HEIGHT: auto
+}
+.left_side .left_side_content A {
+	COLOR: #313131; TEXT-DECORATION: none
+}
+.left_side .left_side_content A:hover {
+	COLOR: #319edb; TEXT-DECORATION: none
+}
+.left_side .left_side_content UL {
+	TEXT-ALIGN: left; WIDTH: 218px; FLOAT: left; FONT-SIZE: 12px
+}
+.left_side .left_side_content UL LI {
+	LINE-HEIGHT: 20px; WIDTH: 218px; FLOAT: left
+}
+.left_side .left_side_content UL LI A {
+	PADDING-LEFT: 8px
+}
+.left_side .left_side_content UL LI SPAN.a {
+	MARGIN: 1px 0px 0px 15px; WIDTH: 9px; DISPLAY: block; FLOAT: left; HEIGHT: 9px
+}
+.left_side .left_side_content UL LI SPAN.b {
+	DISPLAY: block; FLOAT: left; HEIGHT: 20px
+}
+.left_side .left_side_content UL LI UL {
+	MARGIN-TOP: 0px; WIDTH: 218px; MARGIN-BOTTOM: 0px
+}
+.left_side .left_side_content UL LI UL LI {
+	WIDTH: 218px
+}
+.left_side .left_side_content UL LI UL LI A {
+	PADDING-LEFT: 35px
+}
+.left_side .left_side_content UL LI UL LI.acheck {
+	BACKGROUND: #b9e3ff
+}
+.left_side .left_side_content .txt001 {
+	TEXT-ALIGN: center; MARGIN: 8px 0px 0px 50px; WIDTH: 110px; DISPLAY: inline; FLOAT: left; HEIGHT: 16px; COLOR: #003366; FONT-SIZE: 13px
+}
+.footer {
+	WIDTH: 100%; BACKGROUND: #2588bf; HEIGHT: 23px
+}
+.footer .txt001 {
+	TEXT-ALIGN: center; MARGIN: 5px 0px 0px; WIDTH: 100%; FLOAT: left; COLOR: #fff; FONT-SIZE: 12px
+}
+.content {
+	TEXT-ALIGN: center; WIDTH: 100%; BACKGROUND: #eaf4ff; PADDING-TOP: 6px
+}
+.content .content_title001 {
+	MARGIN: 0px auto; WIDTH: 99%; BACKGROUND: #d8ecff; HEIGHT: 30px
+}
+.content .content_title001 .txt001 {
+	MARGIN: 8px 0px 0px 20px; DISPLAY: inline; FLOAT: left; COLOR: #313131; FONT-SIZE: 12px
+}
+.content .box001 {
+	BORDER-BOTTOM: #8ac6ed 1px solid; POSITION: relative; BORDER-LEFT: #8ac6ed 1px solid; MARGIN: 15px auto 0px; WIDTH: 99%; BORDER-TOP: #8ac6ed 1px solid; BORDER-RIGHT: #8ac6ed 1px solid
+}
+.content .box001 .title001 {
+	POSITION: absolute; TEXT-ALIGN: center; PADDING-BOTTOM: 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; DISPLAY: block; BACKGROUND: #eaf4ff; HEIGHT: 16px; COLOR: #0277b9; FONT-SIZE: 14px; TOP: -9px; FONT-WEIGHT: bold; PADDING-TOP: 0px; LEFT: 25px
+}
+.content .box001 .table001 {
+	TEXT-ALIGN: center; PADDING-BOTTOM: 15px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-TOP: 15px
+}
+.content .box001 .table001 A {
+	COLOR: #007ec4
+}
+.tb001 {
+	MARGIN: 0px auto; FONT-SIZE: 12px
+}
+.tb001 TR TD {
+	HEIGHT: 30px
+}
+.tb001 TR TD .sele001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 70%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.tb001 TR TD .sele002 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 40%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.tb001 TR TD .text001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 70%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.tb001 TR TD .text002 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 32%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.tb001 TR TD.col001 {
+	TEXT-ALIGN: right; PADDING-RIGHT: 5px; BACKGROUND: #e5effa
+}
+.tb001 TR TD.col002 {
+	TEXT-ALIGN: left; PADDING-LEFT: 5px; BACKGROUND: #f1f8fe
+}
+.tb001 TR TD.col003 {
+	TEXT-ALIGN: center; PADDING-LEFT: 5px; BACKGROUND: #f1f8fe; HEIGHT: 50px
+}
+.content .box002 {
+	MARGIN: 10px auto 0px; WIDTH: 99%
+}
+.content .box002 .table001 {
+	TEXT-ALIGN: center; WIDTH: 100%; BACKGROUND: url(../img/tb002_title_bk.jpg) repeat-x; HEIGHT: 34px; FONT-SIZE: 14px
+}
+.content .box002 .table001 .title001 {
+	MARGIN: 0px auto; HEIGHT: 18px; COLOR: #fff; FONT-WEIGHT: bold; PADDING-TOP: 10px
+}
+.content .box002 .table001 .tab1 {
+	TEXT-ALIGN: center; MARGIN: 0px 20px; DISPLAY: inline; BACKGROUND: url(../img/tb002_title_bk2.jpg) repeat-x; FLOAT: left; HEIGHT: 34px; FONT-SIZE: 14px
+}
+.content .box002 .table001 .tab1 .txt001 {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; FLOAT: left; HEIGHT: 16px; COLOR: #096da5; FONT-WEIGHT: bold; PADDING-TOP: 10px
+}
+.content .box002 .table001 .tab2 {
+	TEXT-ALIGN: center; MARGIN: 0px 20px; DISPLAY: inline; FLOAT: left; HEIGHT: 34px; FONT-SIZE: 14px
+}
+.content .box002 .table001 .tab2 .txt001 {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 10px; PADDING-RIGHT: 10px; FLOAT: left; HEIGHT: 16px; COLOR: #fff; PADDING-TOP: 10px
+}
+.content .box002 .table001 .tab2 .txt001 A {
+	COLOR: #fff; TEXT-DECORATION: none
+}
+.content .box002 .table001 .tab2 .txt001 A:hover {
+	COLOR: #fff000; TEXT-DECORATION: none
+}
+.content .box002 .table001_1 {
+	BORDER-LEFT: #aad5f1 1px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 37px; BORDER-RIGHT: #aad5f1 1px solid; PADDING-TOP: 6px
+}
+.content .box002 .table001_2 {
+	BORDER-LEFT: #aad5f1 1px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; HEIGHT: 37px; BORDER-RIGHT: #aad5f1 1px solid; PADDING-TOP: 6px
+}
+.content .box002 .table001_1 .center1 {
+	FLOAT: left; OVERFLOW: hidden
+}
+.content .box002 .table001_1 .txt001 {
+	MARGIN: 6px 0px 0px 20px; DISPLAY: inline; FLOAT: left; FONT-SIZE: 12px
+}
+.content .box002 .table001_1 .txt002 {
+	MARGIN: 6px 0px 0px 5px; DISPLAY: inline; FLOAT: left; FONT-SIZE: 12px
+}
+.content .box002 .table001_1 .text001 {
+	MARGIN: 0px 0px 0px 5px; WIDTH: 114px; DISPLAY: inline; FLOAT: left; HEIGHT: 24px
+}
+.content .box002 .table001_1 .text002 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; MARGIN: 0px 0px 0px 5px; WIDTH: 120px; DISPLAY: inline; FLOAT: left; HEIGHT: 24px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table001_1 .btn001 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 0px 0px 0px 10px; WIDTH: 71px; DISPLAY: inline; BACKGROUND: url(../img/btn_cz1.jpg) no-repeat; FLOAT: left; HEIGHT: 24px; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+.content .box002 .table002 {
+	WIDTH: 100%
+}
+.content .box002 .table002_1 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; PADDING-BOTTOM: 10px; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table002 .tb002 {
+	TEXT-ALIGN: center; WIDTH: 100%; FONT-SIZE: 12px
+}
+.content .box002 .table002 .tb002_1 {
+	TEXT-ALIGN: center; MARGIN: 0px auto; WIDTH: 98%; FONT-SIZE: 12px
+}
+.content .box002 .table002 .tb002 A {
+	COLOR: #007ec4
+}
+.content .box002 .table002 .tb002 TR TD {
+	HEIGHT: 30px
+}
+.content .box002 .table002 .tb002 TR TD.col002 {
+	BACKGROUND: #cbe1f9; HEIGHT: 35px
+}
+.content .box002 .table002 .tb002 .sele001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 70%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table002 .tb002 .text001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 70%; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table003 {
+	TEXT-ALIGN: center; MARGIN-TOP: 5px; WIDTH: 100%; BACKGROUND: url(../image/tb003_title_bk.jpg) repeat-x; HEIGHT: 34px; FONT-SIZE: 12px
+}
+.content .box002 .table003_1 {
+	MARGIN: 0px auto; WIDTH: 98%
+}
+.content .box002 .table003 .div1 {
+	MARGIN: 0px auto; WIDTH: 450px; HEIGHT: 20px; PADDING-TOP: 8px
+}
+.content .box002 .table003 .div1 .sele001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 50px; FLOAT: left; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table003 .div1 .btn001 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; MARGIN: 2px 0px 0px 15px; WIDTH: 12px; DISPLAY: inline; FLOAT: left; HEIGHT: 15px; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+.content .box002 .table003 .div1 .txt001 {
+	MARGIN: 3px 5px 0px 10px; DISPLAY: inline; FLOAT: left
+}
+.content .box002 .table003 .div1 .text001 {
+	BORDER-BOTTOM: #aad5f1 1px solid; BORDER-LEFT: #aad5f1 1px solid; WIDTH: 30px; DISPLAY: inline; FLOAT: left; HEIGHT: 22px; FONT-SIZE: 12px; BORDER-TOP: #aad5f1 1px solid; BORDER-RIGHT: #aad5f1 1px solid
+}
+.content .box002 .table004 {
+	TEXT-ALIGN: center; MARGIN-TOP: 5px; WIDTH: 100%; HEIGHT: 50px; FONT-SIZE: 14px; PADDING-TOP: 5px
+}
+.content .box002 .table004 .btnbox {
+	TEXT-ALIGN: center; MARGIN: 0px auto; WIDTH: 250px; HEIGHT: 28px; FONT-SIZE: 14px
+}
+.content .box002 .table004 .btnbox .btn001 {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; WIDTH: 76px; BACKGROUND: url(../images/btn_type01.jpg) no-repeat; HEIGHT: 28px; COLOR: #001c58; BORDER-TOP: medium none; MARGIN-RIGHT: 20px; BORDER-RIGHT: medium none
+}
+.btnbk {
+	MARGIN: 0px 0px 10px; WIDTH: 100%
+}
+.btn_ty {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; WIDTH: 76px; BACKGROUND: url(../images/btn_type01.jpg) no-repeat; HEIGHT: 28px; COLOR: #001c58; BORDER-TOP: medium none; MARGIN-RIGHT: 20px; BORDER-RIGHT: medium none
+}

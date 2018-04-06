@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+/* ------------ Reset ------------ */
+
+ul, ul li { list-style:none }
+h1, h2, h3, h4, h5, h6 {line-height:normal}
+ 
+/* ------------ Featured Proudcts ------------ */
+ 
+.thumbnails .prdocutname { font-size:16px;  color:#5e626b; text-transform:uppercase; text-align:center; margin:0 0 10px 0; display:block }
+.thumbnails.list .thumbnail .prdocutname { font-size:16px;  color:#5e626b; text-transform:uppercase; text-align:left; margin:0 0 10px 0; display:block }
+.thumbnails.list > li { margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid #ccc }
+.thumbnails.list .productdiscrption { margin:10px 0 25px 0 }
+.thumbnails.list .thumbnail .shortlinks { display:block; width:auto; position:static; text-align:left; margin:10px 0 25px 0 }
+.thumbnails.list .pricetag { margin-left:-15px }
+
+
+
+
+ 
+/* This is the zoom window. */
+.cloud-zoom-big { border:2px solid #fff; overflow:hidden; }
+ 
+ 
+ 
+/* Blog */
+
+span.viewfancypopup { background: url("../images/view.png") no-repeat scroll center center transparent; text-align:center; width:100%; display:none; height:75px; position:absolute; bottom:50%; margin-bottom:-38px }
+a.fancyboxpopup { position:relative; display:block }
+a.fancyboxpopup:hover span.viewfancypopup { display:block; position:absolute; z-index:999; margin-top:-55% }
+ 
+ 

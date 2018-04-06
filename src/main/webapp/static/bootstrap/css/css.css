@@ -1,0 +1,128 @@
+body{
+		background: #EEEEEE;
+		font-family: "微软雅黑";
+		}
+		.header{
+		height: 70px;
+		line-height: 70px;
+			background: #f8f8f8;
+		}
+		.container-fluid{
+		background: #FFFFFF;
+		width: 80%;
+		    padding: 2%;
+		}
+		.header .col-md-2{
+			text-align: center;
+		}
+		.fjya{
+			height: 50px;
+			line-height: 50px;
+			margin-top: 2%;
+			    background: #f8f8f8;
+		}
+		.fjya .col-xs-3{
+			text-align: center;
+			    color: #7d7d7d;
+		}
+		.ivue{
+			background: #1b9bff;
+			color: #FFFFFF;
+		}
+		.ivue span{
+			color: #FFFFFF;
+		}
+		.buzhou{
+			font-weight: bold;
+		}
+		.basics{
+			border-bottom: 1px solid #EEEEEE;
+			    margin-top: 2%;
+		}
+		 h4{
+			    height: 55px;
+	    line-height: 55px;
+	    padding: 0% 1%;
+	    background: #f8f8f8;
+	    margin-top: 0px;
+	        margin-bottom: 0px;
+	    font-weight: bold;
+		}
+		.basics .row{
+		    line-height: 50px;
+		    text-align: center;
+				border: 1px solid #EEEEEE;
+				    /*border-bottom: 0px;*/
+				       text-align: left;
+		}
+	.basics .col-md-6{
+		    border-right: 1px solid #eee;
+	}
+	.bdnone{
+		border-right: none !important;
+	}
+	.qvuc{
+		    color: #ffa700;
+	}
+	.basics .left{
+		text-align: right;
+	}
+.sfuw h5{
+	text-align: center;
+    font-weight: bold;
+    margin-top: 3%;
+    font-size: 16px;
+}	
+.sfuw img{
+	    width: 100%;
+    padding: 2% 5%;
+    border-radius: 5px;
+    height: 500px;
+}
+.sfuw p{
+	font-weight: bold;
+	margin-bottom: 0px;
+}
+.sfuw ul{
+	margin: 0px;
+}
+.sfuw ul li{
+	list-style: none;
+	text-indent: 2rem;
+}
+.rkwsu ul li{
+	line-height: 30px;
+}
+table{
+	text-align: center;
+	border: 1px solid #EEEEEE !important;
+	width: 100%;
+}
+table tr th{
+	text-align: center;
+	border-bottom: 0px !important;
+	line-height: 50px;
+	padding: 1.5% 0% !important;
+}
+table button{
+	    background: #1b9bff;
+    border: none;
+        border-radius: 5px;
+    padding: 3% 3%;
+    color: #fff;
+}
+.ngwy tr td{
+	    line-height: 40px !important;
+} 
+.bcie{
+	text-align: center;
+}
+.bcie button{
+	    background: #1b9bff;
+    padding: 1.5% 6%;
+    color: #fff;
+    border: none;
+    font-size: 1vw;
+    border-radius: 5px;
+    border: none;
+}

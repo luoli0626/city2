@@ -1,0 +1,241 @@
+@charset "utf-8";
+/* CSS Document */
+
+html,body{
+height:100%; margin:0px;
+text-align:center;
+
+}
+
+
+
+body{
+text-align:center;
+font-size:12px;
+font-family:Arial, Helvetica, sans-serif;
+color:#313131;
+}
+.body1{ overflow:hidden; background:url(../images/page/bk_1.jpg) repeat-x; background-color:#0b93e0;}
+
+ul,ol{
+list-style:none;
+}
+img
+{
+	border:0;
+}
+li{
+vertical-align: bottom; /*消除ie6多余行高*/
+list-style:none;
+list-style-type:none;
+}
+* {
+margin:0;
+padding:0;
+}
+a
+{
+	text-decoration:none;
+}
+a:hover
+{
+	
+	text-decoration:none;
+}
+
+
+
+/*-----------登陆--------------*/
+/*登陆*/
+.login
+{
+	width:100%;
+	float:left; 
+	
+}
+/*--------------------正文----------------------------*/
+.login .login_mid{ margin:0 auto; width:1005px; height:800px; background:url(../images/page/bk_mid_1.jpg) no-repeat; position:relative;}
+.login .login_mid .dlk{ position:fixed!important;position:absolute;width:518px; height:325px;left:50%;top:50%;margin-left:-259px; margin-top:-207px;z-index:101; background:url(../images/page/dlk_bk.png) no-repeat; padding-top:90px;
+	_top:   expression(eval(document.compatMode &&
+            document.compatMode=='CSS1Compat') ?
+            documentElement.scrollTop + (document.documentElement.clientHeight-this.offsetHeight)/2 :/*IE6*/
+            document.body.scrollTop + (document.body.clientHeight - this.clientHeight)/2);/*IE5 IE5.5*/
+}
+.login .login_mid .dlk .table1{ float:left; width:100%;margin-top:5px;}
+.login .login_mid .dlk .table1 tr td{ line-height:60px;}
+.login .login_mid .dlk .table1 tr td.st1{ color:#F00; line-height:50px;}
+.login .login_mid .dlk .table1 tr td.st2{ color:#0b93e0; font-size:16px; text-align:right; padding-right:20px;}
+.login .login_mid .dlk .textbox1{ float:left; width:300px; height:40px; border:1px solid #d4d4d4; background:#FFF; line-height:40px; font-size:16px; color:#4f4e4e; padding:0 10px;}
+.login .login_mid .dlk .table1 .btnbox{ float:right; padding-right:65px;}
+.login .login_mid .dlk .table1 .btnbox a.link1{float:left; width:178px; height:44px; background:url(../images/page/btn_1.png) no-repeat;}
+.login .login_mid .dlk .table1 .btnbox a.link1:hover{background:url(../images/page/btn_1.png) no-repeat 0px -44px;}
+.login .login_mid .dlk .table1 .btnbox a.link2{float:left; line-height:44px; padding-left:15px; font-size:14px; color:#b80000; text-decoration:underline;}
+.login .login_mid .dlk .table1 .btnbox a.link2:hover{ color:#ea0606; text-decoration:underline;}
+.login_box
+{
+	width:100%;
+	height:549px;
+	background:url(../images/page/login_bk001.jpg) repeat-x;
+}
+.login_box .login_box_mid
+{
+	width:1002px;
+	height:549px;
+	background:url(../images/page/login_bk_2.jpg) repeat-x;
+	margin:0 auto;
+}
+
+.login_box .login_box_mid .loginbox
+{
+	float:left;
+	width:330px;
+	height:180px;
+	margin:235px 0 0 345px;
+	display:inline;
+	
+}
+
+ .loginbox .line1
+ {
+	 width:310px;
+	 float:left;
+	 height:100px;
+ }
+ 
+  .loginbox .line1 .txt1
+ {
+	 width:70px;
+	 float:left;
+	 height:22px;
+	 font-size:16px;
+	 color:#0176ab;
+	 font-weight:bold;
+	 padding-top:3px;
+	
+ }
+ 
+   .loginbox .line1 .txt2
+ {
+	 float:left;
+	 height:22px;
+	 font-size:14px;
+	 color:#0176ab;
+	 font-weight:bold;
+	 padding-top:3px;
+	
+ }
+ 
+   .loginbox .line1 .txt3
+ {
+	 float:left;
+	 height:22px;
+	 width:100px;
+	 margin:0 0 0 10px;
+	 font-size:14px;
+	 color:#0176ab;
+	 font-weight:bold;
+	 padding-top:3px;
+	
+ }
+ 
+   .loginbox .line1 .txtbox1
+ {
+	 width:210px;
+	 float:left;
+	 height:32px;
+	 font-size:16px;
+	 border:0;
+	 margin-left:90px;
+	 display:inline;
+	 padding-top:3px;
+	 background:transparent;
+	 line-height:32px;
+	 color:#0097ce;
+ }
+ 
+   .loginbox .line1 .txtbox2
+ {
+	 width:70px;
+	 float:left;
+	 height:22px;
+	 font-size:16px;
+	 border:1px solid #7ecdf4;
+	 margin-left:5px;
+	 display:inline;
+	 padding-top:3px;
+	 
+ }
+ 
+    .loginbox .line1 .yzm
+ {
+	 width:70px;
+	 float:left;
+	 height:23px;
+	 font-size:14px;
+	 margin-left:10px;
+	 display:inline;
+	 margin-top:2px;
+ }
+ 
+     .loginbox .line2 
+ {
+     width:310px;
+	 float:left;
+	 height:40px;
+	 margin-top:20px;
+	 display:inline;
+ }
+ 
+  .loginbox .line2  .loginbtn
+ {
+     width:123px;
+	 float:left;
+	 height:32px;
+	 display:inline;
+	 border:none;
+	 background:url(../images/page/loginbtn.jpg) no-repeat;
+
+ }
+ 
+   .loginbox .line2  .zhmm
+ {
+     width:100px;
+	 float:left;
+	 height:20px;
+	 font-size:14px;
+	 margin-left:83px;
+	 display:inline;
+	 margin-top:10px;
+ }
+ 
+    .loginbox .line2  .zhmm a
+ {
+	 color:#6fb0c6;
+	 text-decoration:none;
+	 
+ }
+    .loginbox .line2  .zhmm a:hover
+ {
+	 color:#e95e00;
+	  text-decoration:none;
+	 
+ }
+ .loginbox .line1_h
+ {
+	 height:35px;
+	 margin-top:20px;
+ }
+ 
+ .loginbox .line1_h2
+ {
+	 height:35px;
+	 margin-top:23px;
+ }
+  .loginbox .line1_h1
+ {
+	 height:30px;
+ }
+ 
+ 
+ 
+ 
