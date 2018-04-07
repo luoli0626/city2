@@ -1,5 +1,6 @@
 package com.wan.sys.util;
 
+import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,7 @@ public class ValidUtil {
             es.add(error.getField() + error.getDefaultMessage());
         }
         r.setErrmsg(StringUtils.join(es, ","));
-
+        r.setErrcode(ErrorCodeEnum.FAIL_INVALIDPARAM.getCode());
         return r;
     }
 }

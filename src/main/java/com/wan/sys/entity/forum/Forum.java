@@ -11,18 +11,15 @@ import javax.validation.constraints.NotNull;
 @Table(name = "city_forum")
 public class Forum extends BaseEntity{
 
-    @NotNull(message = "{message.notnull}")
     private String title;
 
-    @NotNull(message = "{message.notnull}")
     private String subtitle;
 
-    @NotNull(message = "{message.notnull}")
     private String content;
 
-    @Column(name = "IS_CHECK")
     private String isCheck;
 
+    @NotNull(message = "{message.notnull}")
     public String getTitle() {
         return title;
     }
@@ -39,6 +36,7 @@ public class Forum extends BaseEntity{
         this.subtitle = subtitle;
     }
 
+    @NotNull(message = "{message.notnull}")
     public String getContent() {
         return content;
     }
@@ -47,6 +45,7 @@ public class Forum extends BaseEntity{
         this.content = content;
     }
 
+    @Column(name = "IS_CHECK")
     public String getIsCheck() {
         return isCheck;
     }

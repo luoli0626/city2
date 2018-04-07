@@ -2,6 +2,7 @@ package com.wan.sys.controller.guide;
 
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.pojo.ResponseHead;
+import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.guide.IGuideService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,12 @@ public class GuideController {
             return ValidUtil.errorResponse(result);
         }
 
-        return new ResponseHead(guideService.getList(query));
+        return new ResponseSuccess(guideService.getList(query));
     }
 
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseHead(guideService.getById(id));
+        return new ResponseSuccess(guideService.getById(id));
     }
 }

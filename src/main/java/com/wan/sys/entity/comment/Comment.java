@@ -1,20 +1,19 @@
-package com.wan.sys.entity.lost;
+package com.wan.sys.entity.comment;
 
 import com.wan.sys.common.BaseEntity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "city_lost")
-public class Lost extends BaseEntity{
+@Table(name = "city_comment")
+public class Comment extends BaseEntity{
 
     private String content;
 
-    private String image;
-
-    private String contact;
+    private Long dynamicId;
 
     @NotNull(message = "{message.notnull}")
     public String getContent() {
@@ -25,20 +24,13 @@ public class Lost extends BaseEntity{
         this.content = content;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    @Column(name = "DYNAMIC_ID")
     @NotNull(message = "{message.notnull}")
-    public String getContact() {
-        return contact;
+    public Long getDynamicId() {
+        return dynamicId;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setDynamicId(Long dynamicId) {
+        this.dynamicId = dynamicId;
     }
 }

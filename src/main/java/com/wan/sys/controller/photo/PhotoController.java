@@ -3,6 +3,7 @@ package com.wan.sys.controller.photo;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.ResponseHead;
+import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.photo.IPhotoService;
 import com.wan.sys.util.ValidUtil;
@@ -23,21 +24,21 @@ public class PhotoController {
     IPhotoService photoService;
 
     @ResponseBody
-    @RequestMapping(value = "addPhoto")
-    public ResponseHead addPhoto(@Valid Photo photo, BindingResult result) {
+    @RequestMapping(value = "add")
+    public ResponseHead add(@Valid Photo photo, BindingResult result) {
 
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
         photoService.add(photo);
 
-        return ResponseSuccess.Instance();
+        return OperateSuccess.Instance();
     }
 
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseHead(photoService.getById(id));
+        return new ResponseSuccess(photoService.getById(id));
     }
 
     @ResponseBody
@@ -48,6 +49,6 @@ public class PhotoController {
             return ValidUtil.errorResponse(result);
         }
 
-        return new ResponseHead(photoService.getList(query));
+        return new ResponseSuccess(photoService.getList(query));
     }
 }

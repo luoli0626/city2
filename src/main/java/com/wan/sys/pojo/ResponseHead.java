@@ -1,6 +1,5 @@
 package com.wan.sys.pojo;
 
-import javax.xml.crypto.Data;
 import java.io.Serializable;
 
 public class ResponseHead implements Serializable{
@@ -61,10 +60,4 @@ public class ResponseHead implements Serializable{
 //	public void setUserId(String userId) {
 //		this.userId = userId;
 //	}
-
-    public ResponseHead() {}
-
-    public ResponseHead(Object data) {
-	    this.data = data;
-    }
 }

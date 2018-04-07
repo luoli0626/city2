@@ -1,4 +1,4 @@
-package com.wan.sys.entity.photo;
+package com.wan.sys.entity.common;
 
 public enum State {
 

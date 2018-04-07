@@ -3,6 +3,7 @@ package com.wan.sys.controller.forum;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.pojo.ResponseHead;
+import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.forum.IForumService;
 import com.wan.sys.util.ValidUtil;
@@ -30,7 +31,7 @@ public class ForumController {
         }
         forumService.add(forum);
 
-        return ResponseSuccess.Instance();
+        return OperateSuccess.Instance();
     }
 
     @ResponseBody
@@ -41,12 +42,12 @@ public class ForumController {
             return ValidUtil.errorResponse(result);
         }
 
-        return new ResponseHead(forumService.getList(query));
+        return new ResponseSuccess(forumService.getList(query));
     }
 
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseHead(forumService.getById(id));
+        return new ResponseSuccess(forumService.getById(id));
     }
 }

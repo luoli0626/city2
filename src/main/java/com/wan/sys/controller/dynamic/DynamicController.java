@@ -2,6 +2,7 @@ package com.wan.sys.controller.dynamic;
 
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.pojo.ResponseHead;
+import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.dynamic.IDynamicService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +29,12 @@ public class DynamicController {
             return ValidUtil.errorResponse(result);
         }
 
-        return new ResponseHead(dynamicService.getList(query));
+        return new ResponseSuccess(dynamicService.getList(query));
     }
 
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseHead(dynamicService.getById(id));
+        return new ResponseSuccess(dynamicService.getById(id));
     }
 }

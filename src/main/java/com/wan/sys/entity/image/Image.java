@@ -10,13 +10,9 @@ import javax.validation.constraints.NotNull;
 public class Image {
 
     private Long id;
-
-    @NotNull(message = "{message.notnull}")
     private String address;
     private String type;
     private int order;
-
-    @Column(name = "BELONG_ID")
     private long belongId;
 
     @Id
@@ -30,6 +26,7 @@ public class Image {
         this.id = id;
     }
 
+    @NotNull(message = "{message.notnull}")
     public String getAddress() {
         return address;
     }
@@ -54,6 +51,7 @@ public class Image {
         this.order = order;
     }
 
+    @Column(name = "BELONG_ID")
     public long getBelongId() {
         return belongId;
     }
