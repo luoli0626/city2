@@ -290,17 +290,65 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 
 	@Override
 	public ResponseHead myPhoto(UserBean bean) {
-		return null;
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		
+		
+		
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
 	}
 
 	@Override
 	public ResponseHead myPublish(UserBean bean) {
-		return null;
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		
+		
+		
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
 	}
 
 	@Override
 	public ResponseHead myFound(UserBean bean) {
-		return null;
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		
+		
+		
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
 	}
 	
 }
