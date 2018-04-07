@@ -7,6 +7,7 @@ import com.wan.sys.service.message.IMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +18,10 @@ public class MessageServiceImpl implements IMessageService{
 
     @Override
     public List<Message> getMessageList(Query query) {
+
+        if (query == null) {
+            return new ArrayList<Message>();
+        }
 
         String hql=" from Message t where 1=1 " ;
         if (query.isOnline()) {

@@ -3,12 +3,15 @@ package com.wan.sys.entity.image;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_part_to_images")
 public class Image {
 
     private Long id;
+
+    @NotNull(message = "{message.notnull}")
     private String address;
     private String type;
     private int order;

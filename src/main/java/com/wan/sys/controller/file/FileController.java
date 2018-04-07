@@ -21,15 +21,18 @@ public class FileController {
     @ResponseBody
     @RequestMapping("upload")
     public ResponseHead upload(@RequestParam("file") MultipartFile file) {
+
         ResponseHead r = new ResponseHead();
-        if (file != null && !file.isEmpty()) {
-            try {
-                r.setData(fileService.uploadFile(file));
-            } catch (IOException ex) {
-                r.setErrmsg(ex.getMessage());
-            }
-        } else {
+
+        if (file == null || file.isEmpty()) {
             r.setErrmsg("File can not be null or empty.");
+            return r;
+        }
+
+        try {
+            r.setData(fileService.uploadFile(file));
+        } catch (IOException ex) {
+            r.setErrmsg(ex.getMessage());
         }
 
         return r;

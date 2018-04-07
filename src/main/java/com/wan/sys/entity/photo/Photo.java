@@ -4,6 +4,7 @@ import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -12,6 +13,7 @@ public class Photo extends BaseEntity {
 
     private String state;
 
+    @NotNull(message = "{message.notnull}")
     private String content;
 
     public String getState() {
