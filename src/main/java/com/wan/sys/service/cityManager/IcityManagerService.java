@@ -46,4 +46,32 @@ public interface IcityManagerService {
 	 * @return
 	 */
 	public ResponseHead resetPwd(UserBean bean);
+	
+	/**
+	 * 修改密码
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead editPwd(UserBean bean);
+	
+	/**
+	 * 我的随手拍及详情
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead myPhoto(UserBean bean);
+	
+	/**
+	 * 我的发表
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead myPublish(UserBean bean);
+	
+	/**
+	 * 我的失物招领
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead myFound(UserBean bean);
 }

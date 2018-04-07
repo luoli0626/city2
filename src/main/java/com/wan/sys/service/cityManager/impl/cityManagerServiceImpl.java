@@ -259,8 +259,48 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 					ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
 		}
 	}
-	
-	
-	
+
+	@Override
+	public ResponseHead editPwd(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证，用户id，密码，新密码
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getPassword())
+				||StringUtil.isBlank(bean.getNewPwd())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		//验证密码是否正确
+		User u=(User)baseDao.get(" from User where id=? and password=?", bean.getId(),Encrypt.md5(bean.getPassword()));
+		if(u!=null){
+			u.setPassword(Encrypt.md5(bean.getNewPwd()));
+			baseDao.update(u);
+		}else{
+			return response(ErrorCodeEnum.FAIL_USER.getCode(), 
+					ErrorCodeEnum.FAIL_USER.getValue(), js, 0,null);
+		}
+		
+		return response(ErrorCodeEnum.SUCCESS.getCode(), 
+				ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);
+	}
+
+	@Override
+	public ResponseHead myPhoto(UserBean bean) {
+		return null;
+	}
+
+	@Override
+	public ResponseHead myPublish(UserBean bean) {
+		return null;
+	}
+
+	@Override
+	public ResponseHead myFound(UserBean bean) {
+		return null;
+	}
 	
 }

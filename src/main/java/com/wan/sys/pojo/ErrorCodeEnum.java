@@ -16,6 +16,7 @@ public enum ErrorCodeEnum {
 	FAIL_PASS("密码错误","1011"),
 	FAIL_CODE("验证码错误","1012"),
 	FAIL_EXISTPHONE("手机号已被注册","1013"),
+	FAIL_USER("用户名或密码错误","1014"),
 	;
 	
     // 成员变量  
