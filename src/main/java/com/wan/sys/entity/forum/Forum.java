@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_forum")
-public class Form extends BaseEntity{
+public class Forum extends BaseEntity{
 
     @NotNull(message = "{message.notnull}")
     private String title;

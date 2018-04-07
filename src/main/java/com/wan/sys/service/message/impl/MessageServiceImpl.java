@@ -17,7 +17,7 @@ public class MessageServiceImpl implements IMessageService{
     IMessageDao messageDao;
 
     @Override
-    public List<Message> getMessageList(Query query) {
+    public List<Message> getList(Query query) {
 
         if (query == null) {
             return new ArrayList<Message>();
@@ -39,7 +39,7 @@ public class MessageServiceImpl implements IMessageService{
     }
 
     @Override
-    public Message getMessageById(Long id) {
+    public Message getById(Long id) {
 
         if (id != null && id > 0) {
             return messageDao.get(Message.class, id);

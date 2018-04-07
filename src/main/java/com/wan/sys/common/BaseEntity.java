@@ -41,14 +41,12 @@ public class BaseEntity implements Serializable{
 	protected Long createUserId;
 	
 	/** 创建时间 */
-	@Temporal(TemporalType.TIMESTAMP)
 	protected Date createTime;
 	
 	/** 最近修改人id */
 	protected Long modifyUserId;
 	
 	/** 最近修改时间 */
-	@Temporal(TemporalType.TIMESTAMP)
 	protected Date modifyTime;
 	
 	
@@ -105,13 +103,4 @@ public class BaseEntity implements Serializable{
 		this.modifyTime = modifyTime;
 	}
 
-	@PrePersist
-	protected void onCreate() {
-	    createTime = modifyTime = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-	    modifyTime = new Date();
-    }
 }

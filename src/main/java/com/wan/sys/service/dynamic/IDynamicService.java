@@ -6,7 +6,7 @@ import com.wan.sys.entity.dynamic.Dynamic;
 import java.util.List;
 
 public interface IDynamicService {
-    List<Dynamic> getDynamicList(Query query);
+    List<Dynamic> getList(Query query);
 
-    Dynamic getDynamicById(Long id);
+    Dynamic getById(Long id);
 }

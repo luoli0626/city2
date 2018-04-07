@@ -16,7 +16,7 @@ public class DynamicServiceImpl implements IDynamicService {
     IDynamicDao dynamicDao;
 
     @Override
-    public List<Dynamic> getDynamicList(Query query) {
+    public List<Dynamic> getList(Query query) {
 
         String hql=" from Dynamic t where 1=1 " ;
         if (query.isOnline()) {
@@ -34,7 +34,7 @@ public class DynamicServiceImpl implements IDynamicService {
     }
 
     @Override
-    public Dynamic getDynamicById(Long id) {
+    public Dynamic getById(Long id) {
 
         if (id != null && id > 0) {
             return dynamicDao.get(Dynamic.class, id);

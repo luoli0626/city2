@@ -1,42 +1,38 @@
 package com.wan.sys.controller.message;
 
 import com.wan.sys.entity.common.Query;
-import com.wan.sys.entity.message.Message;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.service.message.IMessageService;
+import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("cityApp")
+@RequestMapping("cityApp/message")
 public class MessageController {
 
     @Autowired
-    IMessageService messageService;
+    IMessageService msgService;
 
     @ResponseBody
-    @RequestMapping("getMessageList")
-    public ResponseHead getMessageList(Query message) {
-        List<Message> messages = messageService.getMessageList(message);
-        ResponseHead r = new ResponseHead();
-        r.setData(messages);
+    @RequestMapping("getList")
+    public ResponseHead getList(@Valid Query query, BindingResult result) {
 
-        return r;
+        if (result.hasErrors()) {
+            return ValidUtil.errorResponse(result);
+        }
+
+        return new ResponseHead(msgService.getList(query));
     }
 
     @ResponseBody
-    @RequestMapping("getMessageById")
-    public ResponseHead getMessageById(Long id) {
-        Message message = messageService.getMessageById(id);
-        ResponseHead r = new ResponseHead();
-        if (message != null) {
-            r.setData(message);
-        }
-
-        return r;
+    @RequestMapping("getById")
+    public ResponseHead getById(Long id) {
+        return new ResponseHead(msgService.getById(id));
     }
 }

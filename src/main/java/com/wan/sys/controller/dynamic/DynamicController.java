@@ -1,18 +1,19 @@
 package com.wan.sys.controller.dynamic;
 
 import com.wan.sys.entity.common.Query;
-import com.wan.sys.entity.dynamic.Dynamic;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.service.dynamic.IDynamicService;
+import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping("cityApp")
+@RequestMapping("cityApp/dynamic")
 public class DynamicController {
 
     @Autowired
@@ -20,24 +21,19 @@ public class DynamicController {
 
 
     @ResponseBody
-    @RequestMapping("getDynamicList")
-    public ResponseHead getDynamicList(Query dynamic) {
-        List<Dynamic> dynamics = dynamicService.getDynamicList(dynamic);
-        ResponseHead r = new ResponseHead();
-        r.setData(dynamics);
+    @RequestMapping("getList")
+    public ResponseHead getList(@Valid Query query, BindingResult result) {
 
-        return r;
+        if (result.hasErrors()) {
+            return ValidUtil.errorResponse(result);
+        }
+
+        return new ResponseHead(dynamicService.getList(query));
     }
 
     @ResponseBody
-    @RequestMapping("getDynamicById")
-    public ResponseHead getDynamicById(Long id) {
-        Dynamic dynamic = dynamicService.getDynamicById(id);
-        ResponseHead r = new ResponseHead();
-        if (dynamic != null) {
-            r.setData(dynamic);
-        }
-
-        return r;
+    @RequestMapping("getById")
+    public ResponseHead getById(Long id) {
+        return new ResponseHead(dynamicService.getById(id));
     }
 }

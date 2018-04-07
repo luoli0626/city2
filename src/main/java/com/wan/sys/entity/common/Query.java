@@ -1,10 +1,17 @@
 package com.wan.sys.entity.common;
 
+import org.hibernate.validator.constraints.Range;
+
 public class Query {
 
+    @Range(min = 1, message = "{message.notlt}{min}")
     private int page;
+
+    @Range(min = 1, message = "{message.notlt}{min}")
     private int rows;
+
     private boolean online;
+    private Long createUserId;
 
     public int getPage() {
         return page;
@@ -28,5 +35,13 @@ public class Query {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public Long getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 }

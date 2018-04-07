@@ -16,7 +16,7 @@ public class GuideServiceImpl implements IGuideService {
     IGuideDao guideDao;
 
     @Override
-    public List<Guide> getGuideList(Query query) {
+    public List<Guide> getList(Query query) {
 
         String hql=" from Guide t where 1=1 " ;
         if (query.isOnline()) {
@@ -34,7 +34,7 @@ public class GuideServiceImpl implements IGuideService {
     }
 
     @Override
-    public Guide getGuideById(Long id) {
+    public Guide getById(Long id) {
 
         if (id != null && id > 0) {
             return guideDao.get(Guide.class, id);

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IMessageService {
 
-    List<Message> getMessageList(Query message);
+    List<Message> getList(Query message);
 
-    Message getMessageById(Long id);
+    Message getById(Long id);
 }
