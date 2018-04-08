@@ -1,15 +1,12 @@
 package com.wan.sys.service.photo.impl;
 
 import com.wan.sys.dao.photo.IPhotoDao;
-import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.service.photo.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class PhotoServiceImpl implements IPhotoService{
@@ -18,46 +15,21 @@ public class PhotoServiceImpl implements IPhotoService{
     IPhotoDao photoDao;
 
     @Override
-    public long add(Photo photo) {
+    public void addPhoto(Photo photo) {
         if (photo != null) {
             Date now = new Date();
-//            photo.setCreateTime(now);
-//            photo.setModifyTime(now);
-            return photoDao.saveAndReturn(photo);
+            photo.setCreateTime(now);
+            photo.setModifyTime(now);
+            photoDao.save(photo);
         }
-
-        return 0L;
     }
 
     @Override
-    public Photo getById(Long id) {
+    public Photo getPhotoById(Long id) {
         if (id != null && id > 0) {
             return photoDao.get(Photo.class, id);
         }
 
         return null;
-    }
-
-    @Override
-    public List<Photo> getList(Query query) {
-
-        if (query == null) {
-            return new ArrayList<Photo>();
-        }
-
-        String hql=" from Photo t where 1=1 " ;
-
-        if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
-            hql += " and t.createUserId=" + query.getCreateUserId();
-        }
-
-        List<Photo> photos;
-        if (query.getPage() > 0 && query.getRows() > 0) {
-            photos = photoDao.find(hql, query.getPage(), query.getRows());
-        } else {
-            photos = photoDao.find(hql);
-        }
-
-        return photos;
     }
 }

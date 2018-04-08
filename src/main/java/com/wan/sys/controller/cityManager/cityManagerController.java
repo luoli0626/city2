@@ -93,10 +93,69 @@ public class cityManagerController {
 	 * @param bean
 	 * @return
 	 */
+	@RequestMapping(value="editInfo")
+	@ResponseBody
 	public ResponseHead editInfo(UserBean bean){
 		return cityServive.editInfo(bean);
 	}
 	
+	
+	/**
+	 * 重置密码
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="resetPwd")
+	@ResponseBody
+	public ResponseHead resetPwd(UserBean bean){
+		return cityServive.resetPwd(bean);
+	}
+	
+	
+	/**
+	 * 
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="editPwd")
+	@ResponseBody
+	public ResponseHead editPwd(UserBean bean){
+		return cityServive.editPwd(bean);
+	}
+	
+	
+	/**
+	 * 我的随手拍及详情
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="myPhoto")
+	@ResponseBody
+	public ResponseHead myPhoto(UserBean bean){
+		return cityServive.myPhoto(bean);
+	}
+	
+	/**
+	 * 我的发表及详情，评论
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="myPublish")
+	@ResponseBody
+	public ResponseHead myPublish(UserBean bean){
+		return cityServive.myPublish(bean);
+	}
+	
+	/**
+	 * 我的失物招领
+	 * @param bean
+	 * @return
+	 */
+	@RequestMapping(value="myFound")
+	@ResponseBody
+	public ResponseHead myFound(UserBean bean){
+		return cityServive.myFound(bean);
+	}
 	/**
 	 * 上传图片
 	 * @param request

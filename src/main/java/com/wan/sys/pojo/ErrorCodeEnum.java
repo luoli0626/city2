@@ -16,9 +16,8 @@ public enum ErrorCodeEnum {
 	FAIL_PASS("密码错误","1011"),
 	FAIL_CODE("验证码错误","1012"),
 	FAIL_EXISTPHONE("手机号已被注册","1013"),
-    FAIL_INVALIDPARAM("参数验证失败","3001"),
-    FAIL_IOERR("IO异常", "4001"),
-	FAIL_NULLFILE("未读取到文件", "4002");
+	FAIL_USER("用户名或密码错误","1014"),
+	;
 	
     // 成员变量  
     private String value;

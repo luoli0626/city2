@@ -1,22 +1,19 @@
 package com.wan.sys.entity.photo;
 
 import com.wan.sys.common.BaseEntity;
-import com.wan.sys.entity.image.Image;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "city_photo")
-public class Photo extends BaseEntity implements Serializable {
+public class Photo extends BaseEntity {
 
     private String state;
-
-    @NotNull(message = "{message.notnull}")
     private String content;
 
+    @Column(name="STATE")
     public String getState() {
         return state;
     }
@@ -25,6 +22,7 @@ public class Photo extends BaseEntity implements Serializable {
         this.state = state;
     }
 
+    @Column(name="CONTENT")
     public String getContent() {
         return content;
     }
@@ -32,18 +30,4 @@ public class Photo extends BaseEntity implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-
-
-    private List<Image> images;
-
-    @Transient
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
-
-    public Photo() {}
 }

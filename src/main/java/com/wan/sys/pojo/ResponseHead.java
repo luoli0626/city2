@@ -60,4 +60,5 @@ public class ResponseHead implements Serializable{
 //	public void setUserId(String userId) {
 //		this.userId = userId;
 //	}
+	
 }

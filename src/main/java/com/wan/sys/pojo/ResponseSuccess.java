@@ -1,10 +1,23 @@
 package com.wan.sys.pojo;
 
-public class ResponseSuccess extends ResponseHead {
+public class ResponseSuccess extends ResponseHead{
 
-    public ResponseSuccess(Object data) {
-        this.setData(data);
-        this.setErrmsg(ErrorCodeEnum.SUCCESS.getValue());
-        this.setErrcode(ErrorCodeEnum.SUCCESS.getCode());
+    private volatile static ResponseSuccess singleton;
+
+    private ResponseSuccess() {}
+
+    public static ResponseSuccess Instance() {
+
+        //双重校验锁实现单例模式
+        if (singleton == null) {
+            synchronized (ResponseSuccess.class) {
+                if (singleton == null) {
+                    singleton = new ResponseSuccess();
+                    singleton.setData("Success");
+                }
+            }
+        }
+
+        return singleton;
     }
 }

@@ -5,21 +5,16 @@ import com.wan.sys.common.BaseEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_message")
 public class Message extends BaseEntity{
 
     private String title;
-
     private String subtitle;
-
     private String content;
-
     private String isOnline;
 
-    @NotNull(message = "{message.notnull}")
     public String getTitle() {
         return title;
     }
@@ -36,7 +31,6 @@ public class Message extends BaseEntity{
         this.subtitle = subtitle;
     }
 
-    @NotNull(message = "{message.notnull}")
     public String getContent() {
         return content;
     }
