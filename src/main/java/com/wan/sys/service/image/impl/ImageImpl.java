@@ -21,7 +21,7 @@ public class ImageImpl implements IImageService {
     }
 
     @Override
-    public List<Image> getImagesByBelongId(Long belongId) {
+    public List<Image> getByBelongId(Long belongId) {
         if (belongId != null && belongId > 0) {
             String hsql = " from Image t where belongId=" + belongId;
 

@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class Dynamic extends BaseEntity{
 
     private String title;
-    private String subtile;
+    private String subtitle;
     private String content;
     private String isOnline;
 
@@ -25,12 +25,12 @@ public class Dynamic extends BaseEntity{
         this.title = title;
     }
 
-    public String getSubtile() {
-        return subtile;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setSubtile(String subtile) {
-        this.subtile = subtile;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     @NotNull(message = "{message.notnull}")

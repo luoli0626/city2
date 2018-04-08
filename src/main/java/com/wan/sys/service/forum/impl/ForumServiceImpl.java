@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,9 @@ public class ForumServiceImpl implements IForumService {
     public void add(Forum forum) {
 
         if (forum != null) {
+            Date now = new Date();
+            forum.setCreateTime(now);
+            forum.setModifyTime(now);
             forumDao.save(forum);
         }
     }

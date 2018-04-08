@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,9 @@ public class CommentServiceImpl implements ICommentService{
     @Override
     public void add(Comment comment) {
         if (comment != null) {
+            Date now = new Date();
+            comment.setCreateTime(now);
+            comment.setModifyTime(now);
             commentDao.save(comment);
         }
     }

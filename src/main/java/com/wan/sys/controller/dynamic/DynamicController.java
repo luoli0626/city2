@@ -24,7 +24,7 @@ public class DynamicController {
     private IDynamicService dynamicService;
 
     /**
-     *
+     * 获取动态列表
      * @param query
      * @param result
      * @return

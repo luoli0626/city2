@@ -2,6 +2,7 @@ package com.wan.sys.service.photo.impl;
 
 import com.wan.sys.dao.photo.IPhotoDao;
 import com.wan.sys.entity.common.Query;
+import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.service.photo.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,10 @@ public class PhotoServiceImpl implements IPhotoService{
     public long add(Photo photo) {
         if (photo != null) {
             Date now = new Date();
-//            photo.setCreateTime(now);
-//            photo.setModifyTime(now);
+            photo.setState("1");
+            photo.setCreateTime(now);
+            photo.setModifyTime(now);
+
             return photoDao.saveAndReturn(photo);
         }
 
