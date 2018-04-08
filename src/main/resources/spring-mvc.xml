@@ -150,7 +150,7 @@
 		              </list>   
 		        </property> 
 		    </bean>	
-		    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
+		    <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
 		        <property name="supportedMediaTypes"> 
 		            <list> 
 		                <value>application/json;charset=UTF-8</value> 
@@ -158,7 +158,7 @@
 		            </list> 
 		        </property>
 		        <property name="objectMapper">  
-				    <bean class="org.codehaus.jackson.map.ObjectMapper">  
+				    <bean class="org.codehaus.jackson.map.ObjectMapper">
 				      <property name="dateFormat">  
 				        <!-- 日期转换 -->  
 				        <bean class="com.wan.sys.convertor.SmartDateFormat"/>  

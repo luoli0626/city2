@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+/**
+ * 
+ */
 @Controller
 @RequestMapping("cityApp/dynamic")
 public class DynamicController {
@@ -20,7 +23,12 @@ public class DynamicController {
     @Autowired
     private IDynamicService dynamicService;
 
-
+    /**
+     *
+     * @param query
+     * @param result
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getList")
     public ResponseHead getList(@Valid Query query, BindingResult result) {
@@ -32,6 +40,11 @@ public class DynamicController {
         return new ResponseSuccess(dynamicService.getList(query));
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {

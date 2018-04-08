@@ -5,11 +5,12 @@ import com.wan.sys.entity.image.Image;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "city_photo")
-public class Photo extends BaseEntity {
+public class Photo extends BaseEntity implements Serializable {
 
     private String state;
 
@@ -43,4 +44,6 @@ public class Photo extends BaseEntity {
     public void setImages(List<Image> images) {
         this.images = images;
     }
+
+    public Photo() {}
 }

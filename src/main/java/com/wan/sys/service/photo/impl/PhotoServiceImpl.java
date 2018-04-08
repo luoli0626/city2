@@ -21,8 +21,8 @@ public class PhotoServiceImpl implements IPhotoService{
     public long add(Photo photo) {
         if (photo != null) {
             Date now = new Date();
-            photo.setCreateTime(now);
-            photo.setModifyTime(now);
+//            photo.setCreateTime(now);
+//            photo.setModifyTime(now);
             return photoDao.saveAndReturn(photo);
         }
 

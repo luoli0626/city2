@@ -24,6 +24,12 @@ public class CommentController {
     @Autowired
     ICommentService commentService;
 
+    /**
+     * 新增评论接口
+     * @param comment 评论
+     * @param result 对象绑定结果
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
     public ResponseHead add(@Valid Comment comment, BindingResult result) {
@@ -37,7 +43,12 @@ public class CommentController {
         return OperateSuccess.Instance();
     }
 
-
+    /**
+     * 获取评论列表接口
+     * @param query 查询参数
+     * @param result 对象绑定结果
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getList")
     public ResponseHead getList(@Valid CommentQuery query, BindingResult result) {
