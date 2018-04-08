@@ -65,17 +65,8 @@ public class UserBean extends BaseEntity implements java.io.Serializable {
 	private String code;//	验证码
 	private String token;
 	private String imgAdress;
-	private String newPwd;
 	public String getImgAdress() {
 		return imgAdress;
-	}
-
-	public String getNewPwd() {
-		return newPwd;
-	}
-
-	public void setNewPwd(String newPwd) {
-		this.newPwd = newPwd;
 	}
 
 	public void setImgAdress(String imgAdress) {

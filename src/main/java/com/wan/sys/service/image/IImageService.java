@@ -7,4 +7,6 @@ import java.util.List;
 public interface IImageService {
 
     void addImages(List<Image> images);
+
+    List<Image> getImagesByBelongId(Long belongId);
 }
