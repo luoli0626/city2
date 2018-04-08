@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.Code;
-import com.wan.sys.entity.cityManager.Forum;
+import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.ErrorCodeEnum;

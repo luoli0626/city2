@@ -7,9 +7,6 @@ import java.util.Map;
 import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * 
@@ -29,7 +26,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  */
 //JPA基类标识
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity implements Serializable{
 	
 	/***/
@@ -85,7 +81,6 @@ public class BaseEntity implements Serializable{
 		this.createUserId = createUserId;
 	}
 
-	@CreatedDate
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -102,7 +97,6 @@ public class BaseEntity implements Serializable{
 		this.modifyUserId = modifyUserId;
 	}
 
-	@LastModifiedDate
 	public Date getModifyTime() {
 		return modifyTime;
 	}
@@ -111,13 +105,4 @@ public class BaseEntity implements Serializable{
 		this.modifyTime = modifyTime;
 	}
 
-	@PrePersist
-	protected void onCreate() {
-	    createTime = modifyTime = new Date();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-	    modifyTime = new Date();
-    }
 }
