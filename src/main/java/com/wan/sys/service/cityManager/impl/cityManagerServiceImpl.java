@@ -1,5 +1,6 @@
 package com.wan.sys.service.cityManager.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.Code;
+import com.wan.sys.entity.cityManager.Forum;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.UserBean;
@@ -301,9 +304,18 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
 					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
 		}
-		
-		
-		
+		//查找随手拍的title，内容，图片，状态
+		List<Photo> list=baseDao.find(" from Photo where createUserId=?", bean.getId());
+		List data=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			JSONObject j1=new JSONObject();
+			List image=baseDao.findBySql(" select group_concat(address)address from Image where type='2' and belongId="+list.get(i).getId()+"");
+//			j1.put("title", list.get(i).getTitle());
+			j1.put("content", list.get(i).getContent());
+			j1.put("images", image.get(0));
+			data.add(j1);
+		}
+		js.put("listData", data);
 		
 		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
 				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
@@ -322,9 +334,18 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
 					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
 		}
-		
-		
-		
+		//查找文章的title，内容，图片
+		List<Forum> list=baseDao.find(" from Forum where and createUserId=?", bean.getId());
+		List data=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			JSONObject j1=new JSONObject();
+			List image=baseDao.findBySql(" select group_concat(address)address from Image where type='2' and belongId="+list.get(i).getId()+"");
+			j1.put("title", list.get(i).getTitle());
+			j1.put("content", list.get(i).getContent());
+			j1.put("images", image.get(0));
+			data.add(j1);
+		}
+		js.put("listData", data);
 		
 		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
 				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
