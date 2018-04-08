@@ -3,7 +3,6 @@ package com.wan.sys.entity.image;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_part_to_images")
@@ -25,8 +24,6 @@ public class Image {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @NotNull(message = "{message.notnull}")
     @Column(name="ADDRESS")
     public String getAddress() {
         return address;
@@ -51,7 +48,6 @@ public class Image {
     public void setOrder(int order) {
         this.order = order;
     }
-
     @Column(name = "BELONG_ID")
     public long getBelongId() {
         return belongId;

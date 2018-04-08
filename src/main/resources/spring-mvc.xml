@@ -124,23 +124,8 @@
 			<bean class="com.wan.sys.interceptors.AuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-    <!-- 注册验证器 -->
-    <mvc:annotation-driven validator="validator" />
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
-        <property name="validationMessageSource" ref="messageSource"/>
-    </bean>
-    <!-- 校验错误信息配置文件 -->
-    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <!-- 资源文件名 -->
-        <property name="basename" value="classpath:validationMessages"/>
-        <!-- 对资源文件内容缓存时间，单位秒 -->
-        <property name="fileEncodings" value="utf8"/>
-        <property name="defaultEncoding" value="utf8"/>
-        <property name="cacheSeconds" value="120"/>
-    </bean>
-    <mvc:annotation-driven>
+	
+ 	<mvc:annotation-driven>
     	<mvc:message-converters>
 		    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
 		        <property name ="supportedMediaTypes">

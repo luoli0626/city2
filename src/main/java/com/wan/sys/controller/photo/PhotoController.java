@@ -1,54 +1,46 @@
 package com.wan.sys.controller.photo;
 
-import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.ResponseHead;
-import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
+import com.wan.sys.service.image.IImageService;
 import com.wan.sys.service.photo.IPhotoService;
-import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import javax.validation.Valid;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping("cityApp/photo")
+@RequestMapping("cityApp")
 public class PhotoController {
 
     @Autowired
     IPhotoService photoService;
 
+    @Autowired
+    IImageService imageService;
+
     @ResponseBody
-    @RequestMapping(value = "add")
-    public ResponseHead add(@Valid Photo photo, BindingResult result) {
+    @RequestMapping(value = "addPhoto", method = POST)
+    public ResponseHead addPhoto(Photo photo) {
+        //保存随手拍
+        photoService.addPhoto(photo);
 
-        if (result.hasErrors()) {
-            return ValidUtil.errorResponse(result);
-        }
-        photoService.add(photo);
-
-        return OperateSuccess.Instance();
+        return ResponseSuccess.Instance();
     }
 
     @ResponseBody
-    @RequestMapping("getById")
-    public ResponseHead getById(Long id) {
-        return new ResponseSuccess(photoService.getById(id));
-    }
-
-    @ResponseBody
-    @RequestMapping("getList")
-    public ResponseHead getList(@Valid Query query, BindingResult result) {
-
-        if (result.hasErrors()) {
-            return ValidUtil.errorResponse(result);
+    @RequestMapping("getPhotoById")
+    public ResponseHead getPhotoById(Long id) {
+        Photo photo = photoService.getPhotoById(id);
+        ResponseHead r = new ResponseHead();
+        if (photo != null) {
+           r.setData(photo);
         }
 
-        return new ResponseSuccess(photoService.getList(query));
+        return r;
     }
 }

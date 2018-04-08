@@ -1,5 +1,6 @@
 package com.wan.sys.service.cityManager.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.Code;
+import com.wan.sys.entity.cityManager.Forum;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.UserBean;
@@ -259,8 +262,114 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 					ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
 		}
 	}
-	
-	
-	
+
+	@Override
+	public ResponseHead editPwd(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证，用户id，密码，新密码
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getPassword())
+				||StringUtil.isBlank(bean.getNewPwd())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		//验证密码是否正确
+		User u=(User)baseDao.get(" from User where id=? and password=?", bean.getId(),Encrypt.md5(bean.getPassword()));
+		if(u!=null){
+			u.setPassword(Encrypt.md5(bean.getNewPwd()));
+			baseDao.update(u);
+		}else{
+			return response(ErrorCodeEnum.FAIL_USER.getCode(), 
+					ErrorCodeEnum.FAIL_USER.getValue(), js, 0,null);
+		}
+		
+		return response(ErrorCodeEnum.SUCCESS.getCode(), 
+				ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);
+	}
+
+	@Override
+	public ResponseHead myPhoto(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		//查找随手拍的title，内容，图片，状态
+		List<Photo> list=baseDao.find(" from Photo where createUserId=?", bean.getId());
+		List data=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			JSONObject j1=new JSONObject();
+			List image=baseDao.findBySql(" select group_concat(address)address from Image where type='2' and belongId="+list.get(i).getId()+"");
+//			j1.put("title", list.get(i).getTitle());
+			j1.put("content", list.get(i).getContent());
+			j1.put("images", image.get(0));
+			data.add(j1);
+		}
+		js.put("listData", data);
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
+	}
+
+	@Override
+	public ResponseHead myPublish(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		//查找文章的title，内容，图片
+		List<Forum> list=baseDao.find(" from Forum where and createUserId=?", bean.getId());
+		List data=new ArrayList();
+		for(int i=0;i<list.size();i++){
+			JSONObject j1=new JSONObject();
+			List image=baseDao.findBySql(" select group_concat(address)address from Image where type='2' and belongId="+list.get(i).getId()+"");
+			j1.put("title", list.get(i).getTitle());
+			j1.put("content", list.get(i).getContent());
+			j1.put("images", image.get(0));
+			data.add(j1);
+		}
+		js.put("listData", data);
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
+	}
+
+	@Override
+	public ResponseHead myFound(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证，id和token
+		if(StringUtil.isBlank(bean.getId().toString())||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		//token验证
+		if(!tokenCheck(bean.getId(),bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_TOKENLOSE.getCode(), 
+					ErrorCodeEnum.FAIL_TOKENLOSE.getValue(), js, 0,null);
+		}
+		
+		
+		
+		
+		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
+				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
+	}
 	
 }
