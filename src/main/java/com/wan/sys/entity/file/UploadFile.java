@@ -1,6 +1,9 @@
 package com.wan.sys.entity.file;
 
-public class UploadFile {
+import java.io.Serializable;
+
+public class UploadFile implements Serializable{
+
     private String path;
 
     public String getPath() {
