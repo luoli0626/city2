@@ -11,6 +11,7 @@ import com.wan.sys.service.image.IImageService;
 import com.wan.sys.service.photo.IPhotoService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.awt.*;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -44,7 +46,7 @@ public class PhotoController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "add", method = POST)
+    @RequestMapping(value = "add", method = POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseHead add(@Valid @RequestBody Photo photo, BindingResult result) {
 
         if (result.hasErrors()) {
@@ -52,11 +54,17 @@ public class PhotoController {
         }
         Long id = photoService.add(photo);
 
-        for (Image image : photo.getImages()) {
-            image.setType(ImageTypeEnum.PHOTO.getIndex());
-            image.setBelongId(id);
+        // 有图片的需要存图片表
+        if (photo.getImages() != null) {
+
+            for (Image image : photo.getImages()) {
+                image.setType(ImageTypeEnum.PHOTO.getIndex());
+                image.setBelongId(id);
+            }
+
+            imageService.addImages(photo.getImages());
         }
-        imageService.addImages(photo.getImages());
+
 
         return OperateSuccess.Instance();
     }

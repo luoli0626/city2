@@ -2,15 +2,18 @@ package com.wan.sys.entity.photo;
 
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "city_photo")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Photo extends BaseEntity implements Serializable {
 
     private String state;
@@ -44,10 +47,5 @@ public class Photo extends BaseEntity implements Serializable {
 
     public void setImages(List<Image> images) {
         this.images = images;
-    }
-
-    @PrePersist
-    public void onCreate() {
-        createTime = new Date();
     }
 }

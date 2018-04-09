@@ -19,7 +19,9 @@ public class ImageImpl implements IImageService {
 
     @Override
     public void addImages(List<Image> images) {
-        imageDao.saveList(images);
+        if (images != null) {
+            imageDao.saveList(images);
+        }
     }
 
     @Override
