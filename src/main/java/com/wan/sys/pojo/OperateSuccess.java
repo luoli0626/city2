@@ -19,7 +19,7 @@ public class OperateSuccess extends ResponseHead{
                     singleton = new OperateSuccess();
                     singleton.setErrmsg(ErrorCodeEnum.SUCCESS.getValue());
                     singleton.setErrcode(ErrorCodeEnum.SUCCESS.getCode());
-                    singleton.setData(ErrorCodeEnum.SUCCESS.getValue());
+                    singleton.setData(new Object());
                 }
             }
         }

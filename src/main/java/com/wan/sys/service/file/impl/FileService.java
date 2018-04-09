@@ -1,5 +1,6 @@
 package com.wan.sys.service.file.impl;
 
+import com.wan.sys.entity.file.UploadFile;
 import com.wan.sys.service.file.IFileService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class FileService implements IFileService {
     private String uploadPath;
 
     @Override
-    public String uploadFile(MultipartFile file) throws IOException{
+    public UploadFile uploadFile(MultipartFile file) throws IOException{
 
         // 文件存放服务端的位置
         String s = File.separator;
@@ -33,6 +34,6 @@ public class FileService implements IFileService {
         File serverFile = new File(dir.getAbsolutePath() + s + newFileName);
         file.transferTo(serverFile);
 
-        return uploadPath + s + newFileName;
+        return new UploadFile(uploadPath + s + newFileName);
     }
 }
