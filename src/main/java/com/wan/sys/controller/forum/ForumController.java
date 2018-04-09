@@ -42,12 +42,14 @@ public class ForumController {
 
         Long id = forumService.add(forum);
 
-        for (Image image : forum.getImages()) {
-            image.setType(ImageTypeEnum.FORUM.getIndex());
-            image.setBelongId(id);
-        }
+        if (forum.getImages() != null) {
+            for (Image image : forum.getImages()) {
+                image.setType(ImageTypeEnum.FORUM.getIndex());
+                image.setBelongId(id);
+            }
 
-        imageService.addImages(forum.getImages());
+            imageService.addImages(forum.getImages());
+        }
 
         return OperateSuccess.Instance();
     }

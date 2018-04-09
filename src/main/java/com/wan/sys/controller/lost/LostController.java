@@ -43,12 +43,14 @@ public class LostController {
 
         Long id = lostService.add(lost);
 
-        for (Image image : lost.getImages()) {
-            image.setType(ImageTypeEnum.LOST.getIndex());
-            image.setBelongId(id);
-        }
+        if (lost.getImages() != null) {
+            for (Image image : lost.getImages()) {
+                image.setType(ImageTypeEnum.LOST.getIndex());
+                image.setBelongId(id);
+            }
 
-        imageService.addImages(lost.getImages());
+            imageService.addImages(lost.getImages());
+        }
 
         return OperateSuccess.Instance();
     }

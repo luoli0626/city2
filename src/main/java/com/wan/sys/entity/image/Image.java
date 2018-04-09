@@ -48,6 +48,7 @@ public class Image implements Serializable {
         this.type = type;
     }
 
+    @Column(name = "\"ORDER\"")
     public int getOrder() {
         return order;
     }
