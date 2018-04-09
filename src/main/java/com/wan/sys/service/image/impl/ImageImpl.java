@@ -3,6 +3,8 @@ package com.wan.sys.service.image.impl;
 import com.wan.sys.dao.image.IImageDao;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.service.image.IImageService;
+import com.wan.sys.util.StringUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +23,18 @@ public class ImageImpl implements IImageService {
     }
 
     @Override
-    public List<Image> getByBelongId(Long belongId) {
-        if (belongId != null && belongId > 0) {
-            String hsql = " from Image t where belongId=" + belongId;
+    public List<Image> getList(Image image) {
 
-            return imageDao.find(hsql);
+        String hsql = " from Image t where 1=1 ";
+
+        if (image.getBelongId() != null && image.getBelongId() > 0) {
+            hsql += " and t.belongId=" + image.getBelongId();
         }
 
-        return new ArrayList<Image>();
+        if (StringUtils.isNotBlank(image.getType())) {
+            hsql += " and t.type=" + image.getType();
+        }
+
+        return imageDao.find(hsql);
     }
 }

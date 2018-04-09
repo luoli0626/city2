@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class PhotoDaoImpl extends BaseDaoImpl<Photo> implements IPhotoDao{
 
     @Override
-    public long saveAndReturn(Photo photo) {
+    public Long saveAndReturn(Photo photo) {
         return (Long) (this.getCurrentSession().save(photo));
     }
 }

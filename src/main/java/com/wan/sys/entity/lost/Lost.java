@@ -1,10 +1,13 @@
 package com.wan.sys.entity.lost;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.image.Image;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "city_lost")
@@ -12,7 +15,7 @@ public class Lost extends BaseEntity{
 
     private String content;
 
-    private String image;
+    private List<Image> images;
 
     private String contact;
 
@@ -25,12 +28,13 @@ public class Lost extends BaseEntity{
         this.content = content;
     }
 
-    public String getImage() {
-        return image;
+    @Transient
+    public List<Image> getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @NotNull(message = "{message.notnull}")

@@ -9,7 +9,7 @@ public interface IForumService {
 
     List<Forum> getList(Query query);
 
-    void add(Forum forum);
+    Long add(Forum forum);
 
     Forum getById(Long id);
 }

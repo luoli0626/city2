@@ -19,7 +19,7 @@ public class PhotoServiceImpl implements IPhotoService{
     IPhotoDao photoDao;
 
     @Override
-    public long add(Photo photo) {
+    public Long add(Photo photo) {
         if (photo != null) {
             Date now = new Date();
             photo.setState("1");

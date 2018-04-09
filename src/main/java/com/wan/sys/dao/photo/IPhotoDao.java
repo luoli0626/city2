@@ -5,5 +5,5 @@ import com.wan.sys.entity.photo.Photo;
 
 public interface IPhotoDao extends IBaseDao<Photo>{
 
-    long saveAndReturn(Photo photo);
+    Long saveAndReturn(Photo photo);
 }

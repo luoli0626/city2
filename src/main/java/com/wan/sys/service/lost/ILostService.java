@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ILostService {
 
-    void add(Lost lost);
+    Long add(Lost lost);
 
     List<Lost> getList(Query query);
 }

@@ -18,14 +18,12 @@ public class LostServiceImpl implements ILostService {
     ILostDao lostDao;
 
     @Override
-    public void add(Lost lost) {
+    public Long add(Lost lost) {
 
-        if (lost != null) {
-            Date now = new Date();
-            lost.setCreateTime(now);
-            lost.setModifyTime(now);
-            lostDao.save(lost);
-        }
+        Date now = new Date();
+        lost.setCreateTime(now);
+        lost.setModifyTime(now);
+        return lostDao.saveAndReturn(lost);
     }
 
     @Override

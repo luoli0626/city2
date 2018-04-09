@@ -8,5 +8,5 @@ public interface IImageService {
 
     void addImages(List<Image> images);
 
-    List<Image> getByBelongId(Long belongId);
+    List<Image> getList(Image image);
 }

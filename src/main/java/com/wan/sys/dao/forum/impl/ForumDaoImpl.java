@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class ForumDaoImpl extends BaseDaoImpl<Forum> implements IForumDao{
+
 }

@@ -3,6 +3,7 @@ package com.wan.sys.controller.photo;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
+import com.wan.sys.pojo.ImageTypeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
@@ -49,7 +50,12 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-        photoService.add(photo);
+        Long id = photoService.add(photo);
+
+        for (Image image : photo.getImages()) {
+            image.setType(ImageTypeEnum.PHOTO.getIndex());
+            image.setBelongId(id);
+        }
         imageService.addImages(photo.getImages());
 
         return OperateSuccess.Instance();
@@ -65,10 +71,8 @@ public class PhotoController {
     public ResponseHead getById(Long id) {
 
         Photo photo = photoService.getById(id);
-
         if (photo != null) {
-            List<Image> images = imageService.getByBelongId(photo.getId());
-            photo.setImages(images);
+            photo.setImages(getImages(photo));
         }
 
         return new ResponseSuccess(photo);
@@ -87,11 +91,20 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
+
         List<Photo> photos = photoService.getList(query);
         for (Photo photo : photos) {
-            photo.setImages(imageService.getByBelongId(photo.getId()));
+            photo.setImages(getImages(photo));
         }
 
         return new ResponseSuccess(photos);
+    }
+
+    private List<Image> getImages(Photo photo) {
+        Image image = new Image();
+        image.setBelongId(photo.getId());
+        image.setType(ImageTypeEnum.PHOTO.getIndex());
+
+        return imageService.getList(image);
     }
 }

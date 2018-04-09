@@ -13,7 +13,7 @@ public class Image {
     private String address;
     private String type;
     private int order;
-    private long belongId;
+    private Long belongId;
 
     @Id
     @GeneratedValue(generator = "pk")
@@ -52,11 +52,11 @@ public class Image {
     }
 
     @Column(name = "BELONG_ID")
-    public long getBelongId() {
+    public Long getBelongId() {
         return belongId;
     }
 
-    public void setBelongId(long belongId) {
+    public void setBelongId(Long belongId) {
         this.belongId = belongId;
     }
 }

@@ -64,6 +64,11 @@ public class BaseDaoImpl<T> implements IBaseDao<T> {
 		this.getCurrentSession().save(o);
 	}
 
+	@Override
+	public Long saveAndReturn(T o) {
+		return (Long) this.getCurrentSession().save(o);
+	}
+
 	public void update(T o) {
 		this.getCurrentSession().update(o);
 	}

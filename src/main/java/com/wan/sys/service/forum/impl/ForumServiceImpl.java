@@ -18,14 +18,13 @@ public class ForumServiceImpl implements IForumService {
     IForumDao forumDao;
 
     @Override
-    public void add(Forum forum) {
+    public Long add(Forum forum) {
 
-        if (forum != null) {
-            Date now = new Date();
-            forum.setCreateTime(now);
-            forum.setModifyTime(now);
-            forumDao.save(forum);
-        }
+        Date now = new Date();
+        forum.setCreateTime(now);
+        forum.setModifyTime(now);
+
+        return forumDao.saveAndReturn(forum);
     }
 
     @Override

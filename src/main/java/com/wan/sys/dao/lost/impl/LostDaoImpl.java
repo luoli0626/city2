@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class LostDaoImpl extends BaseDaoImpl<Lost> implements ILostDao {
+
 }

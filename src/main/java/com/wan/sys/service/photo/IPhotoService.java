@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IPhotoService {
 
-    long add(Photo photo);
+    Long add(Photo photo);
 
     Photo getById(Long id);
 

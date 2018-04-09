@@ -30,6 +30,8 @@ public interface IBaseDao<T> {
 	 */
 	public void save(T o);
 
+	Long saveAndReturn(T o);
+
 	/**
 	 * 更新一个对象
 	 * 
