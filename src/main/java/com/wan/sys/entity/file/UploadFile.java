@@ -14,5 +14,7 @@ public class UploadFile implements Serializable{
         this.path = path;
     }
 
+    public UploadFile() {}
+
     public UploadFile(String path) { this.path = path; }
 }
