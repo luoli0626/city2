@@ -50,6 +50,7 @@ public class PhotoController {
             return ValidUtil.errorResponse(result);
         }
         photoService.add(photo);
+        imageService.addImages(photo.getImages());
 
         return OperateSuccess.Instance();
     }
