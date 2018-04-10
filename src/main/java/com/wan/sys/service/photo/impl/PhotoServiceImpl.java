@@ -21,14 +21,9 @@ public class PhotoServiceImpl implements IPhotoService{
     @Override
     public Long add(Photo photo) {
         if (photo != null) {
-            Date now = new Date();
             photo.setState("1");
-            photo.setCreateTime(now);
-            photo.setModifyTime(now);
-
             return photoDao.saveAndReturn(photo);
         }
-
         return 0L;
     }
 

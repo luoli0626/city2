@@ -24,9 +24,8 @@
 
     <!--<util:properties id="APP_PROPERTIES" location="classpath:application.properties" local-override="true"/>-->
 	
-	<!-- 自动扫描所有controller和aop切面 -->
-	<context:component-scan base-package="com.wan.sys.controller,
-	com.wan.sys.aop">
+	<!-- 自动扫描所有controller,aop,config -->
+	<context:component-scan base-package="com.wan.sys.controller, com.wan.sys.aop, com.wan.sys.config">
 
 
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>

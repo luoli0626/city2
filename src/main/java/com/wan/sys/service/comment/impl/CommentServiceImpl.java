@@ -20,9 +20,6 @@ public class CommentServiceImpl implements ICommentService{
     @Override
     public void add(Comment comment) {
         if (comment != null) {
-            Date now = new Date();
-            comment.setCreateTime(now);
-            comment.setModifyTime(now);
             commentDao.save(comment);
         }
     }

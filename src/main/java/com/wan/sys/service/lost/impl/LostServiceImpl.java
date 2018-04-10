@@ -19,11 +19,11 @@ public class LostServiceImpl implements ILostService {
 
     @Override
     public Long add(Lost lost) {
+        if (lost != null) {
+            return lostDao.saveAndReturn(lost);
+        }
 
-        Date now = new Date();
-        lost.setCreateTime(now);
-        lost.setModifyTime(now);
-        return lostDao.saveAndReturn(lost);
+        return 0L;
     }
 
     @Override
@@ -47,6 +47,5 @@ public class LostServiceImpl implements ILostService {
         }
 
         return losts;
-
     }
 }
