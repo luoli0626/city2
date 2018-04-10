@@ -2,9 +2,8 @@ package com.wan.sys.util;
 
 import java.lang.reflect.Field;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.wan.sys.annotation.NotBlank;
+import org.springframework.util.StringUtils;
 
 public class ObjectBlankCheck{
 	public static String check(Object obj){
@@ -15,7 +14,7 @@ public class ObjectBlankCheck{
 				if(null!=meta){
 					field.setAccessible(true);
 					Object value=field.get(obj);
-					if(null==value||StringUtils.isBlank(value.toString())){
+					if(null==value|| StringUtils.isEmpty(value.toString())){
 						return meta.value();
 					}
 				}

@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jodd.util.StringUtil;
-
 import net.sf.json.util.JSONUtils;
 
 import org.springframework.beans.BeanUtils;
@@ -31,6 +29,7 @@ import com.wan.sys.util.ConfigUtil;
 import com.wan.sys.util.HttpClientUtil;
 import com.wan.sys.util.IdGenerator;
 import com.wan.sys.util.Uuid;
+import org.springframework.util.StringUtils;
 
 /**
  * 
@@ -165,7 +164,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization> imple
 	
 	/**
 	 * Description: 添加机构前先查询是否存在该名称的机构<br>
-	 * @param name
+	 * @param
 	 * @return
 	 */
 //	private Organization findByName(String name){
@@ -347,7 +346,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization> imple
 	 * Description: <br>
 	 * 根据角色和recursive（是否递归查询子节点） 查询出角色或者其子角色的树
 	 * 
-	 * @param id
+	 * @param
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -543,7 +542,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization> imple
 	@Override
 	public Boolean updateSort(OrganBean organBean, String moveFlag) {
 		boolean flag=false;
-		if(organBean==null&&organBean.getId()==null&&StringUtil.isNotBlank(moveFlag)){
+		if(organBean==null&&organBean.getId()==null&&StringUtils.isEmpty(moveFlag)){
 			return flag;
 		}
 		StringBuffer hql=new StringBuffer();
@@ -731,7 +730,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization> imple
 	String bodyStr = HttpClientUtil.getResponseBodyAsString(url, params);
 	// 判断是否成功
 	
-	if(StringUtil.isBlank(bodyStr)){
+	if(StringUtils.isEmpty(bodyStr)){
 		throw new IOException("获取项目数据失败");
 	}
 	// 解析项目数据
@@ -762,7 +761,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization> imple
 		}
 		tProject.setId(orgId);
 		tProject.setOrgName(orgName);
-		tProject.setSortNumber(StringUtil.isNotBlank(isProject)&&isProject.equals("1")?3L:4L);
+		tProject.setSortNumber(StringUtils.isEmpty(isProject)&&isProject.equals("1")?3L:4L);
 		tProject.setOrgCode(orgId);
 		//tProject.setProjectState(true);
 		Organization parent = organDao.get(Organization.class, id);
