@@ -11,7 +11,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "city_part_to_images")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 public class Image implements Serializable {
 
     private Long id;
@@ -48,7 +47,6 @@ public class Image implements Serializable {
         this.type = type;
     }
 
-    @Column(name = "\"ORDER\"")
     public int getOrder() {
         return order;
     }

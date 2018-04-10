@@ -45,7 +45,7 @@ public class PhotoController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "add", method = POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "add", method = POST)
     public ResponseHead add(@Valid @RequestBody Photo photo, BindingResult result) {
 
         if (result.hasErrors()) {

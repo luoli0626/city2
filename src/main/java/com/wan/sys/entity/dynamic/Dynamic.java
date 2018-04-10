@@ -1,6 +1,7 @@
 package com.wan.sys.entity.dynamic;
 
 import com.wan.sys.common.BaseEntity;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_dynamic")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Dynamic extends BaseEntity{
 
     private String title;

@@ -1,6 +1,7 @@
 package com.wan.sys.entity.comment;
 
 import com.wan.sys.common.BaseEntity;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_comment")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment extends BaseEntity{
 
     private String content;

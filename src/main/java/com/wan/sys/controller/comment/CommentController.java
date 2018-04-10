@@ -10,6 +10,7 @@ import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +33,7 @@ public class CommentController {
      */
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
-    public ResponseHead add(@Valid Comment comment, BindingResult result) {
+    public ResponseHead add(@Valid @RequestBody Comment comment, BindingResult result) {
 
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);

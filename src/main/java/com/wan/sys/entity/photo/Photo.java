@@ -13,8 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "city_photo")
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class Photo extends BaseEntity implements Serializable {
+public class Photo extends BaseEntity {
 
     private String state;
 

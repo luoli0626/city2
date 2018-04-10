@@ -21,8 +21,8 @@ import org.hibernate.type.StringType;
  * 修改人：
  * 修改内容：  
  **/
-public class MySQLLocaDialect extends MySQL5Dialect {
-	public MySQLLocaDialect(){  
+public class MySQLLocalDialect extends MySQL5Dialect {
+	public MySQLLocalDialect(){
         super();  
         registerFunction("convert_gbk", new SQLFunctionTemplate(StringType.INSTANCE, "convert(?1 using gbk)"));  
     }  

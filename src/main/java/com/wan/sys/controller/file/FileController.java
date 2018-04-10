@@ -23,7 +23,7 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping("upload")
-    public ResponseHead upload(@RequestParam("file") MultipartFile file) {
+    public ResponseHead upload(@RequestParam("file") MultipartFile file) throws IOException{
 
         if (file == null || file.isEmpty()) {
             return new ResponseFail(ErrorCodeEnum.FAIL_NULLFILE);

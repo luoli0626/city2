@@ -1,6 +1,7 @@
 package com.wan.sys.entity.guide;
 
 import com.wan.sys.common.BaseEntity;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "city_guide")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Guide extends BaseEntity{
 
     private String title;

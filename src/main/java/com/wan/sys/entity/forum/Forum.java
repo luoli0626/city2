@@ -2,6 +2,7 @@ package com.wan.sys.entity.forum;
 
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "city_forum")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Forum extends BaseEntity{
 
     private String title;

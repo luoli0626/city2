@@ -2,6 +2,7 @@ package com.wan.sys.entity.lost;
 
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "city_lost")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Lost extends BaseEntity{
 
     private String content;

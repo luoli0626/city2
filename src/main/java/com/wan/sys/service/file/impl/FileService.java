@@ -13,24 +13,27 @@ import java.util.UUID;
 @Service
 public class FileService implements IFileService {
 
-    @Value("${site.root}")
-    private String siteRoot;
-
     @Value("${site.uploadpath}")
     private String uploadPath;
 
     @Override
     public UploadFile uploadFile(MultipartFile file) throws IOException{
 
-        // 文件存放服务端的位置
         String s = File.separator;
-        File dir = new File(siteRoot + uploadPath);
-        if (!dir.exists())
-            dir.mkdirs();
-        // 写文件到服务器
+        File dir = new File(uploadPath);
+        if (!dir.exists()) { dir.mkdirs(); }
         String originalFileName = file.getOriginalFilename();
-        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-        String newFileName = UUID.randomUUID() + extension;
+
+        //保留文件原后缀名
+        int index = originalFileName.lastIndexOf(".");
+        String newFileName;
+        if (index > 0) {
+            String extension = originalFileName.substring(index);
+            newFileName = UUID.randomUUID() + extension;
+        } else {
+            newFileName = UUID.randomUUID().toString();
+        }
+
         File serverFile = new File(dir.getAbsolutePath() + s + newFileName);
         file.transferTo(serverFile);
 
