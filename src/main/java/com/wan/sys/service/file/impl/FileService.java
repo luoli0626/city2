@@ -13,14 +13,17 @@ import java.util.UUID;
 @Service
 public class FileService implements IFileService {
 
-    @Value("${site.uploadpath}")
-    private String uploadPath;
+    @Value("${site.upload.path}")
+    private String path;
+
+    @Value("${site.upload.location}")
+    private String location;
 
     @Override
     public UploadFile uploadFile(MultipartFile file) throws IOException{
 
         String s = File.separator;
-        File dir = new File(uploadPath);
+        File dir = new File(location);
         if (!dir.exists()) { dir.mkdirs(); }
         String originalFileName = file.getOriginalFilename();
 
@@ -37,6 +40,6 @@ public class FileService implements IFileService {
         File serverFile = new File(dir.getAbsolutePath() + s + newFileName);
         file.transferTo(serverFile);
 
-        return new UploadFile(uploadPath + s + newFileName);
+        return new UploadFile(path + s + newFileName);
     }
 }
