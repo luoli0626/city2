@@ -110,5 +110,4 @@
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-
 </beans>

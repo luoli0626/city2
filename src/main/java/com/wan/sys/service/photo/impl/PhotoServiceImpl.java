@@ -2,14 +2,12 @@ package com.wan.sys.service.photo.impl;
 
 import com.wan.sys.dao.photo.IPhotoDao;
 import com.wan.sys.entity.common.Query;
-import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.service.photo.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -48,6 +46,8 @@ public class PhotoServiceImpl implements IPhotoService{
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();
         }
+
+        hql += " order by t.createTime desc ";
 
         List<Photo> photos;
         if (query.getPage() > 0 && query.getRows() > 0) {

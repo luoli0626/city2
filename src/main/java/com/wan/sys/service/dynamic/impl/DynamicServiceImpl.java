@@ -23,6 +23,8 @@ public class DynamicServiceImpl implements IDynamicService {
             hql += " and t.isOnline=Y ";
         }
 
+        hql += " order by t.createTime desc ";
+
         List<Dynamic> dynamics;
         if (query.getPage() > 0 && query.getRows() > 0) {
             dynamics = dynamicDao.find(hql, query.getPage(), query.getRows());

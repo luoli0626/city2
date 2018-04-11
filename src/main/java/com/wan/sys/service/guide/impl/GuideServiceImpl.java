@@ -23,6 +23,8 @@ public class GuideServiceImpl implements IGuideService {
             hql += " and t.isOnline=Y ";
         }
 
+        hql += " order by t.createTime desc ";
+
         List<Guide> guides;
         if (query.getPage() > 0 && query.getRows() > 0) {
             guides = guideDao.find(hql, query.getPage(), query.getRows());

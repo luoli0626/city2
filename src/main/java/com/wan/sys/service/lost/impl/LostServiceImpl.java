@@ -39,6 +39,8 @@ public class LostServiceImpl implements ILostService {
             hql += " and t.createUserId=" + query.getCreateUserId();
         }
 
+        hql += " order by t.createTime desc ";
+
         List<Lost> losts;
         if (query.getPage() > 0 && query.getRows() > 0) {
             losts = lostDao.find(hql, query.getPage(), query.getRows());

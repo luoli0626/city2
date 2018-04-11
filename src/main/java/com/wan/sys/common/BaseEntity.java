@@ -2,11 +2,10 @@ package com.wan.sys.common;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 import javax.persistence.*;
 
-import com.wan.sys.entity.LastModifiable;
+import com.wan.sys.entity.CreateModifiedable;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -27,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 //JPA基类标识
 @MappedSuperclass
-public class BaseEntity implements Serializable, LastModifiable {
+public class BaseEntity implements Serializable, CreateModifiedable {
 	
 	/***/
 	private static final long serialVersionUID = 5530323836271860201L;
@@ -107,7 +106,7 @@ public class BaseEntity implements Serializable, LastModifiable {
 	}
 
 	public BaseEntity() {
-		createTime = new Date();
+
 	}
 
 }

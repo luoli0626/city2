@@ -38,6 +38,8 @@ public class ForumServiceImpl implements IForumService {
             hql += " and t.createUserId=" + query.getCreateUserId();
         }
 
+        hql += " order by t.createTime desc ";
+
         return forumDao.find(hql, query.getPage(), query.getRows());
     }
 

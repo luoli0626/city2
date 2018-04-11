@@ -24,8 +24,8 @@
 
     <!--<util:properties id="APP_PROPERTIES" location="classpath:application.properties" local-override="true"/>-->
 	
-	<!-- 自动扫描所有controller,aop,config -->
-	<context:component-scan base-package="com.wan.sys.controller, com.wan.sys.aop, com.wan.sys.config">
+	<!-- 自动扫描所有controller, aop, config -->
+	<context:component-scan base-package="com.wan.sys.controller, com.wan.sys.aop">
 
 
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
@@ -170,6 +170,5 @@
 	</mvc:annotation-driven> 
 	
 		<!-- task任务扫描注解 -->
-    <task:annotation-driven/> 
-	
+    <task:annotation-driven/>
 </beans>

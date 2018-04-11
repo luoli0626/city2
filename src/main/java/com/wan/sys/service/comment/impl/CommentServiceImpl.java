@@ -36,6 +36,8 @@ public class CommentServiceImpl implements ICommentService{
             hql += " and t.dynamicId=" + query.getDynamicId();
         }
 
+        hql += " order by t.createTime desc ";
+
         if (query.getPage() > 0 && query.getRows() > 0) {
             return commentDao.find(hql, query.getPage(), query.getRows());
         }

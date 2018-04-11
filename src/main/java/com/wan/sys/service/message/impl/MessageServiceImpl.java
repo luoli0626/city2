@@ -28,6 +28,8 @@ public class MessageServiceImpl implements IMessageService{
             hql += " and t.isOnline=Y ";
         }
 
+        hql += " order by t.createTime desc ";
+
         List<Message> messages;
         if (query.getPage() > 0 && query.getRows() > 0) {
             messages = messageDao.find(hql, query.getPage(), query.getRows());
