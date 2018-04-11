@@ -1,11 +1,11 @@
 package com.wan.sys.service.file;
 
-import com.wan.sys.entity.file.UploadFile;
+import com.wan.sys.entity.file.UploadFileResult;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.util.List;
 
 public interface IFileService {
 
-    UploadFile uploadFile(MultipartFile file) throws IOException;
+    List<UploadFileResult> uploadFiles(MultipartFile[] files);
 }

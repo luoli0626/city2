@@ -23,16 +23,11 @@ public class FileController {
 
     @ResponseBody
     @RequestMapping("upload")
-    public ResponseHead upload(@RequestParam("file") MultipartFile file) throws IOException{
+    public ResponseHead upload(@RequestParam("files") MultipartFile[] files) {
 
-        if (file == null || file.isEmpty()) {
-            return new ResponseFail(ErrorCodeEnum.FAIL_NULLFILE);
+        if (files != null || files.length > 0) {
+            return new ResponseSuccess(fileService.uploadFiles(files));
         }
-
-        try {
-            return new ResponseSuccess(fileService.uploadFile(file));
-        } catch (IOException ex) {
-            return new ResponseFail(ErrorCodeEnum.FAIL_IOERR);
-        }
+        return new ResponseFail(ErrorCodeEnum.FAIL_NULLFILE);
     }
 }
