@@ -11,9 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FileService implements IFileService {
@@ -50,13 +49,16 @@ public class FileService implements IFileService {
     private UploadFileResult saveFile(MultipartFile file) {
 
         if (file != null && !file.isEmpty()) {
-            File dir = new File(location);
+            String sub = new SimpleDateFormat("yyyyMMdd").format(Calendar.getInstance().getTime());
+            String loc = location + sep + sub;
+            File dir = new File(loc);
             if (!dir.exists()) { dir.mkdirs(); }
             String originalFileName = file.getOriginalFilename();
 
             //保留文件原后缀名
             int index = originalFileName.lastIndexOf(".");
             String newFileName;
+            //处理无后缀文件和有后缀文件名
             if (index > 0) {
                 String extension = originalFileName.substring(index);
                 newFileName = UUID.randomUUID() + extension;
@@ -67,7 +69,7 @@ public class FileService implements IFileService {
             File serverFile = new File(dir.getAbsolutePath() + sep + newFileName);
             try {
                 file.transferTo(serverFile);
-                return new UploadSuccess(path + sep + newFileName);
+                return new UploadSuccess(path + sep + sub + sep + newFileName);
             } catch (IOException ex) {
                 return new UploadFailed(ErrorCodeEnum.FAIL_IOERR);
             }
