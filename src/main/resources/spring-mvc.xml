@@ -24,7 +24,7 @@
 
     <!--<util:properties id="APP_PROPERTIES" location="classpath:application.properties" local-override="true"/>-->
 	
-	<!-- 自动扫描所有controller, aop, config -->
+	<!-- 自动扫描所有controller, aop -->
 	<context:component-scan base-package="com.wan.sys.controller, com.wan.sys.aop">
 
 
