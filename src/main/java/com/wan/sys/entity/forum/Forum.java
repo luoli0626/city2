@@ -17,14 +17,12 @@ import java.util.List;
 public class Forum extends BaseEntity{
 
     private String title;
-
     private String subtitle;
-
     private String content;
-
     private String isCheck;
-
     private List<Image> images;
+    private Long viewCount;
+    private Long commentCount;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -68,5 +66,23 @@ public class Forum extends BaseEntity{
 
     public void setImages(List<Image> images) {
         this.images = images;
+    }
+
+    @Transient
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    @Transient
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
     }
 }

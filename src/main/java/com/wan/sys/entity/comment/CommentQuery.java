@@ -4,13 +4,22 @@ import com.wan.sys.entity.common.Query;
 
 public class CommentQuery extends Query {
 
-    private Long dynamicId;
+    private Long belongId;
+    private String type;
 
-    public Long getDynamicId() {
-        return dynamicId;
+    public Long getBelongId() {
+        return belongId;
     }
 
-    public void setDynamicId(Long dynamicId) {
-        this.dynamicId = dynamicId;
+    public void setBelongId(Long id) {
+        this.belongId = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

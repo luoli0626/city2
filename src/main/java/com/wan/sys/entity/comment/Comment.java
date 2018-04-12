@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 public class Comment extends BaseEntity{
 
     private String content;
-
-    private Long dynamicId;
+    private String type;
+    private Long belongId;
 
     @NotNull(message = "{message.notnull}")
     public String getContent() {
@@ -26,13 +26,20 @@ public class Comment extends BaseEntity{
         this.content = content;
     }
 
-    @Column(name = "DYNAMIC_ID")
     @NotNull(message = "{message.notnull}")
-    public Long getDynamicId() {
-        return dynamicId;
+    public Long getBelongId() {
+        return belongId;
     }
 
-    public void setDynamicId(Long dynamicId) {
-        this.dynamicId = dynamicId;
+    public void setBelongId(Long dynamicId) {
+        this.belongId = dynamicId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

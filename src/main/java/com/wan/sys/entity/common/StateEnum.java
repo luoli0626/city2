@@ -1,12 +1,12 @@
 package com.wan.sys.entity.common;
 
-public enum State {
+public enum StateEnum {
 
     WAITING(0), PROCESSING(1), END(2);
 
-    public int index;
+    private int index;
 
-    State(int index) {
+    StateEnum(int index) {
         this.index = index;
     }
 

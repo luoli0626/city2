@@ -8,6 +8,6 @@ import java.util.List;
 public interface ICommentService {
 
     void add(Comment comment);
-
     List<Comment> getList(CommentQuery query);
+    Long count(Comment comment);
 }

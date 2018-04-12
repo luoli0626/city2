@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -14,12 +15,10 @@ import javax.validation.constraints.NotNull;
 public class Message extends BaseEntity{
 
     private String title;
-
     private String subtitle;
-
     private String content;
-
     private String isOnline;
+    private Long viewCount;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -54,5 +53,14 @@ public class Message extends BaseEntity{
 
     public void setIsOnline(String isOnline) {
         this.isOnline = isOnline;
+    }
+
+    @Transient
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
     }
 }

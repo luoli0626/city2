@@ -33,6 +33,8 @@ public class LostController {
     @Autowired
     private IImageService imageService;
 
+    private static final String IMG_TYPE = ImageTypeEnum.LOST.getIndex();
+
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
     public ResponseHead add(@Valid @RequestBody Lost lost, BindingResult result) {
@@ -41,15 +43,9 @@ public class LostController {
             return ValidUtil.errorResponse(result);
         }
 
-        Long id = lostService.add(lost);
-
+        lost = lostService.add(lost);
         if (lost.getImages() != null) {
-            for (Image image : lost.getImages()) {
-                image.setType(ImageTypeEnum.LOST.getIndex());
-                image.setBelongId(id);
-            }
-
-            imageService.addImages(lost.getImages());
+            addImages(lost);
         }
 
         return OperateSuccess.Instance();
@@ -72,10 +68,21 @@ public class LostController {
     }
 
     private List<Image> getImages(Lost lost) {
+
         Image image = new Image();
         image.setBelongId(lost.getId());
-        image.setType(ImageTypeEnum.LOST.getIndex());
+        image.setType(IMG_TYPE);
 
         return imageService.getList(image);
+    }
+
+    private void addImages(Lost lost) {
+
+        for (Image image : lost.getImages()) {
+            image.setType(IMG_TYPE);
+            image.setBelongId(lost.getId());
+        }
+
+        imageService.addImages(lost.getImages());
     }
 }

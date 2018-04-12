@@ -18,12 +18,12 @@ public class LostServiceImpl implements ILostService {
     ILostDao lostDao;
 
     @Override
-    public Long add(Lost lost) {
+    public Lost add(Lost lost) {
         if (lost != null) {
-            return lostDao.saveAndReturn(lost);
+            lost.setId(lostDao.saveAndReturn(lost));
         }
 
-        return 0L;
+        return lost;
     }
 
     @Override

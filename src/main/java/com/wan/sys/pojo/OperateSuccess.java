@@ -1,7 +1,6 @@
 package com.wan.sys.pojo;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author J
@@ -22,8 +21,7 @@ public class OperateSuccess extends ResponseHead{
                     singleton = new OperateSuccess();
                     singleton.setErrmsg(ErrorCodeEnum.SUCCESS.getValue());
                     singleton.setErrcode(ErrorCodeEnum.SUCCESS.getCode());
-                    singleton.setData(new HashMap<String, String>() {
-                    });
+                    singleton.setData(new HashMap<String, String>() {});
                 }
             }
         }

@@ -6,6 +6,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -17,6 +18,8 @@ public class Dynamic extends BaseEntity{
     private String subtitle;
     private String content;
     private String isOnline;
+    private Long viewCount;
+    private Long commentCount;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -51,5 +54,23 @@ public class Dynamic extends BaseEntity{
 
     public void setIsOnline(String isOnline) {
         this.isOnline = isOnline;
+    }
+
+    @Transient
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    @Transient
+    public Long getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Long commentCount) {
+        this.commentCount = commentCount;
     }
 }
