@@ -48,6 +48,9 @@ public class DynamicController {
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
+        //记录paygeview
+
+
         return new ResponseSuccess(dynamicService.getById(id));
     }
 }
