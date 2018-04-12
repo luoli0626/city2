@@ -3,7 +3,7 @@ package com.wan.sys.controller.lost;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.lost.Lost;
-import com.wan.sys.pojo.ImageTypeEnum;
+import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;

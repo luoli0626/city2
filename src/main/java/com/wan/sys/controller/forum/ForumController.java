@@ -6,6 +6,7 @@ import com.wan.sys.entity.comment.CommentTypeEnum;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.entity.view.View;
 import com.wan.sys.entity.view.ViewTypeEnum;
 import com.wan.sys.pojo.*;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
