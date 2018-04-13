@@ -5,6 +5,4 @@ import com.wan.sys.entity.view.View;
 public interface IViewService {
 
     void add(View view);
-
-    Long count(View view);
 }

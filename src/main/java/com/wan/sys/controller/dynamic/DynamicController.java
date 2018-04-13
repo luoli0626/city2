@@ -48,15 +48,7 @@ public class DynamicController {
     @Autowired
     private ICommentService commentService;
 
-    @Autowired
-    private IImageService imageService;
-
-    @Autowired
-    private IUserInfoService userInfoService;
-
     private static final String COMMENT_TYPE = CommentTypeEnum.DYNAMIC.toString();
-    private static final String VIEW_TYPE = ViewTypeEnum.DYNAMIC.toString();
-
 
     @ResponseBody
     @RequestMapping("getList")
@@ -66,13 +58,7 @@ public class DynamicController {
             return ValidUtil.errorResponse(result);
         }
 
-        List<Dynamic> dynamics = dynamicService.getList(query);
-        for (Dynamic dynamic : dynamics) {
-            dynamic.setViewCount(getViewCount(dynamic));
-            dynamic.setCommentCount(getCommentCount(dynamic));
-        }
-
-        return new ResponseSuccess(dynamics);
+        return new ResponseSuccess(dynamicService.getList(query));
     }
 
     @ResponseBody
@@ -114,23 +100,5 @@ public class DynamicController {
 
         query.setType(COMMENT_TYPE);
         return new ResponseSuccess(commentService.getList(query));
-    }
-
-    private Long getViewCount(Dynamic dynamic) {
-
-        View view = new View();
-        view.setBelongId(dynamic.getId());
-        view.setType(VIEW_TYPE);
-
-        return viewService.count(view);
-    }
-
-    private Long getCommentCount(Dynamic dynamic) {
-
-        Comment comment = new Comment();
-        comment.setBelongId(dynamic.getId());
-        comment.setType(COMMENT_TYPE);
-
-        return commentService.count(comment);
     }
 }

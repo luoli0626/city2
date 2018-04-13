@@ -2,6 +2,7 @@ package com.wan.sys.entity.message;
 
 import com.wan.sys.common.BaseEntity;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,7 +56,7 @@ public class Message extends BaseEntity{
         this.isOnline = isOnline;
     }
 
-    @Transient
+    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=3 )")
     public Long getViewCount() {
         return viewCount;
     }

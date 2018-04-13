@@ -1,7 +1,9 @@
 package com.wan.sys.entity.dynamic;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.view.ViewTypeEnum;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,7 +58,7 @@ public class Dynamic extends BaseEntity{
         this.isOnline = isOnline;
     }
 
-    @Transient
+    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=1 )")
     public Long getViewCount() {
         return viewCount;
     }
@@ -65,7 +67,7 @@ public class Dynamic extends BaseEntity{
         this.viewCount = viewCount;
     }
 
-    @Transient
+    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=1 )")
     public Long getCommentCount() {
         return commentCount;
     }

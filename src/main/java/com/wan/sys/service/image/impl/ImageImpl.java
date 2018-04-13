@@ -24,19 +24,19 @@ public class ImageImpl implements IImageService {
         }
     }
 
-    @Override
-    public List<Image> getList(Image image) {
-
-        String hsql = " from Image t where 1=1 ";
-
-        if (image.getBelongId() != null && image.getBelongId() > 0) {
-            hsql += " and t.belongId=" + image.getBelongId();
-        }
-
-        if (StringUtils.isNotBlank(image.getType())) {
-            hsql += " and t.type=" + image.getType();
-        }
-
-        return imageDao.find(hsql);
-    }
+//    @Override
+//    public List<Image> getList(Image image) {
+//
+//        String hsql = " from Image t where 1=1 ";
+//
+//        if (image.getBelongId() != null && image.getBelongId() > 0) {
+//            hsql += " and t.belongId=" + image.getBelongId();
+//        }
+//
+//        if (StringUtils.isNotBlank(image.getType())) {
+//            hsql += " and t.type=" + image.getType();
+//        }
+//
+//        return imageDao.find(hsql);
+//    }
 }

@@ -40,16 +40,9 @@ public class ForumController {
     private IImageService imageService;
 
     @Autowired
-    private IViewService viewService;
-
-    @Autowired
     private ICommentService commentService;
 
-    @Autowired
-    private IUserInfoService userInfoService;
-
     private static final String COMMENT_TYPE = CommentTypeEnum.FORUM.toString();
-    private static final String VIEW_TYPE = ViewTypeEnum.FORUM.toString();
     private static final String IMG_TYPE = ImageTypeEnum.FORUM.getIndex();
 
     @ResponseBody
@@ -60,6 +53,7 @@ public class ForumController {
             return ValidUtil.errorResponse(result);
         }
 
+        forum.setIsCheck("N");
         Long id = forumService.add(forum);
 
         if (forum.getImages() != null) {
@@ -81,12 +75,6 @@ public class ForumController {
             return ValidUtil.errorResponse(result);
         }
 
-        List<Forum> forums = forumService.getList(query);
-        for (int i=0; i < forums.size(); i++) {
-            Forum forum = forums.get(i);
-            forums.set(i, fillForum(forum));
-        }
-
         return new ResponseSuccess(forumService.getList(query));
     }
 
@@ -96,13 +84,10 @@ public class ForumController {
 
         Forum forum = forumService.getById(id);
 
-        if (forum != null) {
-            forum = fillForum(forum);
-            return new ResponseSuccess(forum);
+        if (forum == null) {
+            return NoResultResponseFail.Instance();
         }
-
-        return NoResultResponseFail.Instance();
-
+        return new ResponseSuccess(forum);
     }
 
     @ResponseBody
@@ -128,41 +113,5 @@ public class ForumController {
 
         query.setType(COMMENT_TYPE);
         return new ResponseSuccess(commentService.getList(query));
-    }
-
-    private Forum fillForum (Forum forum) {
-
-        forum.setImages(getImages(forum));
-        forum.setViewCount(getViewCount(forum));
-        forum.setCommentCount(getCommentCount(forum));
-
-        return forum;
-    }
-
-    private List<Image> getImages(Forum forum) {
-
-        Image image = new Image();
-        image.setBelongId(forum.getId());
-        image.setType(IMG_TYPE);
-
-        return imageService.getList(image);
-    }
-
-    private Long getViewCount(Forum forum) {
-
-        View view = new View();
-        view.setBelongId(forum.getId());
-        view.setType(VIEW_TYPE);
-
-        return viewService.count(view);
-    }
-
-    private Long getCommentCount(Forum forum) {
-
-        Comment comment = new Comment();
-        comment.setBelongId(forum.getId());
-        comment.setType(COMMENT_TYPE);
-
-        return commentService.count(comment);
     }
 }

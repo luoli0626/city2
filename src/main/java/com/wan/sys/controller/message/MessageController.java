@@ -38,12 +38,7 @@ public class MessageController {
             return ValidUtil.errorResponse(result);
         }
 
-        List<Message> messages = msgService.getList(query);
-        for (Message message : messages) {
-            message.setViewCount(getViewCount(message));
-        }
-
-        return new ResponseSuccess(messages);
+        return new ResponseSuccess(msgService.getList(query));
     }
 
     @ResponseBody
@@ -59,14 +54,5 @@ public class MessageController {
         }
 
         return new ResponseSuccess(message);
-    }
-
-    private Long getViewCount(Message message) {
-
-        View view = new View();
-        view.setBelongId(message.getId());
-        view.setType(VIEW_TYPE);
-
-        return viewService.count(view);
     }
 }

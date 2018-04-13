@@ -61,35 +61,4 @@ public class CommentServiceImpl implements ICommentService{
         List<Comment> comments  = commentDao.find(hql, params);
         return comments;
     }
-
-    @Override
-    public Long count(Comment comment) {
-
-        String hql = " select count(*) from Comment t where 1=1 ";
-
-        List<Object> params = new ArrayList<Object>();
-        if (comment.getBelongId() != null && comment.getBelongId() > 0) {
-            hql += " and t.belongId=? ";
-            params.add(comment.getBelongId());
-        }
-
-        if (StringUtils.isNotEmpty(comment.getType())) {
-            hql += " and t.type=? ";
-            params.add(comment.getType());
-        }
-
-        Long count = commentDao.count(hql, params);
-        return count == null ? 0 : count;
-    }
-
-//    private List<Comment> reformResult(List<Comment> comments) {
-//
-//        if (comments != null) {
-//            for (Comment comment : comments) {
-//
-//            }
-//        }
-//
-//        return comments;
-//    }
 }

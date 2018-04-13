@@ -23,24 +23,4 @@ public class ViewServiceImpl implements IViewService {
             viewDao.save(view);
         }
     }
-
-    @Override
-    public Long count(View view) {
-
-        String hql = " select count(*) from View t where 1=1 ";
-
-        List<Object> params = new ArrayList<Object>();
-        if (view.getBelongId() != null && view.getBelongId() > 0) {
-            hql += " and t.belongId=? ";
-            params.add(view.getBelongId());
-        }
-
-        if (StringUtils.isNotEmpty(view.getType())) {
-            hql += " and t.type=? ";
-            params.add(view.getType());
-        }
-
-        Long count = viewDao.count(hql, params);
-        return count == null ? 0 : count;
-    }
 }

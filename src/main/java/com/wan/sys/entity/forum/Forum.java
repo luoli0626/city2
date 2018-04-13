@@ -3,11 +3,11 @@ package com.wan.sys.entity.forum;
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -59,7 +59,9 @@ public class Forum extends BaseEntity{
         this.isCheck = isCheck;
     }
 
-    @Transient
+    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
     public List<Image> getImages() {
         return images;
     }
@@ -68,7 +70,7 @@ public class Forum extends BaseEntity{
         this.images = images;
     }
 
-    @Transient
+    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=2 )")
     public Long getViewCount() {
         return viewCount;
     }
@@ -77,7 +79,7 @@ public class Forum extends BaseEntity{
         this.viewCount = viewCount;
     }
 
-    @Transient
+    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=2 )")
     public Long getCommentCount() {
         return commentCount;
     }

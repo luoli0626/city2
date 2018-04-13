@@ -3,6 +3,8 @@ package com.wan.sys.entity.photo;
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -14,8 +16,7 @@ import java.util.List;
 public class Photo extends BaseEntity {
 
     private String state;
-
-    @NotNull(message = "{message.notnull}")
+    private List<Image> images;
     private String content;
 
     public String getState() {
@@ -26,6 +27,7 @@ public class Photo extends BaseEntity {
         this.state = state;
     }
 
+    @NotNull(message = "{message.notnull}")
     public String getContent() {
         return content;
     }
@@ -34,10 +36,9 @@ public class Photo extends BaseEntity {
         this.content = content;
     }
 
-
-    private List<Image> images;
-
-    @Transient
+    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
     public List<Image> getImages() {
         return images;
     }

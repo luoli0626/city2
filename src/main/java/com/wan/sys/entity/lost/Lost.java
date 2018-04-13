@@ -3,10 +3,10 @@ package com.wan.sys.entity.lost;
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -30,7 +30,9 @@ public class Lost extends BaseEntity{
         this.content = content;
     }
 
-    @Transient
+    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
     public List<Image> getImages() {
         return images;
     }

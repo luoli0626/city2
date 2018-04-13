@@ -74,13 +74,7 @@ public class PhotoController {
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-
-        Photo photo = photoService.getById(id);
-        if (photo != null) {
-            photo.setImages(getImages(photo));
-        }
-
-        return new ResponseSuccess(photo);
+        return new ResponseSuccess(photoService.getById(id));
     }
 
     /**
@@ -96,20 +90,6 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-
-        List<Photo> photos = photoService.getList(query);
-        for (Photo photo : photos) {
-            photo.setImages(getImages(photo));
-        }
-
-        return new ResponseSuccess(photos);
-    }
-
-    private List<Image> getImages(Photo photo) {
-        Image image = new Image();
-        image.setBelongId(photo.getId());
-        image.setType(ImageTypeEnum.PHOTO.getIndex());
-
-        return imageService.getList(image);
+        return new ResponseSuccess(photoService.getList(query));
     }
 }

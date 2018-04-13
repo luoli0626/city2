@@ -59,21 +59,7 @@ public class LostController {
             return ValidUtil.errorResponse(result);
         }
 
-        List<Lost> lostList = lostService.getList(query);
-        for (Lost lost : lostList) {
-            lost.setImages(getImages(lost));
-        }
-
-        return new ResponseSuccess(lostList);
-    }
-
-    private List<Image> getImages(Lost lost) {
-
-        Image image = new Image();
-        image.setBelongId(lost.getId());
-        image.setType(IMG_TYPE);
-
-        return imageService.getList(image);
+        return new ResponseSuccess(lostService.getList(query));
     }
 
     private void addImages(Lost lost) {
