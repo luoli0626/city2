@@ -34,7 +34,7 @@ public class CommentServiceImpl implements ICommentService{
 
         List<Object> params = new ArrayList<Object>();
         if (query.getBelongId() != null && query.getBelongId() > 0) {
-            hql += " and t.dynamicId=? ";
+            hql += " and t.belongId=? ";
             params.add(query.getBelongId());
         }
 

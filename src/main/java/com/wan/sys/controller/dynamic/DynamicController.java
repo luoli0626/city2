@@ -1,6 +1,5 @@
 package com.wan.sys.controller.dynamic;
 
-import com.wan.sys.annotation.ValidToken;
 import com.wan.sys.entity.comment.Comment;
 import com.wan.sys.entity.comment.CommentQuery;
 import com.wan.sys.entity.comment.CommentTypeEnum;
@@ -47,7 +46,7 @@ public class DynamicController {
     private static final String VIEW_TYPE = ViewTypeEnum.DYNAMIC.toString();
 
 
-    @ResponseBody@ValidToken
+    @ResponseBody
     @RequestMapping("getList")
     public ResponseHead getList(@Valid Query query, BindingResult result) {
 

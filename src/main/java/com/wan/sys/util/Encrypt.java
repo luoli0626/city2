@@ -1,10 +1,11 @@
 package com.wan.sys.util;
 
-import it.sauronsoftware.base64.Base64;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * 加密工具类
@@ -20,22 +21,26 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Encrypt {
 
-	/**
-	 * 测试
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// md5加密测试
-		String md5_1 = md5("123456");
-		String md5_2 = md5(" ");
-		System.out.println(md5_1 + "\n" + md5_2);
-		// sha加密测试
-		String sha_1 = sha("123456");
-		String sha_2 = sha(" ");
-		System.out.println(sha_1 + "\n" + sha_2);
-
-	}
+//	/**
+//	 * 测试
+//	 *
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		// md5加密测试
+//		String md5_1 = md5("123456");
+//		String md5_2 = md5(" 123456 ");
+//		System.out.println(md5_1 + "\n" + md5_2);
+//		// sha加密测试
+//		String sha_1 = sha("123456");
+//		String sha_2 = sha(" 123456 ");
+//		System.out.println(sha_1 + "\n" + sha_2);
+//
+//		String base64 = base64Encode("123456");
+//		System.out.println(base64);
+//		String base64decode = base64Decode("MTIzNDU2");
+//		System.out.println(base64decode);
+//	}
 	
 	/* 
     *先将内容编码成Base64结果;
@@ -81,9 +86,16 @@ public class Encrypt {
 	 */
 	public static String base64Encode(String inputText, String... charset) {
 		if (charset.length == 1) {
-			return Base64.encode(inputText, charset[0]);
+			byte[] bytes;
+			try {
+				bytes = inputText.getBytes(charset[0]);
+				return Base64.encodeBase64String(bytes);
+			} catch (UnsupportedEncodingException e) {
+				return StringUtils.EMPTY;
+			}
+
 		} else {
-			return Base64.encode(inputText);
+			return Base64.encodeBase64String(inputText.getBytes());
 		}
 	}
 
@@ -97,9 +109,15 @@ public class Encrypt {
 	 */
 	public static String base64Decode(String inputText, String... charset) {
 		if (charset.length == 1) {
-			return Base64.decode(inputText, charset[0]);
+			byte[] bytes;
+			try {
+				bytes = inputText.getBytes(charset[0]);
+				return new String(bytes, charset[0]);
+			} catch (UnsupportedEncodingException e) {
+				return StringUtils.EMPTY;
+			}
 		} else {
-			return Base64.decode(inputText);
+			return new String(Base64.decodeBase64(inputText.getBytes()));
 		}
 	}
 
