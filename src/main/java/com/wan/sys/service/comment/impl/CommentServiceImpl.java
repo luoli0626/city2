@@ -1,9 +1,14 @@
 package com.wan.sys.service.comment.impl;
 
 import com.wan.sys.dao.comment.ICommentDao;
+import com.wan.sys.dao.image.IImageDao;
 import com.wan.sys.entity.comment.Comment;
 import com.wan.sys.entity.comment.CommentQuery;
+import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.user.UserInfo;
 import com.wan.sys.service.comment.ICommentService;
+import com.wan.sys.service.image.IImageService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,9 @@ public class CommentServiceImpl implements ICommentService{
 
     @Autowired
     ICommentDao commentDao;
+
+    @Autowired
+    IImageDao imageDao;
 
     @Override
     public void add(Comment comment) {
@@ -30,9 +38,10 @@ public class CommentServiceImpl implements ICommentService{
             return new ArrayList<Comment>();
         }
 
+        List<Object> params = new ArrayList<Object>();
+
         String hql=" from Comment t where 1=1 " ;
 
-        List<Object> params = new ArrayList<Object>();
         if (query.getBelongId() != null && query.getBelongId() > 0) {
             hql += " and t.belongId=? ";
             params.add(query.getBelongId());
@@ -46,9 +55,11 @@ public class CommentServiceImpl implements ICommentService{
         hql += " order by t.createTime desc ";
 
         if (query.getPage() > 0 && query.getRows() > 0) {
-            return commentDao.find(hql, query.getPage(), query.getRows(), params);
+            List<Comment> comments = commentDao.find(hql, query.getPage(), query.getRows(), params);
+            return comments;
         }
-        return commentDao.find(hql, params);
+        List<Comment> comments  = commentDao.find(hql, params);
+        return comments;
     }
 
     @Override
@@ -70,4 +81,15 @@ public class CommentServiceImpl implements ICommentService{
         Long count = commentDao.count(hql, params);
         return count == null ? 0 : count;
     }
+
+//    private List<Comment> reformResult(List<Comment> comments) {
+//
+//        if (comments != null) {
+//            for (Comment comment : comments) {
+//
+//            }
+//        }
+//
+//        return comments;
+//    }
 }

@@ -5,6 +5,9 @@ import com.wan.sys.entity.comment.CommentQuery;
 import com.wan.sys.entity.comment.CommentTypeEnum;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.dynamic.Dynamic;
+import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.user.UserInfo;
 import com.wan.sys.entity.view.View;
 import com.wan.sys.entity.view.ViewTypeEnum;
 import com.wan.sys.pojo.OperateSuccess;
@@ -12,8 +15,11 @@ import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.comment.ICommentService;
 import com.wan.sys.service.dynamic.IDynamicService;
+import com.wan.sys.service.image.IImageService;
+import com.wan.sys.service.user.IUserInfoService;
 import com.wan.sys.service.view.IViewService;
 import com.wan.sys.util.ValidUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -41,6 +47,12 @@ public class DynamicController {
 
     @Autowired
     private ICommentService commentService;
+
+    @Autowired
+    private IImageService imageService;
+
+    @Autowired
+    private IUserInfoService userInfoService;
 
     private static final String COMMENT_TYPE = CommentTypeEnum.DYNAMIC.toString();
     private static final String VIEW_TYPE = ViewTypeEnum.DYNAMIC.toString();

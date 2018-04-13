@@ -7,12 +7,14 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.user.UserInfo;
 import com.wan.sys.entity.view.View;
 import com.wan.sys.entity.view.ViewTypeEnum;
 import com.wan.sys.pojo.*;
 import com.wan.sys.service.comment.ICommentService;
 import com.wan.sys.service.forum.IForumService;
 import com.wan.sys.service.image.IImageService;
+import com.wan.sys.service.user.IUserInfoService;
 import com.wan.sys.service.view.IViewService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class ForumController {
 
     @Autowired
     private ICommentService commentService;
+
+    @Autowired
+    private IUserInfoService userInfoService;
 
     private static final String COMMENT_TYPE = CommentTypeEnum.FORUM.toString();
     private static final String VIEW_TYPE = ViewTypeEnum.FORUM.toString();
