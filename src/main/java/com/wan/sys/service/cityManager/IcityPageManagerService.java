@@ -1,0 +1,48 @@
+package com.wan.sys.service.cityManager;
+
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.wan.sys.pojo.CityBean;
+import com.wan.sys.pojo.DataGridBean;
+import com.wan.sys.pojo.DataGridJson;
+import com.wan.sys.pojo.Json;
+
+public interface IcityPageManagerService {
+
+	/**
+	 * 获取地址表格
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	public DataGridJson positionList(DataGridBean dg,CityBean city);
+	
+	/**
+	 * 编辑或新添位置信息
+	 * @param city
+	 * @return
+	 */
+	public Boolean alterPosition(CityBean city);
+	
+	/**
+	 * 删除地址信息
+	 * @param city
+	 * @return
+	 */
+	public Boolean removePositions(String[] ids);
+	
+	
+	/**
+	 * 政策资讯的列表数据
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	public DataGridJson messageList(DataGridBean dg,CityBean city);
+	
+	public Boolean alterMessage(CityBean city);
+	
+	public Boolean removeMessages(String[] ids);
+	
+	public Boolean changeMessages(String[] ids);
+}
