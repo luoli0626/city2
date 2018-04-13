@@ -20,6 +20,7 @@ public class Message extends BaseEntity{
     private String content;
     private String isOnline;
     private Long viewCount;
+    private String createUserName;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -64,4 +65,13 @@ public class Message extends BaseEntity{
     public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
     }
+
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+    
 }
