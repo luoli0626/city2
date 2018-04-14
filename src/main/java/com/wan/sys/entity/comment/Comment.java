@@ -46,7 +46,7 @@ public class Comment extends BaseEntity{
         this.type = type;
     }
 
-    @OneToOne(targetEntity = UserInfo.class, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "createUserId", referencedColumnName = "id", updatable = false, insertable = false)
     public UserInfo getUserInfo() {

@@ -4,11 +4,7 @@ import com.wan.sys.dao.comment.ICommentDao;
 import com.wan.sys.dao.image.IImageDao;
 import com.wan.sys.entity.comment.Comment;
 import com.wan.sys.entity.comment.CommentQuery;
-import com.wan.sys.entity.image.Image;
-import com.wan.sys.entity.image.ImageTypeEnum;
-import com.wan.sys.entity.user.UserInfo;
 import com.wan.sys.service.comment.ICommentService;
-import com.wan.sys.service.image.IImageService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,10 +51,8 @@ public class CommentServiceImpl implements ICommentService{
         hql += " order by t.createTime desc ";
 
         if (query.getPage() > 0 && query.getRows() > 0) {
-            List<Comment> comments = commentDao.find(hql, query.getPage(), query.getRows(), params);
-            return comments;
+            return commentDao.find(hql, query.getPage(), query.getRows(), params);
         }
-        List<Comment> comments  = commentDao.find(hql, params);
-        return comments;
+        return commentDao.find(hql, params);
     }
 }
