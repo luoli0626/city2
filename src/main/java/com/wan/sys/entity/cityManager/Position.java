@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.wan.sys.common.BaseEntity;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Entity
 @Table(name="city_position")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Position extends BaseEntity{
 	private String name;
 	private String longitude;//经度

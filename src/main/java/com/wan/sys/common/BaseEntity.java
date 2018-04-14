@@ -5,7 +5,9 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.wan.sys.entity.CreateModifiedable;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 /**

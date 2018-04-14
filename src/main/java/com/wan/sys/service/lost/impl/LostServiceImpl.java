@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -41,13 +40,9 @@ public class LostServiceImpl implements ILostService {
 
         hql += " order by t.createTime desc ";
 
-        List<Lost> losts;
         if (query.getPage() > 0 && query.getRows() > 0) {
-            losts = lostDao.find(hql, query.getPage(), query.getRows());
-        } else {
-            losts = lostDao.find(hql);
+            return lostDao.find(hql, query.getPage(), query.getRows());
         }
-
-        return losts;
+        return lostDao.find(hql);
     }
 }
