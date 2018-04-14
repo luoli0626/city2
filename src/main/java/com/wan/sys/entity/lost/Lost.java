@@ -30,7 +30,7 @@ public class Lost extends BaseEntity{
         this.content = content;
     }
 
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "BELONG_ID", updatable = false)
     public List<Image> getImages() {

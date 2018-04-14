@@ -1,15 +1,16 @@
 package com.wan.sys.entity.dynamic;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.view.ViewTypeEnum;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "city_dynamic")
@@ -22,6 +23,7 @@ public class Dynamic extends BaseEntity{
     private String isOnline;
     private Long viewCount;
     private Long commentCount;
+    private List<Image> images;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -74,5 +76,16 @@ public class Dynamic extends BaseEntity{
 
     public void setCommentCount(Long commentCount) {
         this.commentCount = commentCount;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

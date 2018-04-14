@@ -1,10 +1,12 @@
 package com.wan.sys.entity.banner;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.image.Image;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "city_banner")
@@ -15,6 +17,7 @@ public class Banner extends BaseEntity {
     private Long articleId;
     private String articleType;
     private int orderNumber;
+    private List<Image> images;
 
     public String getIsUrl() {
         return isUrl;
@@ -56,5 +59,16 @@ public class Banner extends BaseEntity {
 
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
