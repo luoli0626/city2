@@ -9,6 +9,13 @@
 	var pointDialog;
 	var positionDialog;
 	$(function() {
+	
+		$('#positionType').combobox({
+		    url:'${ctx}/cityPage/positionTypeSelect',
+		    valueField:'id',
+		    textField:'name',
+		    required : true
+		});
 		
 		positionForm = $('#positionForm').form();
 
@@ -76,11 +83,13 @@
 				style:'text-align:center',
 				handler : function() {
 					if(positionForm.form('validate')){
+					console.log($("#positionType").combobox('getValue'));
 						var formData={
 								"positionId":$("#positionId").val(),
 								"positionName":$("#positionName").val(),
 								"longitude":$("#regFund").val(),
 								"latitude":$("#staffNum").val(),
+								"positionType":$("#positionType").combobox('getValue')
 						};	
 						$.ajax({
 							url:'${ctx}/cityPage/alterPosition',
@@ -144,10 +153,11 @@
 			$('#positionDialog').dialog('open');
 			positionForm.form('clear');
 			$("#positionId").val(rows.id);
+			$("#positionType").combobox('setValue',rows.type);
 			positionForm.form('load', {
 				"positionName":rows.name,
 				"regFund":rows.longitude,
-			    "staffNum":rows.latitude
+			    "staffNum":rows.latitude,
 		});
 	}
 	
@@ -248,6 +258,13 @@
 						<th >地点名称：</th>
 						<td>
 							<input name="positionName" id="positionName" class="easyui-validatebox" required="true"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<th >所属类型：</th>
+						<td>
+							<input name="positionType" id="positionType" class="easyui-validatebox" />
 						</td>
 					</tr>
 				<tr>

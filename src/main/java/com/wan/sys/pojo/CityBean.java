@@ -13,6 +13,45 @@ public class CityBean {
 	private String messageSubTitle;
 	private String messageContent;
 	private String messageImage;
+	private String startTime;
+	private String endTime;
+	private String photoName;
+	private String state;
+	private String stateRemark;
+	private String photoId;
+	private String remark;
+	private String code;
+	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getStartTime() {
+		return startTime;
+	}
+	public String getPhotoId() {
+		return photoId;
+	}
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 	public String getMessageImage() {
 		return messageImage;
 	}
@@ -84,6 +123,24 @@ public class CityBean {
 	}
 	public void setPositionId(String positionId) {
 		this.positionId = positionId;
+	}
+	public String getPhotoName() {
+		return photoName;
+	}
+	public void setPhotoName(String photoName) {
+		this.photoName = photoName;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getStateRemark() {
+		return stateRemark;
+	}
+	public void setStateRemark(String stateRemark) {
+		this.stateRemark = stateRemark;
 	}
 	
 }

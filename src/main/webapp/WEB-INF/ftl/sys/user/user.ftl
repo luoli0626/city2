@@ -777,18 +777,6 @@
 						</td>
 					</tr>
 					<tr>
-						<td>所属角色：</td>
-						<td colspan="2">
-							<input name="Sroles" id="Sroles" class="basic_input"/>
-						</td>
-						<td>所属场景：</td>
-						<td colspan="2">
-							<input name="SsceneId" id="SsceneId" class="basic_input"/>
-						</td>
-						<td>所属项目：</td>
-						<td colspan="2">
-							<input name="SorgId" id="SorgId" class="basic_input"/>
-						</td>
 						<td>
 							&nbsp;
 							<a class="easyui-linkbutton" iconCls="icon-search"  onclick="searchFun();" href="javascript:void(0);">查 找</a>

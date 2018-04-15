@@ -5,18 +5,10 @@
 <#include "/inc/meta.ftl"/>
 <#include "/inc/easyui.ftl"/>
 
-<link href="${static}/um/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-
-<link id="easyuiTheme" href="${static}/css/stylesContent.css" rel="stylesheet" type="text/css" media="screen"/>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.min.js"></script>
-    <script type="text/javascript" src="${static}/um/lang/zh-cn/zh-cn.js"></script>
-
 <script type="text/javascript" charset="UTF-8">
 	var datagrid;
 	var positionDialog;
+	var changeDialog;
 	
 	$.extend($.fn.validatebox.defaults.rules, {  
        equaldDate: {  
@@ -34,7 +26,7 @@
 		positionForm = $('#positionForm').form();
 
 		datagrid = $('#datagrid').datagrid({
-			url : '${ctx}/cityPage/messageList',
+			url : '${ctx}/cityPage/photoList',
 			toolbar : '#toolbar',
 			title : '',
 			iconCls : 'icon-save',
@@ -56,8 +48,8 @@
 				hidden:true
 			}] ],
 			columns : [ [ {
-				field : 'title',
-				title : '资讯标题',
+				field : 'content',
+				title : '问题描述',
 				width :$(this).width()*0.15,
 			},
 			{
@@ -74,21 +66,26 @@
 				field : 'createUserName',
 				title : '上传者',
 				width :$(this).width()*0.15,
+				formatter:function(value,rec,i){
+					return rec.createUserName.nickName;
+				}
 			},
 			{
 				field : 'createTime',
 				title : '上传时间',
 				width :$(this).width()*0.15,
-			},			
+			},	
 			{
-				field : 'isOnline',
-				title : '上线状态',
+				field : 'state',
+				title : '跟进状态',
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
-					if(value=='Y'){
-						return "上线";
-					}else{
-						return "未上线";					
+					if(value=='1'){
+						return "待跟进";
+					}else if(value=='2'){
+						return "跟进中";					
+					}else if(value=='3'){
+						return "处理完成";
 					}
 				}
 			},
@@ -98,9 +95,8 @@
 			    width : $(this).width() * 0.25,
 			    formatter:function(value,rec,i){
 			    var btnHtml="";   
-			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>编辑</span></span></a >";
-			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
-			    btnHtml+="<a href=' javascript:isOnline("+i+");' plain='true'  iconcls='icon-reload' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-reload' style='padding-left: 20px;'>上/下线</span></span></a >";
+			    btnHtml+="<a href='javascript: changeState("+i+");' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>更改状态</span></span></a >";
+			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -158,15 +154,60 @@
 			} ]
 		}).dialog('close');
 		
-		
-			   //实例化编辑器
-		    var um = UM.getEditor('messageContent');
-		    um.setWidth("100%");
-		    window.um=um;
-		    $(".edui-body-container").css("width", "98%");
-		
+		changeDialog=$("#changeDialog").show().dialog({
+			modal : true,
+			title : '处理详情',
+			width:500,
+			height:300,
+			buttons : [ {
+				text : '确定',
+				style:'text-align:center',
+				handler : function() {
+					if(changeForm.form('validate')){
+						var formData={
+								"code":$("#messageId").val(),
+								"state":$("#messageTitle").val(),
+								"remark":$("#messageSubTitle").val(),
+								"photoId":$("#messageContent").val(),
+						};	
+						if($("#messageId").val()==""){
+							var imgs=$("#showContent").find("img");
+							console.log(imgs.length);
+							if (imgs.length != 0) {
+									formData.messageImage= imgs[0].src;
+									console.log(imgs[0].src);
+							}
+						}
+						console.log($("#showContent").html());
+						$.ajax({
+							url:'${ctx}/cityPage/alterMessage',
+							data:JSON.stringify(formData),
+							contentType:"application/json",
+				 			success:function(result){
+								if (result.success) {	
+									console.log(result.success);					 
+									positionDialog.dialog('close');
+									$.messager.alert('政策资讯'+result.msg,"成功");
+									datagrid.datagrid('reload');
+								}else{
+									positionDialog.dialog('close');
+									$.messager.alert('政策资讯'+result.msg,"成功");
+									datagrid.datagrid('reload');
+								}
+							}
+						});
+					}
+				}
+			} ]
+		}).dialog('close');
 	});
 		
+	function changeState(){
+		var rows = $("#datagrid").datagrid("getRows")[index];
+		$("#photoId").val(rows.id);
+		changeDialog.dialog('open');
+	
+	}
 
 	function searchFun() {
 		datagrid.datagrid('load', {
@@ -270,15 +311,16 @@
 				<legend class="my_legend">检索</legend>
 				<table>
 					<tr>
-						<td>标题：</td>
-						<td colspan="2"><input name="title" class="basic_input" />
+						<td>关键内容：</td>
+						<td colspan="2"><input name="photoName" class="basic_input" />
 						</td>
 						<td>上线情况：</td>
 						<td colspan="2">
-							<select name="isOnline" style="width:164px;height:21px;">
-							<option value="">请选择上线状态</option>
-							  <option value="Y">上线</option>
-							  <option value="N">未上线</option>
+							<select name="state" style="width:164px;height:21px;">
+							<option value="">请选择状态</option>
+							  <option value="1">带跟进</option>
+							  <option value="2">跟进中</option>
+							  <option value="3">处理完成</option>
 							</select>
 						</td>
 						<td>开始时间：</td>
@@ -305,35 +347,62 @@
 		<table id="datagrid" border="1"></table>
 	</div>
 	
-	<div id="positionDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
-		<form id="positionForm" method="post" enctype="multipart/form-data">
+	<div id="changeDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
+		<form id="changeForm" method="post" enctype="multipart/form-data">
 			<fieldset class="my_fieldset">
-				<legend class="my_legend">政策资讯详情</legend>
+				<legend class="my_legend">处理详情</legend>
 				<table class="tableForm">
 					<tr style="display: none;">
-						<td id="messageId" name="messageId">
+						<td id="photoId" name="photoId">
 						</td>
 					</tr>
 					<tr>
-						<th >标&nbsp&nbsp题：</th>
-						<td>
-							<input name="messageTitle" id="messageTitle" class="easyui-validatebox" required="true"/>
+						<th >状&nbsp&nbsp态：</th>
+						<td colspan="2">
+							<select name="state" style="width:164px;height:21px;">
+							<option value="">请选择状态</option>
+							  <option value="1">带跟进</option>
+							  <option value="2">跟进中</option>
+							  <option value="3">处理完成</option>
+							</select>
 						</td>
 					</tr>
-				<tr>
-					<th>副标题：</th>
-					<td><input id="messageSubTitle" name="messageSubTitle" class="easyui-validatebox" required="true" style="width: 150px;" /></td>
-				</tr>
-				
 				 <tr>
-                	 <th>内&nbsp&nbsp容：</th>
+                	 <th>处理详情：</th>
               	 </tr>
                 	 <tr>
-                	 <td colspan="4">
-			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
+			    	 <textarea id="remark" name="remark" style="width:800px;height:400px;" >
 			    	 </textarea>
-			    	     <div id="showContent" style="display:none;"></div> 
-     					 </div>
+			    	 </tr>
+				</table>
+			</fieldset>
+		</form>
+	</div>
+	
+	<div id="photoDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
+		<form id="photoForm" method="post" enctype="multipart/form-data">
+			<fieldset class="my_fieldset">
+				<legend class="my_legend">随手拍详情</legend>
+				<table class="tableForm">
+					<tr>
+						<th >上传者：</th>
+						<td colspan="2">
+							<td colspan="2"><input id="createUserName" name="createUserName" class="easyui-datebox" ></td>
+						</td>
+					</tr>
+					<tr>
+						<th >照片：</th>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<td id="photo1"></td>
+							<td id="photo2"></td>
+							<td id="photo3"></td>
+						</td>
+					</tr>
+				 <tr id="process">
+                	 <th>处理进度：</th>
+              	 </tr>
 				</table>
 			</fieldset>
 		</form>

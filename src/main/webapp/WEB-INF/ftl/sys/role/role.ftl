@@ -73,8 +73,6 @@
 				var formData={
 						"text":$('[name=text]').val(),
 						"descript":$('[name=descript]').val(),
-						"seq":$('[name=seq]').val(),
-						"taskNumber":$('[name=taskNumber]').val(),
 						"taskRate":$('[name=taskRate]').val(),
 						"taskRate1":$('[name=taskRate1]').val(),
 						"highestScore":$('[name=highestScore]').val()
@@ -288,23 +286,6 @@
 				return "";
 			}
 		},
-		
-		
-		
-		
-		{
-			field : 'seq',
-			title : '排序',
-			width : 50,
-			editor : {
-				type : 'numberbox',
-				options : {
-					min : 0,
-					max : 999,
-					required : true
-				}
-			}
-		},
 		{
 			field : '1',
 			title : '操作',
@@ -315,7 +296,7 @@
 					if(org){
 						orgId=org.id;
 					}
-					var str = "{id:\""+row.id+"\",text:\""+row.text+"\",descript:\""+row.descript+"\",seq:\""+row.seq+"\",resourcesText:\""+row.resourcesText+"\",organization:\""+orgId+"\",resourcesId:\""+row.resourcesId+"\",taskNumber:\""+row.taskNumber+"\",taskRate:\""+row.taskRate+"\",taskRate1:\""+row.taskRate1+"\",highestScore:\""+row.highestScore+"\"}";
+					var str = "{id:\""+row.id+"\",text:\""+row.text+"\",descript:\""+row.descript+"\",resourcesText:\""+row.resourcesText+"\",organization:\""+orgId+"\",resourcesId:\""+row.resourcesId+"\",taskRate:\""+row.taskRate+"\",taskRate1:\""+row.taskRate1+"\",highestScore:\""+row.highestScore+"\"}";
 					var res = "{id:\""+row.id+"\"}";
 					var btnHtml="";
 					<#if fmfn.checkButton(requestURI,"icon-edit")>
@@ -324,11 +305,7 @@
 					<#if fmfn.checkButton(requestURI,"icon-remove")>
 						btnHtml+="<a href='javascript:remove("+str+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a>";
 					</#if>
-					<#if fmfn.checkButton(requestURI,"icon-search")>
-						btnHtml+="<a href ='javascript:showResources("+res+")' iconcls='icon-search' class='easyui-linkbutton l-btn l-btn-plain' plain='true'><span class='l-btn-left'><span class='l-btn-text icon-search' style='padding-left: 20px;'>查看菜单</span></span></a>";
-					</#if>
 					
-					//btnHtml+="<a href='javascript:addUser("+str+");' plain='true'  iconcls='icon-add' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>新增用户</span></span></a>";
 
 					return btnHtml; 
 			}
@@ -459,35 +436,6 @@
 			}
 		}
 	}
-	function showResources(row){
-		var id = row.id;
-		resdialog = $("#showRes").show().dialog({
-			modal : true,
-			title : '菜单信息',
-			width:300,
-			height:300,
-			shadow:false
-		});
-		resdialog.dialog("close");
-		restree = $('#restree').tree({
-			url : '${ctx}/menu/showTree/'+id,
-			animate : false,
-			lines : !sy.isLessThanIe8(),
-			onLoadSuccess : function(node, data) {
-				var t = $(this);
-				if(data=='' || data==null || data==[]){
-					alert('该角色没有菜单！');	}
-				else {
-					resdialog.dialog("open");
-					$(data).each(function(index, d) {
-						if (this.state == 'closed') {
-							t.tree('expandAll');
-						}
-					});
-				}
-			}
-		});
-	}
 	function edit() {
 		if (editRow) {
 		    myMessage("您没有结束之前编辑的数据，请先保存或取消编辑！");
@@ -542,9 +490,7 @@
 				id:row.id,
 				text:row.text,
 				descript:descript,
-				seq : row.seq,
 				taskRate : row.taskRate,
-				taskNumber : row.taskNumber,
 				taskRate1 : row.taskRate1,
 				highestScore : row.highestScore,
 				resourcesText:strs
@@ -676,51 +622,6 @@
 					<th>描&#12288;&#12288;述：</th>
 					<td><input name="descript" class="easyui-validatebox" style="width:145px;" validType="length[0,100]" /></td>
 				</tr>
-				<tr>
-					<th>排&#12288;&#12288;序：</th>
-					<td><input name="seq" class="easyui-numberbox" required="true" style="width:145px;"/></td>
-				</tr>
-				
-				<tr>
-					<th>角色类型：</th>
-					<td>
-					
-					<select name="taskNumber" id="taskNumber"  required="true"  class="easyui-combobox"  style="width:145px;">   
-					  <option value ="1">总部</option>
-					     <option value ="2">分公司</option>
-					      <option value ="3">项目</option>
-					</select>  
-
-					
-					</td>
-				</tr>
-				
-				<!--
-				<tr>
-					<th>角色任务量：</th>
-					<td><input name="taskNumber" class="easyui-numberbox" required="true" style="width:145px;"/></td>
-				</tr>
-				<tr>
-					<th>整改或审核达标率：</th>
-					<td><input name="taskRate" class="easyui-numberbox" required="true" style="width:145px;"/></td>
-				</tr>
-				<tr>
-					<th>关闭达标率：</th>
-					<td><input name="taskRate1" class="easyui-numberbox" required="true" style="width:145px;"/></td>
-				</tr>
-				<tr>
-					<th>最高得分：</th>
-					<td><input name="highestScore" class="easyui-numberbox" required="true" style="width:145px;"/></td>
-				</tr>
-				
-			
-				<tr>
-					<th>所属机构：</th>
-					<td><select id="orgId" name="orgId" style="width: 200px;" required="true"></select></td>
-				</tr>
-				-->
-				
-				
 				
 				<tr>
 					<th style="width:60px;">拥有菜单</th>

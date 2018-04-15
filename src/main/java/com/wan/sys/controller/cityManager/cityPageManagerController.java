@@ -1,11 +1,14 @@
 package com.wan.sys.controller.cityManager;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wan.sys.entity.cityManager.Fixed;
 import com.wan.sys.pojo.CityBean;
 import com.wan.sys.pojo.DataGridBean;
 import com.wan.sys.pojo.DataGridJson;
@@ -22,7 +25,7 @@ public class cityPageManagerController {
 	
 	
 	
-	//-------------------------------------------------------------便民导航--------------------------------------------------------------------------
+	//---------------------------------------------便民导航------------------------------------------
 	
 	
 	
@@ -80,8 +83,17 @@ public class cityPageManagerController {
 		return j;
 	}
 	
+	/**
+	 * 获取type。选择下拉框
+	 * @return
+	 */
+	@RequestMapping(value="positionTypeSelect")
+	@ResponseBody
+	public List<Fixed> positionTypeSelect(){
+		return cityPageService.positionTypeSelect();
+	}
 	
-	//----------------------------------------------------------------政策资讯-----------------------------------------------------------------------------------
+	//---------------------------------------------政策资讯----------------------------------------------
 	
 	/**
 	 * 政策资讯页面
@@ -149,6 +161,56 @@ public class cityPageManagerController {
 	public Json changeMessages(@RequestBody String[] ids){
 		Json j=new Json();
 		j.setSuccess(cityPageService.changeMessages(ids));
+		return j;
+	}
+	
+	
+	//------------------------------------------随手拍---------------------------------------------
+	
+	
+	/**
+	 * 随手拍页面
+	 * @return
+	 */
+	@RequestMapping(value="photoPage")
+	public String photoPage(){
+		return "/sys/city/photo";
+	}
+	
+	/**
+	 * 随手拍列表
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="photoList")
+	public DataGridJson photoList(DataGridBean dg,CityBean city){
+		return cityPageService.photoList(dg,city);
+	}
+	
+	
+	/**
+	 * 获取随手拍状态下拉框
+	 * @return
+	 */
+	@RequestMapping(value="photoStateSelect")
+	@ResponseBody
+	public List<Fixed> photoStateSelect(){
+		return cityPageService.photoStateSelect();
+	}
+	
+	
+	/**
+	 * 更改随手拍状态
+	 * @param bean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="changePhotoState")
+	public Json changePhotoState(CityBean city){
+		Json j=new Json();
+		j.setSuccess(cityPageService.changePhotoState(city));
 		return j;
 	}
 	

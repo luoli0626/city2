@@ -1,7 +1,10 @@
 package com.wan.sys.service.cityManager;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.wan.sys.entity.cityManager.Fixed;
 import com.wan.sys.pojo.CityBean;
 import com.wan.sys.pojo.DataGridBean;
 import com.wan.sys.pojo.DataGridJson;
@@ -45,4 +48,12 @@ public interface IcityPageManagerService {
 	public Boolean removeMessages(String[] ids);
 	
 	public Boolean changeMessages(String[] ids);
+	
+	public List<Fixed> positionTypeSelect();
+	
+	public DataGridJson photoList(DataGridBean dg,CityBean city);
+	
+	public List<Fixed> photoStateSelect();
+	
+	public Boolean changePhotoState(CityBean city);
 }

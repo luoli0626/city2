@@ -19,14 +19,10 @@
 					id : data.id,
 					loginAcct : data.loginAcct,
 					sex:data.sex,
-					fax:data.fax,
-					officePhone:data.officePhone,
 					mobilePhone:data.mobilePhone,
 					email:data.email,
-					birthday:data.birthday,
 					nickName:data.nickName,
 					qq:data.qq,
-					taskNumber:data.taskNumber
 				});
 				var roles=data.roles;
 				var roleName="";
@@ -105,10 +101,7 @@
 			var formData={
 				"id":$("#id").val(),
 				"sex":$("[name='sex']:checked").val(),
-				"birthday":$("#birthday").datetimebox("getValue"),
-				"officePhone":$("#officePhone").val(),
 				"mobilePhone":$("#mobilePhone").val(),
-				"fax":$("#fax").val(),
 				"email":$("#email").val(),
 				"qq":$("#qq").val(),
 				"nickName":$("#nickName").val()
@@ -170,25 +163,9 @@
 							</td>
 						</tr>
 						<tr>
-							<th>生&#12288;&#12288;日：</th>
-							<td><input id="birthday" name="birthday"  style="width: 196px;" class="easyui-datetimebox" /></td>
-						</tr>
-						<tr>
-							<th>微信ID：</th>
-							<td><input id="officePhone" name="officePhone"  style="width: 196px;" class="easyui-validatebox" validType="phone"/></td>
-						</tr>
-						<tr>
 							<th>移动电话：</th>
 							<td><input id="mobilePhone" name="mobilePhone"  style="width: 196px;" class="easyui-validatebox" validType="mobile"/></td>
 						</tr>
-						
-						<!--
-						<tr>
-							<th>传&#12288;&#12288;真：</th>
-							<td><input id="fax" name="fax"  style="width: 196px;" validType="phone" /></td>
-						</tr>
-						
-						-->
 						<tr>
 							<th>电子邮箱：</th>
 							<td><input id="email" name="email"  style="width: 196px;" class="easyui-validatebox" validType="email" /></td>
@@ -197,10 +174,6 @@
 							<th>q&#12288;&#12288;q：</th>
 							<td><input id="qq" name="qq"  style="width: 196px;" class="easyui-validatebox" validType="qq"/></td>
 						</tr>
-						<tr>
-					<th>任务量</th>
-					<td><input id="taskNumber" name="taskNumber"  style="width: 196px;" class="easyui-numberbox" readonly /></td>
-				</tr>
 						<tr><td>&nbsp;</td></tr>
 						<tr>
 							<th>&#12288;</th>
@@ -213,37 +186,6 @@
 						</tr>
 					</table>
 				</form>
-			</fieldset>
-		</div>
-		<div class="resourceInfo" style="display:block;">
-			<fieldset class="my_fieldset">
-				<legend class="my_legend">拥有资源</legend>
-				<div id="restree" style="margin-left:30px;"></div>
-			</fieldset>
-		</div>
-		
-		<div class="roleInfo">
-			<fieldset class="my_fieldset">
-				<legend class="my_legend">拥有角色</legend>
-				<div id="roles" style="margin-left:30px;">
-					
-				</div>
-			</fieldset>
-		</div>
-		<div class="orgInfo">
-			<fieldset class="my_fieldset">
-				<legend class="my_legend">机构信息</legend>
-				<div id="organization" style="margin-left:30px;">
-					
-				</div>
-			</fieldset>
-		</div>
-		<div class="orgInfo">
-			<fieldset class="my_fieldset">
-				<legend class="my_legend">所属场景板块</legend>
-				<div id="scene" style="margin-left:30px;">
-					
-				</div>
 			</fieldset>
 		</div>
 	</div>
