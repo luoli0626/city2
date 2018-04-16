@@ -1,14 +1,15 @@
 package com.wan.sys.entity.message;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "city_message")
@@ -21,6 +22,7 @@ public class Message extends BaseEntity{
     private String isOnline;
     private Long viewCount;
     private String createUserName;
+    private List<Image> images;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -73,5 +75,15 @@ public class Message extends BaseEntity{
 	public void setCreateUserName(String createUserName) {
 		this.createUserName = createUserName;
 	}
-    
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }
