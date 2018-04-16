@@ -45,4 +45,14 @@ public class LostServiceImpl implements ILostService {
         }
         return lostDao.find(hql);
     }
+
+    @Override
+    public Lost getById(Long id) {
+
+        if (id != null && id > 0) {
+            return lostDao.get(Lost.class, id);
+        }
+
+        return null;
+    }
 }
