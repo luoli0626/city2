@@ -28,9 +28,6 @@ public class PositionServiceImpl implements IPositionService {
             params.add("%" + query.getKeywords() +"%");
         }
 
-        if (query.getPage() > 0 && query.getRows() > 0) {
-            return positionDao.find(hql, query.getPage(), query.getRows(), params);
-        }
         return positionDao.find(hql, params);
     }
 }

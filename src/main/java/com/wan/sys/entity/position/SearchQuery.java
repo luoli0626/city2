@@ -1,8 +1,6 @@
 package com.wan.sys.entity.position;
 
-import com.wan.sys.entity.common.Query;
-
-public class SearchQuery extends Query {
+public class SearchQuery {
 
     private String keywords;
 

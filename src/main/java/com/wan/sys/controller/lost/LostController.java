@@ -4,6 +4,8 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.lost.Lost;
 import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.message.Message;
+import com.wan.sys.entity.view.View;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
@@ -60,6 +62,12 @@ public class LostController {
         }
 
         return new ResponseSuccess(lostService.getList(query));
+    }
+
+    @ResponseBody
+    @RequestMapping("getById")
+    public ResponseHead getById(Long id) {
+        return new ResponseSuccess(lostService.getById(id));
     }
 
     private void addImages(Lost lost) {

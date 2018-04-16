@@ -14,6 +14,7 @@ public class UpdateInsertListener implements PreUpdateEventListener, PreInsertEv
     public boolean onPreUpdate(PreUpdateEvent event) {
 
         if (event.getEntity() instanceof CreateModifiedable) {
+            System.out.println("onPreUpdate");
             CreateModifiedable e = (CreateModifiedable) event.getEntity();
             e.setModifyTime(new Date());
         }
@@ -25,6 +26,7 @@ public class UpdateInsertListener implements PreUpdateEventListener, PreInsertEv
     public boolean onPreInsert(PreInsertEvent event) {
 
         if (event.getEntity() instanceof CreateModifiedable) {
+            System.out.println("onPreInsert");
             CreateModifiedable e = (CreateModifiedable) event.getEntity();
             Date now = new Date();
             e.setCreateTime(now);

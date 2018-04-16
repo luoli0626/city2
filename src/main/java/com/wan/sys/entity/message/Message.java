@@ -2,21 +2,12 @@ package com.wan.sys.entity.message;
 
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
-
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -84,15 +75,14 @@ public class Message extends BaseEntity{
 		this.createUserName = createUserName;
 	}
 
-	@OneToMany(targetEntity=Image.class,cascade=CascadeType.ALL)  
-    @Fetch(FetchMode.JOIN)  
-    @JoinColumn(name="belong_id",updatable=false)  
-	public List<Image> getImages() {
-		return images;
-	}
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    @JoinColumn(name = "BELONG_ID", updatable = false)
+    public List<Image> getImages() {
+        return images;
+    }
 
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
-    
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }
