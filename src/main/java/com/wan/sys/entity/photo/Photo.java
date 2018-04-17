@@ -12,7 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,9 +25,9 @@ public class Photo extends BaseEntity {
     private User createUserName;
     private Set<PartToState> allState;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
-    @JoinColumn(name = "CREATEUSERID", insertable = false, updatable = false)
+    @JoinColumn(name = "CREATEUSERID")
     public User getCreateUserName() {
 		return createUserName;
 	}
@@ -54,9 +53,9 @@ public class Photo extends BaseEntity {
         this.content = content;
     }
    
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
+    @JoinColumn(name = "BELONG_ID")
     public Set<Image> getImages() {
         return images;
     }
@@ -65,9 +64,9 @@ public class Photo extends BaseEntity {
         this.images = images;
     }
     
-	@OneToMany(targetEntity=PartToState.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)  
+	@OneToMany(cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name="BELONG_ID",updatable=false)  
+    @JoinColumn(name="BELONG_ID")
 	public Set<PartToState> getAllState() {
 		return allState;
 	}

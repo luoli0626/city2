@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -51,17 +48,14 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-        Long id = photoService.add(photo);
 
         // 有图片的需要存图片表
         if (photo.getImages() != null) {
-
             for (Image image : photo.getImages()) {
                 image.setType(ImageTypeEnum.PHOTO.getIndex());
-                image.setBelongId(id);
             }
-            imageService.addImages(new ArrayList<Image>(photo.getImages()));
         }
+        photoService.add(photo);
 
         return OperateSuccess.Instance();
     }

@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
@@ -32,9 +29,6 @@ public class ForumController {
 
     @Autowired
     private IForumService forumService;
-
-    @Autowired
-    private IImageService imageService;
 
     @Autowired
     private ICommentService commentService;
@@ -51,15 +45,12 @@ public class ForumController {
         }
 
         forum.setIsCheck("N");
-        Long id = forumService.add(forum);
-
         if (forum.getImages() != null) {
             for (Image image : forum.getImages()) {
                 image.setType(IMG_TYPE);
-                image.setBelongId(id);
             }
-            imageService.addImages(new ArrayList<Image>(forum.getImages()));
         }
+        forumService.add(forum);
 
         return OperateSuccess.Instance();
     }

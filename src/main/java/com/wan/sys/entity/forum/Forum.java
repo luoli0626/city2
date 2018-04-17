@@ -60,8 +60,8 @@ public class Forum extends BaseEntity{
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "BELONG_ID", updatable = false, insertable = false)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "BELONG_ID")
     public Set<Image> getImages() {
         return images;
     }

@@ -16,19 +16,24 @@ public class PartToState extends BaseEntity{
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	@Column(name="BELONG_ID")
 	public Long getBelongId() {
 		return belongId;
 	}
-	@Column(name="BELONG_ID")
+
 	public void setBelongId(Long belongId) {
 		this.belongId = belongId;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}

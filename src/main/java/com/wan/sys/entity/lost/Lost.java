@@ -8,7 +8,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "city_lost")
@@ -16,9 +16,7 @@ import java.util.List;
 public class Lost extends BaseEntity{
 
     private String content;
-
-    private List<Image> images;
-
+    private Set<Image> images;
     private String contact;
 
     @NotNull(message = "{message.notnull}")
@@ -31,13 +29,13 @@ public class Lost extends BaseEntity{
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
-    public List<Image> getImages() {
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "BELONG_ID")
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 
