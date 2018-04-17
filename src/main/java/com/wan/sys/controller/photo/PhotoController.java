@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -84,6 +86,13 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-        return new ResponseSuccess(photoService.getList(query));
+        List<Photo> photos = photoService.getList(query);
+        if (photos != null) {
+            for (Photo photo : photos) {
+                photo.setCreateUserName(null);
+                photo.setAllState(null);
+            }
+        }
+        return new ResponseSuccess(photos);
     }
 }
