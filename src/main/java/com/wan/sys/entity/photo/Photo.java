@@ -5,11 +5,12 @@ import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +26,9 @@ public class Photo extends BaseEntity {
     private User createUserName;
     private Set<PartToState> allState;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="ID")
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "CREATEUSERID")
     public User getCreateUserName() {
 		return createUserName;
 	}
