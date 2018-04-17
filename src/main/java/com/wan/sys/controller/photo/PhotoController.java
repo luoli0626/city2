@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -59,8 +60,8 @@ public class PhotoController {
                 image.setType(ImageTypeEnum.PHOTO.getIndex());
                 image.setBelongId(id);
             }
-
-            imageService.addImages(photo.getImages());
+            List<Image> images = new ArrayList<Image>(photo.getImages());
+            imageService.addImages(images);
         }
 
         return OperateSuccess.Instance();
