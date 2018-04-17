@@ -20,8 +20,8 @@ public class Dynamic extends BaseEntity{
     private String subtitle;
     private String content;
     private String isOnline;
-    private Long viewCount;
-    private Long commentCount;
+    private Long viewCount = 0L;
+    private Long commentCount = 0L;
     private Set<Image> images;
 
     @NotNull(message = "{message.notnull}")

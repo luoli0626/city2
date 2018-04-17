@@ -18,8 +18,8 @@ public class Message extends BaseEntity{
     private String title;
     private String subtitle;
     private String content;
-    private String isOnline;
-    private Long viewCount;
+    private String isOnline = "N";
+    private Long viewCount = 0L;
     private String createUserName;
     private List<Image> images;
 

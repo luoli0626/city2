@@ -10,7 +10,6 @@ import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.pojo.*;
 import com.wan.sys.service.comment.ICommentService;
 import com.wan.sys.service.forum.IForumService;
-import com.wan.sys.service.image.IImageService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,7 +43,6 @@ public class ForumController {
             return ValidUtil.errorResponse(result);
         }
 
-        forum.setIsCheck("N");
         if (forum.getImages() != null) {
             for (Image image : forum.getImages()) {
                 image.setType(IMG_TYPE);

@@ -19,10 +19,10 @@ public class Forum extends BaseEntity{
     private String title;
     private String subtitle;
     private String content;
-    private String isCheck;
+    private String isCheck = "N";
     private Set<Image> images;
-    private Long viewCount;
-    private Long commentCount;
+    private Long viewCount = 0L;
+    private Long commentCount = 0L;
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
