@@ -60,8 +60,7 @@ public class PhotoController {
                 image.setType(ImageTypeEnum.PHOTO.getIndex());
                 image.setBelongId(id);
             }
-            List<Image> images = new ArrayList<Image>(photo.getImages());
-            imageService.addImages(images);
+            imageService.addImages(new ArrayList<Image>(photo.getImages()));
         }
 
         return OperateSuccess.Instance();

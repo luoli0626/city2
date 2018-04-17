@@ -1,10 +1,8 @@
 package com.wan.sys.config;
 
 import com.wan.sys.entity.CreateModifiedable;
-import org.hibernate.event.spi.PreInsertEvent;
-import org.hibernate.event.spi.PreInsertEventListener;
-import org.hibernate.event.spi.PreUpdateEvent;
-import org.hibernate.event.spi.PreUpdateEventListener;
+import org.hibernate.event.spi.*;
+import org.hibernate.tuple.StandardProperty;
 
 import java.util.Date;
 
@@ -14,9 +12,14 @@ public class UpdateInsertListener implements PreUpdateEventListener, PreInsertEv
     public boolean onPreUpdate(PreUpdateEvent event) {
 
         if (event.getEntity() instanceof CreateModifiedable) {
-            System.out.println("onPreUpdate");
-            CreateModifiedable e = (CreateModifiedable) event.getEntity();
-            e.setModifyTime(new Date());
+            StandardProperty[] properties = event.getPersister().getEntityMetamodel().getProperties();
+            Object[] state = event.getState();
+            for (int i = 0; i < properties.length; i++) {
+                StandardProperty property = properties[i];
+                if ("modifyTime".equalsIgnoreCase(property.getName())) {
+                    state[i] = new Date();
+                }
+            }
         }
 
         return false;
@@ -26,11 +29,16 @@ public class UpdateInsertListener implements PreUpdateEventListener, PreInsertEv
     public boolean onPreInsert(PreInsertEvent event) {
 
         if (event.getEntity() instanceof CreateModifiedable) {
-            System.out.println("onPreInsert");
-            CreateModifiedable e = (CreateModifiedable) event.getEntity();
-            Date now = new Date();
-            e.setCreateTime(now);
-            e.setModifyTime(now);
+            StandardProperty[] properties = event.getPersister().getEntityMetamodel().getProperties();
+            Object[] state = event.getState();
+            for (int i = 0; i < properties.length; i++) {
+                StandardProperty property = properties[i];
+                Date now = new Date();
+                if ("modifyTime".equalsIgnoreCase(property.getName()) ||
+                        "createTime".equalsIgnoreCase(property.getName())) {
+                    state[i] = now;
+                }
+            }
         }
 
         return false;

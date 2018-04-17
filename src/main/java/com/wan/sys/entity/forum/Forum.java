@@ -9,7 +9,7 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "city_forum")
@@ -20,7 +20,7 @@ public class Forum extends BaseEntity{
     private String subtitle;
     private String content;
     private String isCheck;
-    private List<Image> images;
+    private Set<Image> images;
     private Long viewCount;
     private Long commentCount;
 
@@ -59,14 +59,14 @@ public class Forum extends BaseEntity{
         this.isCheck = isCheck;
     }
 
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
-    public List<Image> getImages() {
+    @JoinColumn(name = "BELONG_ID", updatable = false, insertable = false)
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 
