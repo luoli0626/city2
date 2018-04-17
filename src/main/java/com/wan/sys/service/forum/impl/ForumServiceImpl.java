@@ -32,7 +32,7 @@ public class ForumServiceImpl implements IForumService {
             return new ArrayList<Forum>();
         }
 
-        String hql=" from Forum t where 1=1 " ;
+        String hql=" from Forum t where t.isOnline='Y' and t.recordStatus='Y' " ;
 
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();

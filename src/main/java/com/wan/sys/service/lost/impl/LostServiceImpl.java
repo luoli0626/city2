@@ -32,7 +32,7 @@ public class LostServiceImpl implements ILostService {
             return new ArrayList<Lost>();
         }
 
-        String hql=" from Lost t where 1=1 " ;
+        String hql=" from Lost t where t.recordStatus='Y' " ;
 
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();

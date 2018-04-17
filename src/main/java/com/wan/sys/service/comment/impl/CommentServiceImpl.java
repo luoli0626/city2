@@ -36,7 +36,7 @@ public class CommentServiceImpl implements ICommentService{
 
         List<Object> params = new ArrayList<Object>();
 
-        String hql=" from Comment t where 1=1 " ;
+        String hql=" from Comment t where t.recordStatus='Y' " ;
 
         if (query.getBelongId() != null && query.getBelongId() > 0) {
             hql += " and t.belongId=? ";

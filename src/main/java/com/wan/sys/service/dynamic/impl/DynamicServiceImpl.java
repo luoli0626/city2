@@ -18,12 +18,7 @@ public class DynamicServiceImpl implements IDynamicService {
     @Override
     public List<Dynamic> getList(Query query) {
 
-        String hql=" from Dynamic t where 1=1 " ;
-        if (query.isOnline()) {
-            hql += " and t.isOnline=Y ";
-        }
-
-        hql += " order by t.createTime desc ";
+        String hql=" from Dynamic t where t.isOnline='Y' order by t.createTime desc ";
 
         List<Dynamic> dynamics;
         if (query.getPage() > 0 && query.getRows() > 0) {

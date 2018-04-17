@@ -20,7 +20,7 @@ public class PositionServiceImpl implements IPositionService {
     @Override
     public List<Position> getList(SearchQuery query) {
 
-        String hql = " from Position t where 1=1 ";
+        String hql = " from Position t where t.recordStatus='Y' ";
 
         List<Object> params = new ArrayList<Object>();
         if (query != null && StringUtils.isNotBlank(query.getKeywords())) {
