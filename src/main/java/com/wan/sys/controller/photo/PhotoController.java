@@ -70,7 +70,11 @@ public class PhotoController {
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseSuccess(photoService.getById(id));
+        Photo photo = photoService.getById(id);
+        if (photo != null) {
+            photo.setCreateUserName(null);
+        }
+        return new ResponseSuccess(photo);
     }
 
     /**
