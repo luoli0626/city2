@@ -16,7 +16,7 @@ public class Banner extends BaseEntity {
     private String urlAddress;
     private Long articleId;
     private String articleType;
-    private int orderNumber;
+    private Integer orderNumber;
     private List<Image> images;
 
     public String getIsUrl() {
@@ -53,11 +53,11 @@ public class Banner extends BaseEntity {
         this.articleType = articleType;
     }
 
-    public int getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 
