@@ -20,16 +20,10 @@ public class Dynamic extends BaseEntity{
     private String subtitle;
     private String content;
     private String isOnline;
-<<<<<<< HEAD
-    private Long viewCount;
-    private Long commentCount;
-    private List<Image> images;
     private String createUserName;
-=======
     private Long viewCount = 0L;
     private Long commentCount = 0L;
     private Set<Image> images;
->>>>>>> refs/remotes/origin/master
 
     public String getCreateUserName() {
 		return createUserName;
