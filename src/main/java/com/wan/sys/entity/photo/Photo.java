@@ -5,9 +5,12 @@ import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,10 +26,11 @@ public class Photo extends BaseEntity {
     private Set<Image> images;
     private String content;
     private User createUserName;
-    private Set<PartToState> allState;
+    private List<PartToState> allState;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="ID")
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "CREATEUSERID")
     public User getCreateUserName() {
 		return createUserName;
 	}
@@ -66,11 +70,11 @@ public class Photo extends BaseEntity {
 	@OneToMany(targetEntity=PartToState.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)  
 	@Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name="BELONG_ID",updatable=false)  
-	public Set<PartToState> getAllState() {
+	public List<PartToState> getAllState() {
 		return allState;
 	}
 
-	public void setAllState(Set<PartToState> allState) {
+	public void setAllState(List<PartToState> allState) {
 		this.allState = allState;
 	}
     

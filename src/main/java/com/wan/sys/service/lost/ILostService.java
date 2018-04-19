@@ -10,4 +10,6 @@ public interface ILostService {
     Lost add(Lost lost);
 
     List<Lost> getList(Query query);
+
+    Lost getById(Long id);
 }

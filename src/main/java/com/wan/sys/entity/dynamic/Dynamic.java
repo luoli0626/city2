@@ -24,8 +24,17 @@ public class Dynamic extends BaseEntity{
     private Long viewCount;
     private Long commentCount;
     private List<Image> images;
+    private String createUserName;
 
-    @NotNull(message = "{message.notnull}")
+    public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
+	@NotNull(message = "{message.notnull}")
     public String getTitle() {
         return title;
     }

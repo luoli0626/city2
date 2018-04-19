@@ -23,12 +23,8 @@ public class MessageServiceImpl implements IMessageService{
             return new ArrayList<Message>();
         }
 
-        String hql=" from Message t where 1=1 " ;
-        if (query.isOnline()) {
-            hql += " and t.isOnline=Y ";
-        }
-
-        hql += " order by t.createTime desc ";
+        String hql=" from Message t where t.isOnline='Y' and t.recordStatus='Y' " +
+                " order by t.createTime desc ";
 
         List<Message> messages;
         if (query.getPage() > 0 && query.getRows() > 0) {

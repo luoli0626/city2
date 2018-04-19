@@ -41,7 +41,7 @@ public class PhotoServiceImpl implements IPhotoService{
             return new ArrayList<Photo>();
         }
 
-        String hql=" from Photo t where 1=1 " ;
+        String hql=" from Photo t where t.recordStatus='Y' " ;
 
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();

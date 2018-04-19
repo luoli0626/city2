@@ -5,10 +5,10 @@ import org.hibernate.validator.constraints.Range;
 public class Query {
 
     @Range(min = 1, message = "{message.notlt}{min}")
-    private int page;
+    private int page = 0;
 
     @Range(min = 1, message = "{message.notlt}{min}")
-    private int rows;
+    private int rows = 0;
 
     private boolean online;
     private Long createUserId;

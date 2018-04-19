@@ -18,12 +18,8 @@ public class GuideServiceImpl implements IGuideService {
     @Override
     public List<Guide> getList(Query query) {
 
-        String hql=" from Guide t where 1=1 " ;
-        if (query.isOnline()) {
-            hql += " and t.isOnline=Y ";
-        }
-
-        hql += " order by t.createTime desc ";
+        String hql=" from Guide t where t.isOnline='Y' and t.recordStatus='Y' " +
+                " order by t.createTime desc ";
 
         List<Guide> guides;
         if (query.getPage() > 0 && query.getRows() > 0) {

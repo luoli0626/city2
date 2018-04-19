@@ -4,6 +4,8 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.lost.Lost;
 import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.message.Message;
+import com.wan.sys.entity.view.View;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseSuccess;
@@ -30,9 +32,6 @@ public class LostController {
     @Autowired
     private ILostService lostService;
 
-    @Autowired
-    private IImageService imageService;
-
     private static final String IMG_TYPE = ImageTypeEnum.LOST.getIndex();
 
     @ResponseBody
@@ -43,10 +42,12 @@ public class LostController {
             return ValidUtil.errorResponse(result);
         }
 
-        lost = lostService.add(lost);
         if (lost.getImages() != null) {
-            addImages(lost);
+            for (Image image : lost.getImages()) {
+                image.setType(IMG_TYPE);
+            }
         }
+        lostService.add(lost);
 
         return OperateSuccess.Instance();
     }
@@ -62,13 +63,9 @@ public class LostController {
         return new ResponseSuccess(lostService.getList(query));
     }
 
-    private void addImages(Lost lost) {
-
-        for (Image image : lost.getImages()) {
-            image.setType(IMG_TYPE);
-            image.setBelongId(lost.getId());
-        }
-
-        imageService.addImages(lost.getImages());
+    @ResponseBody
+    @RequestMapping("getById")
+    public ResponseHead getById(Long id) {
+        return new ResponseSuccess(lostService.getById(id));
     }
 }

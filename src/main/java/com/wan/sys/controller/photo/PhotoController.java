@@ -50,18 +50,14 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-        Long id = photoService.add(photo);
 
         // 有图片的需要存图片表
         if (photo.getImages() != null) {
-
             for (Image image : photo.getImages()) {
                 image.setType(ImageTypeEnum.PHOTO.getIndex());
-                image.setBelongId(id);
             }
-
-            imageService.addImages(photo.getImages());
         }
+        photoService.add(photo);
 
         return OperateSuccess.Instance();
     }
@@ -74,7 +70,11 @@ public class PhotoController {
     @ResponseBody
     @RequestMapping("getById")
     public ResponseHead getById(Long id) {
-        return new ResponseSuccess(photoService.getById(id));
+        Photo photo = photoService.getById(id);
+        if (photo != null) {
+            photo.setCreateUserName(null);
+        }
+        return new ResponseSuccess(photo);
     }
 
     /**
@@ -90,6 +90,13 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
-        return new ResponseSuccess(photoService.getList(query));
+        List<Photo> photos = photoService.getList(query);
+        if (photos != null) {
+            for (Photo photo : photos) {
+                photo.setCreateUserName(null);
+                photo.setAllState(null);
+            }
+        }
+        return new ResponseSuccess(photos);
     }
 }
