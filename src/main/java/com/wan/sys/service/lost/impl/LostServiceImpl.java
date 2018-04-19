@@ -32,7 +32,7 @@ public class LostServiceImpl implements ILostService {
             return new ArrayList<Lost>();
         }
 
-        String hql=" from Lost t where 1=1 " ;
+        String hql=" from Lost t where t.recordStatus='Y' " ;
 
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();
@@ -44,5 +44,15 @@ public class LostServiceImpl implements ILostService {
             return lostDao.find(hql, query.getPage(), query.getRows());
         }
         return lostDao.find(hql);
+    }
+
+    @Override
+    public Lost getById(Long id) {
+
+        if (id != null && id > 0) {
+            return lostDao.get(Lost.class, id);
+        }
+
+        return null;
     }
 }

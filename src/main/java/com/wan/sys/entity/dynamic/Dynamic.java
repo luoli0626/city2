@@ -2,7 +2,6 @@ package com.wan.sys.entity.dynamic;
 
 import com.wan.sys.common.BaseEntity;
 import com.wan.sys.entity.image.Image;
-import com.wan.sys.entity.view.ViewTypeEnum;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -10,7 +9,7 @@ import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "city_dynamic")
@@ -21,10 +20,16 @@ public class Dynamic extends BaseEntity{
     private String subtitle;
     private String content;
     private String isOnline;
+<<<<<<< HEAD
     private Long viewCount;
     private Long commentCount;
     private List<Image> images;
     private String createUserName;
+=======
+    private Long viewCount = 0L;
+    private Long commentCount = 0L;
+    private Set<Image> images;
+>>>>>>> refs/remotes/origin/master
 
     public String getCreateUserName() {
 		return createUserName;
@@ -88,13 +93,13 @@ public class Dynamic extends BaseEntity{
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "BELONG_ID", updatable = false)
-    public List<Image> getImages() {
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 }

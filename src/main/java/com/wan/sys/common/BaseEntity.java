@@ -37,7 +37,7 @@ public class BaseEntity implements Serializable, CreateModifiedable {
 	protected Long id;
 	
 	/** 删除状态 */
-	protected String recordStatus;
+	protected String recordStatus = "Y";
 	
 	/** 创建人id */
 	protected Long createUserId;

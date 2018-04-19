@@ -11,10 +11,13 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,11 +29,11 @@ public class Photo extends BaseEntity {
     private Set<Image> images;
     private String content;
     private User createUserName;
-    private List<PartToState> allState;
+    private Set<PartToState> allState;
 
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name = "CREATEUSERID")
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(name = "CREATEUSERID", updatable = false, insertable = false)
     public User getCreateUserName() {
 		return createUserName;
 	}
@@ -56,9 +59,9 @@ public class Photo extends BaseEntity {
         this.content = content;
     }
    
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
+    @JoinColumn(name = "BELONG_ID")
     public Set<Image> getImages() {
         return images;
     }
@@ -67,14 +70,14 @@ public class Photo extends BaseEntity {
         this.images = images;
     }
     
-	@OneToMany(targetEntity=PartToState.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)  
+	@OneToMany(cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name="BELONG_ID",updatable=false)  
-	public List<PartToState> getAllState() {
+    @JoinColumn(name="BELONG_ID")
+	public Set<PartToState> getAllState() {
 		return allState;
 	}
 
-	public void setAllState(List<PartToState> allState) {
+	public void setAllState(Set<PartToState> allState) {
 		this.allState = allState;
 	}
     
