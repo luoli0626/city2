@@ -1,5 +1,6 @@
 package com.wan.sys.controller.photo;
 
+import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -50,6 +53,13 @@ public class PhotoController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
+
+        //写入跟进状态表
+        PartToState state = new PartToState();
+        state.setName("待跟进");
+        Set<PartToState> states = new HashSet<PartToState>();
+        states.add(state);
+        photo.setAllState(states);
 
         // 有图片的需要存图片表
         if (photo.getImages() != null) {

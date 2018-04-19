@@ -1,5 +1,6 @@
 package com.wan.sys.controller.forum;
 
+import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.comment.Comment;
 import com.wan.sys.entity.comment.CommentQuery;
 import com.wan.sys.entity.comment.CommentTypeEnum;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -42,6 +46,13 @@ public class ForumController {
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
+
+        //写入跟进状态表
+        PartToState state = new PartToState();
+        state.setName("待审核");
+        Set<PartToState> states = new HashSet<PartToState>();
+        states.add(state);
+        forum.setAllState(states);
 
         if (forum.getImages() != null) {
             for (Image image : forum.getImages()) {
