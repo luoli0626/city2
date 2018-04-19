@@ -1,10 +1,19 @@
 package com.wan.sys.entity.guide;
 
 import com.wan.sys.common.BaseEntity;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.wan.sys.entity.image.Image;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +29,9 @@ public class Guide extends BaseEntity{
     private String content;
 
     private String isOnline;
+    
+    private String createUserName;
+    
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -55,4 +67,15 @@ public class Guide extends BaseEntity{
     public void setIsOnline(String isOnline) {
         this.isOnline = isOnline;
     }
+    
+    
+    
+	public String getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(String createUserName) {
+		this.createUserName = createUserName;
+	}
+
 }

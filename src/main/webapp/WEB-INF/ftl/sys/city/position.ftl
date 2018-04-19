@@ -133,7 +133,7 @@
 
 	function searchFun() {
 		datagrid.datagrid('load', {
-			orgName : $('#toolbar input[name=positionName]').val(),
+			positionName : $('#toolbar input[name=positionName]').val(),
 		});
 	}
 	

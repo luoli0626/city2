@@ -208,10 +208,207 @@ public class cityPageManagerController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="changePhotoState")
-	public Json changePhotoState(CityBean city){
+	public Json changePhotoState(@RequestBody CityBean city){
 		Json j=new Json();
 		j.setSuccess(cityPageService.changePhotoState(city));
 		return j;
 	}
 	
+	//---------------------------------------------城管动态-------------------------------------------------
+	
+	/**
+	 * 城管动态页面
+	 * @return
+	 */
+	@RequestMapping(value="dynamicPage")
+	public String dynamicPage(){
+		return "/sys/city/dynamic";
+	}
+	
+	
+	/**
+	 * 城管动态的datagrid
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="dynamicList")
+	public DataGridJson dynamicList(DataGridBean dg,CityBean city){
+		return cityPageService.dynamicList(dg,city);
+	}
+
+	/**
+	 * 城管动态的新增编辑
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="alterDynamic")
+	public Json alterDynamic(@RequestBody CityBean city){
+		Json j=new Json();
+		if(cityPageService.alterDynamic(city)){
+			j.setSuccess(true);
+			j.setMsg("新增");
+		}else{
+			j.setSuccess(false);
+			j.setMsg("编辑");
+		}
+		return j;
+	}
+	
+	
+	/**
+	 * 删除城管动态
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeDynamics")
+	public Json removeDynamics(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeDynamics(ids));
+		return j;
+	}
+	
+	
+	/**
+	 * 下线城管动态
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="changeDynamics")
+	public Json changezDynamics(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.changezDynamics(ids));
+		return j;
+	}
+	
+	
+	//----------------------------------------------------办事指南--------------------------------------------------------
+	
+	
+	/**
+	 * 办事页面
+	 * @return
+	 */
+	@RequestMapping(value="guidePage")
+	public String guidePage(){
+		return "/sys/city/guide";
+	}
+	
+	
+	/**
+	 * 办事指南的datagrid
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="guideList")
+	public DataGridJson guideList(DataGridBean dg,CityBean city){
+		return cityPageService.guideList(dg,city);
+	}
+
+	/**
+	 * 办事指南的新增编辑
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="alterGuide")
+	public Json alterGuide(@RequestBody CityBean city){
+		Json j=new Json();
+		if(cityPageService.alterGuide(city)){
+			j.setSuccess(true);
+			j.setMsg("新增");
+		}else{
+			j.setSuccess(false);
+			j.setMsg("编辑");
+		}
+		return j;
+	}
+	
+	
+	/**
+	 * 删除办事指南
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeGuides")
+	public Json removeGuides(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeGuides(ids));
+		return j;
+	}
+	
+	
+	/**
+	 * 下线办事指南
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="changeGuides")
+	public Json changeGuides(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.changeGuides(ids));
+		return j;
+	}
+	
+	
+	
+	
+	//--------------------------------------------------社区论坛--------------------------------------------------------
+	
+	/**
+	 * 社区论坛页面
+	 * @return
+	 */
+	@RequestMapping(value="forumPage")
+	public String forumPage(){
+		return "/sys/city/forum";
+	}
+	
+	/**
+	 * 社区论坛列表
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="forumList")
+	public DataGridJson forumList(DataGridBean dg,CityBean city){
+		return cityPageService.forumList(dg,city);
+	}
+	
+	
+	
+	/**
+	 * 更改社区论坛状态
+	 * @param bean
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="changeForumState")
+	public Json changeForumState(@RequestBody CityBean city){
+		Json j=new Json();
+		j.setSuccess(cityPageService.changeForumState(city));
+		return j;
+	}
+	
+	/**
+	 * 删除社区论坛
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeForums")
+	public Json removeForums(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeForums(ids));
+		return j;
+	}
 }

@@ -28,7 +28,7 @@
 		positionForm = $('#positionForm').form();
 
 		datagrid = $('#datagrid').datagrid({
-			url : '${ctx}/cityPage/photoList',
+			url : '${ctx}/cityPage/forumList',
 			toolbar : '#toolbar',
 			title : '',
 			iconCls : 'icon-save',
@@ -50,19 +50,9 @@
 				hidden:true
 			}] ],
 			columns : [ [ {
-				field : 'content',
-				title : '问题描述',
+				field : 'title',
+				title : '文章标题',
 				width :$(this).width()*0.15,
-			},
-			{
-				field : 'images',
-				title : '预览图片',
-				width :$(this).width()*0.2,
-				formatter:function(value,rec,i){
-					if(value.length!=0){
-						return "<img src='"+value[0].address+"' style='width:50px;height:50px;'>";
-					}
-				}
 			},
 			{
 				field : 'createUserName',
@@ -78,16 +68,14 @@
 				width :$(this).width()*0.15,
 			},	
 			{
-				field : 'state',
-				title : '跟进状态',
+				field : 'isCheck',
+				title : '审核状态',
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
-					if(value=='1'){
-						return "待跟进";
-					}else if(value=='2'){
-						return "跟进中";					
-					}else if(value=='3'){
-						return "处理完成";
+					if(value=='Y'){
+						return "审核通过";
+					}else if(value=='N'){
+						return "审核未通过";					
 					}
 				}
 			},
@@ -97,8 +85,10 @@
 			    width : $(this).width() * 0.25,
 			    formatter:function(value,rec,i){
 			    var btnHtml="";   
-			    btnHtml+="<a href='javascript: changeState("+i+");' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>更改状态</span></span></a >";
+			    btnHtml+="<a href='javascript: changeState("+i+",'审核通过','Y');' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核通过</span></span></a >";
+			    btnHtml+="<a href='javascript: changeState("+i+",'审核不通过','N');' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核不过</span></span></a >";
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
+			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -110,7 +100,7 @@
 		
 		photoDialog = $('#photoDialog').show().dialog({
 			modal : true,
-			title : '随手拍详情',
+			title : '论坛详情',
 			width:1000,
 			height:800,
 			buttons : [ {
@@ -121,44 +111,26 @@
 			} ]
 		}).dialog('close');
 		
-		
-		changeForm=$("#changeForm").form();
-		changeDialog=$("#changeDialog").show().dialog({
-			modal : true,
-			title : '处理进度详情',
-			width:700,
-			height:280,
-			buttons : [ {
-				text : '确定',
-				style:'text-align:center',
-				handler : function() {
-					if(changeForm.form('validate')){
-						var formData={
-								"photoId":$("#photoId").val(),
-								"state":$("#state").find("option:selected").text(),
-								"remark":$("#remark").val(),
-								"code":$("#state").val()
-						};	
-						console.log(formData);
-						$.ajax({
-							url:'${ctx}/cityPage/changePhotoState',
-							data:JSON.stringify(formData),
-							contentType:"application/json",
-				 			success:function(result){
-								datagrid.datagrid('reload');
-							}
-						});
-					}
-				}
-			} ]
-		}).dialog('close');
 	});
-		
-	function changeState(index){
+	
+	
+	function changeState(index,state,code){
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		console.log(rows);
-		$("#photoId").val(rows.id);
-		changeDialog.dialog('open');
+		var formData={
+			"photoId": rows.id,
+			"state": state,
+			"code": code
+		};	
+								
+		$.ajax({
+			url:'${ctx}/cityPage/changeForumState',
+			data:JSON.stringify(formData),
+			contentType:"application/json",
+ 			success:function(result){
+				datagrid.datagrid('reload');
+			}
+		});
 	}
 
 	function searchFun() {
@@ -172,23 +144,46 @@
 	
 	
 	function edit(index){
-		$('#positionDialog').dialog('setTitle', '<font">随手拍详情</font>');  
+		$('#positionDialog').dialog('setTitle', '<font">论坛详情详情</font>');  
 	        var rows = $("#datagrid").datagrid("getRows")[index];
 	        console.log(rows);
 			photoDialog.dialog('open');
-			$("#createUserName").text(rows.createUserName.nickName);
-			$("#remark2").text(rows.content);
-			$("#photo").empty();
+			$("#forumName").text(rows.title);
+			$("#content").val(rows.content);
 			$("#state2").empty();
-			for(var i=0;i<rows.images.length;i++){
-				$("#photo").append("<img style='width:100px;height:100px;margin-left:20px' src='"+rows.images[i].address+"'/>");
-			}
-			$("#state2").append("<tr style='font-weight:blod;' ><td>处理状态</td><td>处理详情</td><td>处理时间</td></tr>");
+			$("#state2").append("<tr style='font-weight:blod;' ><td>审核状态</td><td>审核时间</td></tr>");
 			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+rows.allState[i].content+"</td><td>"+rows.allState[i].createTime+"</td></tr>");
+				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+rows.allState[i].createTime+"</td></tr>");
 			}
 	}
 	
+	
+		function remove(index) {
+		var ids = [];
+		var rows = $("#datagrid").datagrid("getRows")[index];
+		if (rows) {
+			$.messager.confirm('请确认', '您要删除当前所选文章？', function(r) {
+				if (r) {	
+						ids.push(rows.id);
+					$.ajax({
+						url : '${ctx}/cityPage/removeForums',
+						data : JSON.stringify(ids),
+						cache : false,
+						dataType : "json",
+						contentType:"application/json",
+						success : function(data) {
+							if(data.success){
+								datagrid.datagrid('unselectAll');
+								datagrid.datagrid('reload');
+							}
+						}
+					});
+				}
+			});
+		} else {
+			$.messager.alert('提示', '请选择要删除的记录！', 'error');
+		}
+	}
 	
 </script>
 
@@ -238,34 +233,6 @@
 		<table id="datagrid" border="1"></table>
 	</div>
 	
-	<div id="changeDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
-		<form id="changeForm" method="post" enctype="multipart/form-data">
-			<fieldset class="my_fieldset">
-				<legend class="my_legend">处理进度详情</legend>
-				<table class="tableForm">
-					<tr style="display: none;">
-						<td id="photoId" name="photoId">
-						</td>
-					</tr>
-					<tr>
-						<th >状&nbsp&nbsp态：</th>
-						<td colspan="2">
-							<select id="state" name="state" style="width:164px;height:21px;">
-							<option value="">请选择状态</option>
-							  <option value="1">带跟进</option>
-							  <option value="2">跟进中</option>
-							  <option value="3">处理完成</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-	                	<th>处理进度详情：</th>
-				    	<td><textarea rows=4 cols=50 id="remark" name="remark" ></textarea></td>
-			    	</tr>
-				</table>
-			</fieldset>
-		</form>
-	</div>
 	
 	<div id="photoDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
 		<form id="photoForm" method="post" enctype="multipart/form-data">
@@ -273,26 +240,19 @@
 				<legend class="my_legend">随手拍详情</legend>
 				<table class="tableForm">
 					<tr>
-						<th >上&nbsp传&nbsp者：</th>
+						<th >文章标题：</th>
 						<td colspan="2">
-							<td colspan="2" id="createUserName" name="createUserName"></td>
+							<td colspan="2" id="forumName" name="forumName"></td>
 						</td>
 					</tr>
 					<tr>
-						<th >问题描述：</th>
-						<td colspan="2">
-							<td colspan="2" id="remark2" name="remark2"></td>
-						</td>
-					</tr>
-					<tr>
-						<th >照片：</th>
-					</tr>
-					<tr>
-						<td id="photo" colspan="4">
-						</td>
-					</tr>
+	                	<th>文章内容：</th>
+                	</tr>
+                	<tr>
+				    	<td  colspan="4"><textarea rows=6 cols=65 id="content" name="content" ></textarea></td>
+			    	</tr>
 				 <tr id="process">
-                	 <th id=processTh>处理进度：</th>
+                	 <th >审核进度：</th>
               	 </tr>
               	 <tr id="state2">
 					</tr>

@@ -1,15 +1,19 @@
 package com.wan.sys.entity.forum;
 
 import com.wan.sys.common.BaseEntity;
+import com.wan.sys.entity.User;
+import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.image.Image;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "city_forum")
@@ -19,10 +23,23 @@ public class Forum extends BaseEntity{
     private String title;
     private String subtitle;
     private String content;
-    private String isCheck;
-    private List<Image> images;
-    private Long viewCount;
-    private Long commentCount;
+    private String isCheck = "N";
+    private Set<Image> images;
+    private Long viewCount = 0L;
+    private Long commentCount = 0L;
+    private Set<PartToState> allState;
+    private User createUserName;
+    
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@NotFound(action = NotFoundAction.IGNORE)
+	@JoinColumn(name = "CREATEUSERID")
+    public User getCreateUserName() {
+		return createUserName;
+	}
+
+	public void setCreateUserName(User createUserName) {
+		this.createUserName = createUserName;
+	}
 
     @NotNull(message = "{message.notnull}")
     public String getTitle() {
@@ -59,14 +76,14 @@ public class Forum extends BaseEntity{
         this.isCheck = isCheck;
     }
 
-    @OneToMany(targetEntity = Image.class, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
-    public List<Image> getImages() {
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "BELONG_ID")
+    public Set<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<Image> images) {
+    public void setImages(Set<Image> images) {
         this.images = images;
     }
 
@@ -87,4 +104,15 @@ public class Forum extends BaseEntity{
     public void setCommentCount(Long commentCount) {
         this.commentCount = commentCount;
     }
+    
+	@OneToMany(targetEntity=PartToState.class,cascade=CascadeType.ALL,fetch = FetchType.LAZY)  
+	@Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name="BELONG_ID",updatable=false)  
+	public Set<PartToState> getAllState() {
+		return allState;
+	}
+
+	public void setAllState(Set<PartToState> allState) {
+		this.allState = allState;
+	}
 }

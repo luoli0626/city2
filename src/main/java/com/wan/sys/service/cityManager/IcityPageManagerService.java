@@ -56,4 +56,27 @@ public interface IcityPageManagerService {
 	public List<Fixed> photoStateSelect();
 	
 	public Boolean changePhotoState(CityBean city);
+	
+	public DataGridJson dynamicList(DataGridBean dg,CityBean city);
+	
+	public Boolean alterDynamic(CityBean city);
+	
+	public Boolean removeDynamics(String[] ids);
+	
+	public Boolean changezDynamics(String[] ids);
+	
+	public DataGridJson guideList(DataGridBean dg,CityBean city);
+	
+	public Boolean alterGuide(CityBean city);
+	
+	public Boolean removeGuides(String[] ids);
+	
+	public Boolean changeGuides(String[] ids);
+
+	public DataGridJson forumList(DataGridBean dg, CityBean city);
+	
+	public Boolean changeForumState(CityBean city);
+	
+	public Boolean removeForums(String[] ids);
+	
 }
