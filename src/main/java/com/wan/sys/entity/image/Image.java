@@ -15,7 +15,7 @@ public class Image implements Serializable {
     private Long id;
     private String address;
     private String type;
-    private int order;
+    private Integer order;
     private Long belongId;
 
     @Id
@@ -47,11 +47,11 @@ public class Image implements Serializable {
     }
 
     @Column(name = "\"ORDER\"")
-    public int getOrder() {
+    public Integer getOrder() {
         return order;
     }
 
-    public void setOrder(int order) {
+    public void setOrder(Integer order) {
         this.order = order;
     }
 
