@@ -64,7 +64,7 @@ public class Banner extends BaseEntity {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "BELONG_ID", updatable = false, insertable = false)
     public Set<Image> getBannerImages() {
         return bannerImages;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("cityApp/banner")
@@ -25,11 +26,12 @@ public class BannerController {
         List<Banner> banners = bannerService.getList();
         if (banners != null) {
             for (Banner banner : banners) {
-
-                if ("Y".equalsIgnoreCase(banner.getIsUrl()) && banner.getBannerImages() != null && banner.getBannerImages().size() > 0) {
-                    banner.setImage(banner.getBannerImages().iterator().next());
-                } else if (banner.getArticleImages() != null && banner.getArticleImages().size() > 0) {
-                    banner.setImage(banner.getArticleImages().iterator().next());
+                Set<Image> articleImages = banner.getArticleImages();
+                Set<Image> bannerImages =  banner.getBannerImages();
+                if ("Y".equalsIgnoreCase(banner.getIsUrl()) && articleImages != null && articleImages.size() > 0) {
+                    banner.setImage(articleImages.iterator().next());
+                } else if (bannerImages != null && bannerImages.size() > 0) {
+                    banner.setImage(bannerImages.iterator().next());
                 }
 
                 banner.setArticleImages(null);
