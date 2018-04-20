@@ -101,6 +101,7 @@
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>编辑</span></span></a >";
 			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    btnHtml+="<a href=' javascript:isOnline("+i+");' plain='true'  iconcls='icon-reload' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-reload' style='padding-left: 20px;'>上/下线</span></span></a >";
+			     btnHtml+="<a href=' javascript:isBanner("+i+");' plain='true'  iconcls='icon-reload' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-reload' style='padding-left: 20px;'>设置为首页轮播</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -256,6 +257,39 @@
 		} else {
 			$.messager.alert('提示', '请选择要删除的记录！', 'error');
 		}
+	}
+	
+	function isBanner(index){
+		var rows = $("#datagrid").datagrid("getRows")[index];
+		var formdata={
+			"code" : "1",
+			"messageId" : rows.id
+		}
+			if (rows) {
+				$.messager.confirm('请确认', '您要更改当前所选文章为首页轮播？', function(r) {
+					if (r) {	
+						$.ajax({
+							url : '${ctx}/cityPage/addBanner',
+							data : JSON.stringify(formdata),
+							cache : false,
+							dataType : "json",
+							contentType:"application/json",
+							success : function(data) {
+								if(data.success){
+									$.messager.alert('成功',"轮播设置成功，您可以在轮播设置界面查看");
+									datagrid.datagrid('unselectAll');
+									datagrid.datagrid('reload');
+								}else{
+									$.messager.alert('失败',"轮播数量已经达到上线");
+									datagrid.datagrid('unselectAll');
+									datagrid.datagrid('reload');
+								}
+							}
+						});
+					}
+				});
+			} 
+		
 	}
 	
 </script>

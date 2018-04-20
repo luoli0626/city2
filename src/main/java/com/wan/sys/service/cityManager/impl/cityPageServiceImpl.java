@@ -2,7 +2,9 @@ package com.wan.sys.service.cityManager.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.wan.sys.common.GlobalContext;
 import com.wan.sys.dao.common.IBaseDao;
+import com.wan.sys.entity.banner.Banner;
 import com.wan.sys.entity.cityManager.Fixed;
 import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.cityManager.Position;
@@ -406,7 +409,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public DataGridJson forumList(DataGridBean dg, CityBean city) {
 		DataGridJson j = new DataGridJson();
-		String hql=" from Forum  where 1=1 ";
+		String hql=" from Forum  where recordStatus='Y'";
 		if(StringUtil.isNotBlank(city.getPhotoName())){
 			hql+=" and title like '%%"+city.getPhotoName()+"%%'";
 		}
@@ -456,6 +459,123 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			}
 		}	
 		baseDao.executeSql(" update `city_forum` set RECORDSTATUS='N' where ID in("+ids+")");
+		return true;
+	}
+
+	@Override
+	public DataGridJson bannerList(DataGridBean dg, CityBean city) {
+		DataGridJson j = new DataGridJson();
+		String sql=" select cb.`isUrl`,cb.`urlAddress`,cb.`article_type`,cd.`TITLE` title1,img1.`ADDRESS`img1,"+
+						" cm.`TITLE`title2,img2.`ADDRESS`img2,img3.`ADDRESS`img3,cb.`ORDERNUMBER`,cb.`ID`   from `city_banner` cb "+
+						" left join `city_dynamic` cd on cb.`article_id`=cd.`ID` "+
+						" left join `city_message` cm on cb.`article_id`=cm.`ID` "+
+						" left join `city_part_to_images` img1 on img1.`BELONG_ID`=cd.`ID`"+
+						" left join `city_part_to_images` img2 on img2.`BELONG_ID`=cm.`ID` "+
+						" left join `city_part_to_images` img3 on img3.`BELONG_ID`=cb.`ID`"+
+						" where cb.`recordStatus`='Y'";
+		
+		
+		List<Object[]> list=baseDao.findBySql(sql);
+		j.setTotal(Long.valueOf(list.size()));
+		List data=new ArrayList();
+//		List<Position> positionList=baseDao.find(sql, dg.getPage(),dg.getRows());
+		for(int i=0;i<list.size();i++){
+			Map<String,Object> m=new HashMap<String,Object>();
+			if(list.get(i)[0].equals("Y")){//url链接
+				m.put("type","url外部链接");
+				m.put("title", list.get(i)[1]);
+				m.put("img",list.get(i)[7] );
+				m.put("orderNum", list.get(i)[8]);
+				m.put("id", list.get(i)[9]);
+				
+			}else{
+				if(list.get(i)[2].equals("1")){//动态
+					m.put("type", "城管动态");
+					m.put("title", list.get(i)[3]);
+					m.put("img",list.get(i)[4] );
+					m.put("orderNum", list.get(i)[8]);
+					m.put("id", list.get(i)[9]);
+				}else if(list.get(i)[2].equals("2")){//资讯
+					m.put("type", "政策资讯");
+					m.put("title", list.get(i)[5]);
+					m.put("img",list.get(i)[6] );
+					m.put("orderNum", list.get(i)[8]);
+					m.put("id", list.get(i)[9]);
+				}
+			}
+			data.add(m);
+		}
+		j.setRows(data);
+		return j;
+	}
+
+	@Override
+	public Boolean addBanner(CityBean city) {//dynamic
+		if((baseDao.find(" from Banner where recordStatus='Y'")).size()==4){
+			return false;
+		}
+		if(city.getCode().equals("1")){
+			Banner b=new Banner();
+			b.setIsUrl("N");
+			b.setArticleId(Long.valueOf(city.getMessageId()));
+			b.setArticleType("1");
+			b.setRecordStatus("Y");
+			b.setOrderNumber(1);
+			baseDao.save(b);
+			
+		}else if(city.getCode().equals("2")){//message
+			
+			Banner b=new Banner();
+			b.setIsUrl("N");
+			b.setArticleId(Long.valueOf(city.getMessageId()));
+			b.setArticleType("2");
+			b.setRecordStatus("Y");
+			b.setOrderNumber(1);
+			baseDao.save(b);
+			
+		}else if(city.getCode().equals("3")){//url
+			Banner b=new Banner();
+			b.setIsUrl("Y");
+			b.setUrlAddress(city.getRemark());
+			b.setRecordStatus("Y");
+			b.setOrderNumber(1);
+			baseDao.save(b);
+			
+			Image i=new Image();
+			i.setBelongId(b.getId());
+			i.setType("7");
+			i.setAddress(city.getPhotoName());
+			baseDao.save(i);
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean removeBanners(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" update `city_banner` set RECORDSTATUS='N' where ID in("+ids+")");
+		return true;
+	}
+
+	@Override
+	public Boolean changeBanners(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" UPDATE `city_banner` SET ORDERNUMBER = CASE ORDERNUMBER  WHEN '1' THEN '2' WHEN '2' THEN '3'"+
+							" WHEN '3' THEN '4' WHEN '4' THEN '1' END WHERE  ID in("+ids+")");
 		return true;
 	}
 

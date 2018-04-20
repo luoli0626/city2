@@ -209,7 +209,7 @@
 						<td colspan="2">
 							<select name="state" style="width:164px;height:21px;">
 							<option value="">请选择状态</option>
-							  <option value="1">带跟进</option>
+							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>

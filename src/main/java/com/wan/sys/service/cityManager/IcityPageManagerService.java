@@ -79,4 +79,12 @@ public interface IcityPageManagerService {
 	
 	public Boolean removeForums(String[] ids);
 	
+	public DataGridJson bannerList(DataGridBean dg,CityBean city);
+	
+	public Boolean addBanner(CityBean city);
+	
+	public Boolean removeBanners(String[] ids);
+	
+	public Boolean changeBanners(String[] ids);
+	
 }
