@@ -6,7 +6,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "city_banner")
@@ -17,7 +17,9 @@ public class Banner extends BaseEntity {
     private Long articleId;
     private String articleType;
     private Integer orderNumber;
-    private List<Image> images;
+    private Set<Image> bannerImages;
+    private Set<Image> articleImages;
+    private Image image;
 
     public String getIsUrl() {
         return isUrl;
@@ -63,12 +65,32 @@ public class Banner extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "BELONG_ID", updatable = false)
-    public List<Image> getImages() {
-        return images;
+    @JoinColumn(name = "BELONG_ID", updatable = false, insertable = false)
+    public Set<Image> getBannerImages() {
+        return bannerImages;
     }
 
-    public void setImages(List<Image> images) {
-        this.images = images;
+    @OneToMany(cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name = "BELONG_ID", referencedColumnName = "article_id", updatable = false, insertable = false)
+    public Set<Image> getArticleImages() {
+        return articleImages;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    @Transient
+    public Image getImage() {
+        return image;
+    }
+
+    public void setBannerImages(Set<Image> bannerImages) {
+        this.bannerImages = bannerImages;
+    }
+
+    public void setArticleImages(Set<Image> articleImages) {
+        this.articleImages = articleImages;
     }
 }
