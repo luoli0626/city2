@@ -2,9 +2,11 @@ package com.wan.sys.controller.banner;
 
 import com.wan.sys.entity.banner.Banner;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.banner.IBannerService;
+import com.wan.sys.service.image.IImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,24 +22,29 @@ public class BannerController {
     @Autowired
     IBannerService bannerService;
 
+    @Autowired
+    IImageService imageService;
+
     @ResponseBody
     @RequestMapping("getList")
     public ResponseHead getList() {
         List<Banner> banners = bannerService.getList();
-        if (banners != null) {
-            for (Banner banner : banners) {
-                Set<Image> articleImages = banner.getArticleImages();
-                Set<Image> bannerImages =  banner.getBannerImages();
-                if ("Y".equalsIgnoreCase(banner.getIsUrl()) && articleImages != null && articleImages.size() > 0) {
-                    banner.setImage(articleImages.iterator().next());
-                } else if (bannerImages != null && bannerImages.size() > 0) {
-                    banner.setImage(bannerImages.iterator().next());
-                }
+        for (Banner banner : banners) {
+            Image image = new Image();
+            if ("Y".equals(banner.getIsUrl())) {
+                image.setType(ImageTypeEnum.BANNER.getIndex());
+            } else if ("1".equals(banner.getArticleType())) {
+                image.setType(ImageTypeEnum.DYNAMIC.getIndex());
+            } else {
+                image.setType(ImageTypeEnum.MESSAGE.getIndex());
+            }
 
-                banner.setArticleImages(null);
-                banner.setBannerImages(null);
+            List<Image> images = imageService.getList(image);
+            if (image != null && images.size() > 0) {
+                banner.setImage(images.get(0));
             }
         }
+
         return new ResponseSuccess(banners);
     }
 }

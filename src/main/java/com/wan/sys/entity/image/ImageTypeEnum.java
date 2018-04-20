@@ -10,7 +10,8 @@ public enum ImageTypeEnum {
     DYNAMIC("3"),
     AVATAR("4"),
     LOST("5"),
-    FORUM("6");
+    FORUM("6"),
+    BANNER("7");
 
     private String index;
 

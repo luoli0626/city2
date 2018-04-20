@@ -8,5 +8,5 @@ public interface IImageService {
 
     void addImages(List<Image> images);
 
-//    List<Image> getList(Image image);
+    List<Image> getList(Image image);
 }
