@@ -69,10 +69,6 @@
                         <span class="l-btn-text icon-lw-mine lw-icon" ></span>
                         <span>个人信息<span>
                      </a>
-                     <a href="javascript:toEditPassword();" >
-                        <span class="l-btn-text icon-lw-chang-password lw-icon" ></span>
-                        <span>修改密码<span>
-                     </a>
                  </div>
 
                  <div class="close-login"><a  href="javascript:logout(true);" >退出管理控制台</a></div>
