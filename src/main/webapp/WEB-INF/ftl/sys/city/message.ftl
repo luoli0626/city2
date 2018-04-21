@@ -262,7 +262,7 @@
 	function isBanner(index){
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		var formdata={
-			"code" : "1",
+			"code" : "2",
 			"messageId" : rows.id
 		}
 			if (rows) {
