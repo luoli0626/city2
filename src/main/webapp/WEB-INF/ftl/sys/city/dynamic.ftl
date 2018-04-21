@@ -183,7 +183,7 @@
 		$('#positionDialog').dialog('setTitle', '<font">添加城管动态</font>');  
 		$('#positionDialog').dialog('open');
 		positionForm.form('clear');
-		
+		um.setContent("");
 	}
 	
 	function edit(index){

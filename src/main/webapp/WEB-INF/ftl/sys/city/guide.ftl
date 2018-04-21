@@ -124,11 +124,11 @@
 								if (result.success) {	
 									console.log(result.success);					 
 									positionDialog.dialog('close');
-									$.messager.alert('城管动态'+result.msg,"成功");
+									$.messager.alert('办事指南'+result.msg,"成功");
 									datagrid.datagrid('reload');
 								}else{
 									positionDialog.dialog('close');
-									$.messager.alert('城管动态'+result.msg,"成功");
+									$.messager.alert('办事指南'+result.msg,"成功");
 									datagrid.datagrid('reload');
 								}
 							}
