@@ -79,6 +79,9 @@
 				field : 'createTime',
 				title : '上传时间',
 				width :$(this).width()*0.15,
+				formatter:function(value,rec,i){
+					return timestampToTime(value);					
+				}
 			},			
 			{
 				field : 'isOnline',
@@ -130,10 +133,12 @@
 						};	
 						if($("#messageId").val()==""){
 							var imgs=$("#showContent").find("img");
-							console.log(imgs.length);
 							if (imgs.length != 0) {
 									formData.messageImage= imgs[0].src;
 									console.log(imgs[0].src);
+							}else{
+								$.messager.alert('提示',"请至少添加一张图片");
+								return false;
 							}
 						}
 						console.log($("#showContent").html());
@@ -262,7 +267,7 @@
 	function isBanner(index){
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		var formdata={
-			"code" : "1",
+			"code" : "2",
 			"messageId" : rows.id
 		}
 			if (rows) {
@@ -290,6 +295,19 @@
 				});
 			} 
 		
+	}
+	
+	function add0(m){return m<10?'0'+m:m }
+	function timestampToTime(nows)
+	{
+		var time = new Date(nows);
+		var y = time.getFullYear();
+		var m = time.getMonth()+1;
+		var d = time.getDate();
+		var h = time.getHours();
+		var mm = time.getMinutes();
+		var s = time.getSeconds();
+		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 	}
 	
 </script>

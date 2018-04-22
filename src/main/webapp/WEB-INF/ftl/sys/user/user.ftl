@@ -275,16 +275,8 @@
 				width : $(this).width() * 0.11,
 				formatter:function(value,rec,i){
 					var btnHtml="";			
-					<#if fmfn.checkButton(requestURI,"icon-edit")>
 						btnHtml="<a href='javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>编辑</span></span></a>";
-					</#if>
-					<#if fmfn.checkButton(requestURI,"icon-remove")>
 						btnHtml+="<a href='javascript:removeUser();' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a>";
-					</#if>
-						<#if fmfn.checkButton(requestURI,"icon-edit")>
-						if(rec.seal=="N")
-						btnHtml+="<a href='javascript:controlUser("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>解封</span></span></a>";
-					</#if>
 						
 					return btnHtml;
 				}
@@ -632,6 +624,8 @@
 			$.messager.alert('提示', '请选择要重置密码的用户！', 'error');
 		}
 	}
+	
+	
 	
 	function userExport(){
 			$.messager.confirm('请确认', '您要导出项目？', function(r) {
