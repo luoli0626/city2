@@ -7,6 +7,7 @@ import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.banner.IBannerService;
 import com.wan.sys.service.image.IImageService;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +45,6 @@ public class BannerController {
                 banner.setImage(images.get(0));
             }
         }
-
         return new ResponseSuccess(banners);
     }
 }
