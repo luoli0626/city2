@@ -69,6 +69,9 @@
 				field : 'createTime',
 				title : '上传时间',
 				width :$(this).width()*0.15,
+				formatter:function(value,rec,i){
+					return timestampToTime(value);					
+				}
 			},			
 			{
 				field : 'isOnline',
@@ -229,6 +232,20 @@
 		} else {
 			$.messager.alert('提示', '请选择要删除的记录！', 'error');
 		}
+	}
+	
+    
+    function add0(m){return m<10?'0'+m:m }
+	function timestampToTime(nows)
+	{
+		var time = new Date(nows);
+		var y = time.getFullYear();
+		var m = time.getMonth()+1;
+		var d = time.getDate();
+		var h = time.getHours();
+		var mm = time.getMinutes();
+		var s = time.getSeconds();
+		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 	}
 	
 </script>
