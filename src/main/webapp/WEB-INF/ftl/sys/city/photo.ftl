@@ -148,6 +148,8 @@
 							data:JSON.stringify(formData),
 							contentType:"application/json",
 				 			success:function(result){
+				 				console.log(result);
+				 				changeDialog.dialog('close');
 								datagrid.datagrid('reload');
 							}
 						});
@@ -161,6 +163,7 @@
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		console.log(rows);
 		$("#photoId").val(rows.id);
+		changeForm.form('clear')
 		changeDialog.dialog('open');
 	}
 
@@ -184,11 +187,11 @@
 			$("#photo").empty();
 			$("#state2").empty();
 			for(var i=0;i<rows.images.length;i++){
-				$("#photo").append("<img style='width:100px;height:100px;margin-left:20px' src='"+rows.images[i].address+"'/>");
+				$("#photo").append("<td colspan='8'><img style='width:500px;height:500px;margin-left:20px' src='"+rows.images[i].address+"'/></td></br>");
 			}
-			$("#state2").append("<tr style='font-weight:blod;' ><td>处理状态</td><td>处理详情</td><td>处理时间</td></tr>");
+			$("#state2").append("<tr style='font-weight:blod;' ><td>处理状态</td><td colspan='2'>处理详情</td><td colspan='2'>处理时间</td></tr>");
 			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+rows.allState[i].content+"</td><td>"+rows.allState[i].createTime+"</td></tr>");
+				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td colspan='2'>"+(rows.allState[i].content==null?"":rows.allState[i].content)+"</td><td colspan='2'>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
 			}
 	}
 	function add0(m){return m<10?'0'+m:m }
@@ -221,7 +224,7 @@
 						</td>
 						<td>上线情况：</td>
 						<td colspan="2">
-							<select name="state" style="width:164px;height:21px;">
+							<select name="state" style="width:164px;height:21px;" >
 							<option value="">请选择状态</option>
 							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
@@ -264,7 +267,7 @@
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
 						<td colspan="2">
-							<select id="state" name="state" style="width:164px;height:21px;">
+							<select id="state" name="state" style="width:164px;height:21px;"   >
 							<option value="">请选择状态</option>
 							  <option value="1">带跟进</option>
 							  <option value="2">跟进中</option>
@@ -274,7 +277,7 @@
 					</tr>
 					<tr>
 	                	<th>处理进度详情：</th>
-				    	<td><textarea rows=4 cols=50 id="remark" name="remark" ></textarea></td>
+				    	<td><textarea  rows=4 cols=50 id="remark" name="remark" ></textarea></td>
 			    	</tr>
 				</table>
 			</fieldset>
@@ -288,22 +291,16 @@
 				<table class="tableForm">
 					<tr>
 						<th >上&nbsp传&nbsp者：</th>
-						<td colspan="2">
-							<td colspan="2" id="createUserName" name="createUserName"></td>
-						</td>
+							<td colspan="8" id="createUserName" name="createUserName"></td>
 					</tr>
 					<tr>
 						<th >问题描述：</th>
-						<td colspan="2">
-							<td colspan="2" id="remark2" name="remark2"></td>
-						</td>
+							<td colspan="8" id="remark2" name="remark2"></td>
 					</tr>
 					<tr>
 						<th >照片：</th>
 					</tr>
-					<tr>
-						<td id="photo" colspan="4">
-						</td>
+					<tr id="photo">
 					</tr>
 				 <tr id="process">
                 	 <th id=processTh>处理进度：</th>

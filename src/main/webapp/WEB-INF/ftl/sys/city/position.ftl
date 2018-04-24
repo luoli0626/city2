@@ -285,7 +285,7 @@
 		<div id="pointDialog" style="display: none;overflow: hidden;background:#FFFFFF;padding:20px 20px;">
 	<div id="r-result" style="width:100%; font-size:14px;">
 		 <input id="cityName" type="text" style="width:100px; margin-right:10px;" />
-		<a href="#"  onclick="theLocation()" >搜索</a>
+		<a href="#"  onclick="theLocation()" >搜索您要添加的位置</a>
 		 </br>
 		 </br>
 	     </div>

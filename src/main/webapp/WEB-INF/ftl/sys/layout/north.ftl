@@ -46,7 +46,7 @@
 	
 </script>
 <div class="left_logo">
-<img src="static/images/bpmx3_logo_1.png">
+<img style="margin-left:100px;margin-top:15px;" src="static/images/bpmx3_logo_1.png">
 </div>
 
 <div class="header_right">

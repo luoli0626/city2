@@ -110,6 +110,7 @@
 				text : '确定',
 				style:'text-align:center',
 				handler : function() {
+					photoDialog.dialog('close');
 				}
 			} ]
 		}).dialog('close');
@@ -165,7 +166,7 @@
 			$("#state2").empty();
 			$("#state2").append("<tr style='font-weight:blod;' ><td>审核状态</td><td>审核时间</td></tr>");
 			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+rows.allState[i].createTime+"</td></tr>");
+				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
 			}
 	}
 	

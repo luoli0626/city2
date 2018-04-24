@@ -114,6 +114,7 @@
 								roleDialog.dialog('close');
 								$.messager.alert('角色'+msg,"保存成功");
 								datagrid.datagrid('reload');
+								top.addTabFun({src:'${ctx}/role/roleList',title:'角色管理'});
 							}else{
 								$.messager.alert('角色'+msg,"保存失败");
 							}
