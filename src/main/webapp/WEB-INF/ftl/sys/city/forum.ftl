@@ -66,6 +66,9 @@
 				field : 'createTime',
 				title : '上传时间',
 				width :$(this).width()*0.15,
+				formatter:function(value,rec,i){
+					return timestampToTime(value);					
+				}
 			},	
 			{
 				field : 'isCheck',
@@ -85,8 +88,8 @@
 			    width : $(this).width() * 0.25,
 			    formatter:function(value,rec,i){
 			    var btnHtml="";   
-			    btnHtml+="<a href='javascript: changeState("+i+",'审核通过','Y');' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核通过</span></span></a >";
-			    btnHtml+="<a href='javascript: changeState("+i+",'审核不通过','N');' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核不过</span></span></a >";
+			    btnHtml+="<a href='javascript: changeState("+i+",1);' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核通过</span></span></a >";
+			    btnHtml+="<a href='javascript: changeState("+i+",2);' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核不过</span></span></a >";
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
 			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    return btnHtml;
@@ -107,6 +110,7 @@
 				text : '确定',
 				style:'text-align:center',
 				handler : function() {
+					photoDialog.dialog('close');
 				}
 			} ]
 		}).dialog('close');
@@ -114,13 +118,22 @@
 	});
 	
 	
-	function changeState(index,state,code){
+	function changeState(index,code){
+		var state;
+		var isCheck;
+		if(code==1){
+			state='审核通过';
+			isCheck='Y';
+		}else{
+			state='审核不通过';
+			isCheck='N';
+		}
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		console.log(rows);
 		var formData={
 			"photoId": rows.id,
 			"state": state,
-			"code": code
+			"code": isCheck
 		};	
 								
 		$.ajax({
@@ -153,7 +166,7 @@
 			$("#state2").empty();
 			$("#state2").append("<tr style='font-weight:blod;' ><td>审核状态</td><td>审核时间</td></tr>");
 			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+rows.allState[i].createTime+"</td></tr>");
+				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
 			}
 	}
 	
@@ -185,6 +198,18 @@
 		}
 	}
 	
+    function add0(m){return m<10?'0'+m:m }
+	function timestampToTime(nows)
+	{
+		var time = new Date(nows);
+		var y = time.getFullYear();
+		var m = time.getMonth()+1;
+		var d = time.getDate();
+		var h = time.getHours();
+		var mm = time.getMinutes();
+		var s = time.getSeconds();
+		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
+	}
 </script>
 
 
@@ -204,9 +229,8 @@
 						<td colspan="2">
 							<select name="state" style="width:164px;height:21px;">
 							<option value="">请选择状态</option>
-							  <option value="1">带跟进</option>
-							  <option value="2">跟进中</option>
-							  <option value="3">处理完成</option>
+							  <option value="Y">审核通过</option>
+							  <option value="N">审核不通过</option>
 							</select>
 						</td>
 						<td>开始时间：</td>

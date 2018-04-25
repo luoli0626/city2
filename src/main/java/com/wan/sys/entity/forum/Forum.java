@@ -32,7 +32,7 @@ public class Forum extends BaseEntity{
     
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@NotFound(action = NotFoundAction.IGNORE)
-	@JoinColumn(name = "CREATEUSERID")
+	@JoinColumn(name = "CREATEUSERID", updatable = false, insertable = false)
     public User getCreateUserName() {
 		return createUserName;
 	}

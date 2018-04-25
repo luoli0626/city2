@@ -2,15 +2,19 @@ package com.wan.sys.controller.banner;
 
 import com.wan.sys.entity.banner.Banner;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.banner.IBannerService;
+import com.wan.sys.service.image.IImageService;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("cityApp/banner")
@@ -19,21 +23,26 @@ public class BannerController {
     @Autowired
     IBannerService bannerService;
 
+    @Autowired
+    IImageService imageService;
+
     @ResponseBody
     @RequestMapping("getList")
     public ResponseHead getList() {
         List<Banner> banners = bannerService.getList();
-        if (banners != null) {
-            for (Banner banner : banners) {
+        for (Banner banner : banners) {
+            Image image = new Image();
+            if ("Y".equals(banner.getIsUrl())) {
+                image.setType(ImageTypeEnum.BANNER.getIndex());
+            } else if ("1".equals(banner.getArticleType())) {
+                image.setType(ImageTypeEnum.DYNAMIC.getIndex());
+            } else {
+                image.setType(ImageTypeEnum.MESSAGE.getIndex());
+            }
 
-                if ("Y".equalsIgnoreCase(banner.getIsUrl()) && banner.getBannerImages() != null && banner.getBannerImages().size() > 0) {
-                    banner.setImage(banner.getBannerImages().iterator().next());
-                } else if (banner.getArticleImages() != null && banner.getArticleImages().size() > 0) {
-                    banner.setImage(banner.getArticleImages().iterator().next());
-                }
-
-                banner.setArticleImages(null);
-                banner.setBannerImages(null);
+            List<Image> images = imageService.getList(image);
+            if (image != null && images.size() > 0) {
+                banner.setImage(images.get(0));
             }
         }
         return new ResponseSuccess(banners);

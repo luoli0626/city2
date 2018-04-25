@@ -46,7 +46,7 @@
 	
 </script>
 <div class="left_logo">
-<img src="static/images/bpmx3_logo_1.png">
+<img style="margin-left:100px;margin-top:15px;" src="static/images/bpmx3_logo_1.png">
 </div>
 
 <div class="header_right">
@@ -68,10 +68,6 @@
                      <a  href="javascript:userInfo();" >
                         <span class="l-btn-text icon-lw-mine lw-icon" ></span>
                         <span>个人信息<span>
-                     </a>
-                     <a href="javascript:toEditPassword();" >
-                        <span class="l-btn-text icon-lw-chang-password lw-icon" ></span>
-                        <span>修改密码<span>
                      </a>
                  </div>
 

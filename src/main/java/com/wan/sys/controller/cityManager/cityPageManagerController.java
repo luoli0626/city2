@@ -411,4 +411,68 @@ public class cityPageManagerController {
 		j.setSuccess(cityPageService.removeForums(ids));
 		return j;
 	}
+	
+	
+	//------------------------------------------------------banner--------------------------------------------------------
+	/**
+	 * 轮播设置页面
+	 * @return
+	 */
+	@RequestMapping(value="bannerPage")
+	public String bannerPage(){
+		return "/sys/city/banner";
+	}
+	
+	/**
+	 * 轮播设置列表
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="bannerList")
+	public DataGridJson bannerList(DataGridBean dg,CityBean city){
+		return cityPageService.bannerList(dg,city);
+	}
+	
+	
+	/**
+	 * 新增banner
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="addBanner")
+	public Json addBanner(@RequestBody CityBean city){
+		Json j=new Json();
+		j.setSuccess(cityPageService.addBanner(city));
+		return j;
+	}
+	
+	/**
+	 * 删除轮播
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeBanners")
+	public Json removeBanners(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeBanners(ids));
+		return j;
+	}
+	
+	
+	/**
+	 * 更改轮播顺序
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="changeBanners")
+	public Json changeBanners(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.changeBanners(ids));
+		return j;
+	}
 }

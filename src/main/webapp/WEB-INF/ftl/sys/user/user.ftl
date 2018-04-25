@@ -200,34 +200,18 @@
 						var formData={
 								"loginAcct":$("#loginAcct").val(),
 								"sex":$("[name='sex']:checked").val(),
-								"birthday":$("#birthday").datetimebox("getValue"),
-								"officePhone":$("#officePhone").val(),
 								"mobilePhone":$("#mobilePhone").val(),
-								"fax":$("#fax").val(),
-								"email":$("#email").val(),
-								"qq":$("#qq").val(),
-								"taskNumber":$("#taskNumber").val(),
 								"nickName":$("#nickName").val()
-							};	
-						var organization=[];
+							};
 						var roles=[];
-						var scenes=[];
 						var ids=roleTree.combotree("getValues");
-						var ids1=sceneTree.combotree("getValues");
-						var orgg=organTree.combotree("getValues");
 						for(var i=0;i<ids.length;i++){
 							roles.push({"id":ids[i]});
 						}
-						for(var i=0;i<ids1.length;i++){
-							scenes.push({"id":ids1[i]});
-						}
-						for(var i=0;i<orgg.length;i++){
-							organization.push({"id":orgg[i]});
-						}
 						
-						formData.organization=organization;
+						
 						formData.roles=roles;
-						formData.scenes=scenes;
+						
 						var url="${ctx}/user/add";
 						var msg="新增";
 						if ($('[name=id]').val()) {
@@ -263,34 +247,7 @@
 				}
 			} ]
 		}).dialog('close');
-		
-		repeatDialog=$('#repeatDialog').show().dialog({
-				modal : true,
-				title : '批量回馈',
-				width:750,
-				height:450,
-				buttons : [ {
-					text : '导出数据',
-					style:'text-align:center',
-					handler : function() {
-					 window.open('${ctx}/manual/userRolereports',"","_blank");
-					}
-				},{
-					text : '取消',
-					style:'text-align:center',
-					handler : function() {
-					
-					userRoleId.dialog('close');
-					repeatDialog.dialog('close');
-					$('#repeatView').empty();
-					$.messager.progress('close');
-					 datagrid.datagrid('unselectAll');
-					datagrid.datagrid('reload');
-					
-					
-					}
-				}]
-			}).dialog('close');
+
 		
 		datagrid = $('#datagrid').datagrid({
 			url : '${ctx}/user/datagrid',
@@ -318,16 +275,8 @@
 				width : $(this).width() * 0.11,
 				formatter:function(value,rec,i){
 					var btnHtml="";			
-					<#if fmfn.checkButton(requestURI,"icon-edit")>
 						btnHtml="<a href='javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>编辑</span></span></a>";
-					</#if>
-					<#if fmfn.checkButton(requestURI,"icon-remove")>
 						btnHtml+="<a href='javascript:removeUser();' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a>";
-					</#if>
-						<#if fmfn.checkButton(requestURI,"icon-edit")>
-						if(rec.seal=="N")
-						btnHtml+="<a href='javascript:controlUser("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>解封</span></span></a>";
-					</#if>
 						
 					return btnHtml;
 				}
@@ -345,21 +294,9 @@
 					sortable : true
 				},
 				 {
-					field : 'officePhone',
-					title : '微信ID',
-					width : $(this).width() * 0.06,
-					sortable : true
-				},
-				 {
 					field : 'mobilePhone',
 					title : '移动电话',
 					width : $(this).width() * 0.06,
-					sortable : true
-				},
-				 {
-					field : 'email',
-					title : '电子邮箱',
-					width : $(this).width() * 0.09,
 					sortable : true
 				},
 				{
@@ -376,46 +313,11 @@
 					}
 					return result;
 				}
-			},
-				{
-				field : 'scenes',
-				title : '所属场景',
-				width : $(this).width() * 0.09,
-				formatter:function(value,row){
-				  
-					var result="";
-					if(value){
-						for(var i=0;i<value.length;i++){
-							result+=value[i].name+",";
-						}
-						result=result.substring(0,result.length-1)
-					}
-					return result;
-				}
-			}, {
-				field : 'organization',
-				title : '所属项目',
-				width : $(this).width() * 0.09,
-				formatter:function(value,row){
-					var result="";
-					if(value){
-						for(var i=0;i<value.length;i++){
-							result+=value[i].orgName+",";
-						}
-						result=result.substring(0,result.length-1)
-					}
-					return result;
-				}
 			}, {
 				field : 'roleId',
 				title : '所属角色',
 				width : $(this).width() * 0.06,
 				hidden : true
-			},{
-				field : 'fax',
-				title : '描述',
-				width : $(this).width() * 0.2,
-				sortable : true
 			}] ],
 			onRowContextMenu : function(e, rowIndex, rowData) {
 				$(this).datagrid('selectRow', rowIndex);
@@ -544,9 +446,6 @@
 				email:rows.email,
 				birthday:rows.birthday,
 				nickName:rows.nickName,
-				qq:rows.qq,
-				taskNumber:rows.taskNumber,
-				staff:rows.staff
 			});
 			//$("#password").attr("disabled","true");
 			//$("#password1").attr("disabled","true");
@@ -649,14 +548,7 @@
 	function searchFun() {
 		datagrid.datagrid('load', {
 			loginAcct 	: $('#toolbar input[name=SloginAcct]').val(),
-			nickName 	: $('#toolbar input[name=SnickName]').val(),
-			officePhone : $('#toolbar input[name=SofficePhone]').val(),
-			mobilePhone : $('#toolbar input[name=SmobilePhone]').val(),
-			email 		: $('#toolbar input[name=Semail]').val(),
-			fax 		: $('#toolbar input[name=Sfax]').val(),
-			rolesID		: $("#Sroles").combobox('getValue'),
-			scenesID	: $("#SsceneId").combobox('getValue'),
-			organId 	: $("#SorgId").combobox('getValue')
+			nickName 	: $('#toolbar input[name=SnickName]').val()
 		});
 	}
 	function clearFun() {
@@ -733,6 +625,8 @@
 		}
 	}
 	
+	
+	
 	function userExport(){
 			$.messager.confirm('请确认', '您要导出项目？', function(r) {
 					if (r) {
@@ -757,26 +651,6 @@
 						<td colspan="2">
 							<input name="SnickName" class="basic_input"/>
 						</td>
-						<td>微信ID：</td>
-						<td colspan="2">
-							<input name="SofficePhone" class="basic_input"/>
-						</td>
-					</tr>
-					<tr>
-						<td>移动电话：</td>
-						<td colspan="2">
-							<input name="SmobilePhone" class="basic_input"/>
-						</td>
-						<td>电子邮箱：</td>
-						<td colspan="2">
-							<input name="Semail" class="basic_input"/>
-						</td>
-						<td>描述：</td>
-						<td colspan="2">
-							<input name="Sfax" class="basic_input"/>
-						</td>
-					</tr>
-					<tr>
 						<td>
 							&nbsp;
 							<a class="easyui-linkbutton" iconCls="icon-search"  onclick="searchFun();" href="javascript:void(0);">查 找</a>
@@ -792,14 +666,6 @@
 				<#if fmfn.checkButton(requestURI,"icon-remove")>
 					<a class="easyui-linkbutton" iconCls="icon-remove" onclick="removeUser();"   href="javascript:void(0);">删 除</a>
 				</#if>
-				<a class="easyui-linkbutton" iconCls="icon-print"  onclick="userRole();" href="javascript:void(0);">导入用户角色信息</a>
-				<a class="easyui-linkbutton" iconCls="icon-print"  onclick="userExport();" href="javascript:void(0);">导出</a>
-				<#if fmfn.checkButton(requestURI,"icon-batch")>
-					<a class="easyui-linkbutton" iconCls="icon-batch" onclick="resetPass();"   href="javascript:void(0);">重置密码</a>
-				</#if>
-				
-				
-				
 				
 				
 			</div>
@@ -839,57 +705,14 @@
 					</td>
 				</tr>
 				<tr>
-					<th>生&#12288;&#12288;日：</th>
-					<td><input id="birthday" name="birthday"  style="width: 196px;" class="easyui-datetimebox" /></td>
-				</tr>
-				<tr>
-					<th>微信ID：</th>
-					<td><input id="officePhone" name="officePhone"  style="width: 196px;" class="easyui-validatebox" validType="length[1,200]"/></td>
-				</tr>
-				<tr>
 					<th>移动电话：</th>
 					<td><input id="mobilePhone" name="mobilePhone"  style="width: 196px;" class="easyui-validatebox" validType="mobile"/></td>
 				</tr>
-				<tr>
-					<th>个人描述：</th>
-					<td><input id="fax" name="fax"  style="width: 196px;" validType="length[1,200]" /></td>
-				</tr>
-				<tr>
-					<th>电子邮箱：</th>
-					<td><input id="email" name="email"  style="width: 196px;" class="easyui-validatebox" validType="email" /></td>
-				</tr>
-				<tr>
-					<th>q&#12288;&#12288;q：</th>
-					<td><input id="qq" name="qq"  style="width: 196px;" class="easyui-validatebox" validType="qq"/></td>
-				</tr>
-				
-				
-				
-				<tr>
-					<th >所属项目：</th>
-					<td><select id="orgId"  multiple="true"   cascadeCheck="false"  name="orgId" style="width: 200px;" required="true"></select></td>
-				</tr>
-			
-				
 				<tr>
 					<th >所属角色：</th>
 					<td><select id="roleId" name="roles.id" style="width: 200px;" required="true"></select></td>
 				</tr>
 				
-				<tr>
-					<th >场景板块：</th>
-					<td><select id="sceneId" name="scenes.id" style="width: 200px;" required="true"></select></td>
-				</tr>
-				
-				<tr>
-					<th>任务量</th>
-					<td><input id="taskNumber" name="taskNumber"  style="width: 196px;"  validType="length[1,3]" class="easyui-numberbox" /></td>
-				</tr>
-				
-				<!--<tr>
-					<th >对应人员：</th>
-					<td><select id="staff" name="staff" style="width: 200px;" required="true"></select></td>
-				</tr>-->
 			</table>
 		</form>
 	</div>
