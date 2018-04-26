@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.exceptions.ClientException;
 import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.entity.User;
 import com.wan.sys.entity.cityManager.Code;
@@ -21,6 +22,7 @@ import com.wan.sys.service.cityManager.IcityManagerService;
 import com.wan.sys.service.common.impl.CommonServiceImpl;
 import com.wan.sys.util.Encrypt;
 import com.wan.sys.util.StringUtil;
+import com.wan.sys.util.AliMessageSend;
 
 @Service
 public class cityManagerServiceImpl extends CommonServiceImpl implements IcityManagerService{
@@ -131,7 +133,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 	public ResponseHead getCode(UserBean bean) {
 		JSONObject js=new JSONObject();
 		//参数验证
-		if(StringUtil.isBlank(bean.getMobilePhone())){
+		if(StringUtil.isBlank(bean.getMobilePhone())||StringUtil.isBlank(bean.getFlag())){
 			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
 					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
 		}
@@ -152,6 +154,14 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		}
 		
 		js.put("code", code);
+		
+		try {
+			AliMessageSend.sendSms(bean.getMobilePhone(), code+"",bean.getFlag());
+		} catch (ClientException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return response(ErrorCodeEnum.SUCCESS.getCode(), 
 				ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);	
 	}
