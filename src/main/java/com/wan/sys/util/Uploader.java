@@ -137,8 +137,7 @@ public class Uploader {
 	 * @return
 	 */
 	private String generateFileName(String originalName) {
-		Random random = new Random();
-		String fileName = random.nextInt(10000) + System.currentTimeMillis() + this.getFileExt(originalName);
+		String fileName = UUID.randomUUID() + getFileExt(originalName);
 		return fileName;
 	}
 
