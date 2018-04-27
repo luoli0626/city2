@@ -19,7 +19,7 @@ public class AliMessageSend {
 //	    private static String mobile = "电话";  
 	    private static String accessKeyId = "LTAIFNXJTWg6Ui0o";  
 	    private static String accessKeySecret = "muZKKoae40L5kOYZjdBYkV1VOmB50w";  
-	    private static String signName = "阿里云短信测试专用";     //签名
+	    private static String signName = "石家庄市桥西区城市管理局";     //签名
 	    private static String templeteCode1 = "SMS_133590009";  //短信模版Code(一般都是SMS_********格式)
 	    private static String templeteCode2 = "SMS_133590008"; 
 	  
