@@ -41,7 +41,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		DataGridJson j = new DataGridJson();
 		String hql=" from Position p where recordStatus='Y' ";
 		if(StringUtils.isNotBlank(city.getPositionName())){
-			hql+=" and p.type like '%%"+city.getPositionName()+"%%'";
+			hql+=" and p.name like '%%"+city.getPositionName()+"%%'";
 		}
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
