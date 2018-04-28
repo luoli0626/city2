@@ -123,6 +123,16 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public Boolean alterMessage(CityBean city) {
 		if(StringUtils.isNotBlank(city.getMessageId())){//编辑，不支持更改封面图片，其他图片存在html
+			//改为可以更改封面，先删除再添加
+			baseDao.executeSql("delete from city_part_to_images where TYPE='1' and BELONG_ID="+city.getMessageId());
+			if(StringUtils.isNotBlank(city.getMessageImage())){
+				Image i=new Image();
+				i.setBelongId(Long.valueOf(city.getMessageId()));
+				i.setType("1");
+				i.setAddress(city.getMessageImage());
+				baseDao.save(i);
+			}
+			
 			Message p=(Message)baseDao.get(Message.class, Long.valueOf(city.getMessageId()));
 			p.setTitle(city.getMessageTitle());
 			p.setSubtitle(city.getMessageSubTitle());
@@ -267,6 +277,16 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public Boolean alterDynamic(CityBean city) {
 		if(StringUtils.isNotBlank(city.getMessageId())){//编辑，不支持更改封面图片，其他图片存在html
+			//改为可以更改封面，先删除再添加
+			baseDao.executeSql("delete from city_part_to_images where TYPE='3' and  BELONG_ID="+city.getMessageId());
+			if(StringUtils.isNotBlank(city.getMessageImage())){
+				Image i=new Image();
+				i.setBelongId(Long.valueOf(city.getMessageId()));
+				i.setType("3");
+				i.setAddress(city.getMessageImage());
+				baseDao.save(i);
+			}
+			
 			Dynamic p=(Dynamic)baseDao.get(Dynamic.class, Long.valueOf(city.getMessageId()));
 			p.setTitle(city.getMessageTitle());
 			p.setSubtitle(city.getMessageSubTitle());

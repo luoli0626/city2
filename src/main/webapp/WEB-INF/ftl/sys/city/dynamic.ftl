@@ -131,9 +131,8 @@
 								"messageSubTitle":$("#messageSubTitle").val(),
 								"messageContent":$("#messageContent").val(),
 						};	
-						if($("#messageId").val()==""){
+						//if($("#messageId").val()==""){
 							var imgs=$("#showContent").find("img");
-							console.log(imgs.length);
 							if (imgs.length != 0) {
 									formData.messageImage= imgs[0].src;
 									console.log(imgs[0].src);
@@ -141,7 +140,7 @@
 								$.messager.alert('提示',"请至少添加一张图片");
 								return false;
 							}
-						}
+						//}
 						console.log($("#showContent").html());
 						$.ajax({
 							url:'${ctx}/cityPage/alterDynamic',
