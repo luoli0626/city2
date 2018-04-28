@@ -34,10 +34,13 @@ public class BannerController {
             Image image = new Image();
             if ("Y".equals(banner.getIsUrl())) {
                 image.setType(ImageTypeEnum.BANNER.getIndex());
+                image.setBelongId(banner.getId());
             } else if ("1".equals(banner.getArticleType())) {
                 image.setType(ImageTypeEnum.DYNAMIC.getIndex());
+                image.setBelongId(banner.getArticleId());
             } else {
                 image.setType(ImageTypeEnum.MESSAGE.getIndex());
+                image.setBelongId(banner.getArticleId());
             }
 
             List<Image> images = imageService.getList(image);

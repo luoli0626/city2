@@ -35,7 +35,7 @@ public class ImageImpl implements IImageService {
         List<Object> params = new ArrayList<Object>();
         if (image.getBelongId() != null && StringUtils.isNotEmpty(image.getType())) {
 
-            hql += " t.belongId=? and t.type=? ";
+            hql += " and t.belongId=? and t.type=? ";
             params.add(image.getBelongId());
             params.add(image.getType());
         }
