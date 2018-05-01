@@ -28,7 +28,7 @@
 		positionForm = $('#positionForm').form();
 
 		datagrid = $('#datagrid').datagrid({
-			url : '${ctx}/cityPage/forumList',
+			url : '${ctx}/cityPage/lostList',
 			toolbar : '#toolbar',
 			title : '',
 			iconCls : 'icon-save',
@@ -50,9 +50,19 @@
 				hidden:true
 			}] ],
 			columns : [ [ {
-				field : 'title',
-				title : '文章标题',
+				field : 'content',
+				title : '内容',
 				width :$(this).width()*0.15,
+			},
+			{
+				field : 'images',
+				title : '预览图片',
+				width :$(this).width()*0.2,
+				formatter:function(value,rec,i){
+					if(value.length!=0){
+						return "<img src='"+value[0].address+"' style='width:50px;height:50px;'>";
+					}
+				}
 			},
 			{
 				field : 'createUserName',
@@ -71,16 +81,9 @@
 				}
 			},	
 			{
-				field : 'isCheck',
-				title : '审核状态',
+				field : 'contact',
+				title : '联系方式',
 				width :$(this).width()*0.15,
-				formatter:function(value,rec,i){
-					if(value=='Y'){
-						return "审核通过";
-					}else if(value=='N'){
-						return "审核未通过";					
-					}
-				}
 			},
 			{
 			    title : '操作',
@@ -88,10 +91,8 @@
 			    width : $(this).width() * 0.25,
 			    formatter:function(value,rec,i){
 			    var btnHtml="";   
-			    btnHtml+="<a href='javascript: changeState("+i+",1);' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核通过</span></span></a >";
-			    btnHtml+="<a href='javascript: changeState("+i+",2);' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核不过</span></span></a >";
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
-			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
+			    btnHtml+="<a href='javascript: remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -103,7 +104,7 @@
 		
 		photoDialog = $('#photoDialog').show().dialog({
 			modal : true,
-			title : '论坛详情',
+			title : '失物招领详情',
 			width:1000,
 			height:800,
 			buttons : [ {
@@ -116,35 +117,7 @@
 		}).dialog('close');
 		
 	});
-	
-	
-	function changeState(index,code){
-		var state;
-		var isCheck;
-		if(code==1){
-			state='审核通过';
-			isCheck='Y';
-		}else{
-			state='审核不通过';
-			isCheck='N';
-		}
-		var rows = $("#datagrid").datagrid("getRows")[index];
-		console.log(rows);
-		var formData={
-			"photoId": rows.id,
-			"state": state,
-			"code": isCheck
-		};	
-								
-		$.ajax({
-			url:'${ctx}/cityPage/changeForumState',
-			data:JSON.stringify(formData),
-			contentType:"application/json",
- 			success:function(result){
-				datagrid.datagrid('reload');
-			}
-		});
-	}
+		
 
 	function searchFun() {
 		datagrid.datagrid('load', {
@@ -157,29 +130,29 @@
 	
 	
 	function edit(index){
-		$('#positionDialog').dialog('setTitle', '<font">论坛详情详情</font>');  
+		$('#positionDialog').dialog('setTitle', '<font">失物招领详情</font>');  
 	        var rows = $("#datagrid").datagrid("getRows")[index];
 	        console.log(rows);
 			photoDialog.dialog('open');
-			$("#forumName").text(rows.title);
-			$("#content").val(rows.content);
-			$("#state2").empty();
-			$("#state2").append("<tr style='font-weight:blod;' ><td>审核状态</td><td>审核时间</td></tr>");
-			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
+			$("#createUserName").text(rows.createUserName.nickName);
+			$("#remark2").text(rows.content);
+			$("#contact").text(rows.contact);
+			$("#photo").empty();
+			for(var i=0;i<rows.images.length;i++){
+				$("#photo").append("<td colspan='8'><img style='width:500px;height:500px;margin-left:20px' src='"+rows.images[i].address+"'/></td></br>");
 			}
 	}
 	
 	
-		function remove(index) {
+	function remove(index) {
 		var ids = [];
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		if (rows) {
-			$.messager.confirm('请确认', '您要删除当前所选文章？', function(r) {
+			$.messager.confirm('请确认', '您要删除当前所选失物招领？', function(r) {
 				if (r) {	
 						ids.push(rows.id);
 					$.ajax({
-						url : '${ctx}/cityPage/removeForums',
+						url : '${ctx}/cityPage/removeLost',
 						data : JSON.stringify(ids),
 						cache : false,
 						dataType : "json",
@@ -203,7 +176,7 @@
 		datagrid.datagrid('load', {});
 	}
 	
-    function add0(m){return m<10?'0'+m:m }
+	function add0(m){return m<10?'0'+m:m }
 	function timestampToTime(nows)
 	{
 		var time = new Date(nows);
@@ -215,6 +188,7 @@
 		var s = time.getSeconds();
 		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 	}
+	
 </script>
 
 
@@ -230,14 +204,6 @@
 						<td>关键内容：</td>
 						<td colspan="2"><input name="photoName" class="basic_input" />
 						</td>
-						<td>上线情况：</td>
-						<td colspan="2">
-							<select name="state" style="width:164px;height:21px;">
-							<option value="">请选择状态</option>
-							  <option value="Y">审核通过</option>
-							  <option value="N">审核不通过</option>
-							</select>
-						</td>
 						<td>开始时间：</td>
 							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
 						<td>结束时间：</td>	
@@ -251,13 +217,6 @@
 			</fieldset>
 			
 			
-		    <div class="buttonList">
-				<#if fmfn.checkButton(requestURI,"icon-add")>
-					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
-				</#if>
-			</div>
-			
-			
 		</div>
 		<table id="datagrid" border="1"></table>
 	</div>
@@ -269,21 +228,21 @@
 				<legend class="my_legend">随手拍详情</legend>
 				<table class="tableForm">
 					<tr>
-						<th >文章标题：</th>
-						<td colspan="2">
-							<td colspan="2" id="forumName" name="forumName"></td>
-						</td>
+						<th >上&nbsp传&nbsp者：</th>
+							<td colspan="8" id="createUserName" name="createUserName"></td>
 					</tr>
 					<tr>
-	                	<th>文章内容：</th>
-                	</tr>
-                	<tr>
-				    	<td  colspan="4"><textarea rows=6 cols=65 id="content" name="content" ></textarea></td>
-			    	</tr>
-				 <tr id="process">
-                	 <th >审核进度：</th>
-              	 </tr>
-              	 <tr id="state2">
+						<th >问题描述：</th>
+							<td colspan="8" id="remark2" name="remark2"></td>
+					</tr>
+					<tr>
+					<th >联系电话：</th>
+							<td colspan="8" id="contact" name="contact"></td>
+					</tr>
+					<tr>
+						<th >照片：</th>
+					</tr>
+					<tr id="photo">
 					</tr>
 				</table>
 			</fieldset>

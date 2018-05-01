@@ -475,4 +475,46 @@ public class cityPageManagerController {
 		j.setSuccess(cityPageService.changeBanners(ids));
 		return j;
 	}
+	
+	
+	//------------------------------------------失物招领---------------------------------------------
+	
+	
+	/**
+	 * 失物招领页面
+	 * @return
+	 */
+	@RequestMapping(value="lostPage")
+	public String lostPage(){
+		return "/sys/city/lost";
+	}
+	
+	
+	
+	/**
+	 * 失物招领列表
+	 * @param dg
+	 * @param city
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="lostList")
+	public DataGridJson lostList(DataGridBean dg,CityBean city){
+		return cityPageService.lostList(dg,city);
+	}
+	
+	
+	
+	/**
+	 * 删除失物招领
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeLost")
+	public Json removeLost(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeLost(ids));
+		return j;
+	}
 }

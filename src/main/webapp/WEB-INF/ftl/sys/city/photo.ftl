@@ -120,6 +120,7 @@
 				text : '确定',
 				style:'text-align:center',
 				handler : function() {
+					photoDialog.dialog('close');
 				}
 			} ]
 		}).dialog('close');
@@ -207,6 +208,11 @@
 		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 	}
 	
+	function clearFun() {
+		$('#toolbar input').val('');
+		datagrid.datagrid('load', {});
+	}
+	
 </script>
 
 
@@ -269,7 +275,7 @@
 						<td colspan="2">
 							<select id="state" name="state" style="width:164px;height:21px;"   >
 							<option value="">请选择状态</option>
-							  <option value="1">带跟进</option>
+							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>

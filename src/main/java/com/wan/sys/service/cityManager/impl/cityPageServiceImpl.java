@@ -20,6 +20,7 @@ import com.wan.sys.entity.dynamic.Dynamic;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.guide.Guide;
 import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.lost.Lost;
 import com.wan.sys.entity.message.Message;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.CityBean;
@@ -596,6 +597,43 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		}	
 		baseDao.executeSql(" UPDATE `city_banner` SET ORDERNUMBER = CASE ORDERNUMBER  WHEN '1' THEN '2' WHEN '2' THEN '3'"+
 							" WHEN '3' THEN '4' WHEN '4' THEN '1' END WHERE  ID in("+ids+")");
+		return true;
+	}
+
+	@Override
+	public DataGridJson lostList(DataGridBean dg, CityBean city) {
+		DataGridJson j = new DataGridJson();
+		String hql=" from Lost  where recordStatus='Y'";
+		if(StringUtil.isNotBlank(city.getPhotoName())){
+			hql+=" and content like '%%"+city.getPhotoName()+"%%'";
+		}
+		if(StringUtil.isNotBlank(city.getStartTime())){
+			hql+=" and createTime>'"+city.getStartTime()+"'";
+		}
+		if(StringUtil.isNotBlank(city.getEndTime())){
+			hql +=" and createTime<'"+city.getEndTime()+"'";
+		}
+		String totalHql=" select count(*) "+hql;
+		j.setTotal(baseDao.count(totalHql));
+		if(dg.getOrder()!=null){
+			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+		}
+		List<Lost> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
+		j.setRows(lostList);
+		return j;
+	}
+
+	@Override
+	public Boolean removeLost(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" update `city_lost` set RECORDSTATUS='N' where ID in("+ids+")");
 		return true;
 	}
 

@@ -147,7 +147,7 @@
 		$('#positionDialog').dialog('setTitle', '<font">添加轮播地址</font>');  
 		$('#positionDialog').dialog('open');
 		positionForm.form('clear');
-		
+		um.setContent("");
 	}
 	
 	
@@ -199,6 +199,11 @@
 						}
 					});
 		} 
+	}
+	
+	function clearFun() {
+		$('#toolbar input').val('');
+		datagrid.datagrid('load', {});
 	}
 	
 </script>

@@ -87,4 +87,8 @@ public interface IcityPageManagerService {
 	
 	public Boolean changeBanners(String[] ids);
 	
+	public DataGridJson lostList(DataGridBean dg,CityBean city);
+	
+	public Boolean removeLost(String[] ids);
+	
 }

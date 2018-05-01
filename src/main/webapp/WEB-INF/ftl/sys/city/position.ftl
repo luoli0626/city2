@@ -189,6 +189,11 @@
 		}
 	}
 	
+	function clearFun() {
+		$('#toolbar input').val('');
+		datagrid.datagrid('load', {});
+	}
+	
 	function getPointsave(){
 	
 	  $("#regFund").val($("#longitude").val());

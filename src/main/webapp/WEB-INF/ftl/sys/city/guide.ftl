@@ -248,6 +248,11 @@
 		return y+'-'+add0(m)+'-'+add0(d)+' '+add0(h)+':'+add0(mm)+':'+add0(s);
 	}
 	
+	function clearFun() {
+		$('#toolbar input').val('');
+		datagrid.datagrid('load', {});
+	}
+	
 </script>
 
 

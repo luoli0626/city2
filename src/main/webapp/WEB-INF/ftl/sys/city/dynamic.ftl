@@ -297,6 +297,11 @@
 		
 	}
 	
+	function clearFun() {
+		$('#toolbar input').val('');
+		datagrid.datagrid('load', {});
+	}
+	
 	function add0(m){return m<10?'0'+m:m }
 	function timestampToTime(nows)
 	{
