@@ -141,6 +141,13 @@
 			} ]
 		}).dialog('close');
 		
+		
+		   //实例化编辑器
+		    var um = UM.getEditor('messageContent');
+		    um.setWidth("100%");
+		    window.um=um;
+		    $(".edui-body-container").css("width", "98%");
+		
 	});
 		
 
@@ -158,7 +165,7 @@
 		$('#positionDialog').dialog('setTitle', '<font">添加办事指南</font>');  
 		$('#positionDialog').dialog('open');
 		positionForm.form('clear');
-		
+		um.setContent("");
 	}
 	
 	function edit(index){
@@ -169,10 +176,11 @@
 			positionForm.form('clear');
 			$("#messageId").val(rows.id);
 			console.log($("#messageId").val());
+			um.setContent(rows.content);
 			positionForm.form('load', {
 				"messageTitle":rows.title,
 				"messageSubTitle":rows.subtitle,
-				"messageContent" : rows.content
+				//"messageContent" : rows.content
 		});
 	}
 	
