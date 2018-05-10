@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wan.sys.entity.cityManager.Fixed;
@@ -182,7 +183,7 @@ public class cityPageManagerController {
 	 * 随手拍详情页面
 	 * @return
 	 */
-	@RequestMapping(value="photoDetailPage")
+	@RequestMapping(value="photoDetailPage",method={RequestMethod.GET})
 	public String photoDetailPage(Model model,String id){
 		model.addAttribute("photo", cityPageService.photoDetail(id));
 		return "/sys/city/photoDetail";

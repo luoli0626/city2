@@ -11,10 +11,10 @@ var sy = $.extend({}, sy);/* 全局对象 */
 
 $.parser.auto = false;
 $(function() {
-	$.messager.progress({
-		text : '页面加载中....',
-		interval : 100
-	});
+//	$.messager.progress({
+//		text : '页面加载中....',
+//		interval : 100
+//	});
 	$.parser.parse(window.document);
 	window.setTimeout(function() {
 		$.messager.progress('close');
