@@ -105,8 +105,8 @@
 		photoDialog = $('#photoDialog').show().dialog({
 			modal : true,
 			title : '失物招领详情',
-			width:1000,
-			height:800,
+			width: ($(window).width())*0.7,
+   			height:($(window).height())*0.8,
 			buttons : [ {
 				text : '确定',
 				style:'text-align:center',

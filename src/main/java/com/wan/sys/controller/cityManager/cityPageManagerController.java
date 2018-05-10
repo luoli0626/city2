@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -177,6 +178,15 @@ public class cityPageManagerController {
 		return "/sys/city/photo";
 	}
 	
+	/**
+	 * 随手拍详情页面
+	 * @return
+	 */
+	@RequestMapping(value="photoDetailPage")
+	public String photoDetailPage(Model model,String id){
+		model.addAttribute("photo", cityPageService.photoDetail(id));
+		return "/sys/city/photoDetail";
+	}
 	/**
 	 * 随手拍列表
 	 * @param dg

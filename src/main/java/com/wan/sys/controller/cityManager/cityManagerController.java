@@ -165,6 +165,14 @@ public class cityManagerController {
 		
 	}
 	
+	/**
+	 * 三方登陆
+	 * @return
+	 */
+	public ResponseHead otherLogin(){
+		return null;
+		
+	}
 	
 	
 }

@@ -637,4 +637,10 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		return true;
 	}
 
+	@Override
+	public Photo photoDetail(String id) {
+		Photo p=(Photo)baseDao.get(Photo.class, Long.valueOf(id));
+		return p;
+	}
+
 }

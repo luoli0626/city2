@@ -85,6 +85,8 @@
 				title : '跟进状态',
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
+					//return rec.allState[rec.allState.length-1].name;
+					
 					if(value=='1'){
 						return "待跟进";
 					}else if(value=='2'){
@@ -114,8 +116,8 @@
 		photoDialog = $('#photoDialog').show().dialog({
 			modal : true,
 			title : '随手拍详情',
-			width:1000,
-			height:800,
+			width: ($(window).width())*0.7,
+   			height:($(window).height())*0.8,
 			buttons : [ {
 				text : '确定',
 				style:'text-align:center',
@@ -139,9 +141,10 @@
 					if(changeForm.form('validate')){
 						var formData={
 								"photoId":$("#photoId").val(),
-								"state":$("#state").find("option:selected").text(),
+								//"state":$("#state").find("option:selected").text(),
+								"state":$("#state").combobox('getText'),
 								"remark":$("#remark").val(),
-								"code":$("#state").val()
+								"code":$("#state").combobox('getValue')
 						};	
 						console.log(formData);
 						$.ajax({
@@ -158,6 +161,18 @@
 				}
 			} ]
 		}).dialog('close');
+		
+		$("#state").combobox({
+		    url:'${ctx}/cityPage/photoStateSelect',
+		    valueField:'id',
+		    textField:'name'
+		});
+		
+		$("#state3").combobox({
+		    url:'${ctx}/cityPage/photoStateSelect',
+		    valueField:'id',
+		    textField:'name'
+		});
 	});
 		
 	function changeState(index){
@@ -171,7 +186,7 @@
 	function searchFun() {
 		datagrid.datagrid('load', {
 			photoName : $('#toolbar input[name=photoName]').val(),
-			state : $('#toolbar select[name=state]').val(),
+			state : $("#state3").combobox('getValue'),
 			startTime :  $('#startTime').datebox('getValue'),
 			endTime :  $('#endTime').datebox('getValue')
 		});
@@ -179,21 +194,22 @@
 	
 	
 	function edit(index){
-		$('#positionDialog').dialog('setTitle', '<font">随手拍详情</font>');  
+		//$('#positionDialog').dialog('setTitle', '<font">随手拍详情</font>');  
 	        var rows = $("#datagrid").datagrid("getRows")[index];
-	        console.log(rows);
-			photoDialog.dialog('open');
-			$("#createUserName").text(rows.createUserName.nickName);
-			$("#remark2").text(rows.content);
-			$("#photo").empty();
-			$("#state2").empty();
-			for(var i=0;i<rows.images.length;i++){
-				$("#photo").append("<td colspan='8'><img style='width:500px;height:500px;margin-left:20px' src='"+rows.images[i].address+"'/></td></br>");
-			}
-			$("#state2").append("<tr style='font-weight:blod;' ><td>处理状态</td><td colspan='2'>处理详情</td><td colspan='2'>处理时间</td></tr>");
-			for(var i=0;i<rows.allState.length;i++){
-				$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td colspan='2'>"+(rows.allState[i].content==null?"":rows.allState[i].content)+"</td><td colspan='2'>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
-			}
+	        top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+rows.id,title:'随手拍详情'});
+	        
+			//photoDialog.dialog('open');
+			//$("#createUserName").text(rows.createUserName.nickName);
+			//$("#remark2").text(rows.content);
+			//$("#photo").empty();
+			//$("#state2").empty();
+			//for(var i=0;i<rows.images.length;i++){
+			//	$("#photo").append("<td colspan='8'><img style='width:500px;height:500px;margin-left:20px' src='"+rows.images[i].address+"'/></td></br>");
+			//}
+			//$("#state2").append("<tr style='font-weight:blod;' ><td>处理状态</td><td colspan='2'>处理详情</td><td colspan='2'>处理时间</td></tr>");
+			//for(var i=0;i<rows.allState.length;i++){
+			//	$("#state2").append("<tr><td>"+rows.allState[i].name+"</td><td colspan='2'>"+(rows.allState[i].content==null?"":rows.allState[i].content)+"</td><td colspan='2'>"+timestampToTime(rows.allState[i].createTime)+"</td></tr>");
+			//}
 	}
 	function add0(m){return m<10?'0'+m:m }
 	function timestampToTime(nows)
@@ -229,13 +245,17 @@
 						<td colspan="2"><input name="photoName" class="basic_input" />
 						</td>
 						<td>上线情况：</td>
+						
 						<td colspan="2">
+						<input name="state" id="state3" class="easyui-validatebox"  />
+						<!--
 							<select name="state" style="width:164px;height:21px;" >
 							<option value="">请选择状态</option>
 							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>
+						-->
 						</td>
 						<td>开始时间：</td>
 							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
@@ -273,12 +293,15 @@
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
 						<td colspan="2">
+						<input name="state" id="state" class="easyui-validatebox"  />
+						<!--
 							<select id="state" name="state" style="width:164px;height:21px;"   >
 							<option value="">请选择状态</option>
 							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>
+						-->
 						</td>
 					</tr>
 					<tr>

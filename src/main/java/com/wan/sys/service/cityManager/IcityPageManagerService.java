@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wan.sys.entity.cityManager.Fixed;
+import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.CityBean;
 import com.wan.sys.pojo.DataGridBean;
 import com.wan.sys.pojo.DataGridJson;
@@ -90,5 +91,7 @@ public interface IcityPageManagerService {
 	public DataGridJson lostList(DataGridBean dg,CityBean city);
 	
 	public Boolean removeLost(String[] ids);
+	
+	public Photo photoDetail(String id);
 	
 }
