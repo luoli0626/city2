@@ -87,12 +87,16 @@
 				formatter:function(value,rec,i){
 					//return rec.allState[rec.allState.length-1].name;
 					
-					if(value=='1'){
+					if(value=='9'){
 						return "待跟进";
-					}else if(value=='2'){
+					}else if(value=='10'){
 						return "跟进中";					
-					}else if(value=='3'){
+					}else if(value=='11'){
 						return "处理完成";
+					}else if(value=='16'){
+						return "审核中";
+					}else if(value=='17'){
+						return "未通过审核";
 					}
 				}
 			},
