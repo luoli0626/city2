@@ -94,4 +94,12 @@ public interface IcityPageManagerService {
 	
 	public Photo photoDetail(String id);
 	
+	public DataGridJson dynamicCommentList(DataGridBean dg,CityBean city);
+	
+	public Boolean removeDynamicComment(String[] ids);
+	
+	public DataGridJson forumsCommentList(DataGridBean dg,CityBean city);
+	
+	public Boolean removeForumsComment(String[] ids);
+	
 }

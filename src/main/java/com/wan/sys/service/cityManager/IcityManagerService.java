@@ -74,4 +74,11 @@ public interface IcityManagerService {
 	 * @return
 	 */
 	public ResponseHead myFound(UserBean bean);
+	
+	/**
+	 * 第三方登陆
+	 * @param bean
+	 * @return
+	 */
+	public ResponseHead otherLogin(UserBean bean);
 }

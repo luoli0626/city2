@@ -19,7 +19,7 @@ public class PhotoServiceImpl implements IPhotoService{
     @Override
     public Long add(Photo photo) {
         if (photo != null) {
-            photo.setState("1");
+            photo.setState("18");
             return photoDao.saveAndReturn(photo);
         }
         return 0L;

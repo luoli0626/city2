@@ -225,6 +225,8 @@ public class cityPageManagerController {
 		return j;
 	}
 	
+	
+	
 	//---------------------------------------------城管动态-------------------------------------------------
 	
 	/**
@@ -293,6 +295,30 @@ public class cityPageManagerController {
 	public Json changezDynamics(@RequestBody String[] ids){
 		Json j=new Json();
 		j.setSuccess(cityPageService.changezDynamics(ids));
+		return j;
+	}
+	
+	/**
+	 * 动态评论列表
+	 * @param dg
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="dynamicCommentList")
+	public DataGridJson dynamicCommentList(DataGridBean dg,CityBean city){
+		return cityPageService.dynamicCommentList(dg,city);
+	}
+	
+	/**
+	 * 删除动态的评论
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeDynamicComment")
+	public Json removeDynamicComment(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeDynamicComment(ids));
 		return j;
 	}
 	
@@ -420,6 +446,30 @@ public class cityPageManagerController {
 	public Json removeForums(@RequestBody String[] ids){
 		Json j=new Json();
 		j.setSuccess(cityPageService.removeForums(ids));
+		return j;
+	}
+	
+	/**
+	 * 论坛评论列表
+	 * @param dg
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="forumsCommentList")
+	public DataGridJson forumsCommentList(DataGridBean dg,CityBean city){
+		return cityPageService.forumsCommentList(dg,city);
+	}
+	
+	/**
+	 * 删除论坛的评论
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removeForumsComment")
+	public Json removeForumsComment(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removeForumsComment(ids));
 		return j;
 	}
 	

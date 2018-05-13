@@ -79,6 +79,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		//返回token值，和userid
 		js.put("userId",u.getId());
 		js.put("token",token);
+		js.put("type", u.getType()==null?"0":u.getType());
 		return response(ErrorCodeEnum.SUCCESS.getCode(), 
 				ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);
 	}
@@ -112,6 +113,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 					u.setMobilePhone(bean.getMobilePhone());
 					u.setRecordStatus("Y");
 					u.setCreateTime(new Date());
+					u.setType("0");
 					baseDao.save(u);
 					return response(ErrorCodeEnum.SUCCESS.getCode(), 
 							ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);
@@ -380,6 +382,53 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		
 		return response(ErrorCodeEnum.FAIL_CODE.getCode(), 
 				ErrorCodeEnum.FAIL_CODE.getValue(), js, 0,null);
+	}
+
+	@Override
+	public ResponseHead otherLogin(UserBean bean) {
+		JSONObject js=new JSONObject();
+		//参数验证
+		if(StringUtil.isBlank(bean.getNickName())||StringUtil.isBlank(bean.getSex())||StringUtil.isBlank(bean.getImgAdress())
+				||StringUtil.isBlank(bean.getToken())){
+			return response(ErrorCodeEnum.FAIL_PARAMSISNULL.getCode(), 
+					ErrorCodeEnum.FAIL_PARAMSISNULL.getValue(), js, 0,null);
+		}
+		
+		Long userId;
+		//判断用户是否已经授权过
+		User user=(User)baseDao.get(" from User where token='"+bean.getToken()+"'");
+		if(user!=null){
+			user.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
+			userId=user.getId();
+			baseDao.update(user);
+		}else{
+			//添加用户
+			User u=new User();
+			u.setNickName(bean.getNickName());
+			u.setSex(bean.getSex());
+			u.setToken(bean.getToken());
+			u.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
+			u.setRecordStatus("Y");
+			u.setCreateTime(new Date());
+			u.setType("2");
+			baseDao.save(u);
+			//存头像地址
+			Image i=new Image();
+			i.setAddress(bean.getImgAdress());
+			i.setBelongId(u.getId());
+			i.setType("4");
+			baseDao.save(i);
+			userId=u.getId();
+		}
+		
+		
+		//返回参数
+		js.put("token", bean.getToken());
+		js.put("userId", userId);
+		js.put("type", "2");
+		
+		return response(ErrorCodeEnum.SUCCESS.getCode(), 
+				ErrorCodeEnum.SUCCESS.getValue(), js, 0,null);
 	}
 	
 }

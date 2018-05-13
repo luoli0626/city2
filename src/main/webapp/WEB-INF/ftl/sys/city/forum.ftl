@@ -11,6 +11,8 @@
 	var changeDialog;
 	var changeForm;
 	var photoDialog;
+	var datagridComment;
+	var CommentDialog;
 	
 	$.extend($.fn.validatebox.defaults.rules, {  
        equaldDate: {  
@@ -92,6 +94,58 @@
 			    btnHtml+="<a href='javascript: changeState("+i+",2);' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>审核不过</span></span></a >";
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
 			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
+			    btnHtml+="<a href=' javascript:showComment("+i+");' plain='true'  iconcls='icon-haveholder' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-haveholder' style='padding-left: 20px;'>管理评论</span></span></a >";
+			    return btnHtml;
+		    }
+		    }] ],
+			onLoadSuccess:function(data) {
+				console.log(data);
+			}
+		});
+		
+		datagridComment = $('#datagridComment').datagrid({
+			url : '${ctx}/cityPage/forumsCommentList',
+			title : '',
+			iconCls : 'icon-save',
+			rownumbers: true,
+			pagination : true,
+			pageSize:10,
+			pageList:[10,20,30,50,100],
+			fit : true,
+			fitColumns : true,
+			nowrap : false,
+			border : false,
+			idField : 'id',
+			sortName : 'id',
+			frozenColumns : [ [ {
+				field : 'id',
+				title : 'id',
+				width : $(this).width()*0.1,
+				sortable : true,
+				hidden:true
+			}] ],
+			columns : [ [ {
+				field : 'createUserName',
+				title : '评论人',
+				width :$(this).width()*0.2,
+			},
+			{
+				field : 'createTime',
+				title : '评论时间',
+				width :$(this).width()*0.2,
+			},
+			{
+				field : 'content',
+				title : '评论内容',
+				width :$(this).width()*0.2,
+			},
+			{
+			    title : '操作',
+			    field : '1',
+			    width : $(this).width() * 0.25,
+			    formatter:function(value,rec,i){
+			    var btnHtml="";   
+			    btnHtml+="<a href='javascript:removeComment("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -111,6 +165,20 @@
 				style:'text-align:center',
 				handler : function() {
 					photoDialog.dialog('close');
+				}
+			} ]
+		}).dialog('close');
+		
+		CommentDialog= $('#CommentDialog').show().dialog({
+			modal : true,
+			title : '城管动态评论详情',
+			width: ($(window).width())*0.7,
+   			height:($(window).height())*0.8,
+			buttons : [ {
+				text : '确定',
+				style:'text-align:center',
+				handler : function() {
+					CommentDialog.dialog('close');
 				}
 			} ]
 		}).dialog('close');
@@ -170,8 +238,16 @@
 			}
 	}
 	
+	function showComment(index){
+		var rows = $("#datagrid").datagrid("getRows")[index];
+		datagridComment.datagrid('load', {
+			messageId : rows.id
+		});
+		$("#CommentDialog").dialog('open');
+	}
 	
-		function remove(index) {
+	
+	function remove(index) {
 		var ids = [];
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		if (rows) {
@@ -188,6 +264,33 @@
 							if(data.success){
 								datagrid.datagrid('unselectAll');
 								datagrid.datagrid('reload');
+							}
+						}
+					});
+				}
+			});
+		} else {
+			$.messager.alert('提示', '请选择要删除的记录！', 'error');
+		}
+	}
+	
+	function removeComment(index) {
+		var ids = [];
+		var rows = $("#datagridComment").datagrid("getRows")[index];
+		if (rows) {
+			$.messager.confirm('请确认', '您要删除当前所选评论？', function(r) {
+				if (r) {	
+						ids.push(rows.id);
+					$.ajax({
+						url : '${ctx}/cityPage/removeForumsComment',
+						data : JSON.stringify(ids),
+						cache : false,
+						dataType : "json",
+						contentType:"application/json",
+						success : function(data) {
+							if(data.success){
+								datagridComment.datagrid('unselectAll');
+								datagridComment.datagrid('reload');
 							}
 						}
 					});
@@ -288,6 +391,11 @@
 				</table>
 			</fieldset>
 		</form>
+	</div>
+	<div id="CommentDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
+		<div id="toolbar2" class="datagrid-toolbar" style="height: auto;display: none;">
+		</div>
+		<table id="datagridComment" border="1"></table>
 	</div>
 </body>
 </html>

@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.wan.sys.common.GlobalContext;
 import com.wan.sys.dao.common.IBaseDao;
+import com.wan.sys.entity.User;
 import com.wan.sys.entity.banner.Banner;
 import com.wan.sys.entity.cityManager.Fixed;
 import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.cityManager.Position;
+import com.wan.sys.entity.comment.Comment;
 import com.wan.sys.entity.dynamic.Dynamic;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.guide.Guide;
@@ -641,6 +643,86 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	public Photo photoDetail(String id) {
 		Photo p=(Photo)baseDao.get(Photo.class, Long.valueOf(id));
 		return p;
+	}
+
+	@Override
+	public DataGridJson dynamicCommentList(DataGridBean dg,CityBean city) {
+		DataGridJson j = new DataGridJson();
+		String hql=" from Comment  where recordStatus='Y' and type='1' ";//动态评论
+		if(StringUtil.isNotBlank(city.getMessageId())){
+			hql+=" and belongId="+city.getMessageId();
+		}
+		String totalHql=" select count(*) "+hql;
+		j.setTotal(baseDao.count(totalHql));
+		if(dg.getOrder()!=null){
+			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+		}
+		List<Comment> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
+		List l=new ArrayList();
+		for(int i=0;i<lostList.size();i++){
+			Map map=new HashMap();
+			map.put("id", lostList.get(i).getId());
+			map.put("createTime", lostList.get(i).getCreateTime());
+			map.put("createUserName", ((User)baseDao.get(User.class, lostList.get(i).getCreateUserId())).getNickName());
+			map.put("content", lostList.get(i).getContent());
+			l.add(map);
+		}
+		j.setRows(l);
+		return j;
+	}
+
+	@Override
+	public Boolean removeDynamicComment(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" update `city_comment` set RECORDSTATUS='N' where ID in("+ids+") and TYPE='1' ");
+		return true;
+	}
+
+	@Override
+	public DataGridJson forumsCommentList(DataGridBean dg,CityBean city) {
+		DataGridJson j = new DataGridJson();
+		String hql=" from Comment  where recordStatus='Y' and type='2' ";//论坛评论
+		if(StringUtil.isNotBlank(city.getMessageId())){
+			hql+=" and belongId="+city.getMessageId();
+		}
+		String totalHql=" select count(*) "+hql;
+		j.setTotal(baseDao.count(totalHql));
+		if(dg.getOrder()!=null){
+			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+		}
+		List<Comment> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
+		List l=new ArrayList();
+		for(int i=0;i<lostList.size();i++){
+			Map map=new HashMap();
+			map.put("id", lostList.get(i).getId());
+			map.put("createTime", lostList.get(i).getCreateTime());
+			map.put("createUserName", ((User)baseDao.get(User.class, lostList.get(i).getCreateUserId())).getNickName());
+			map.put("content", lostList.get(i).getContent());
+			l.add(map);
+		}
+		j.setRows(l);
+		return j;
+	}
+
+	@Override
+	public Boolean removeForumsComment(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" update `city_comment` set RECORDSTATUS='N' where ID in("+ids+") and TYPE='2'");
+		return true;
 	}
 
 }

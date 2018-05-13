@@ -5,6 +5,15 @@
 <#include "/inc/meta.ftl"/>
 <#include "/inc/easyui.ftl"/>
 
+<link href="${static}/um/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+
+<link id="easyuiTheme" href="${static}/css/stylesContent.css" rel="stylesheet" type="text/css" media="screen"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.min.js"></script>
+    <script type="text/javascript" src="${static}/um/lang/zh-cn/zh-cn.js"></script>
+
 <script type="text/javascript" charset="UTF-8">
 	var datagrid;
 	var positionDialog;
@@ -97,6 +106,8 @@
 						return "审核中";
 					}else if(value=='17'){
 						return "未通过审核";
+					}else if(value="18"){
+						return "待审核";
 					}
 				}
 			},
@@ -148,6 +159,7 @@
 								//"state":$("#state").find("option:selected").text(),
 								"state":$("#state").combobox('getText'),
 								"remark":$("#remark").val(),
+								//"code" : $("#state").val(),
 								"code":$("#state").combobox('getValue')
 						};	
 						console.log(formData);
@@ -191,6 +203,7 @@
 		datagrid.datagrid('load', {
 			photoName : $('#toolbar input[name=photoName]').val(),
 			state : $("#state3").combobox('getValue'),
+			//state : $('#toolbar select[name=state]').val(),
 			startTime :  $('#startTime').datebox('getValue'),
 			endTime :  $('#endTime').datebox('getValue')
 		});
@@ -251,15 +264,16 @@
 						<td>上线情况：</td>
 						
 						<td colspan="2">
+						
 						<input name="state" id="state3" class="easyui-validatebox"  />
-						<!--
+							<!--
 							<select name="state" style="width:164px;height:21px;" >
 							<option value="">请选择状态</option>
 							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>
-						-->
+							-->
 						</td>
 						<td>开始时间：</td>
 							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
@@ -297,21 +311,36 @@
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
 						<td colspan="2">
+						
 						<input name="state" id="state" class="easyui-validatebox"  />
-						<!--
+							<!--
 							<select id="state" name="state" style="width:164px;height:21px;"   >
 							<option value="">请选择状态</option>
 							  <option value="1">待跟进</option>
 							  <option value="2">跟进中</option>
 							  <option value="3">处理完成</option>
 							</select>
-						-->
+							-->
 						</td>
 					</tr>
+					<!--
 					<tr>
 	                	<th>处理进度详情：</th>
 				    	<td><textarea  rows=4 cols=50 id="remark" name="remark" ></textarea></td>
 			    	</tr>
+			    	-->
+			    	
+			    	<tr>
+                	 <th>处理进度详情：</th>
+              		</tr>
+                	 <tr>
+                	 <td colspan="4">
+			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
+			    	 </textarea>
+			    	     <div id="showContent" style="display:none;"></div> 
+     					 </div>
+     					 
+     					 
 				</table>
 			</fieldset>
 		</form>

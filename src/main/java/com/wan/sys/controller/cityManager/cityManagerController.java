@@ -169,9 +169,10 @@ public class cityManagerController {
 	 * 三方登陆
 	 * @return
 	 */
-	public ResponseHead otherLogin(){
-		return null;
-		
+	@RequestMapping(value="otherLogin")
+	@ResponseBody
+	public ResponseHead otherLogin(UserBean bean){
+		return cityServive.otherLogin(bean);
 	}
 	
 	
