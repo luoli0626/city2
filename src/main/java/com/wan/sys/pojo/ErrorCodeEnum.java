@@ -22,7 +22,8 @@ public enum ErrorCodeEnum {
 
     FAIL_IOERR("IO异常", "4001"),
 	FAIL_NULLFILE("未读取到文件", "4002"),
-	FAIL_NORESULT("没有匹配的结果", "5001");
+	FAIL_NORESULT("没有匹配的结果", "5001"),
+	FAIL_REMOVEPHOTO("只有未被处理的随手拍可以删除","2001");
 	
     // 成员变量  
     private String value;

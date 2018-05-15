@@ -1,12 +1,15 @@
 package com.wan.sys.controller.photo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.pojo.ResponseHead;
+import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.pojo.OperateSuccess;
+import com.wan.sys.pojo.ResponseFail;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.image.IImageService;
 import com.wan.sys.service.photo.IPhotoService;
@@ -114,6 +117,10 @@ public class PhotoController {
     @ResponseBody
     @RequestMapping(value="remove")
     public ResponseHead remove(Long id){
-    	return null;
+    	if(photoService.remove(id)){
+    		return new ResponseSuccess("");
+    	}else{
+    		return new ResponseFail(ErrorCodeEnum.FAIL_REMOVEPHOTO);
+    	}
     }
 }
