@@ -22,8 +22,17 @@ public class Message extends BaseEntity{
     private Long viewCount = 0L;
     private String createUserName;
     private List<Image> images;
+    private String h5url;
 
-    @NotNull(message = "{message.notnull}")
+    public String getH5url() {
+		return h5url;
+	}
+
+	public void setH5url(String h5url) {
+		this.h5url = h5url;
+	}
+
+	@NotNull(message = "{message.notnull}")
     public String getTitle() {
         return title;
     }

@@ -51,6 +51,7 @@
 			border : false,
 			idField : 'id',
 			sortName : 'id',
+			singleSelect : true,
 			frozenColumns : [ [ {
 				field : 'id',
 				title : 'id',
@@ -78,12 +79,17 @@
 				title : '上传者',
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
-					return rec.createUserName.nickName;
+					if(rec.createUserName.nickName==null){
+						return rec.createUserName.mobilePhone;
+					}else{
+						return rec.createUserName.nickName;
+					}
 				}
 			},
 			{
 				field : 'createTime',
 				title : '上传时间',
+				sortable : true,
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
 					return timestampToTime(value);					
@@ -97,17 +103,15 @@
 					//return rec.allState[rec.allState.length-1].name;
 					
 					if(value=='9'){
-						return "待跟进";
-					}else if(value=='10'){
-						return "跟进中";					
-					}else if(value=='11'){
-						return "处理完成";
-					}else if(value=='16'){
-						return "审核中";
-					}else if(value=='17'){
-						return "未通过审核";
-					}else if(value="18"){
 						return "待审核";
+					}else if(value=='10'){
+						return "审核中";					
+					}else if(value=='11'){
+						return "未通过审核";
+					}else if(value=='16'){
+						return "处理中";
+					}else if(value=='17'){
+						return "处理完成";
 					}
 				}
 			},
@@ -119,6 +123,7 @@
 			    var btnHtml="";   
 			    btnHtml+="<a href='javascript: changeState("+i+");' plain='true'  iconcls='icon-changeSate' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-changeSate' style='padding-left: 20px;'>更改状态</span></span></a >";
 			    btnHtml+="<a href=' javascript:edit("+i+");' plain='true'  iconcls='icon-edit' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-edit' style='padding-left: 20px;'>详情</span></span></a >";
+			    btnHtml+="<a href='javascript:remove("+i+");' plain='true'  iconcls='icon-remove' class='easyui-linkbutton l-btn l-btn-plain'><span class='l-btn-left'><span class='l-btn-text icon-remove' style='padding-left: 20px;'>删除</span></span></a >";
 			    return btnHtml;
 		    }
 		    }] ],
@@ -147,8 +152,8 @@
 		changeDialog=$("#changeDialog").show().dialog({
 			modal : true,
 			title : '处理进度详情',
-			width:700,
-			height:280,
+			width: ($(window).width())*0.7,
+   			height:($(window).height())*0.95,
 			buttons : [ {
 				text : '确定',
 				style:'text-align:center',
@@ -162,6 +167,15 @@
 								//"code" : $("#state").val(),
 								"code":$("#state").combobox('getValue')
 						};	
+						$("#showContent").html(um.getContent());
+						var imgs=$("#showContent").find("img");
+						var imgaddr=[];
+							if (imgs.length != 0) {
+								for(var i=0;i<imgs.length;i++){
+									imgaddr.push(imgs[i].src);
+								}
+									formData.messageImage= imgaddr.join(",");
+							}
 						console.log(formData);
 						$.ajax({
 							url:'${ctx}/cityPage/changePhotoState',
@@ -189,6 +203,13 @@
 		    valueField:'id',
 		    textField:'name'
 		});
+		
+		   //实例化编辑器
+		    var um = UM.getEditor('messageContent');
+		    um.setWidth("100%");
+		    um.setHeight("70%");
+		    window.um=um;
+		    $(".edui-body-container").css("width", "98%");
 	});
 		
 	function changeState(index){
@@ -197,6 +218,7 @@
 		$("#photoId").val(rows.id);
 		changeForm.form('clear')
 		changeDialog.dialog('open');
+		um.setContent("");
 	}
 
 	function searchFun() {
@@ -207,6 +229,34 @@
 			startTime :  $('#startTime').datebox('getValue'),
 			endTime :  $('#endTime').datebox('getValue')
 		});
+	}
+	
+	
+	function remove(index) {
+		var ids = [];
+		var rows = $("#datagrid").datagrid("getRows")[index];
+		if (rows) {
+			$.messager.confirm('请确认', '您要删除当前所选随手拍？', function(r) {
+				if (r) {	
+						ids.push(rows.id);
+					$.ajax({
+						url : '${ctx}/cityPage/removePhotos',
+						data : JSON.stringify(ids),
+						cache : false,
+						dataType : "json",
+						contentType:"application/json",
+						success : function(data) {
+							if(data.success){
+								datagrid.datagrid('unselectAll');
+								datagrid.datagrid('reload');
+							}
+						}
+					});
+				}
+			});
+		} else {
+			$.messager.alert('提示', '请选择要删除的记录！', 'error');
+		}
 	}
 	
 	
@@ -323,17 +373,17 @@
 							-->
 						</td>
 					</tr>
-					<!--
+					
+					
 					<tr>
 	                	<th>处理进度详情：</th>
 				    	<td><textarea  rows=4 cols=50 id="remark" name="remark" ></textarea></td>
 			    	</tr>
-			    	-->
 			    	
 			    	<tr>
-                	 <th>处理进度详情：</th>
-              		</tr>
-                	 <tr>
+                	 <th>处理图片：</th>
+              	 </tr>
+			    	<tr>
                 	 <td colspan="4">
 			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
 			    	 </textarea>

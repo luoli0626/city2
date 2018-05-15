@@ -12,4 +12,6 @@ public interface IPhotoService {
     Photo getById(Long id);
 
     List<Photo> getList(Query query);
+    
+    Boolean remove(Long id);
 }

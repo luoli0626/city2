@@ -24,6 +24,15 @@ public class Dynamic extends BaseEntity{
     private Long viewCount = 0L;
     private Long commentCount = 0L;
     private Set<Image> images;
+    public String getH5url() {
+		return h5url;
+	}
+
+	public void setH5url(String h5url) {
+		this.h5url = h5url;
+	}
+
+	private String h5url;
 
     public String getCreateUserName() {
 		return createUserName;
@@ -68,7 +77,7 @@ public class Dynamic extends BaseEntity{
         this.isOnline = isOnline;
     }
 
-    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=1 )")
+    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=1 and t.RECORDSTATUS='Y')")
     public Long getViewCount() {
         return viewCount;
     }
@@ -77,7 +86,7 @@ public class Dynamic extends BaseEntity{
         this.viewCount = viewCount;
     }
 
-    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=1 )")
+    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=1 and t.RECORDSTATUS='Y')")
     public Long getCommentCount() {
         return commentCount;
     }

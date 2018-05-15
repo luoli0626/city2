@@ -19,7 +19,7 @@ public class PhotoServiceImpl implements IPhotoService{
     @Override
     public Long add(Photo photo) {
         if (photo != null) {
-            photo.setState("18");
+            photo.setState("9");
             return photoDao.saveAndReturn(photo);
         }
         return 0L;
@@ -58,4 +58,18 @@ public class PhotoServiceImpl implements IPhotoService{
 
         return photos;
     }
+
+	@Override
+	public Boolean remove(Long id) {
+		Photo p=photoDao.get(Photo.class, id);
+		if(p.getState().equals("9")&&p.getAllState().size()==1&&p.getAllState().get(0).getName().equals("待审核")){
+			p.setRecordStatus("N");
+			photoDao.update(p);
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+
 }

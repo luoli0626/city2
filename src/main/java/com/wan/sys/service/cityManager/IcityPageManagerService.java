@@ -102,4 +102,6 @@ public interface IcityPageManagerService {
 	
 	public Boolean removeForumsComment(String[] ids);
 	
+	public Boolean removePhotos(String[] ids);
+	
 }

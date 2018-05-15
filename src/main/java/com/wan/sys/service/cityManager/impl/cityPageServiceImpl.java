@@ -1,5 +1,15 @@
 package com.wan.sys.service.cityManager.impl;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,6 +34,7 @@ import com.wan.sys.entity.guide.Guide;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.lost.Lost;
 import com.wan.sys.entity.message.Message;
+import com.wan.sys.entity.photo.Handle;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.pojo.CityBean;
 import com.wan.sys.pojo.DataGridBean;
@@ -31,6 +42,7 @@ import com.wan.sys.pojo.DataGridJson;
 import com.wan.sys.pojo.Json;
 import com.wan.sys.service.cityManager.IcityPageManagerService;
 import com.wan.sys.service.common.impl.CommonServiceImpl;
+import com.wan.sys.util.Encrypt;
 import com.wan.sys.util.StringUtil;
 
 @Service
@@ -155,6 +167,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			p.setCreateUserName(GlobalContext.getCurrentUser().getNickName());
 			p.setCreateUserId(GlobalContext.getCurrentUser().getId());
 			baseDao.save(p);
+			//h5
+			city.setMessageId(p.getId().toString());
+			try {
+				p.setH5url(h5url(city));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//添加封面
 			if(StringUtils.isNotBlank(city.getMessageImage())){
 				Image i=new Image();
@@ -163,6 +183,8 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 				i.setAddress(city.getMessageImage());
 				baseDao.save(i);
 			}
+			
+			
 			return true;
 		}
 	}
@@ -205,7 +227,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public DataGridJson photoList(DataGridBean dg, CityBean city) {
 		DataGridJson j = new DataGridJson();
-		String hql=" from Photo  where 1=1 ";
+		String hql=" from Photo  where recordStatus='Y'";
 		if(StringUtil.isNotBlank(city.getPhotoName())){
 			hql+=" and content like '%%"+city.getPhotoName()+"%%'";
 		}
@@ -221,7 +243,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by  createTime desc";
 		}
 		List<Photo> photoList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(photoList);
@@ -247,6 +269,16 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		if(t!=null){
 			t.setState(city.getCode());
 			baseDao.update(t);
+		}
+		//保存处理图片
+		if(StringUtil.isNotBlank(city.getMessageImage())){
+			String[] imgs=city.getMessageImage().split(",");
+			for(int i=0;i<imgs.length;i++){
+				Handle h=new Handle();
+				h.setBelongId(Long.valueOf(city.getPhotoId()));
+				h.setAddress(imgs[i]);
+				baseDao.save(h);
+			}
 		}
 		return true;
 	}
@@ -309,6 +341,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			p.setCreateUserName(GlobalContext.getCurrentUser().getNickName());
 			p.setCreateUserId(GlobalContext.getCurrentUser().getId());
 			baseDao.save(p);
+			//h5
+			city.setMessageId(p.getId().toString());
+			try {
+				p.setH5url(h5url(city));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			//添加封面
 			if(StringUtils.isNotBlank(city.getMessageImage())){
 				Image i=new Image();
@@ -317,6 +357,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 				i.setAddress(city.getMessageImage());
 				baseDao.save(i);
 			}
+			
 			return true;
 		}
 	}
@@ -642,6 +683,8 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public Photo photoDetail(String id) {
 		Photo p=(Photo)baseDao.get(Photo.class, Long.valueOf(id));
+		List l=baseDao.find(" from PartToState where belongId=?  order by createTime desc", p.getId());
+		p.setAllState(l);
 		return p;
 	}
 
@@ -722,6 +765,95 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			}
 		}	
 		baseDao.executeSql(" update `city_comment` set RECORDSTATUS='N' where ID in("+ids+") and TYPE='2'");
+		return true;
+	}
+	
+	
+	//生成h5
+	public String h5url(CityBean bean) throws IOException{
+		FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        FileOutputStream fos  = null;
+        PrintWriter pw = null;
+        String temp  = "";
+
+	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(bean.getMessageId())+".html";
+	      
+	      String data = " <!DOCTYPE html><html><head><meta charset='UTF-8' /> "
+	      		+ "<title>城管分享</title></head><body><div><p style='font-weight:bold；font-size:14px'>"+bean.getMessageTitle()
+	    		  +"</p></br><p style='font-weight:bold；font-size:13px'>"+bean.getMessageSubTitle()+"</p></br>"
+	    		  +bean.getMessageContent()+"</div></body></html>";
+		 try{
+		      
+		      File file =new File(fileName);
+
+		      //if file doesnt exists, then create it
+		      if(!file.exists()){
+		    	  file.createNewFile();
+		      }
+
+		      //true = append file
+//		      FileWriter fileWritter = new FileWriter(file.getName(),true);
+//		             BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
+//		             bufferWritter.write(data);
+//		             bufferWritter.close();
+//		             fileWritter.close();
+		             
+		             //将文件读入输入流
+		             fis = new FileInputStream(file);
+		             isr = new InputStreamReader(fis);
+		             br = new BufferedReader(isr);
+		             StringBuffer buffer = new StringBuffer();
+		             
+		             //文件原有内容
+		             for(int i=0;(temp =br.readLine())!=null;i++){
+		                 buffer.append(temp);
+		                 // 行与行之间的分隔符 相当于“\n”
+		                 buffer = buffer.append(System.getProperty("line.separator"));
+		             }
+		             buffer.append(data);
+		             
+		             fos = new FileOutputStream(file);
+		             pw = new PrintWriter(fos);
+		             pw.write(buffer.toString().toCharArray());
+		             pw.flush();
+
+		     }catch(IOException e){
+		      e.printStackTrace();
+		     }finally {
+		            //不要忘记关闭
+		            if (pw != null) {
+		                pw.close();
+		            }
+		            if (fos != null) {
+		                fos.close();
+		            }
+		            if (br != null) {
+		                br.close();
+		            }
+		            if (isr != null) {
+		                isr.close();
+		            }
+		            if (fis != null) {
+		                fis.close();
+		            }
+		        }
+		 return fileName;
+	}
+
+	@Override
+	public Boolean removePhotos(String[] id) {
+		String ids="";
+		for(int i=0;i<id.length;i++){
+			if(i==id.length-1){
+				ids+=id[i];
+			}else{
+				ids+=id[i]+",";
+			}
+		}	
+		baseDao.executeSql(" update `city_photo` set RECORDSTATUS='N' where ID in("+ids+")");
 		return true;
 	}
 

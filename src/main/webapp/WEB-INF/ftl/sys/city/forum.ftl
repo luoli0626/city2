@@ -44,6 +44,7 @@
 			border : false,
 			idField : 'id',
 			sortName : 'id',
+			singleSelect : true,
 			frozenColumns : [ [ {
 				field : 'id',
 				title : 'id',
@@ -117,6 +118,7 @@
 			border : false,
 			idField : 'id',
 			sortName : 'id',
+			singleSelect : true,
 			frozenColumns : [ [ {
 				field : 'id',
 				title : 'id',

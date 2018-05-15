@@ -225,6 +225,19 @@ public class cityPageManagerController {
 		return j;
 	}
 	
+	/**
+	 * 删除随手拍
+	 * @param ids
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="removePhotos")
+	public Json removePhotos(@RequestBody String[] ids){
+		Json j=new Json();
+		j.setSuccess(cityPageService.removePhotos(ids));
+		return j;
+	}
+	
 	
 	
 	//---------------------------------------------城管动态-------------------------------------------------

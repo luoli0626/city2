@@ -87,7 +87,7 @@ public class Forum extends BaseEntity{
         this.images = images;
     }
 
-    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=2 )")
+    @Formula("( select count(*) from city_view t where t.BELONGID=id and t.TYPE=2 and t.RECORDSTATUS='Y' )")
     public Long getViewCount() {
         return viewCount;
     }
@@ -96,7 +96,7 @@ public class Forum extends BaseEntity{
         this.viewCount = viewCount;
     }
 
-    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=2 )")
+    @Formula("( select count(*) from city_comment t where t.BELONGID=id and t.TYPE=2 and t.RECORDSTATUS='Y' )")
     public Long getCommentCount() {
         return commentCount;
     }

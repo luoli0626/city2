@@ -19,6 +19,7 @@
 	var userRoleId;
 	var userRoleIdForm;
 	var orgData;
+	var searchRole;
 	$(function(){
 	
 
@@ -323,6 +324,15 @@
 				$(this).datagrid('selectRow', rowIndex);
 			}
 		});
+		
+		searchRole=$('#searchRole').combobox({
+			url : '${ctx}/role/tree',
+		    valueField:'id',
+		    textField:'text',
+		    onLoadSuccess : function(node, data) {
+			console.log(data);
+			}
+		});
 	});
 	function timeInputBoxBindOpenPanel(id){
 		var timeInput=$("#"+id).parent().children()[1];
@@ -368,7 +378,6 @@
 		
 	
 	
-	
 		roleTree=$('#roleId').combotree({
 			url : '${ctx}/role/tree',
 			animate : false,
@@ -377,6 +386,7 @@
 			panelHeight:110,
 			multiple : true,
 			onLoadSuccess : function(node, data) {
+				console.log(data);
 				roleTree.combotree("clear");
 				//alert(roleIds);
 				//设置角色选中
@@ -548,7 +558,8 @@
 	function searchFun() {
 		datagrid.datagrid('load', {
 			loginAcct 	: $('#toolbar input[name=SloginAcct]').val(),
-			nickName 	: $('#toolbar input[name=SnickName]').val()
+			nickName 	: $('#toolbar input[name=SnickName]').val(),
+			rolesID     : $("#searchRole").combobox('getValue')
 		});
 	}
 	function clearFun() {
@@ -650,6 +661,10 @@
 						<td>昵称：</td>
 						<td colspan="2">
 							<input name="SnickName" class="basic_input"/>
+						</td>
+						<td>所属角色：</td>
+						<td colspan="2">
+							<input name="SnickName" class="basic_input" id="searchRole"/>
 						</td>
 						<td>
 							&nbsp;

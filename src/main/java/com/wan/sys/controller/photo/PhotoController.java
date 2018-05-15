@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -56,8 +57,8 @@ public class PhotoController {
 
         //写入跟进状态表
         PartToState state = new PartToState();
-        state.setName("待跟进");
-        Set<PartToState> states = new HashSet<PartToState>();
+        state.setName("待审核");
+        List<PartToState> states = new ArrayList<PartToState>();
         states.add(state);
         photo.setAllState(states);
 
@@ -108,5 +109,11 @@ public class PhotoController {
             }
         }
         return new ResponseSuccess(photos);
+    }
+    
+    @ResponseBody
+    @RequestMapping(value="remove")
+    public ResponseHead remove(Long id){
+    	return null;
     }
 }

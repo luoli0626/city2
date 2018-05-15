@@ -17,7 +17,7 @@
 				<table class="tableForm">
 					<tr>
 						<th >上&nbsp传&nbsp者：</th>
-							<td colspan="8" id="createUserName" name="createUserName">${(photo.createUserName.NICKNAME)!}</td>
+							<td colspan="8" id="createUserName" name="createUserName">${photo.createUserName.nickName !photo.createUserName.mobilePhone}</td>
 					</tr>
 					<tr>
 						<th >问题描述：</th>
@@ -26,13 +26,13 @@
 					<tr>
 						<th >照片：</th>
 					</tr>
+					<tr>
 				<#if photo.images?exists>
 		  			  <#list photo.images as node1>  
-			  			  <tr>
-			  				<td colspan='8'><img style='width:500px;height:500px;margin-left:20px' src="${node1.address}"></td>
-			  			</tr>
+			  				<td colspan='8'><img style='width:400px;height:400px;margin-left:20px' src="${node1.address}"></td>
 	           		</#list>
 	  			</#if>
+	  			</tr>
 				 <tr id="process">
             	 <th id=processTh>处理进度：</th>
               	 </tr>
@@ -44,6 +44,18 @@
 			  			</tr>
 	           		</#list>
 	  			</#if>
+	  			
+	  			
+              	 <#if photo.handles?exists>
+              	 	<tr>
+		            	 <th>处理完成留存照片：</th>
+		              	 </tr>
+	          	 	<tr>
+		  			  <#list photo.handles as node3>  
+			  				<td colspan='8'><img style='width:400px;height:400px;margin-left:20px' src="${node3.address}"></td>
+	           		</#list>
+	  			</#if>
+	  			</tr>
 				</table>
 		</form>
 	</div>

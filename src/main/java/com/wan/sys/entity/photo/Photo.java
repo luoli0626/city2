@@ -18,6 +18,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,7 +31,9 @@ public class Photo extends BaseEntity {
     private Set<Image> images;
     private String content;
     private User createUserName;
-    private Set<PartToState> allState;
+    private List<PartToState> allState;
+    private Set<Handle> handles;
+    private String addrName;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -73,12 +77,33 @@ public class Photo extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name="BELONG_ID")
-	public Set<PartToState> getAllState() {
+	public List<PartToState> getAllState() {
 		return allState;
 	}
 
-	public void setAllState(Set<PartToState> allState) {
+	public void setAllState(List<PartToState> allState) {
 		this.allState = allState;
+	}
+
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@Fetch(FetchMode.SUBSELECT)
+    @JoinColumn(name="BELONG_ID")
+	public Set<Handle> getHandles() {
+		return handles;
+	}
+
+	public void setHandles(Set<Handle> handles) {
+		this.handles = handles;
+	}
+
+	@Column(name="ADDR_NAME")
+	public String getAddrName() {
+		return addrName;
+	}
+
+	public void setAddrName(String addrName) {
+		this.addrName = addrName;
 	}
     
 }
