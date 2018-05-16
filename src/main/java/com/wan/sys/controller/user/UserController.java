@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -78,11 +79,14 @@ public class UserController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/userList",method={RequestMethod.GET})
-	public String user(HttpServletRequest request) {
+	public String user(HttpServletRequest request,Model model) {
 		Object o = userService.orgList();
 		if(null!=o){
 			request.setAttribute("orgList",JSONArray.toJSONString(o));
 		}
+		String[] s=userService.countUser();
+		model.addAttribute("manage", s[0]);
+		model.addAttribute("user", s[1]);
 		return "sys/user/user";
 	}
 	

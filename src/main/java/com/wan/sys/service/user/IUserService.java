@@ -123,4 +123,6 @@ public interface IUserService extends IBaseService<User> {
 	public void passCheckById(String[] ids);
 
 	public void updateRecordStatus(String []ids);
+	
+	public String[] countUser();
 }

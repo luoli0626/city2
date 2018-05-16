@@ -669,4 +669,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 		
 	}
 
+	@Override
+	public String[] countUser() {
+		Long l1=userDao.count(" select count(*) from User where recordStatus='Y' and ifManage='Y'");//管理员
+		Long l2=userDao.count("  select count(*) from User where recordStatus='Y' and ifManage='N'");//普通用户
+		String[] s = new String[2];
+		if(l1!=null&&l2!=null){
+			s[0]=l1.toString();
+			s[1]=l2.toString();
+		}
+		return s;
+	}
+
 }

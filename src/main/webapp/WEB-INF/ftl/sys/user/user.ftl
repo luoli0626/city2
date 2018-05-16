@@ -679,6 +679,7 @@
 							&nbsp;
 							<a class="easyui-linkbutton" iconCls="icon-search"  onclick="searchFun();" href="javascript:void(0);">查 找</a>
 							<a class="easyui-linkbutton" iconCls="icon-empty"  onclick="clearFun();" href="javascript:void(0);">清 空</a>
+							
 						</td>
 					</tr>
 				</table>
@@ -691,7 +692,7 @@
 					<a class="easyui-linkbutton" iconCls="icon-remove" onclick="removeUser();"   href="javascript:void(0);">删 除</a>
 				</#if>
 				
-				
+				<span style="margin-right:5px;">管理员用户:${(manage)!}人，普通用户：${(user)!}人。</span>
 			</div>
 		</div>
 		<table id="datagrid"></table>
