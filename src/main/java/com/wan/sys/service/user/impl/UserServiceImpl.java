@@ -178,6 +178,10 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 				hql += " and t in(select elements(r.users) from XSceneCategory r where r.id= ? )";
 				values.add(user.getScenesID());
 			}
+			if (user.getIfManage() != null && !user.getIfManage().equals("")) {
+				hql += " and t.ifManage=? ";
+				values.add(user.getIfManage());
+			}
 		}
 		hql=hql.replaceFirst("and", " where ");
 		String totalHql = " select count(*) " + hql;
@@ -257,6 +261,13 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 		wanBeanUtils.copyPropertiesIgnoreNull(user, syuser);
 		//通用信息设置
 		GeneralMethod.setRecordInfo(syuser, true);
+		
+		//是否管理员
+		if(syuser.getRoles()!=null&&syuser.getRoles().size()!=0){
+			syuser.setIfManage("Y");
+		}else{
+			syuser.setIfManage("N");
+		}
 		userDao.save(syuser);
 		user.setId(syuser.getId());
 

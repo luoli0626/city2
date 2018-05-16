@@ -66,6 +66,16 @@ public class UserBean extends BaseEntity implements java.io.Serializable {
 	private String token;
 	private String imgAdress;
 	private String newPwd;
+	private String ifManage;
+
+	public String getIfManage() {
+		return ifManage;
+	}
+
+	public void setIfManage(String ifManage) {
+		this.ifManage = ifManage;
+	}
+
 	public String getImgAdress() {
 		return imgAdress;
 	}

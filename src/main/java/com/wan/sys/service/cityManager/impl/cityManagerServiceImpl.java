@@ -112,6 +112,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 					u.setPassword(Encrypt.md5(bean.getPassword()));
 					u.setMobilePhone(bean.getMobilePhone());
 					u.setRecordStatus("Y");
+					u.setIfManage("N");
 					u.setCreateTime(new Date());
 					u.setType("0");
 					baseDao.save(u);
@@ -411,6 +412,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 			u.setRecordStatus("Y");
 			u.setCreateTime(new Date());
 			u.setType("2");
+			u.setIfManage("N");
 			baseDao.save(u);
 			//存头像地址
 			Image i=new Image();

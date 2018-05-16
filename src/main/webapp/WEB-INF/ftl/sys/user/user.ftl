@@ -284,7 +284,7 @@
 			} ,{
 				field : 'loginAcct',
 				title : '登录帐号',
-				width : $(this).width() * 0.06,
+				width : $(this).width() * 0.20,
 				sortable : true
 			} ] ],
 			columns : [ [ 
@@ -559,7 +559,8 @@
 		datagrid.datagrid('load', {
 			loginAcct 	: $('#toolbar input[name=SloginAcct]').val(),
 			nickName 	: $('#toolbar input[name=SnickName]').val(),
-			rolesID     : $("#searchRole").combobox('getValue')
+			rolesID     : $("#searchRole").combobox('getValue'),
+			ifManage    : $("#userType").val()
 		});
 	}
 	function clearFun() {
@@ -665,6 +666,14 @@
 						<td>所属角色：</td>
 						<td colspan="2">
 							<input name="SnickName" class="basic_input" id="searchRole"/>
+						</td>
+						<td>用户类型：</td>
+						<td colspan="2">
+							<select id="userType" name="userType" style="width:164px;height:21px;"   >
+							  <option value="">全部</option>
+							  <option value="N">普通用户</option>
+							  <option value="Y">管理员</option>
+							</select>
 						</td>
 						<td>
 							&nbsp;
