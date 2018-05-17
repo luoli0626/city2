@@ -6,6 +6,7 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.photo.PhotoType;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.pojo.OperateSuccess;
@@ -122,5 +123,22 @@ public class PhotoController {
     	}else{
     		return new ResponseFail(ErrorCodeEnum.FAIL_REMOVEPHOTO);
     	}
+    }
+
+    /**
+     * 获取随手拍类型列表接口
+     * @param query
+     * @param result
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("getTypeList")
+    public ResponseHead getTypeList(@Valid Query query, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return ValidUtil.errorResponse(result);
+        }
+        List<PhotoType> photos = photoService.getTypeList(query);
+        return new ResponseSuccess(photos);
     }
 }

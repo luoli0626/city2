@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.wan.sys.entity.photo.PhotoType;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -856,5 +853,65 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		baseDao.executeSql(" update `city_photo` set RECORDSTATUS='N' where ID in("+ids+")");
 		return true;
 	}
+
+    @Override
+    public DataGridJson photoTypeList(DataGridBean dg, String typeName) {
+        DataGridJson j = new DataGridJson();
+        String hql=" from PhotoType  where recordStatus='Y' ";
+        if(StringUtil.isNotBlank(typeName)){
+            hql+=" and name like '%"+ typeName +"%' ";
+        }
+        String totalHql=" select count(*) "+hql;
+        j.setTotal(baseDao.count(totalHql));
+        if(dg.getOrder()!=null){
+            hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+        }
+        List<PhotoType> typeList = baseDao.find(hql, dg.getPage(), dg.getRows());
+        List l = new ArrayList();
+        for(int i=0;i < typeList.size();i++){
+            Map map=new HashMap();
+            map.put("id", typeList.get(i).getId());
+            map.put("createTime", typeList.get(i).getCreateTime());
+            map.put("createUserName", ((User) baseDao.get(User.class, typeList.get(i).getCreateUserId())).getNickName());
+            map.put("name", typeList.get(i).getName());
+            l.add(map);
+        }
+        j.setRows(l);
+        return j;
+    }
+
+    @Override
+    public Boolean removePhotoType(String[] id) {
+        String ids = "";
+        for(int i=0;i < id.length; i++){
+            if(i == id.length-1){
+                ids += id[i];
+            } else {
+                ids += id[i]+",";
+            }
+        }
+        baseDao.executeSql(" update `city_photo_type` set RECORDSTATUS='N' where ID in("+ids+")");
+        return true;
+    }
+
+    @Override
+    public Boolean alterPhotoType(PhotoType type) {
+        if(type.getId() != null){
+            PhotoType p = (PhotoType) baseDao.get(PhotoType.class, Long.valueOf(type.getId()));
+            p.setName(type.getName());
+            p.setModifyUserId(GlobalContext.getCurrentUser().getId());
+            baseDao.update(p);
+            return false;
+        } else {
+            PhotoType p = new PhotoType();
+            p.setName(type.getName());
+            p.setRecordStatus("Y");
+            p.setCreateTime(new Date());
+            p.setCreateUserId(GlobalContext.getCurrentUser().getId());
+            p.setCreateUserName(GlobalContext.getCurrentUser().getNickName());
+            baseDao.save(p);
+            return true;
+        }
+    }
 
 }

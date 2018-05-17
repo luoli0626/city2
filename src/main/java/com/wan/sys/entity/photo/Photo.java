@@ -34,6 +34,8 @@ public class Photo extends BaseEntity {
     private List<PartToState> allState;
     private Set<Handle> handles;
     private String addrName;
+    private Long type;
+    private String typeName;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -105,5 +107,21 @@ public class Photo extends BaseEntity {
 	public void setAddrName(String addrName) {
 		this.addrName = addrName;
 	}
-    
+
+	@Formula(" (select t.NAME from city_photo_type t where t.ID = TYPE )")
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Long getType() {
+        return type;
+    }
+
+    public void setType(Long type) {
+        this.type = type;
+    }
 }

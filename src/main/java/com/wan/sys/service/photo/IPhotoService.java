@@ -2,6 +2,7 @@ package com.wan.sys.service.photo;
 
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.photo.Photo;
+import com.wan.sys.entity.photo.PhotoType;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface IPhotoService {
     List<Photo> getList(Query query);
     
     Boolean remove(Long id);
+
+    List<PhotoType> getTypeList(Query query);
 }

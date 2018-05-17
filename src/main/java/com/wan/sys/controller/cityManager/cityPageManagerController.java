@@ -2,6 +2,7 @@ package com.wan.sys.controller.cityManager;
 
 import java.util.List;
 
+import com.wan.sys.entity.photo.PhotoType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -214,7 +215,7 @@ public class cityPageManagerController {
 	
 	/**
 	 * 更改随手拍状态
-	 * @param bean
+	 * @param city
 	 * @return
 	 */
 	@ResponseBody
@@ -237,8 +238,59 @@ public class cityPageManagerController {
 		j.setSuccess(cityPageService.removePhotos(ids));
 		return j;
 	}
-	
-	
+
+    /**
+     * 随手拍类型页面
+     * @return
+     */
+    @RequestMapping(value="photoTypePage")
+    public String photoTypePage() {
+        return "/sys/city/photoType";
+    }
+
+    /**
+     * 随手拍类型列表
+     * @param dg
+     * @param city
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="photoTypeList")
+    public DataGridJson photoTypeList(DataGridBean dg, String name){
+        return cityPageService.photoTypeList(dg, name);
+    }
+
+    /**
+     * 删除随手拍分类
+     * @param ids
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="removePhotoType")
+    public Json removePhotoType(@RequestBody String[] ids){
+        Json j = new Json();
+        j.setSuccess(cityPageService.removePhotoType(ids));
+        return j;
+    }
+
+    /**
+     * 随手拍类型的新增编辑
+     * @param type
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="alterPhotoType")
+    public Json alterPhotoType(@RequestBody PhotoType type){
+        Json j=new Json();
+        if(cityPageService.alterPhotoType(type)){
+            j.setSuccess(true);
+            j.setMsg("新增");
+        }else{
+            j.setSuccess(false);
+            j.setMsg("编辑");
+        }
+        return j;
+    }
 	
 	//---------------------------------------------城管动态-------------------------------------------------
 	
@@ -591,4 +643,6 @@ public class cityPageManagerController {
 		j.setSuccess(cityPageService.removeLost(ids));
 		return j;
 	}
+
+
 }

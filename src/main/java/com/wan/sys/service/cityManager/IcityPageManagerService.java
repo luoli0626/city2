@@ -2,6 +2,7 @@ package com.wan.sys.service.cityManager;
 
 import java.util.List;
 
+import com.wan.sys.entity.photo.PhotoType;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.wan.sys.entity.cityManager.Fixed;
@@ -19,21 +20,21 @@ public interface IcityPageManagerService {
 	 * @param city
 	 * @return
 	 */
-	public DataGridJson positionList(DataGridBean dg,CityBean city);
+	DataGridJson positionList(DataGridBean dg,CityBean city);
 	
 	/**
 	 * 编辑或新添位置信息
 	 * @param city
 	 * @return
 	 */
-	public Boolean alterPosition(CityBean city);
+	Boolean alterPosition(CityBean city);
 	
 	/**
 	 * 删除地址信息
-	 * @param city
+	 * @param ids
 	 * @return
 	 */
-	public Boolean removePositions(String[] ids);
+	Boolean removePositions(String[] ids);
 	
 	
 	/**
@@ -42,66 +43,71 @@ public interface IcityPageManagerService {
 	 * @param city
 	 * @return
 	 */
-	public DataGridJson messageList(DataGridBean dg,CityBean city);
+	DataGridJson messageList(DataGridBean dg,CityBean city);
 	
-	public Boolean alterMessage(CityBean city);
+	Boolean alterMessage(CityBean city);
 	
-	public Boolean removeMessages(String[] ids);
+	Boolean removeMessages(String[] ids);
 	
-	public Boolean changeMessages(String[] ids);
+	Boolean changeMessages(String[] ids);
 	
-	public List<Fixed> positionTypeSelect();
+	List<Fixed> positionTypeSelect();
 	
-	public DataGridJson photoList(DataGridBean dg,CityBean city);
+	DataGridJson photoList(DataGridBean dg,CityBean city);
 	
-	public List<Fixed> photoStateSelect();
+	List<Fixed> photoStateSelect();
 	
-	public Boolean changePhotoState(CityBean city);
+	Boolean changePhotoState(CityBean city);
 	
-	public DataGridJson dynamicList(DataGridBean dg,CityBean city);
+	DataGridJson dynamicList(DataGridBean dg,CityBean city);
 	
-	public Boolean alterDynamic(CityBean city);
+	Boolean alterDynamic(CityBean city);
 	
-	public Boolean removeDynamics(String[] ids);
+	Boolean removeDynamics(String[] ids);
 	
-	public Boolean changezDynamics(String[] ids);
+	Boolean changezDynamics(String[] ids);
 	
-	public DataGridJson guideList(DataGridBean dg,CityBean city);
+	DataGridJson guideList(DataGridBean dg,CityBean city);
 	
-	public Boolean alterGuide(CityBean city);
+	Boolean alterGuide(CityBean city);
 	
-	public Boolean removeGuides(String[] ids);
+	Boolean removeGuides(String[] ids);
 	
-	public Boolean changeGuides(String[] ids);
+	Boolean changeGuides(String[] ids);
 
-	public DataGridJson forumList(DataGridBean dg, CityBean city);
+	DataGridJson forumList(DataGridBean dg, CityBean city);
 	
-	public Boolean changeForumState(CityBean city);
+	Boolean changeForumState(CityBean city);
 	
-	public Boolean removeForums(String[] ids);
+	Boolean removeForums(String[] ids);
 	
-	public DataGridJson bannerList(DataGridBean dg,CityBean city);
+	DataGridJson bannerList(DataGridBean dg,CityBean city);
 	
-	public Boolean addBanner(CityBean city);
+	Boolean addBanner(CityBean city);
 	
-	public Boolean removeBanners(String[] ids);
+	Boolean removeBanners(String[] ids);
 	
-	public Boolean changeBanners(String[] ids);
+	Boolean changeBanners(String[] ids);
 	
-	public DataGridJson lostList(DataGridBean dg,CityBean city);
+	DataGridJson lostList(DataGridBean dg,CityBean city);
 	
-	public Boolean removeLost(String[] ids);
+	Boolean removeLost(String[] ids);
 	
-	public Photo photoDetail(String id);
+	Photo photoDetail(String id);
 	
-	public DataGridJson dynamicCommentList(DataGridBean dg,CityBean city);
+	DataGridJson dynamicCommentList(DataGridBean dg,CityBean city);
 	
-	public Boolean removeDynamicComment(String[] ids);
+	Boolean removeDynamicComment(String[] ids);
 	
-	public DataGridJson forumsCommentList(DataGridBean dg,CityBean city);
+	DataGridJson forumsCommentList(DataGridBean dg,CityBean city);
 	
-	public Boolean removeForumsComment(String[] ids);
+	Boolean removeForumsComment(String[] ids);
 	
-	public Boolean removePhotos(String[] ids);
-	
+	Boolean removePhotos(String[] ids);
+
+    DataGridJson photoTypeList(DataGridBean dg, String typeName);
+
+    Boolean removePhotoType(String[] ids);
+
+    Boolean alterPhotoType(PhotoType type);
 }

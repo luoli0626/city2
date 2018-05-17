@@ -1,8 +1,10 @@
 package com.wan.sys.service.photo.impl;
 
 import com.wan.sys.dao.photo.IPhotoDao;
+import com.wan.sys.dao.photo.IPhotoTypeDao;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.photo.Photo;
+import com.wan.sys.entity.photo.PhotoType;
 import com.wan.sys.service.photo.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ public class PhotoServiceImpl implements IPhotoService{
 
     @Autowired
     IPhotoDao photoDao;
+
+    @Autowired
+    IPhotoTypeDao photoTypeDao;
 
     @Override
     public Long add(Photo photo) {
@@ -71,5 +76,24 @@ public class PhotoServiceImpl implements IPhotoService{
 		}
 		
 	}
+
+    @Override
+    public List<PhotoType> getTypeList(Query query) {
+        if (query == null) {
+            return new ArrayList<>();
+        }
+
+        String hql=" from PhotoType t where t.recordStatus='Y' " ;
+        hql += " order by t.createTime desc ";
+
+        List<PhotoType> types;
+        if (query.getPage() > 0 && query.getRows() > 0) {
+            types = photoTypeDao.find(hql, query.getPage(), query.getRows());
+        } else {
+            types = photoTypeDao.find(hql);
+        }
+
+        return types;
+    }
 
 }
