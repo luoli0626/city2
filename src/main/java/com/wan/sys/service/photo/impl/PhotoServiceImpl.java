@@ -61,6 +61,7 @@ public class PhotoServiceImpl implements IPhotoService{
         	//状态变为待审核
         	PartToState state = new PartToState();
 	        state.setName("待审核");
+	        state.setBelongId(photo2.getId());
 	        List<PartToState> states = baseDao.find(" from PartToState where belongId=?", photo.getId());
 	        states.add(state);
 	        photo2.setAllState(states);
@@ -72,6 +73,7 @@ public class PhotoServiceImpl implements IPhotoService{
     		if (photo.getImages() != null) {
     	            for (Image image : photo.getImages()) {
     	                image.setType(ImageTypeEnum.PHOTO.getIndex());
+    	                image.setBelongId(photo2.getId());
     	                images.add(image);
     	            }
     	        }
@@ -125,7 +127,7 @@ public class PhotoServiceImpl implements IPhotoService{
 	@Override
 	public Boolean remove(Long id) {
 		Photo p=photoDao.get(Photo.class, id);
-		if(p.getState().equals("9")&&p.getAllState().size()==1&&p.getAllState().get(0).getName().equals("待审核")){
+		if(p.getState().equals("9")){
 			p.setRecordStatus("N");
 			photoDao.update(p);
 			return true;

@@ -302,6 +302,20 @@ public class cityPageManagerController {
         }
         return j;
     }
+    
+    /**
+     * 随手拍生成H5
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="createH5")
+    public Json createH5(@RequestBody String id){
+    	Json j=new Json();
+    	j.setSuccess(true);
+    	j.setMsg(cityPageService.createH5(id));
+    	return j;
+    }
 	
 	//---------------------------------------------城管动态-------------------------------------------------
 	

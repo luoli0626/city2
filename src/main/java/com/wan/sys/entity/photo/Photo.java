@@ -36,6 +36,7 @@ public class Photo extends BaseEntity {
     private String addrName;
     private Long type;
     private String typeName;
+    private String h5url;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -124,4 +125,14 @@ public class Photo extends BaseEntity {
     public void setType(Long type) {
         this.type = type;
     }
+
+    @Column(name="h5url")
+	public String getH5url() {
+		return h5url;
+	}
+
+	public void setH5url(String h5url) {
+		this.h5url = h5url;
+	}
+    
 }
