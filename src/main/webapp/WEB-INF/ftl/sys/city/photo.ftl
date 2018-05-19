@@ -67,17 +67,22 @@
 			{
 				field : 'images',
 				title : '预览图片',
-				width :$(this).width()*0.2,
+				width :$(this).width()*0.1,
 				formatter:function(value,rec,i){
 					if(value.length!=0){
 						return "<img src='"+value[0].address+"' style='width:50px;height:50px;'>";
 					}
 				}
 			},
+            {
+                field : 'typeName',
+                title : '类型',
+                width :$(this).width()*0.10,
+            },
 			{
 				field : 'createUserName',
 				title : '上传者',
-				width :$(this).width()*0.15,
+				width :$(this).width()*0.10,
 				formatter:function(value,rec,i){
 					if(rec.createUserName.nickName==null){
 						return rec.createUserName.mobilePhone;
@@ -203,6 +208,12 @@
 		    valueField:'id',
 		    textField:'name'
 		});
+
+        $("#type").combobox({
+            url:'${ctx}/cityPage/photoTypeSelect',
+            valueField:'id',
+            textField:'name'
+        });
 		
 		   //实例化编辑器
 		    var um = UM.getEditor('messageContent');
@@ -223,11 +234,11 @@
 
 	function searchFun() {
 		datagrid.datagrid('load', {
-			photoName : $('#toolbar input[name=photoName]').val(),
-			state : $("#state3").combobox('getValue'),
-			//state : $('#toolbar select[name=state]').val(),
-			startTime :  $('#startTime').datebox('getValue'),
-			endTime :  $('#endTime').datebox('getValue')
+			"photoName" : $('#toolbar input[name=photoName]').val(),
+			"state" : $("#state3").combobox('getValue'),
+            "type" : $("#type").combobox('getValue'),
+			"startTime" :  $('#startTime').datebox('getValue'),
+			"endTime" :  $('#endTime').datebox('getValue')
 		});
 	}
 	
@@ -314,17 +325,12 @@
 						<td>上线情况：</td>
 						
 						<td colspan="2">
-						
-						<input name="state" id="state3" class="easyui-validatebox"  />
-							<!--
-							<select name="state" style="width:164px;height:21px;" >
-							<option value="">请选择状态</option>
-							  <option value="1">待跟进</option>
-							  <option value="2">跟进中</option>
-							  <option value="3">处理完成</option>
-							</select>
-							-->
+						    <input name="state" id="state3" class="easyui-validatebox"  />
 						</td>
+                        <td>分类：</td>
+                        <td colspan="2">
+                            <input name="type" id="type" class="easyui-validatebox"  />
+                        </td>
 						<td>开始时间：</td>
 							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
 						<td>结束时间：</td>	
@@ -373,7 +379,7 @@
 							-->
 						</td>
 					</tr>
-					
+
 					
 					<tr>
 	                	<th>处理进度详情：</th>

@@ -21,6 +21,7 @@ public class CityBean {
 	private String photoId;
 	private String remark;
 	private String code;
+	private Long type;
 	
 	public String getCode() {
 		return code;
@@ -142,5 +143,12 @@ public class CityBean {
 	public void setStateRemark(String stateRemark) {
 		this.stateRemark = stateRemark;
 	}
-	
+
+    public Long getType() {
+        return type;
+    }
+
+    public void setType(Long type) {
+        this.type = type;
+    }
 }

@@ -237,6 +237,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		if(StringUtil.isNotBlank(city.getEndTime())){
 			hql +=" and createTime<'"+city.getEndTime()+"'";
 		}
+		if(city.getType() != null) {
+		    hql += " and type= "+city.getType();
+        }
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
@@ -863,7 +866,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         }
         String totalHql=" select count(*) "+hql;
         j.setTotal(baseDao.count(totalHql));
-        if(dg.getOrder()!=null){
+        if(dg != null && dg.getOrder()!=null){
             hql+=" order by "+dg.getSort()+" " +dg.getOrder();
         }
         List<PhotoType> typeList = baseDao.find(hql, dg.getPage(), dg.getRows());

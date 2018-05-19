@@ -212,7 +212,6 @@ public class cityPageManagerController {
 		return cityPageService.photoStateSelect();
 	}
 	
-	
 	/**
 	 * 更改随手拍状态
 	 * @param city
@@ -258,6 +257,12 @@ public class cityPageManagerController {
     @RequestMapping(value="photoTypeList")
     public DataGridJson photoTypeList(DataGridBean dg, String name){
         return cityPageService.photoTypeList(dg, name);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="photoTypeSelect")
+    public List<PhotoType> photoTypeSelect (){
+        return cityPageService.photoTypeList(new DataGridBean(), null).getRows();
     }
 
     /**
