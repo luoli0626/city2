@@ -53,25 +53,12 @@ public class PhotoController {
      */
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
-    public ResponseHead add(@Valid @RequestBody Photo photo, BindingResult result) {
+    public ResponseHead add(Photo photo, BindingResult result) {
 
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
         }
 
-        //写入跟进状态表
-        PartToState state = new PartToState();
-        state.setName("待审核");
-        List<PartToState> states = new ArrayList<PartToState>();
-        states.add(state);
-        photo.setAllState(states);
-
-        // 有图片的需要存图片表
-        if (photo.getImages() != null) {
-            for (Image image : photo.getImages()) {
-                image.setType(ImageTypeEnum.PHOTO.getIndex());
-            }
-        }
         photoService.add(photo);
 
         return OperateSuccess.Instance();

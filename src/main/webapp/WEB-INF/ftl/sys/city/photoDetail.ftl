@@ -24,6 +24,10 @@
 							<td colspan="8" id="remark2" name="remark2">${(photo.content)!}</td>
 					</tr>
 					<tr>
+						<th >上传地址：</th>
+							<td colspan="8" id="remark2" name="remark2">${(photo.addrName)!}</td>
+					</tr>
+					<tr>
 						<th >照片：</th>
 					</tr>
 					<tr>

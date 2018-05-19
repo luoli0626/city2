@@ -90,7 +90,7 @@ public class Photo extends BaseEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
-    @JoinColumn(name="BELONG_ID")
+    @JoinColumn(name="BELONG_ID", updatable = false, insertable = false)
 	public Set<Handle> getHandles() {
 		return handles;
 	}
