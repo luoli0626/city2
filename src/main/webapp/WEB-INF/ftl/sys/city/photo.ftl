@@ -191,6 +191,7 @@
 				 				console.log(result);
 				 				changeDialog.dialog('close');
 								datagrid.datagrid('reload');
+								updatePhotoCount();
 							}
 						});
 					}
@@ -307,7 +308,20 @@
 		$('#toolbar input').val('');
 		datagrid.datagrid('load', {});
 	}
-	
+
+	//更新待审核数量
+    function updatePhotoCount() {
+	    $.ajax({
+            "url" : '${ctx}/cityPage/photoCount',
+            "type" : "GET",
+            "success" : function (data) {
+                $('#photoCount').text(data);
+            }
+        });
+    }
+    $(function () {
+        updatePhotoCount();
+    });
 </script>
 
 
@@ -343,12 +357,13 @@
 					</tr>
 				</table>
 			</fieldset>
-			
-			
+
+
 		    <div class="buttonList">
 				<#if fmfn.checkButton(requestURI,"icon-add")>
 					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
 				</#if>
+                <span style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</span>
 			</div>
 			
 			

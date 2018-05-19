@@ -17,4 +17,6 @@ public interface IPhotoService {
     Boolean remove(Long id);
 
     List<PhotoType> getTypeList(Query query);
+
+    Long count(int state);
 }

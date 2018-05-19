@@ -3,6 +3,7 @@ package com.wan.sys.controller.cityManager;
 import java.util.List;
 
 import com.wan.sys.entity.photo.PhotoType;
+import com.wan.sys.service.photo.IPhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +26,9 @@ public class cityPageManagerController {
 	
 	@Autowired
 	IcityPageManagerService cityPageService;
-	
-	
-	
+
+    @Autowired
+    IPhotoService photoService;
 	//---------------------------------------------便民导航------------------------------------------
 	
 	
@@ -75,7 +76,7 @@ public class cityPageManagerController {
 	
 	/**
 	 * 删除位置
-	 * @param city
+	 * @param ids
 	 * @return
 	 */
 	@ResponseBody
@@ -200,8 +201,13 @@ public class cityPageManagerController {
 	public DataGridJson photoList(DataGridBean dg,CityBean city){
 		return cityPageService.photoList(dg,city);
 	}
-	
-	
+
+	@ResponseBody
+    @RequestMapping(value = "photoCount")
+	public Long photoCount() {
+	    return photoService.count(9);
+    }
+
 	/**
 	 * 获取随手拍状态下拉框
 	 * @return
@@ -250,7 +256,7 @@ public class cityPageManagerController {
     /**
      * 随手拍类型列表
      * @param dg
-     * @param city
+     * @param name
      * @return
      */
     @ResponseBody
@@ -495,7 +501,7 @@ public class cityPageManagerController {
 	
 	/**
 	 * 更改社区论坛状态
-	 * @param bean
+	 * @param city
 	 * @return
 	 */
 	@ResponseBody

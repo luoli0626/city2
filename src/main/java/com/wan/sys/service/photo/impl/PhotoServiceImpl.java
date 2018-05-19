@@ -154,4 +154,16 @@ public class PhotoServiceImpl implements IPhotoService{
         return types;
     }
 
+    @Override
+    public Long count(int state) {
+        String hql = "select count(*) from Photo where recordStatus='Y' ";
+        List<Object> params = new ArrayList<>();
+        if (state > 0) {
+            hql += " and state=? ";
+            params.add(String.valueOf(state));
+        }
+
+        return photoDao.count(hql, params);
+    }
+
 }
