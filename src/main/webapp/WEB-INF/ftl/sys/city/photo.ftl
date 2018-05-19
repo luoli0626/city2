@@ -229,8 +229,12 @@
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		console.log(rows);
 		$("#photoId").val(rows.id);
-		changeForm.form('clear')
-		changeDialog.dialog('open');
+		changeForm.form('clear');
+		if(rows.state=='17'){
+			$.messager.alert('提示', '该条已经处理完成，不能再操作！');
+		}else{
+			changeDialog.dialog('open');
+		}
 		um.setContent("");
 	}
 
@@ -337,7 +341,7 @@
 						<td>关键内容：</td>
 						<td colspan="2"><input name="photoName" class="basic_input" />
 						</td>
-						<td>上线情况：</td>
+						<td>跟进状态：</td>
 						
 						<td colspan="2">
 						    <input name="state" id="state3" class="easyui-validatebox"  />

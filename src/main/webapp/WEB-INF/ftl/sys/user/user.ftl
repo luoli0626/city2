@@ -285,20 +285,20 @@
 				field : 'loginAcct',
 				title : '登录帐号',
 				width : $(this).width() * 0.20,
-				sortable : true
+				sortable : false
 			} ] ],
 			columns : [ [ 
 				 {
 					field : 'nickName',
 					title : '昵称',
 					width : $(this).width() * 0.06,
-					sortable : true
+					sortable : false
 				},
 				 {
 					field : 'mobilePhone',
 					title : '移动电话',
 					width : $(this).width() * 0.06,
-					sortable : true
+					sortable : false
 				},
 				{
 				field : 'roles',
@@ -314,7 +314,24 @@
 					}
 					return result;
 				}
-			}, {
+			}, 
+			{
+					field : 'createTime',
+					title : '注册时间',
+					width : $(this).width() * 0.06,
+					sortable : true,
+					formatter:function (value){
+							var time = new Date(value);
+							var y = time.getFullYear();
+							var m = time.getMonth()+1;
+							var d = time.getDate();
+							var h = time.getHours();
+							var mm = time.getMinutes();
+							var s = time.getSeconds();
+							return y+'-'+(m<10?'0'+m:m)+'-'+(d<10?'0'+d:d)+' '+(h<10?'0'+h:h)+':'+(mm<10?'0'+mm:mm)+':'+(s<10?'0'+s:s);
+						}
+				},
+				{
 				field : 'roleId',
 				title : '所属角色',
 				width : $(this).width() * 0.06,

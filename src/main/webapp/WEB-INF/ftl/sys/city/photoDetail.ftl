@@ -23,6 +23,23 @@
 						}
 					});
 		}
+		
+		function remove(obj){
+		var id=$(obj).prev().val();
+			$.ajax({
+					url : '${ctx}/cityPage/removeHandleImage',
+					data : id,
+					cache : false,
+					dataType : "json",
+					contentType:"application/json",
+					success : function(data) {
+						if(data.success){
+							top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+$("#photoId").val(),title:'随手拍详情'});
+						}
+					}
+				});
+			
+		}
 	</script>
 </head>
 <body class="easyui-layout" fit="true">
@@ -53,7 +70,7 @@
 					<tr>
 				<#if photo.images?exists>
 		  			  <#list photo.images as node1>  
-			  				<td colspan='8'><img style='width:400px;height:400px;margin-left:20px' src="${node1.address}"></td>
+			  				<td colspan='8'><img style='width:380px;height:380px;margin-left:20px' src="${node1.address}"></td>
 	           		</#list>
 	  			</#if>
 	  			</tr>
@@ -76,7 +93,10 @@
 		              	 </tr>
 	          	 	<tr>
 		  			  <#list photo.handles as node3>  
-			  				<td colspan='8'><img style='width:400px;height:400px;margin-left:20px' src="${node3.address}"></td>
+			  				<td colspan='8'><img style='width:400px;height:400px;margin-left:20px' src="${node3.address}"></br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			  				<input style="display:none;" type="text" name="photoId" value=${node3.id} />
+			  				<a class="easyui-linkbutton" iconCls="icon-remove" plain='true' onclick="remove(this);" href="javascript:void(0);">删除图片</a>
+	           				</td>
 	           		</#list>
 	  			</#if>
 	  			</tr>

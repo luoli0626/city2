@@ -82,6 +82,8 @@
 						return "审核通过";
 					}else if(value=='N'){
 						return "审核未通过";					
+					}else if(value=='D'){
+						return "待审核";
 					}
 				}
 			},
@@ -341,6 +343,7 @@
 							<option value="">请选择状态</option>
 							  <option value="Y">审核通过</option>
 							  <option value="N">审核不通过</option>
+							  <option value="D">待审核</option>
 							</select>
 						</td>
 						<td>开始时间：</td>
