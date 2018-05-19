@@ -53,7 +53,7 @@ public class PhotoController {
      */
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
-    public ResponseHead add(Photo photo, BindingResult result) {
+    public ResponseHead add(@Valid @RequestBody Photo photo, BindingResult result) {
 
         if (result.hasErrors()) {
             return ValidUtil.errorResponse(result);
@@ -106,7 +106,7 @@ public class PhotoController {
     @RequestMapping(value="remove")
     public ResponseHead remove(Long id){
     	if(photoService.remove(id)){
-    		return new ResponseSuccess("");
+    		return new ResponseSuccess(new Photo());
     	}else{
     		return new ResponseFail(ErrorCodeEnum.FAIL_REMOVEPHOTO);
     	}

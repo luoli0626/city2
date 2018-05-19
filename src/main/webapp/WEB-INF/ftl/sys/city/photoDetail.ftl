@@ -4,17 +4,37 @@
 <title></title>
 <#include "/inc/meta.ftl"/>
 <#include "/inc/easyui.ftl"/>
-	<script type="text/javascript" charset="UTF-8">
-		$(function(){
-			alert("fuck!!!!");
-		
-		});
+
+<script type="text/javascript" charset="UTF-8">
+
+		function createH5(){
+			var id=$("#photoId").val();
+			console.log(id);
+				$.ajax({
+						url : '${ctx}/cityPage/createH5',
+						data : id,
+						cache : false,
+						dataType : "json",
+						contentType:"application/json",
+						success : function(data) {
+							if(data.success){
+								top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+id,title:'随手拍详情'});
+							}
+						}
+					});
+		}
 	</script>
 </head>
 <body class="easyui-layout" fit="true">
 	<div id="photoDialog" style="overflow-y:auto;background:#FFFFFF;padding:20px 20px;width:90%;height:90%">
+	<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="createH5();" href="javascript:void(0);">生成H5链接</a>
+	<span id='h5url'>${(photo.h5url)!}</span>
 		<form id="photoForm" method="post" enctype="multipart/form-data">
 				<table class="tableForm">
+					<tr style="display:none;">
+						<th >id：</th>
+						<td colspan="8"><input type="text"  id="photoId" name="photoId" value=${photo.id} /></td>
+					</tr>
 					<tr>
 						<th >上&nbsp传&nbsp者：</th>
 							<td colspan="8" id="createUserName" name="createUserName">${photo.createUserName.nickName !photo.createUserName.mobilePhone}</td>
@@ -66,4 +86,5 @@
 	
 
 </body>
+
 </html>

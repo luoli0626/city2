@@ -794,12 +794,6 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		    	  file.createNewFile();
 		      }
 
-		      //true = append file
-//		      FileWriter fileWritter = new FileWriter(file.getName(),true);
-//		             BufferedWriter bufferWritter = new BufferedWriter(fileWritter);
-//		             bufferWritter.write(data);
-//		             bufferWritter.close();
-//		             fileWritter.close();
 		             
 		             //将文件读入输入流
 		             fis = new FileInputStream(file);
@@ -916,5 +910,102 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
             return true;
         }
     }
+
+	@Override
+	public String createH5(String id) {
+		
+		//随手拍
+		Photo p=(Photo)baseDao.get(Photo.class, Long.valueOf(id));
+		
+		String createUser;
+		if(StringUtil.isNotBlank(p.getCreateUserName().getNickName())){
+			createUser=p.getCreateUserName().getNickName();
+		}else{
+			createUser=p.getCreateUserName().getMobilePhone();
+		}
+		
+		//图片标签
+		String imgs = "";
+		if(p.getImages().size()>0){
+			for(Image i:p.getImages()){
+				imgs+="<img style='width:400px;height:400px;margin-left:20px' src="+i.getAddress()+">";
+			}
+		}
+		
+		FileInputStream fis = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        FileOutputStream fos  = null;
+        PrintWriter pw = null;
+        String temp  = "";
+
+	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+".html";
+	      
+	      String data = " <!DOCTYPE html><html><head><meta charset='UTF-8' /> "
+	      		+ "<title>城管分享</title></head><body><div>"
+	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+p.getCreateUserName().getNickName()+"</p></br>"
+  				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+p.getContent()+"</p></br>"
+				+ "<p style='font-weight:bold；font-size:13px'>上传地址："+p.getAddrName()+"</p></br>"
+				+ "<p style='font-weight:bold；font-size:13px'>照片详情：</p></br>"+imgs
+	    		+ "</div></body></html>";
+	      try{
+		      
+		      File file =new File(fileName);
+
+		      //if file doesnt exists, then create it
+		      if(!file.exists()){
+		    	  file.createNewFile();
+		      }
+
+		             
+		             //将文件读入输入流
+		             fis = new FileInputStream(file);
+		             isr = new InputStreamReader(fis);
+		             br = new BufferedReader(isr);
+		             StringBuffer buffer = new StringBuffer();
+		             
+		             //文件原有内容
+		             for(int i=0;(temp =br.readLine())!=null;i++){
+		                 buffer.append(temp);
+		                 // 行与行之间的分隔符 相当于“\n”
+		                 buffer = buffer.append(System.getProperty("line.separator"));
+		             }
+		             buffer.append(data);
+		             
+		             fos = new FileOutputStream(file);
+		             pw = new PrintWriter(fos);
+		             pw.write(buffer.toString().toCharArray());
+		             pw.flush();
+
+		     }catch(IOException e){
+		      e.printStackTrace();
+		     }finally {
+		    	 try {
+		            //不要忘记关闭
+		            if (pw != null) {
+		                pw.close();
+		            }
+		            if (fos != null) {
+						fos.close();
+		            }
+		            if (br != null) {
+		                br.close();
+		            }
+		            if (isr != null) {
+		                isr.close();
+		            }
+		            if (fis != null) {
+		                fis.close();
+		            }
+		        }catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		     }
+	      p.setH5url("http://111.231.222.163:8080"+fileName);
+	      baseDao.update(p);
+		 return fileName;
+	}
 
 }

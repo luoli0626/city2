@@ -110,4 +110,6 @@ public interface IcityPageManagerService {
     Boolean removePhotoType(String[] ids);
 
     Boolean alterPhotoType(PhotoType type);
+    
+    String createH5(String id);
 }
