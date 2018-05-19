@@ -12,4 +12,9 @@ public class PhotoDaoImpl extends BaseDaoImpl<Photo> implements IPhotoDao{
     public Long saveAndReturn(Photo photo) {
         return (Long) (this.getCurrentSession().save(photo));
     }
+
+	@Override
+	public void updateAndReturn(Photo photo) {
+		this.getCurrentSession().update(photo);
+	}
 }

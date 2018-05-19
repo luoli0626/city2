@@ -79,6 +79,7 @@
 				title : '上传者',
 				width :$(this).width()*0.15,
 				formatter:function(value,rec,i){
+					console.log(rec);
 					if(rec.createUserName.nickName==null){
 						return rec.createUserName.mobilePhone;
 					}else{

@@ -1,8 +1,13 @@
 package com.wan.sys.service.photo.impl;
 
+import com.wan.sys.common.GlobalContext;
+import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.dao.photo.IPhotoDao;
 import com.wan.sys.dao.photo.IPhotoTypeDao;
+import com.wan.sys.entity.cityManager.PartToState;
 import com.wan.sys.entity.common.Query;
+import com.wan.sys.entity.image.Image;
+import com.wan.sys.entity.image.ImageTypeEnum;
 import com.wan.sys.entity.photo.Photo;
 import com.wan.sys.entity.photo.PhotoType;
 import com.wan.sys.service.photo.IPhotoService;
@@ -10,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,13 +26,59 @@ public class PhotoServiceImpl implements IPhotoService{
 
     @Autowired
     IPhotoTypeDao photoTypeDao;
+    @Autowired
+    IBaseDao baseDao;
 
     @Override
     public Long add(Photo photo) {
-        if (photo != null) {
-            photo.setState("9");
-            return photoDao.saveAndReturn(photo);
+    	
+    	//根据id判断新增或编辑
+        if(photo.getId()==null){//新增
+        	
+	    	//写入跟进状态表
+	        PartToState state = new PartToState();
+	        state.setName("待审核");
+	        List<PartToState> states = new ArrayList<PartToState>();
+	        states.add(state);
+	        photo.setAllState(states);
+	
+	        //保存新增图片
+			if (photo.getImages() != null) {
+		            for (Image image : photo.getImages()) {
+		                image.setType(ImageTypeEnum.PHOTO.getIndex());
+		            }
+		        }
+			
+			 if (photo != null) {
+		            photo.setState("9");
+		            return photoDao.saveAndReturn(photo);
+		        }
+        }else{//编辑
+        	
+        	//状态变为待审核
+        	PartToState state = new PartToState();
+	        state.setName("待审核");
+	        List<PartToState> states = baseDao.find(" from PartToState where belongId=?", photo.getId());
+	        states.add(state);
+	        photo.setAllState(states);
+    		//删除之前的图片
+    		baseDao.executeSql(" delete from city_part_to_images where TYPE='"+ImageTypeEnum.PHOTO.getIndex()+"' and BELONG_ID="+photo.getId());
+    		
+            //保存新增图片
+    		if (photo.getImages() != null) {
+    	            for (Image image : photo.getImages()) {
+    	                image.setType(ImageTypeEnum.PHOTO.getIndex());
+    	            }
+    	        }
+    		
+    		 if (photo != null) {
+	            photo.setState("9");
+	            photo.setCreateTime(new Date());
+	            photoDao.update(photo);
+	        }
         }
+        
+
         return 0L;
     }
 
