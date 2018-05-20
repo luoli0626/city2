@@ -333,7 +333,7 @@
 
         //点击刷新待审核数量
         $('#photoCount-btn').click(function () {
-            datagrid.datagrid('load', {})
+            datagrid.datagrid('load', {"state" : 'D'});
         });
     });
 </script>
