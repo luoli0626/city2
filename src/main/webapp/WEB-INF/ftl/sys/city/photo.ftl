@@ -315,11 +315,15 @@
 
 	//更新待审核数量
     function updatePhotoCount() {
+        $('#photoCount-btn').hide();
+        $('#updating').show();
 	    $.ajax({
             "url" : '${ctx}/cityPage/photoCount',
             "type" : "GET",
             "success" : function (data) {
                 $('#photoCount').text(data);
+                $('#updating').hide();
+                $('#photoCount-btn').show();
             }
         });
     }
@@ -375,6 +379,7 @@
 				<#if fmfn.checkButton(requestURI,"icon-add")>
 					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
 				</#if>
+                <span id="updating" style="display:none;margin-left: 15px;">更新中...</span>
                 <a href="javascript:void(0);" id="photoCount-btn" style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</a>
 			</div>
 			
