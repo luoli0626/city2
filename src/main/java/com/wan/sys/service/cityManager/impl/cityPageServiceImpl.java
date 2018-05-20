@@ -1014,4 +1014,19 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		return true;
 	}
 
+	@Override
+	public Boolean addHandleImage(CityBean city) {
+		//保存处理图片
+		if(StringUtil.isNotBlank(city.getMessageImage())){
+			String[] imgs=city.getMessageImage().split(",");
+			for(int i=0;i<imgs.length;i++){
+				Handle h=new Handle();
+				h.setBelongId(Long.valueOf(city.getPhotoId()));
+				h.setAddress(imgs[i]);
+				baseDao.save(h);
+			}
+		}
+		return true;
+	}
+
 }
