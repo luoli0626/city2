@@ -315,15 +315,11 @@
 
 	//更新待审核数量
     function updatePhotoCount() {
-        $('#photoCount-btn').hide();
-        $('#updating').show();
 	    $.ajax({
             "url" : '${ctx}/cityPage/photoCount',
             "type" : "GET",
             "success" : function (data) {
                 $('#photoCount').text(data);
-                $('#updating').hide();
-                $('#photoCount-btn').show();
             }
         });
     }
@@ -353,21 +349,21 @@
 				<table>
 					<tr>
 						<td>关键内容：</td>
-						<td colspan="2"><input name="photoName" class="basic_input" />
+						<td colspan="2"><input style="width:120px;" name="photoName" class="basic_input" />
 						</td>
 						<td>跟进状态：</td>
 						
 						<td colspan="2">
-						    <input name="state" id="state3" class="easyui-validatebox"  />
+						    <input name="state" style="width:120px;" id="state3" class="easyui-validatebox"  />
 						</td>
                         <td>分类：</td>
                         <td colspan="2">
-                            <input name="type" id="type" class="easyui-validatebox"  />
+                            <input name="type" style="width:120px;" id="type" class="easyui-validatebox"  />
                         </td>
 						<td>开始时间：</td>
-							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
+							<td colspan="2"><input style="width:120px;" id="startTime" name="startTime" class="easyui-datebox" ></td>
 						<td>结束时间：</td>	
-							<td colspan="2"><input id="endTime" name="endTime" class="easyui-datebox" validType='equaldDate'></td>
+							<td colspan="2"><input style="width:120px;" id="endTime" name="endTime" class="easyui-datebox" validType='equaldDate'></td>
 										
 						<td>&nbsp;<a class="easyui-linkbutton" iconCls="icon-search" plain='true' onclick="searchFun();" href="javascript:void(0);">查 找</a>&nbsp;
 						<a class="easyui-linkbutton" iconCls="icon-empty"  plain='true' onclick="clearFun();" href="javascript:void(0);">清 空</a>
@@ -381,7 +377,6 @@
 				<#if fmfn.checkButton(requestURI,"icon-add")>
 					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
 				</#if>
-                <span id="updating" style="display:none;margin-left: 15px;">更新中...</span>
                 <a href="javascript:void(0);" id="photoCount-btn" style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</a>
 			</div>
 			
@@ -401,7 +396,8 @@
 					</tr>
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
-						<td colspan="2">
+						</tr><tr>
+						<td>
 						
 						<input name="state" id="state" class="easyui-validatebox"  />
 							<!--
@@ -417,15 +413,16 @@
 
 					
 					<tr>
-	                	<th>处理进度详情：</th>
-				    	<td><textarea  rows=4 cols=50 id="remark" name="remark" ></textarea></td>
+	                	<th >处理进度详情：</th>
+	                	</tr><tr>
+				    	<td colspan="4"><textarea  rows=4 cols=50  placeholder="请填写处理描述" id="remark" name="remark" ></textarea></td>
 			    	</tr>
 			    	
 			    	<tr>
                 	 <th>处理图片：</th>
               	 </tr>
 			    	<tr>
-                	 <td colspan="4">
+                	 <td  colspan="4">
 			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
 			    	 </textarea>
 			    	     <div id="showContent" style="display:none;"></div> 
