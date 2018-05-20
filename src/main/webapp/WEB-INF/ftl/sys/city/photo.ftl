@@ -164,37 +164,37 @@
 				text : '确定',
 				style:'text-align:center',
 				handler : function() {
-					if(changeForm.form('validate')){
-						var formData={
-								"photoId":$("#photoId").val(),
-								//"state":$("#state").find("option:selected").text(),
-								"state":$("#state").combobox('getText'),
-								"remark":$("#remark").val(),
-								//"code" : $("#state").val(),
-								"code":$("#state").combobox('getValue')
-						};	
-						$("#showContent").html(um.getContent());
-						var imgs=$("#showContent").find("img");
-						var imgaddr=[];
-							if (imgs.length != 0) {
-								for(var i=0;i<imgs.length;i++){
-									imgaddr.push(imgs[i].src);
-								}
-									formData.messageImage= imgaddr.join(",");
-							}
-						console.log(formData);
-						$.ajax({
-							url:'${ctx}/cityPage/changePhotoState',
-							data:JSON.stringify(formData),
-							contentType:"application/json",
-				 			success:function(result){
-				 				console.log(result);
-				 				changeDialog.dialog('close');
-								datagrid.datagrid('reload');
-								updatePhotoCount();
-							}
-						});
-					}
+				    if (changeForm.form('validate')) {
+                        var formData={
+                            "photoId":$("#photoId").val(),
+                            //"state":$("#state").find("option:selected").text(),
+                            "state":$("#state").combobox('getText'),
+                            "remark":$("#remark").val(),
+                            //"code" : $("#state").val(),
+                            "code":$("#state").combobox('getValue')
+                        };
+                        $("#showContent").html(um.getContent());
+                        var imgs=$("#showContent").find("img");
+                        var imgaddr=[];
+                        if (imgs.length != 0) {
+                            for(var i=0;i<imgs.length;i++){
+                                imgaddr.push(imgs[i].src);
+                            }
+                            formData.messageImage= imgaddr.join(",");
+                        }
+                        // console.log(formData);
+                        $.ajax({
+                            url:'${ctx}/cityPage/changePhotoState',
+                            data:JSON.stringify(formData),
+                            contentType:"application/json",
+                            success:function(result){
+                                console.log(result);
+                                changeDialog.dialog('close');
+                                datagrid.datagrid('reload');
+                                updatePhotoCount();
+                            }
+                        });
+                    }
 				}
 			} ]
 		}).dialog('close');
@@ -319,8 +319,16 @@
             }
         });
     }
+
     $(function () {
+
+        //页面加载完成更新待审核数量
         updatePhotoCount();
+
+        //点击刷新待审核数量
+        $('#photoCount-btn').click(function () {
+            updatePhotoCount();
+        });
     });
 </script>
 
@@ -337,7 +345,7 @@
 						<td>关键内容：</td>
 						<td colspan="2"><input name="photoName" class="basic_input" />
 						</td>
-						<td>上线情况：</td>
+						<td>跟进状态：</td>
 						
 						<td colspan="2">
 						    <input name="state" id="state3" class="easyui-validatebox"  />
@@ -363,7 +371,7 @@
 				<#if fmfn.checkButton(requestURI,"icon-add")>
 					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
 				</#if>
-                <span style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</span>
+                <a href="javascript:void(0);" id="photoCount-btn" style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</a>
 			</div>
 			
 			
