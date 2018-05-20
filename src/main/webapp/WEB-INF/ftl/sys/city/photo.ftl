@@ -315,15 +315,11 @@
 
 	//更新待审核数量
     function updatePhotoCount() {
-        $('#photoCount-btn').hide();
-        $('#updating').show();
 	    $.ajax({
             "url" : '${ctx}/cityPage/photoCount',
             "type" : "GET",
             "success" : function (data) {
                 $('#photoCount').text(data);
-                $('#updating').hide();
-                $('#photoCount-btn').show();
             }
         });
     }
@@ -379,7 +375,6 @@
 				<#if fmfn.checkButton(requestURI,"icon-add")>
 					<a class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="append('1');"  href="javascript:void(0);">增加</a> 
 				</#if>
-                <span id="updating" style="display:none;margin-left: 15px;">更新中...</span>
                 <a href="javascript:void(0);" id="photoCount-btn" style="margin-left: 15px; font-style: italic;"><span id="photoCount">0</span>个待审核</a>
 			</div>
 			
@@ -399,7 +394,8 @@
 					</tr>
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
-						<td colspan="2">
+						</tr><tr>
+						<td>
 						
 						<input name="state" id="state" class="easyui-validatebox"  />
 							<!--
@@ -415,15 +411,16 @@
 
 					
 					<tr>
-	                	<th>处理进度详情：</th>
-				    	<td><textarea  rows=4 cols=50  placeholder="请填写处理描述" id="remark" name="remark" ></textarea></td>
+	                	<th >处理进度详情：</th>
+	                	</tr><tr>
+				    	<td colspan="4"><textarea  rows=4 cols=50  placeholder="请填写处理描述" id="remark" name="remark" ></textarea></td>
 			    	</tr>
 			    	
 			    	<tr>
                 	 <th>处理图片：</th>
               	 </tr>
 			    	<tr>
-                	 <td colspan="4">
+                	 <td  colspan="4">
 			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
 			    	 </textarea>
 			    	     <div id="showContent" style="display:none;"></div> 
