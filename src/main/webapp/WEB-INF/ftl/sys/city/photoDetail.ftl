@@ -4,8 +4,19 @@
 <title></title>
 <#include "/inc/meta.ftl"/>
 <#include "/inc/easyui.ftl"/>
+<link href="${static}/um/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+
+<link id="easyuiTheme" href="${static}/css/stylesContent.css" rel="stylesheet" type="text/css" media="screen"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${static}/um/umeditor.min.js"></script>
+    <script type="text/javascript" src="${static}/um/lang/zh-cn/zh-cn.js"></script>
+
 
 <script type="text/javascript" charset="UTF-8">
+	var changeDialog;
+	var changeForm;
 
 		function createH5(){
 			var id=$("#photoId").val();
@@ -25,21 +36,85 @@
 		}
 		
 		function remove(obj){
-		var id=$(obj).prev().val();
-			$.ajax({
-					url : '${ctx}/cityPage/removeHandleImage',
-					data : id,
-					cache : false,
-					dataType : "json",
-					contentType:"application/json",
-					success : function(data) {
-						if(data.success){
-							top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+$("#photoId").val(),title:'随手拍详情'});
+			$.messager.confirm('请确认', '确认要删除所选留存图片？', function(r) {
+				if (r) {
+					var id=$(obj).prev().val();
+						$.ajax({
+								url : '${ctx}/cityPage/removeHandleImage',
+								data : id,
+								cache : false,
+								dataType : "json",
+								contentType:"application/json",
+								success : function(data) {
+									if(data.success){
+										top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+$("#photoId").val(),title:'随手拍详情'});
+									}
+								}
+							});
 						}
-					}
-				});
-			
+					});
 		}
+		
+		function add(){
+		
+		changeForm=$("#changeForm").form();
+		changeDialog=$("#changeDialog").show().dialog({
+			modal : true,
+			title : '处理进度详情',
+			width: ($(window).width())*0.6,
+   			height:($(window).height())*0.8,
+			buttons : [ {
+				text : '确定',
+				style:'text-align:center',
+				handler : function() {
+					if(changeForm.form('validate')){
+						var formData={
+							"photoId":$("#photoId").val(),
+						};	
+						$("#showContent").html(um.getContent());
+						var imgs=$("#showContent").find("img");
+						var imgaddr=[];
+							if (imgs.length != 0) {
+								for(var i=0;i<imgs.length;i++){
+									imgaddr.push(imgs[i].src);
+								}
+								formData.messageImage= imgaddr.join(",");
+								
+								$.ajax({
+									url : '${ctx}/cityPage/addHandleImage',
+									data : JSON.stringify(formData),
+									cache : false,
+									dataType : "json",
+									contentType:"application/json",
+									success : function(data) {
+										if(data.success){
+											top.addTabFun({src:'${ctx}/cityPage/photoDetailPage?id='+$("#photoId").val(),title:'随手拍详情'});
+										}
+									}
+								});
+							}else{
+								$.messager.alert('提示', '请至少上传一张图片');
+							}
+					}
+				}
+			} ]
+		}).dialog('close');
+		
+		//实例化编辑器
+		    var um = UM.getEditor('messageContent');
+		    um.setWidth("100%");
+		    um.setHeight("70%");
+		    window.um=um;
+		    $(".edui-body-container").css("width", "98%");
+		
+			changeDialog.dialog('open');
+			
+			
+		
+		}
+		
+		
+		
 	</script>
 </head>
 <body class="easyui-layout" fit="true">
@@ -90,6 +165,9 @@
               	 <#if photo.handles?exists>
               	 	<tr>
 		            	 <th>处理完成留存照片：</th>
+		            	 	<td>
+		            	 	<a style="color:'red';" class="easyui-linkbutton" iconCls="icon-add" plain='true' onclick="add();" href="javascript:void(0);">添加图片</a>
+		              	 	</td>
 		              	 </tr>
 	          	 	<tr>
 		  			  <#list photo.handles as node3>  
@@ -101,6 +179,25 @@
 	  			</#if>
 	  			</tr>
 				</table>
+		</form>
+	</div>
+	
+		<div id="changeDialog" style="display: none;overflow-y:auto;background:#FFFFFF;padding:20px 20px;">
+		<form id="changeForm" method="post" enctype="multipart/form-data">
+			<fieldset class="my_fieldset">
+				<legend class="my_legend">添加留存图片</legend>
+				<table class="tableForm">
+			    	<tr>
+                	 <th>添加图片：</th>
+              	 </tr>
+			    	<tr>
+                	 <td colspan="4">
+			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
+			    	 </textarea>
+			    	     <div id="showContent" style="display:none;"></div> 
+     					 </div>
+				</table>
+			</fieldset>
 		</form>
 	</div>
 	

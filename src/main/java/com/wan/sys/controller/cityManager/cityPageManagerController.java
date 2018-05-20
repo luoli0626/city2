@@ -190,6 +190,8 @@ public class cityPageManagerController {
 		model.addAttribute("photo", cityPageService.photoDetail(id));
 		return "/sys/city/photoDetail";
 	}
+	
+	
 	/**
 	 * 随手拍列表
 	 * @param dg
@@ -228,6 +230,19 @@ public class cityPageManagerController {
 	public Json changePhotoState(@RequestBody CityBean city){
 		Json j=new Json();
 		j.setSuccess(cityPageService.changePhotoState(city));
+		return j;
+	}
+	
+	/**
+	 * 详情页添加处理留存图片
+	 * @param imgAddr
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="addHandleImage")
+	public Json addHandleImage(@RequestBody CityBean city){
+		Json j=new Json();
+		j.setSuccess(cityPageService.addHandleImage(city));
 		return j;
 	}
 	

@@ -114,4 +114,6 @@ public interface IcityPageManagerService {
     String createH5(String id);
     
     Boolean removeHandleImage(String id);
+    
+    Boolean addHandleImage(CityBean city);
 }
