@@ -333,9 +333,11 @@
         //页面加载完成更新待审核数量
         updatePhotoCount();
 
+        setInterval(updatePhotoCount, 5000);
+
         //点击刷新待审核数量
         $('#photoCount-btn').click(function () {
-            updatePhotoCount();
+            datagrid.datagrid('load', {})
         });
     });
 </script>
