@@ -351,21 +351,21 @@
 				<table>
 					<tr>
 						<td>关键内容：</td>
-						<td colspan="2"><input name="photoName" class="basic_input" />
+						<td colspan="2"><input style="width:120px;" name="photoName" class="basic_input" />
 						</td>
 						<td>跟进状态：</td>
 						
 						<td colspan="2">
-						    <input name="state" id="state3" class="easyui-validatebox"  />
+						    <input name="state" style="width:120px;" id="state3" class="easyui-validatebox"  />
 						</td>
                         <td>分类：</td>
                         <td colspan="2">
-                            <input name="type" id="type" class="easyui-validatebox"  />
+                            <input name="type" style="width:120px;" id="type" class="easyui-validatebox"  />
                         </td>
 						<td>开始时间：</td>
-							<td colspan="2"><input id="startTime" name="startTime" class="easyui-datebox" ></td>
+							<td colspan="2"><input style="width:120px;" id="startTime" name="startTime" class="easyui-datebox" ></td>
 						<td>结束时间：</td>	
-							<td colspan="2"><input id="endTime" name="endTime" class="easyui-datebox" validType='equaldDate'></td>
+							<td colspan="2"><input style="width:120px;" id="endTime" name="endTime" class="easyui-datebox" validType='equaldDate'></td>
 										
 						<td>&nbsp;<a class="easyui-linkbutton" iconCls="icon-search" plain='true' onclick="searchFun();" href="javascript:void(0);">查 找</a>&nbsp;
 						<a class="easyui-linkbutton" iconCls="icon-empty"  plain='true' onclick="clearFun();" href="javascript:void(0);">清 空</a>
@@ -416,7 +416,7 @@
 					
 					<tr>
 	                	<th>处理进度详情：</th>
-				    	<td><textarea  rows=4 cols=50 id="remark" name="remark" ></textarea></td>
+				    	<td><textarea  rows=4 cols=50  placeholder="请填写处理描述" id="remark" name="remark" ></textarea></td>
 			    	</tr>
 			    	
 			    	<tr>

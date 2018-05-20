@@ -117,8 +117,8 @@
 		pointDialog = $('#pointDialog').show().dialog({
 			modal : true,
 			title : "获取经纬度",
-			width:1300,
-			height:600,
+			width: ($(window).width())*0.95,
+   			height:($(window).height())*0.8,
 			onBeforeClose:function(){
 				
 			},
