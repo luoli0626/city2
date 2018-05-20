@@ -940,7 +940,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         String temp  = "";
 
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+".html";
+	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+System.currentTimeMillis()+".html";
 	      
 	      String data = " <!DOCTYPE html><html><head><meta charset='UTF-8' /> "
 	      		+ "<title>城管分享</title></head><body><div>"
