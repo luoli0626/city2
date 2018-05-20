@@ -229,8 +229,12 @@
 		var rows = $("#datagrid").datagrid("getRows")[index];
 		console.log(rows);
 		$("#photoId").val(rows.id);
-		changeForm.form('clear')
-		changeDialog.dialog('open');
+		changeForm.form('clear');
+		if(rows.state=='17'){
+			$.messager.alert('提示', '该条已经处理完成，不能再操作！');
+		}else{
+			changeDialog.dialog('open');
+		}
 		um.setContent("");
 	}
 

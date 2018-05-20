@@ -23,7 +23,7 @@ public class Forum extends BaseEntity{
     private String title;
     private String subtitle;
     private String content;
-    private String isCheck = "N";
+    private String isCheck = "D";
     private Set<Image> images;
     private Long viewCount = 0L;
     private Long commentCount = 0L;

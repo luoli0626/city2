@@ -1008,4 +1008,10 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		 return fileName;
 	}
 
+	@Override
+	public Boolean removeHandleImage(String id) {
+		baseDao.executeSql(" delete from city_handle where id="+id);
+		return true;
+	}
+
 }

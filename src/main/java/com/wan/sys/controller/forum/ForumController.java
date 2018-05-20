@@ -59,6 +59,7 @@ public class ForumController {
                 image.setType(IMG_TYPE);
             }
         }
+        
         forumService.add(forum);
 
         return OperateSuccess.Instance();

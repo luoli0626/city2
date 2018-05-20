@@ -316,6 +316,19 @@ public class cityPageManagerController {
     	j.setMsg(cityPageService.createH5(id));
     	return j;
     }
+    
+    /**
+     * 删除留存图片
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="removeHandleImage")
+    public Json removeHandleImage(@RequestBody String id){
+    	Json j=new Json();
+    	j.setSuccess(cityPageService.removeHandleImage(id));
+    	return j;
+    }
 	
 	//---------------------------------------------城管动态-------------------------------------------------
 	
