@@ -4,6 +4,7 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.message.Message;
 import com.wan.sys.entity.view.View;
 import com.wan.sys.entity.view.ViewTypeEnum;
+import com.wan.sys.pojo.NoResultResponseFail;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
 import com.wan.sys.service.message.IMessageService;
@@ -46,12 +47,14 @@ public class MessageController {
     public ResponseHead getById(Long id) {
         Message message = msgService.getById(id);
 
-        if (message != null) {
-            View view = new View();
-            view.setBelongId(message.getId());
-            view.setType(VIEW_TYPE);
-            viewService.add(view);
+        if (message == null) {
+            return NoResultResponseFail.Instance();
         }
+
+        View view = new View();
+        view.setBelongId(message.getId());
+        view.setType(VIEW_TYPE);
+        viewService.add(view);
 
         return new ResponseSuccess(message);
     }

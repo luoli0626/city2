@@ -8,9 +8,12 @@ import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.forum.Forum;
 import com.wan.sys.entity.image.Image;
 import com.wan.sys.entity.image.ImageTypeEnum;
+import com.wan.sys.entity.view.View;
+import com.wan.sys.entity.view.ViewTypeEnum;
 import com.wan.sys.pojo.*;
 import com.wan.sys.service.comment.ICommentService;
 import com.wan.sys.service.forum.IForumService;
+import com.wan.sys.service.view.IViewService;
 import com.wan.sys.util.ValidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,8 +39,12 @@ public class ForumController {
     @Autowired
     private ICommentService commentService;
 
+    @Autowired
+    private IViewService viewService;
+
     private static final String COMMENT_TYPE = CommentTypeEnum.FORUM.toString();
     private static final String IMG_TYPE = ImageTypeEnum.FORUM.getIndex();
+    private static final String VIEW_TYPE = ViewTypeEnum.FORUM.toString();
 
     @ResponseBody
     @RequestMapping(value = "add", method = POST)
@@ -85,6 +92,11 @@ public class ForumController {
         if (forum == null) {
             return NoResultResponseFail.Instance();
         }
+
+        View view = new View();
+        view.setBelongId(forum.getId());
+        view.setType(VIEW_TYPE);
+        viewService.add(view);
         return new ResponseSuccess(forum);
     }
 

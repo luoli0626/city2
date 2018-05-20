@@ -6,6 +6,8 @@ import com.wan.sys.entity.comment.CommentTypeEnum;
 import com.wan.sys.entity.common.Query;
 import com.wan.sys.entity.dynamic.Dynamic;
 import com.wan.sys.entity.view.View;
+import com.wan.sys.entity.view.ViewTypeEnum;
+import com.wan.sys.pojo.NoResultResponseFail;
 import com.wan.sys.pojo.OperateSuccess;
 import com.wan.sys.pojo.ResponseHead;
 import com.wan.sys.pojo.ResponseSuccess;
@@ -41,6 +43,7 @@ public class DynamicController {
     private ICommentService commentService;
 
     private static final String COMMENT_TYPE = CommentTypeEnum.DYNAMIC.toString();
+    private static final String VIEW_TYPE = ViewTypeEnum.DYNAMIC.toString();
 
     @ResponseBody
     @RequestMapping("getList")
@@ -59,11 +62,13 @@ public class DynamicController {
 
         Dynamic dynamic = dynamicService.getById(id);
 
-        if (dynamic != null) {
-            View view = new View();
-            view.setBelongId(dynamic.getId());
-            viewService.add(view);
+        if (dynamic == null) {
+            return NoResultResponseFail.Instance();
         }
+        View view = new View();
+        view.setBelongId(dynamic.getId());
+        view.setType(VIEW_TYPE);
+        viewService.add(view);
 
         return new ResponseSuccess(dynamic);
     }
