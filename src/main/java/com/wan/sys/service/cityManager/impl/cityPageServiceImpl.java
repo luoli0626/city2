@@ -944,9 +944,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	      
 	      String data = " <!DOCTYPE html><html><head><meta charset='UTF-8' /> "
 	      		+ "<title>城管分享</title></head><body><div>"
-	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+p.getCreateUserName().getNickName()+"</p></br>"
+	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+p.getCreateUserName().getNickName()==null?p.getCreateUserName().getMobilePhone():p.getCreateUserName().getNickName()+"</p></br>"
   				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+p.getContent()+"</p></br>"
-				+ "<p style='font-weight:bold；font-size:13px'>上传地址："+p.getAddrName()+"</p></br>"
+				+ "<p style='font-weight:bold；font-size:13px'>上传地址："+p.getAddrName()==null?"":p.getAddrName()+"</p></br>"
 				+ "<p style='font-weight:bold；font-size:13px'>照片详情：</p></br>"+imgs
 	    		+ "</div></body></html>";
 	      try{
@@ -1003,7 +1003,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 					e.printStackTrace();
 				}
 		     }
-	      p.setH5url("http://111.231.222.163:8080"+fileName);
+	     
+//	      p.setH5url("http://111.231.222.163:8080"+fileName);
+	    	  p.setH5url("http://47.105.53.173:8080"+fileName);
 	      baseDao.update(p);
 		 return fileName;
 	}
