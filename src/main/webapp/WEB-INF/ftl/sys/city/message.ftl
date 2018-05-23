@@ -386,14 +386,11 @@
 				 <tr>
                 	 <th>内&nbsp&nbsp容：</th>
               	 </tr>
-                	 <tr>
-                	 <td colspan="4">
-			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
-			    	 </textarea>
+              	 </table>
+			
+			    	 <div id="messageContent" name="messageContent" style="width:800px;height:400px;" >
 			    	     <div id="showContent" style="display:none;"></div> 
-     					 </div>
-				</table>
-			</fieldset>
+			</fieldset>	
 		</form>
 	</div>
 </body>

@@ -190,13 +190,10 @@
 			    	<tr>
                 	 <th>添加图片：</th>
               	 </tr>
-			    	<tr>
-                	 <td colspan="4">
-			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
-			    	 </textarea>
+              	 </table>
+			    	 <div id="messageContent" name="messageContent"  >
 			    	     <div id="showContent" style="display:none;"></div> 
-     					 </div>
-				</table>
+				
 			</fieldset>
 		</form>
 	</div>

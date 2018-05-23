@@ -43,8 +43,8 @@
 			iconCls : 'icon-save',
 			rownumbers: true,
 			pagination : true,
-			pageSize:30,
-			pageList:[10,20,30,50,100],
+			pageSize:15,
+			pageList:[15,30,50,100],
 			fit : true,
 			fitColumns : true,
 			nowrap : false,
@@ -396,8 +396,7 @@
 					</tr>
 					<tr>
 						<th >状&nbsp&nbsp态：</th>
-						</tr><tr>
-						<td>
+						<td colspan="2">
 						
 						<input name="state" id="state" class="easyui-validatebox"  />
 							<!--
@@ -414,23 +413,21 @@
 					
 					<tr>
 	                	<th >处理进度详情：</th>
-	                	</tr><tr>
 				    	<td colspan="4"><textarea  rows=4 cols=50  placeholder="请填写处理描述" id="remark" name="remark" ></textarea></td>
 			    	</tr>
 			    	
 			    	<tr>
                 	 <th>处理图片：</th>
               	 </tr>
-			    	<tr>
-                	 <td  colspan="4">
-			    	 <textarea id="messageContent" name="messageContent" style="width:800px;height:400px;" >
-			    	 </textarea>
+              	 
+              	 </table>
+			
+			    	 <div id="messageContent" name="messageContent" style="width:800px !important;height:400px;" ></div>
 			    	     <div id="showContent" style="display:none;"></div> 
      					 </div>
      					 
      					 
-				</table>
-			</fieldset>
+			</fieldset>	
 		</form>
 	</div>
 	
