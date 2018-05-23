@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.FileUploadBase.InvalidContentTypeException;
 import org.apache.commons.fileupload.FileUploadBase.SizeLimitExceededException;
@@ -72,9 +74,13 @@ public class Uploader {
 						String newFileName = generateFileName(originalFileName);
 						String url = urlPath + "/" + newFileName;
 						BufferedInputStream in = new BufferedInputStream(fis.openStream());
-						File file = new File(physicalPath + File.separator + newFileName);
+                        String absFilePath = physicalPath + File.separator + newFileName;
+						File file = new File(absFilePath);
 						BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(file));
 						Streams.copy(in, output, true);
+
+                        //同时保存一份缩略图
+                        Thumbnails.of(file).forceSize(50, 50).outputFormat("jpg").toFile(absFilePath + "_50x50");
 
 						result.setState(UploadResultEnum.SUCCESS.message());
 						result.setSize(file.length());

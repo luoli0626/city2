@@ -5,6 +5,8 @@ import com.wan.sys.entity.file.UploadFileResult;
 import com.wan.sys.entity.file.UploadSuccess;
 import com.wan.sys.pojo.ErrorCodeEnum;
 import com.wan.sys.service.file.IFileService;
+import net.coobird.thumbnailator.Thumbnails;
+import org.apache.poi.hpsf.Thumbnail;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -66,15 +68,17 @@ public class FileService implements IFileService {
                 newFileName = UUID.randomUUID().toString();
             }
 
-            File serverFile = new File(dir.getAbsolutePath() + sep + newFileName);
+            String absFilePath = dir.getAbsolutePath() + sep + newFileName;
+            File serverFile = new File(absFilePath);
             try {
                 file.transferTo(serverFile);
+                //同时保存一份缩略图
+                Thumbnails.of(serverFile).forceSize(50, 50).outputFormat("jpg").toFile(absFilePath + "_50x50");
                 return new UploadSuccess(path + sep + sub + sep + newFileName);
             } catch (IOException ex) {
                 return new UploadFailed(ErrorCodeEnum.FAIL_IOERR);
             }
         }
-
         return new UploadFailed(ErrorCodeEnum.FAIL_NULLFILE);
     }
 }
