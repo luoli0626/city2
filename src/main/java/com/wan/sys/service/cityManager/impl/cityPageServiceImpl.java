@@ -942,6 +942,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         
         String user=p.getCreateUserName().getNickName()==null?p.getCreateUserName().getMobilePhone():p.getCreateUserName().getNickName();
         String addr=p.getAddrName()==null?"":p.getAddrName();
+        String content=p.getContent();
         
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+System.currentTimeMillis()+".html";
@@ -949,7 +950,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	      String data = " <!DOCTYPE html><html><head><meta charset='utf-8' /> "
 	      		+ "<title>城管分享</title></head><body><div>"
 	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+user+"</p></br>"
-  				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+p.getContent()+"</p></br>"
+  				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+content+"</p></br>"
 				+ "<p style='font-weight:bold；font-size:13px'>上传地址："+addr+"</p></br>"
 				+ "<p style='font-weight:bold；font-size:13px'>照片详情：</p></br>"+imgs
 	    		+ "</div></body></html>";

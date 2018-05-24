@@ -23,6 +23,12 @@
 	$(function(){
 	
 
+		$("#userType").click(function(){
+			if($("#userType").val()=='N'){
+				$("#searchRole").combobox('setValue','');
+			}
+		});
+		
 	
 		timeInputBoxBindOpenPanel("birthday");
 		userForm = $('#userForm').form();
@@ -348,6 +354,11 @@
 		    textField:'text',
 		    onLoadSuccess : function(node, data) {
 			console.log(data);
+			},
+			onSelect:function(record){
+				if($("#userType").val()=='N'){
+					$("#userType").val('Y');
+				}
 			}
 		});
 	});
