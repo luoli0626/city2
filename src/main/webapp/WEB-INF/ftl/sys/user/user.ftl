@@ -25,7 +25,7 @@
 
 		$("#userType").click(function(){
 			if($("#userType").val()=='N'){
-				$("#searchRole").combobox('setValue','');
+				$("#searchRole").combobox('clear');
 			}
 		});
 		
@@ -593,6 +593,7 @@
 	}
 	function clearFun() {
 		$('#toolbar input').val('');
+		$("#userType").val("");
 		datagrid.datagrid('load', {});
 	}
 	/*提示消息弹出框函数*/

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -936,7 +937,8 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         InputStreamReader isr = null;
         BufferedReader br = null;
         FileOutputStream fos  = null;
-        PrintWriter pw = null;
+//        PrintWriter pw = null;
+        BufferedWriter pw = null;
         String temp  = "";
         
         
@@ -947,7 +949,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+System.currentTimeMillis()+".html";
 	      
-	      String data = " <!DOCTYPE html><html><head><meta charset='utf-8' /> "
+	      String data = " <!DOCTYPE html><html><head><meta http-equiv='content-type' content='text/html;charset=UTF-8'/> "
 	      		+ "<title>城管分享</title></head><body><div>"
 	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+user+"</p></br>"
   				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+content+"</p></br>"
@@ -966,7 +968,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		             
 		             //将文件读入输入流
 		             fis = new FileInputStream(file);
-		             isr = new InputStreamReader(fis);
+		             isr = new InputStreamReader(fis,"UTF-8");
 		             br = new BufferedReader(isr);
 		             StringBuffer buffer = new StringBuffer();
 		             
@@ -979,7 +981,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		             buffer.append(data);
 		             
 		             fos = new FileOutputStream(file);
-		             pw = new PrintWriter(fos);
+//		             pw = new PrintWriter(fos);
+		             OutputStreamWriter write = new OutputStreamWriter(fos,"UTF-8");
+		             pw=new BufferedWriter(write);
 		             pw.write(buffer.toString().toCharArray());
 		             pw.flush();
 
