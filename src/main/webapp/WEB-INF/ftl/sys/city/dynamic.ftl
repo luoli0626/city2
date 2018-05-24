@@ -69,7 +69,7 @@
 				width :$(this).width()*0.2,
 				formatter:function(value,rec,i){
 					if(value.length!=0){
-						return "<img src='"+value[0].address+"' style='width:50px;height:50px;'>";
+						return "<img src='"+value[0].address+"_50*50.jpg' style='width:50px;height:50px;'>";
 					}
 				}
 			},
