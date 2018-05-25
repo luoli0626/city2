@@ -388,7 +388,7 @@
               	 </tr>
               	 </table>
 			
-			    	 <div id="messageContent" name="messageContent" style="width:800px;height:400px;" >
+			    	 <div id="messageContent" name="messageContent" style="width:800px;height:400px;" ></div>
 			    	     <div id="showContent" style="display:none;"></div> 
 			</fieldset>	
 		</form>

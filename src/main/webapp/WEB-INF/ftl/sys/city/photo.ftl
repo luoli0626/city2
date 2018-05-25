@@ -424,7 +424,6 @@
 			
 			    	 <div id="messageContent" name="messageContent" style="width:800px !important;height:400px;" ></div>
 			    	     <div id="showContent" style="display:none;"></div> 
-     					 </div>
      					 
      					 
 			</fieldset>	

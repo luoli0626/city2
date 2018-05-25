@@ -181,6 +181,7 @@
 				handler : function() {
 					if(positionForm.form('validate')){
 						$("#showContent").html(um.getContent());
+						console.log($("#showContent").html());
 						var formData={
 								"messageId":$("#messageId").val(),
 								"messageTitle":$("#messageTitle").val(),
@@ -491,8 +492,8 @@
               	 </tr>
               	 </table>
 			
-			    	 <div  id="messageContent" name="messageContent"  >
-			    	     <div id="showContent" style="display:none;"></div> 
+			    	 <div  id="messageContent" name="messageContent"  ></div>
+		    	     <div id="showContent" style="display:none;"></div> 
 				</fieldset>
 		</form>
 	</div>

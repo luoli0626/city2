@@ -1013,8 +1013,8 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 				}
 		     }
 	     
-	      p.setH5url("http://111.231.222.163:8080"+fileName);
-//	    	  p.setH5url("http://47.105.53.173:8080"+fileName);
+//	      p.setH5url("http://111.231.222.163:8080"+fileName);
+	    	  p.setH5url("http://47.105.53.173:8080"+fileName);
 	      baseDao.update(p);
 		 return fileName;
 	}
