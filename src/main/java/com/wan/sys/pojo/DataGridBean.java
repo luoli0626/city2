@@ -14,7 +14,7 @@ public class DataGridBean implements Serializable {
 	private int page;// 当前页
 	private int rows;// 每页显示记录数
 	private String sort = null;// 排序字段名
-	private String order = "asc";// 按什么排序(asc,desc)
+	private String order = "desc";// 按什么排序(asc,desc)
 
 	public int getPage() {
 		return page;

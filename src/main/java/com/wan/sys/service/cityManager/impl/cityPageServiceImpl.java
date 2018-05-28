@@ -60,7 +60,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime desc";
 		}
 		List<Position> positionList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(positionList);
@@ -127,7 +127,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Message> positionList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(positionList);
@@ -304,7 +304,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Dynamic> dynamicList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(dynamicList);
@@ -411,7 +411,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Guide> guideList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(guideList);
@@ -491,7 +491,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Forum> forumList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(forumList);
@@ -661,7 +661,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Lost> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		j.setRows(lostList);
@@ -700,7 +700,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Comment> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		List l=new ArrayList();
@@ -740,7 +740,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){
-			hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+			hql+=" order by createTime  desc";
 		}
 		List<Comment> lostList=baseDao.find(hql, dg.getPage(),dg.getRows());
 		List l=new ArrayList();
@@ -866,7 +866,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         String totalHql=" select count(*) "+hql;
         j.setTotal(baseDao.count(totalHql));
         if(dg != null && dg.getOrder()!=null){
-            hql+=" order by "+dg.getSort()+" " +dg.getOrder();
+            hql+=" order by createTime  desc";
         }
         List<PhotoType> typeList = baseDao.find(hql, dg.getPage(), dg.getRows());
         List l = new ArrayList();
@@ -955,7 +955,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	      
 	      String data = " <!DOCTYPE html><html><head><meta http-equiv='content-type' content='text/html;charset=UTF-8'/> "
 	      		+ "<title>城管分享</title></head><body><div>"
-	      		+ "<p style='font-weight:bold；font-size:14px'>上传者："+user+"</p></br>"
+	      		//+ "<p style='font-weight:bold；font-size:14px'>上传者："+user+"</p></br>"
   				+ "<p style='font-weight:bold；font-size:13px'>问题描述："+content+"</p></br>"
 				+ "<p style='font-weight:bold；font-size:13px'>上传地址："+addr+"</p></br>"
 				+ "<p style='font-weight:bold；font-size:13px'>照片详情：</p></br>"+imgs
