@@ -40,6 +40,7 @@ import com.wan.sys.pojo.DataGridJson;
 import com.wan.sys.pojo.Json;
 import com.wan.sys.service.cityManager.IcityPageManagerService;
 import com.wan.sys.service.common.impl.CommonServiceImpl;
+import com.wan.sys.util.ConfigUtil;
 import com.wan.sys.util.Encrypt;
 import com.wan.sys.util.StringUtil;
 
@@ -776,13 +777,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         InputStreamReader isr = null;
         BufferedReader br = null;
         FileOutputStream fos  = null;
-        PrintWriter pw = null;
+//        PrintWriter pw = null;
+        BufferedWriter pw=null;
         String temp  = "";
 
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(bean.getMessageId())+".html";
+	      String fileName="/data/uploads/dmkAndMsgH5/"+Encrypt.md5(bean.getMessageId())+System.currentTimeMillis()+".html";
 	      
-	      String data = " <!DOCTYPE html><html><head><meta charset='UTF-8' /> "
+	      String data = " <!DOCTYPE html><html><head><meta http-equiv='content-type' content='text/html;charset=UTF-8'/> "
 	      		+ "<title>城管分享</title></head><body><div><p style='font-weight:bold；font-size:14px'>"+bean.getMessageTitle()
 	    		  +"</p></br><p style='font-weight:bold；font-size:13px'>"+bean.getMessageSubTitle()+"</p></br>"
 	    		  +bean.getMessageContent()+"</div></body></html>";
@@ -798,7 +800,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		             
 		             //将文件读入输入流
 		             fis = new FileInputStream(file);
-		             isr = new InputStreamReader(fis);
+		             isr = new InputStreamReader(fis,"UTF-8");
 		             br = new BufferedReader(isr);
 		             StringBuffer buffer = new StringBuffer();
 		             
@@ -811,7 +813,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		             buffer.append(data);
 		             
 		             fos = new FileOutputStream(file);
-		             pw = new PrintWriter(fos);
+//		             pw = new PrintWriter(fos);
+		             OutputStreamWriter write = new OutputStreamWriter(fos,"UTF-8");
+		             pw=new BufferedWriter(write);
 		             pw.write(buffer.toString().toCharArray());
 		             pw.flush();
 
@@ -947,7 +951,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
         String content=p.getContent();
         
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-	      String fileName="/data/uploads/"+format.format(new Date())+"/"+Encrypt.md5(p.getId().toString())+System.currentTimeMillis()+".html";
+	      String fileName="/data/uploads/photo/"+Encrypt.md5(p.getId().toString())+System.currentTimeMillis()+".html";
 	      
 	      String data = " <!DOCTYPE html><html><head><meta http-equiv='content-type' content='text/html;charset=UTF-8'/> "
 	      		+ "<title>城管分享</title></head><body><div>"
@@ -1012,9 +1016,9 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 					e.printStackTrace();
 				}
 		     }
-	     
+	      p.setH5url(ConfigUtil.get("h5addr")+fileName);
 //	      p.setH5url("http://111.231.222.163:8080"+fileName);
-	    	  p.setH5url("http://47.105.53.173:8080"+fileName);
+//	    	  p.setH5url("http://47.105.53.173:8080"+fileName);
 	      baseDao.update(p);
 		 return fileName;
 	}
@@ -1038,6 +1042,43 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void createHistory(String type) {
+
+		List<Object[]> list=new ArrayList();
+		//查询数据
+		if(type.equals("1")){
+			list=baseDao.findBySql(" select ID,TITLE,SUBTITLE,CONTENT from city_dynamic where h5url is null");
+		}else if(type.equals("2")){
+			list=baseDao.findBySql(" select ID,TITLE,SUBTITLE,CONTENT from city_message where h5url is null ");
+		}
+		
+		for(int i=0;i<list.size();i++){
+			CityBean bean=new CityBean();
+			bean.setMessageId(list.get(i)[0].toString());
+			bean.setMessageTitle(list.get(i)[1].toString());
+			bean.setMessageSubTitle(list.get(i)[2].toString());
+			bean.setMessageContent(list.get(i)[3].toString());
+			
+			try {
+				if(type.equals("1")){
+					Dynamic d=(Dynamic)baseDao.get(Dynamic.class, Long.valueOf(bean.getMessageId()));
+					d.setH5url(h5url(bean));
+					baseDao.update(d);
+				}else if(type.equals("2")){
+					Message d=(Message)baseDao.get(Message.class, Long.valueOf(bean.getMessageId()));
+					d.setH5url(h5url(bean));
+					baseDao.update(d);
+				}
+			
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
 	}
 
 }

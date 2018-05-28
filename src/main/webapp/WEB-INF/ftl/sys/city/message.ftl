@@ -130,7 +130,7 @@
 								"messageId":$("#messageId").val(),
 								"messageTitle":$("#messageTitle").val(),
 								"messageSubTitle":$("#messageSubTitle").val(),
-								"messageContent":$("#messageContent").val(),
+								"messageContent":$("#showContent").html(),
 						};	
 						//if($("#messageId").val()==""){
 							var imgs=$("#showContent").find("img");

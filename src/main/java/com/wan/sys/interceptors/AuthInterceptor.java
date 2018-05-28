@@ -122,6 +122,10 @@ String requestPath = RequestUtil.getRequestPath(request);// 用户访问的资�
 						currUser);
 		}
 
+		//历史数据
+		if(requestPath.contains("/cityPage/createHistory")){
+			return true;
+		}
 		String [] us=requestPath.split("/");
 		requestPath="/"+us[1]+"/";
 		if("/main/".equals(requestPath)||"/app/".equals(requestPath)||"/house/".equals(requestPath)

@@ -697,5 +697,15 @@ public class cityPageManagerController {
 		return j;
 	}
 
-
+	/**
+	 * 生成咨询和动态的历史数据的h5
+	 * 1,dynamic
+	 * 2.message
+	 * @param type
+	 */
+	@RequestMapping(value="createHistory")
+	@ResponseBody
+	public void createHistory(String type){
+		cityPageService.createHistory(type);
+	}
 }

@@ -116,4 +116,6 @@ public interface IcityPageManagerService {
     Boolean removeHandleImage(String id);
     
     Boolean addHandleImage(CityBean city);
+    
+    void createHistory(String type);
 }
