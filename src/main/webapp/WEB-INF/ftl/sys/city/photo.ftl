@@ -316,9 +316,10 @@
 	//更新待审核数量
     function updatePhotoCount() {
 	    $.ajax({
-            "url" : '${ctx}/cityPage/photoCount',
-            "type" : "GET",
-            "success" : function (data) {
+            url : '${ctx}/cityPage/photoCount',
+            type : "GET",
+            timeout : 4000
+            success : function (data) {
                 $('#photoCount').text(data);
             }
         });
