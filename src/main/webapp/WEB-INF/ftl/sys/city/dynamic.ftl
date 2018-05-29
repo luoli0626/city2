@@ -193,10 +193,11 @@
 							if (imgs.length != 0) {
 									formData.messageImage= imgs[0].src;
 									console.log(imgs[0].src);
-							}else{
-								$.messager.alert('提示',"请至少添加一张图片");
-								return false;
 							}
+							//else{
+							//	$.messager.alert('提示',"请至少添加一张图片");
+							//	return false;
+							//}
 						//}
 						console.log($("#showContent").html());
 						$.ajax({
