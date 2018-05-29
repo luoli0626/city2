@@ -318,7 +318,7 @@
 	    $.ajax({
             url : '${ctx}/cityPage/photoCount',
             type : "GET",
-            timeout : 4000
+            timeout : 4000,
             success : function (data) {
                 $('#photoCount').text(data);
             }
