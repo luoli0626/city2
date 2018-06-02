@@ -106,7 +106,7 @@ public class PhotoServiceImpl implements IPhotoService{
             return new ArrayList<Photo>();
         }
 
-        String hql=" from Photo t where t.recordStatus='Y' " ;
+        String hql=" from Photo t where t.recordStatus='Y' and t.userDel='Y' " ;
 
         if (query.getCreateUserId() != null && query.getCreateUserId() > 0) {
             hql += " and t.createUserId=" + query.getCreateUserId();
@@ -128,7 +128,8 @@ public class PhotoServiceImpl implements IPhotoService{
 	public Boolean remove(Long id) {
 		Photo p=photoDao.get(Photo.class, id);
 		if(p.getState().equals("9")){
-			p.setRecordStatus("N");
+//			p.setRecordStatus("N");
+			p.setUserDel("N");
 			photoDao.update(p);
 			return true;
 		}else{

@@ -22,6 +22,8 @@ public class CityBean {
 	private String remark;
 	private String code;
 	private Long type;
+	private String userName;
+	private String userPhone;
 	
 	public String getCode() {
 		return code;
@@ -151,4 +153,18 @@ public class CityBean {
     public void setType(Long type) {
         this.type = type;
     }
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+    
+    
 }

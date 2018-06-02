@@ -104,7 +104,7 @@
 			{
 				field : 'state',
 				title : '跟进状态',
-				width :$(this).width()*0.15,
+				width :$(this).width()*0.10,
 				formatter:function(value,rec,i){
 					//return rec.allState[rec.allState.length-1].name;
 					
@@ -118,6 +118,20 @@
 						return "处理中";
 					}else if(value=='17'){
 						return "处理完成";
+					}
+				}
+			},
+			{
+				field : 'userDel',
+				title : '是否删除',
+				width :$(this).width()*0.10,
+				formatter:function(value,rec,i){
+					if(rec.recordStatus=='N'){
+						return "管理员删除";
+					}else if(rec.userDel=='N'){
+						return "用户已删除";					
+					}else{
+						return "正常";
 					}
 				}
 			},
@@ -244,7 +258,10 @@
 			"state" : $("#state3").combobox('getValue'),
             "type" : $("#type").combobox('getValue'),
 			"startTime" :  $('#startTime').datebox('getValue'),
-			"endTime" :  $('#endTime').datebox('getValue')
+			"endTime" :  $('#endTime').datebox('getValue'),
+			"userName" : $('#userName').val(),
+			"userPhone" : $('#userPhone').val(),
+			"userDel"     : $('#userDel').val()
 		});
 	}
 	
@@ -338,9 +355,6 @@
         });
     });
 </script>
-
-
-
 </head>
 <body class="easyui-layout" fit="true">
 	<div region="center" border="false" style="overflow: hidden;">
@@ -349,15 +363,33 @@
 				<legend class="my_legend">检索</legend>
 				<table>
 					<tr>
+						<td>上传者昵称：</td>
+						<td colspan="2"><input style="width:120px;" name="userName" id="userName" class="basic_input" />
+						</td>
+						<td>上传者手机号：</td>
+						<td colspan="2"><input style="width:120px;" name="userPhone" id="userPhone" class="basic_input" />
+						</td>
+						<td>是否删除：</td>
+						<!--
+						<td colspan="2"><input style="width:120px;" name="photoName" class="basic_input" />
+						-->
+						<td colspan="2">
+							<select id="userDel" name="userDel" style="width:120px;height:21px;"   >
+								  <option value="">正常状态</option>
+								  <option value="1">管理员删除</option>
+								  <option value="2">用户删除</option>
+							</select>
+						</td>
 						<td>关键内容：</td>
 						<td colspan="2"><input style="width:120px;" name="photoName" class="basic_input" />
 						</td>
+					</tr>
+					<tr>
 						<td>跟进状态：</td>
-						
 						<td colspan="2">
 						    <input name="state" style="width:120px;" id="state3" class="easyui-validatebox"  />
 						</td>
-                        <td>分类：</td>
+                        <td>所属分类：</td>
                         <td colspan="2">
                             <input name="type" style="width:120px;" id="type" class="easyui-validatebox"  />
                         </td>

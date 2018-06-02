@@ -37,6 +37,7 @@ public class Photo extends BaseEntity {
     private Long type;
     private String typeName;
     private String h5url;
+    private String userDel;
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
@@ -134,5 +135,14 @@ public class Photo extends BaseEntity {
 	public void setH5url(String h5url) {
 		this.h5url = h5url;
 	}
+
+	public String getUserDel() {
+		return userDel;
+	}
+
+	public void setUserDel(String userDel) {
+		this.userDel = userDel;
+	}
     
+	
 }

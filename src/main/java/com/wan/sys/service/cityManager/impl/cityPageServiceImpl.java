@@ -226,7 +226,7 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 	@Override
 	public DataGridJson photoList(DataGridBean dg, CityBean city) {
 		DataGridJson j = new DataGridJson();
-		String hql=" from Photo  where recordStatus='Y'";
+		String hql=" from Photo ";
 		if(StringUtil.isNotBlank(city.getPhotoName())){
 			hql+=" and content like '%%"+city.getPhotoName()+"%%'";
 		}
@@ -242,6 +242,12 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		if(city.getType() != null) {
 		    hql += " and type= "+city.getType();
         }
+		if(StringUtil.isNotBlank(city.getUserName())){
+			hql += " and createUserName.nickName='"+city.getUserName()+"'";
+		}
+		if(StringUtil.isNotBlank(city.getUserPhone())){
+			hql += " and createUserName.mobilePhone='"+city.getUserPhone()+"'";
+		}
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
 		if(dg.getOrder()!=null){

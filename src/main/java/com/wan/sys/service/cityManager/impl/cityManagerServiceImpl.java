@@ -399,7 +399,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		//判断用户是否已经授权过
 		User user=(User)baseDao.get(" from User where token='"+bean.getToken()+"'");
 		if(user!=null){
-			user.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
+			user.setExpireTime(9999999999999L);
 			userId=user.getId();
 			baseDao.update(user);
 		}else{
@@ -408,7 +408,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 			u.setNickName(bean.getNickName());
 			u.setSex(bean.getSex());
 			u.setToken(bean.getToken());
-			u.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
+			u.setExpireTime(9999999999999L);
 			u.setRecordStatus("Y");
 			u.setCreateTime(new Date());
 			u.setType("2");
