@@ -377,6 +377,7 @@
 						-->
 						<td colspan="2">
 							<select id="userDel" name="userDel" style="width:120px;height:21px;"   >
+								  <option value="">全部</option>
 								  <option value="0">正常状态</option>
 								  <option value="1">管理员删除</option>
 								  <option value="2">用户删除</option>
