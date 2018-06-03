@@ -114,11 +114,12 @@
 				style:'text-align:center',
 				handler : function() {
 					if(positionForm.form('validate')){
+					$("#showContent").html(um.getContent());
 						var formData={
 								"messageId":$("#messageId").val(),
 								"messageTitle":$("#messageTitle").val(),
 								"messageSubTitle":$("#messageSubTitle").val(),
-								"messageContent":$("#messageContent").val(),
+								"messageContent":$("#showContent").html(),
 						};	
 						$.ajax({
 							url:'${ctx}/cityPage/alterGuide',
@@ -332,11 +333,11 @@
 				 <tr>
                 	 <th>内&nbsp&nbsp容：</th>
               	 </tr>
-                	 <tr>
-                	 <td colspan="4">
-			    	 <textarea rows=4 cols=60 id="messageContent" name="messageContent" style="width:800px;height:400px;" >
-			    	 </textarea>
-				</table>
+                	</table>
+			
+			    	 <div  id="messageContent" name="messageContent"  ></div>
+		    	     <div id="showContent" style="display:none;"></div> 
+				</fieldset>
 			</fieldset>
 		</form>
 	</div>

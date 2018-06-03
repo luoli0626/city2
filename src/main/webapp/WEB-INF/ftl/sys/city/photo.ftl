@@ -381,7 +381,7 @@
 								  <option value="0">正常状态</option>
 								  <option value="1">管理员删除</option>
 								  <option value="2">用户删除</option>
-								  <option value="3">用户、管理员都删除</option>
+								  <option value="3">双方删除</option>
 							</select>
 						</td>
 						<td>关键内容：</td>
