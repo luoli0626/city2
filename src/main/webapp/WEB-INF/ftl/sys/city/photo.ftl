@@ -126,10 +126,12 @@
 				title : '是否删除',
 				width :$(this).width()*0.10,
 				formatter:function(value,rec,i){
-					if(rec.recordStatus=='N'){
+					if(rec.recordStatus=='N' && rec.userDel=='Y'){
 						return "管理员删除";
-					}else if(rec.userDel=='N'){
+					}else if(rec.userDel=='N' && rec.recordStatus=='Y'){
 						return "用户已删除";					
+					}else if(rec.userDel=='N' && rec.recordStatus=='N'){
+						return "用户、管理员删除";
 					}else{
 						return "正常";
 					}

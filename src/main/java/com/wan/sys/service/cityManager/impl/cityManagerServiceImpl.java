@@ -396,10 +396,21 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		}
 		
 		Long userId;
+		
+		
+		//ios用openId验证是否登陆过
+		User user=(User)baseDao.get(" from User where token='"+bean.getOpenId()+"'");
+		if(user!=null){//脏数据用openid登陆过
+			user.setToken(bean.getToken());
+			baseDao.update(user);
+		}
+				
+				
 		//判断用户是否已经授权过
-		User user=(User)baseDao.get(" from User where token='"+bean.getToken()+"'");
+		user=(User)baseDao.get(" from User where token='"+bean.getToken()+"'");
+		
 		if(user!=null){
-			user.setExpireTime(9999999999999L);
+			user.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
 			userId=user.getId();
 			baseDao.update(user);
 		}else{
@@ -408,7 +419,8 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 			u.setNickName(bean.getNickName());
 			u.setSex(bean.getSex());
 			u.setToken(bean.getToken());
-			u.setExpireTime(9999999999999L);
+//			u.setExpireTime(9999999999999L);
+			u.setExpireTime(30L*1000L*24L*60L*60L+System.currentTimeMillis());
 			u.setRecordStatus("Y");
 			u.setCreateTime(new Date());
 			u.setType("2");
