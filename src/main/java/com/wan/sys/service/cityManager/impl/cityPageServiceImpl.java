@@ -154,6 +154,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			p.setModifyTime(new Date());
 			p.setModifyUserId(GlobalContext.getCurrentUser().getId());
 			baseDao.update(p);
+			//h5
+			city.setMessageId(p.getId().toString());
+			try {
+				p.setH5url(h5url(city));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return false;
 		}else{//添加
 			Message p=new Message();
@@ -348,6 +356,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 			p.setModifyTime(new Date());
 			p.setModifyUserId(GlobalContext.getCurrentUser().getId());
 			baseDao.update(p);
+			//h5
+			city.setMessageId(p.getId().toString());
+			try {
+				p.setH5url(h5url(city));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return false;
 		}else{//添加
 			Dynamic p=new Dynamic();
@@ -797,13 +813,14 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 //        PrintWriter pw = null;
         BufferedWriter pw=null;
         String temp  = "";
+        String subTitle=bean.getMessageSubTitle()==null?"":bean.getMessageSubTitle();
 
 	      SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 	      String fileName="/data/uploads/dmkAndMsgH5/"+Encrypt.md5(bean.getMessageId())+System.currentTimeMillis()+".html";
 	      
 	      String data = " <!DOCTYPE html><html><head><meta http-equiv='content-type' content='text/html;charset=UTF-8'/> "
 	      		+ "<title>城管分享</title></head><body><div><p style='font-weight:bold；font-size:14px'>"+bean.getMessageTitle()
-	    		  +"</p></br><p style='font-weight:bold；font-size:13px'>"+bean.getMessageSubTitle()+"</p></br>"
+	    		  +"</p></br><p style='font-weight:bold；font-size:13px'>"+subTitle+"</p></br>"
 	    		  +bean.getMessageContent()+"</div></body></html>";
 		 try{
 		      

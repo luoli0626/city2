@@ -485,7 +485,7 @@
 					</tr>
 				<tr>
 					<th>副标题：</th>
-					<td><input id="messageSubTitle" name="messageSubTitle" class="easyui-validatebox" required="true" style="width: 150px;" /></td>
+					<td><input id="messageSubTitle" name="messageSubTitle" class="easyui-validatebox"  style="width: 150px;" /></td>
 				</tr>
 				
 				 <tr>
