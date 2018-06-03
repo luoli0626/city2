@@ -37,7 +37,7 @@ public class Photo extends BaseEntity {
     private Long type;
     private String typeName;
     private String h5url;
-    private String userDel;
+    private String userDel="Y";
 
     @ManyToOne(cascade = CascadeType.REFRESH)
     @NotFound(action = NotFoundAction.IGNORE)
