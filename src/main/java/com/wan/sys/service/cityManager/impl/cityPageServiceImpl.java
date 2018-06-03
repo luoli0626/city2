@@ -250,9 +250,13 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 		}
 		if(StringUtil.isNotBlank(city.getUserDel())){
 			if(city.getUserDel().equals("1")){//管理员删除
-				hql += " and recordStatus='N' ";
+				hql += " and recordStatus='N' and userDel='Y'";
 			}else if(city.getUserDel().equals("2")){//用户删除
-				hql += " and userDel='N'";
+				hql += " and userDel='N' and recordStatus='Y'";
+			}else if(city.getUserDel().equals("3")){
+				hql += " and userDel='N' and recordStatus='N'";
+			}else if(city.getUserDel().equals("0")){
+				hql += " and userDel='Y' and recordStatus='Y'";
 			}
 		}
 		String totalHql=" select count(*) "+hql;
