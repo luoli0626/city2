@@ -340,6 +340,9 @@
             timeout : 4000,
             success : function (data) {
                 $('#photoCount').text(data);
+            },
+            error : function () {
+
             }
         });
     }
