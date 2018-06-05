@@ -265,7 +265,11 @@ public class cityPageServiceImpl extends CommonServiceImpl implements IcityPageM
 				hql += " and userDel='N' and recordStatus='N'";
 			}else if(city.getUserDel().equals("0")){
 				hql += " and userDel='Y' and recordStatus='Y'";
+			}else if(city.getUserDel().equals("4")){
+				hql += " ";
 			}
+		}else{//默认为正常
+			hql += " and userDel='Y' and recordStatus='Y'";
 		}
 		String totalHql=" select count(*) "+hql;
 		j.setTotal(baseDao.count(totalHql));
