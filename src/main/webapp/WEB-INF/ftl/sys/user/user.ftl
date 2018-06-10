@@ -760,7 +760,7 @@
 				</tr>
 				<tr>
 					<th>移动电话：</th>
-					<td><input id="mobilePhone" name="mobilePhone"  style="width: 196px;" class="easyui-validatebox" validType="mobile"/></td>
+					<td><input id="mobilePhone" name="mobilePhone"  style="width: 196px;" class="easyui-validatebox" validType="mobile" required="true"/></td>
 				</tr>
 				<tr>
 					<th >所属角色：</th>

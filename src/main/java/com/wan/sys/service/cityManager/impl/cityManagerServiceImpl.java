@@ -62,12 +62,28 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 		}
 		String token= Encrypt.md5(bean.getLoginAcct()+bean.getPassword())+(int)(Math.random()*100);
 		//查询用户在数据库是否存在
-		User u=(User)baseDao.get(" from User where loginAcct=? ", bean.getLoginAcct());
+//		User u=(User)baseDao.get(" from User where loginAcct=? ", bean.getLoginAcct());
+//		if(u==null){//不存在
+//			return response(ErrorCodeEnum.FAIL_NOUSER.getCode(), 
+//					ErrorCodeEnum.FAIL_NOUSER.getValue(), js, 0,null);
+//		}else{//存在，判断密码是否一致
+//			if(Encrypt.md5(bean.getPassword()).equals(u.getPassword())){
+//				u.setToken(token);
+//				u.setExpireTime((1000*24*60*60+System.currentTimeMillis()));
+//				baseDao.update(u);
+//			}else{//密码错误
+//				return response(ErrorCodeEnum.FAIL_PASS.getCode(), 
+//						ErrorCodeEnum.FAIL_PASS.getValue(), js, 0,null);
+//			}
+//		}
+		
+		//改为用手机号登录
+		User u=(User)baseDao.get(" from User where mobilePhone=?", bean.getLoginAcct());
 		if(u==null){//不存在
 			return response(ErrorCodeEnum.FAIL_NOUSER.getCode(), 
 					ErrorCodeEnum.FAIL_NOUSER.getValue(), js, 0,null);
 		}else{//存在，判断密码是否一致
-			if(Encrypt.md5(bean.getPassword()).equals(u.getPassword())){
+			if(Encrypt.md5(bean.getPassword()).equals(u.getPassword())){//一致就更新token
 				u.setToken(token);
 				u.setExpireTime((1000*24*60*60+System.currentTimeMillis()));
 				baseDao.update(u);
@@ -76,6 +92,7 @@ public class cityManagerServiceImpl extends CommonServiceImpl implements IcityMa
 						ErrorCodeEnum.FAIL_PASS.getValue(), js, 0,null);
 			}
 		}
+		
 		//返回token值，和userid
 		js.put("userId",u.getId());
 		js.put("token",token);
