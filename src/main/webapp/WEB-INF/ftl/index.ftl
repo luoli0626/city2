@@ -11,7 +11,7 @@
     if ('WebSocket' in window) {
     	console.log("建立通信链接");
         websocket = new WebSocket("ws://111.231.222.163:8080/websocket");
-        // websocket = new WebSocket("ws://localhost:8080/websocket");本地
+        // websocket = new WebSocket("ws://localhost:8080/city/websocket");本地
     }
     else {
         alert('当前浏览器 Not support websocket')
