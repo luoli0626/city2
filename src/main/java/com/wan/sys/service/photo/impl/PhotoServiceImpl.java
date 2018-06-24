@@ -1,6 +1,7 @@
 package com.wan.sys.service.photo.impl;
 
 import com.wan.sys.common.GlobalContext;
+import com.wan.sys.controller.cityManager.WebSocketTest1;
 import com.wan.sys.dao.common.IBaseDao;
 import com.wan.sys.dao.photo.IPhotoDao;
 import com.wan.sys.dao.photo.IPhotoTypeDao;
@@ -20,6 +21,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.websocket.Session;
+
 @Service
 public class PhotoServiceImpl implements IPhotoService{
 
@@ -33,7 +36,12 @@ public class PhotoServiceImpl implements IPhotoService{
 
     @Override
     public Long add(Photo photo) {
-    	
+    	//向web前端发送消息
+    	Session s=null;
+		WebSocketTest1 ws=new WebSocketTest1();
+		ws.onMessage("你有新的随手拍，请及时处理!",s);
+		 
+		 
     	//根据id判断新增或编辑
         if(photo.getId()==null){//新增
         	
@@ -55,6 +63,7 @@ public class PhotoServiceImpl implements IPhotoService{
 		            photo.setState("9");
 		            return photoDao.saveAndReturn(photo);
 		        }
+			 
         }else{//编辑
         	
         	Photo photo2=(Photo)baseDao.get(Photo.class, photo.getId());
@@ -126,6 +135,11 @@ public class PhotoServiceImpl implements IPhotoService{
 
 	@Override
 	public Boolean remove(Long id) {
+		//向web前端发送消息
+    	Session s=null;
+		WebSocketTest1 ws=new WebSocketTest1();
+		ws.onMessage("你有新的随手拍，请及时处理!",s);
+		
 		Photo p=photoDao.get(Photo.class, id);
 		if(p.getState().equals("9")){
 //			p.setRecordStatus("N");
@@ -135,6 +149,8 @@ public class PhotoServiceImpl implements IPhotoService{
 		}else{
 			return false;
 		}
+		
+		
 		
 	}
 

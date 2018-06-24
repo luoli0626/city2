@@ -118,6 +118,7 @@
 			<mvc:exclude-mapping path="/static/**" />
 			<mvc:exclude-mapping path="/images/**" />
 			<mvc:exclude-mapping path="/error/**" />
+			<mvc:exclude-mapping path="/websocket" />
 			<mvc:exclude-mapping path="/main/login" />
 			<mvc:exclude-mapping path="/main/showHistory" />
 			<bean class="com.wan.sys.interceptors.AuthInterceptor" />
