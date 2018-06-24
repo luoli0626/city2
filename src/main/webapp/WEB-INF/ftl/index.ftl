@@ -10,7 +10,8 @@
     //判断当前浏览器是否支持WebSocket
     if ('WebSocket' in window) {
     	console.log("建立通信链接");
-        websocket = new WebSocket("ws://localhost:8080/city/websocket");
+        websocket = new WebSocket("ws://111.231.222.163:8080/websocket");
+        // websocket = new WebSocket("ws://localhost:8080/websocket");本地
     }
     else {
         alert('当前浏览器 Not support websocket')
@@ -28,38 +29,9 @@
 
     //接收到消息的回调方法
     websocket.onmessage = function (msg) {
-        //setMessageInnerHTML(msg.data);
-        console.log(msg);
-        var data =  msg.data;
-		var datalen = msg.data.size;
-
-            {
-        	    var reader = new FileReader();
-        	    
-        	    reader.onload = function(evt)
-            	{
-                	if(evt.target.readyState == FileReader.DONE)
-                	{
-                	    var data = new Uint8Array(evt.target.result);
-
-                       // 方式1 ,ok
-                       audioContext.decodeAudioData(evt.target.result, function(buffer) {//解码成pcm流
-                            var audioBufferSouceNode = audioContext.createBufferSource();
-                            audioBufferSouceNode.buffer = buffer;
-                            audioBufferSouceNode.connect(audioContext.destination);
-                            audioBufferSouceNode.start(0);
-                        }, function(e) {
-                            alert("Fail to decode the file.");
-                        });
-
-                        //方式2 ok
-                        //audio.src = window.URL.createObjectURL(getBlob2(data,datalen));
-                	}
-            	}
-            	reader.readAsArrayBuffer(data);
-   			 }
-    }
-
+        setMessageInnerHTML(msg.data);
+	}
+	
     //连接关闭的回调方法
     websocket.onclose = function () {
         setMessageInnerHTML("WebSocket连接关闭");
@@ -73,14 +45,17 @@
     //将消息显示在网页上
     function setMessageInnerHTML(innerHTML) {
         if(innerHTML=="WebSocket连接发生错误"){
-        	document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        	console.log(innerHTML);
         }else if(innerHTML=="WebSocket连接成功"){
-        	document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        	console.log(innerHTML);
         }else if(innerHTML=="WebSocket连接关闭"){
-        	document.getElementById('message').innerHTML += innerHTML + '<br/>';
+        	console.log(innerHTML);
         }else{
-        	alert(innerHTML);
+        	//alert(innerHTML);
+        	console.log(innerHTML);
+			$("#audio").get(0).play();
         }
+        
     }
 
     //关闭WebSocket连接
@@ -93,15 +68,9 @@
         var message = document.getElementById('text').value;
         websocket.send(message);
     }
-    //转换字节流
-    function getBlob2(data,len){
-	    var buffer = new ArrayBuffer(len);
-	    var dataview = new DataView(buffer);
-		writeUint8Array(dataview,0,data,len);
-	    return new Blob([dataview], { type: 'audio/wav' });
-	}
 </script>
 <body id="indexLayout" class="easyui-layout" fit="true">
+	<audio id="audio" src="http://111.231.222.163:8080/data/uploads/photo/photo2.mp3" controls="controls"></audio>
 	<div region="north"  href="${ctx}/main/north" style="height:50px;overflow: hidden; background-color:#373d41;"></div>
 	<div region="west" href="${ctx}/main/west"split="false" style="width:200px;overflow: hidden;"></div>
 	<div region="center"  href="${ctx}/main/center" title="" style="overflow: hidden;"></div>

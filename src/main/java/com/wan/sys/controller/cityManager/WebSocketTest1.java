@@ -88,40 +88,40 @@ public class WebSocketTest1 {
 	 * @param message
 	 * @throws IOException
 	 */
-	@SuppressWarnings("resource")
 	public void sendMessage(String message) throws IOException{
-		//this.session.getBasicRemote().sendText(message);
+		this.session.getBasicRemote().sendText(message);
 		//this.session.getAsyncRemote().sendText(message);
 		//发送音频
-		ByteArrayOutputStream bos =null; 
-		BufferedInputStream in = null;  
-        try {  
-        	File file=new File("/Users/luoli/Desktop/work/photo2.mp3");  
-        	
-        	System.out.println(file.getAbsolutePath());
-        	
-            bos=new ByteArrayOutputStream((int) file.length());  
-           
-            in = new BufferedInputStream(new FileInputStream(file));  
-            int buf_size = 1024;  
-            byte[] buffer = new byte[1024];  
-            int len = 0;  
-            while (-1 != (len = in.read(buffer, 0, buf_size))) {  
-                bos.write(buffer, 0, len);  
-            }  
-            ByteBuffer buf = ByteBuffer.wrap(bos.toByteArray());  
-            this.session.getBasicRemote().sendBinary(buf);
-        }catch (Exception e) {  
-            e.printStackTrace();  
-        }finally {  
-            if(in!=null){  
-            	in.close();  
-            }
-            if(bos!=null){  
-            	bos.close();  
-            } 
-        }
-		
+//		ByteArrayOutputStream bos =null; 
+//		BufferedInputStream in = null;  
+//        try {  
+////        	File file=new File("/Users/luoli/Desktop/work/photo2.mp3");  
+//        	File file=new File("/data/uploads/photo/photo2.mp3");  
+//        	
+//        	System.out.println(file.length());
+//        	
+//            bos=new ByteArrayOutputStream((int) file.length());  
+//           
+//            in = new BufferedInputStream(new FileInputStream(file));  
+//            int buf_size = 1024;  
+//            byte[] buffer = new byte[1024];  
+//            int len = 0;  
+//            while (-1 != (len = in.read(buffer, 0, buf_size))) {  
+//                bos.write(buffer, 0, len);  
+//            }  
+//            ByteBuffer buf = ByteBuffer.wrap(bos.toByteArray());  
+//            this.session.getBasicRemote().sendBinary(buf);
+//        }catch (Exception e) {  
+//            e.printStackTrace();  
+//        }finally {  
+//            if(in!=null){  
+//            	in.close();  
+//            }
+//            if(bos!=null){  
+//            	bos.close();  
+//            } 
+//        }
+//		
 	}
 
 	public static synchronized int getOnlineCount() {

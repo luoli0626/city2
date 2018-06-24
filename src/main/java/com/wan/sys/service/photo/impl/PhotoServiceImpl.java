@@ -135,10 +135,10 @@ public class PhotoServiceImpl implements IPhotoService{
 
 	@Override
 	public Boolean remove(Long id) {
-		//向web前端发送消息
-    	Session s=null;
-		WebSocketTest1 ws=new WebSocketTest1();
-		ws.onMessage("你有新的随手拍，请及时处理!",s);
+		//向web前端发送消息，测试
+//    	Session s=null;
+//		WebSocketTest1 ws=new WebSocketTest1();
+//		ws.onMessage("你有新的随手拍，请及时处理!",s);
 		
 		Photo p=photoDao.get(Photo.class, id);
 		if(p.getState().equals("9")){
