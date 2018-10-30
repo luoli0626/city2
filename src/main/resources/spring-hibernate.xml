@@ -77,6 +77,10 @@
 		<property name="poolPreparedStatements" value="true" />
 		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
 		<property name="timeBetweenLogStatsMillis" value="300000" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="300" />
+		<property name="logAbandoned" value="false" />
+		
 	  <!--  <property name="proxyFilters">
 	        <list>
 	            <ref bean="stat-filter" />

@@ -368,7 +368,7 @@
 		<form id="positionForm" method="post" enctype="multipart/form-data">
 			<fieldset class="my_fieldset">
 				<legend class="my_legend">政策资讯详情</legend>
-				<table class="tableForm">
+				<table class="tableForm" >
 					<tr style="display: none;">
 						<td id="messageId" name="messageId">
 						</td>
@@ -389,7 +389,7 @@
               	 </tr>
               	 </table>
 			
-			    	 <div id="messageContent" name="messageContent" style="width:800px;height:400px;" ></div>
+			    	 <div id="messageContent" name="messageContent" style="width:800px;height:280px;overflow:scoll;" ></div>
 			    	     <div id="showContent" style="display:none;"></div> 
 			</fieldset>	
 		</form>
